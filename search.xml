@@ -2357,7 +2357,8 @@ data/data/包名/&lt;font color=&#39;orange&#39;&gt;cache&lt;/font&gt;
 </li>
 <li><p>6.三种基本的数据冗余<br>（1）编码冗余<br>如果一个图像的灰度级编码，使用了多于<span class="hide-inline"><button type="button" class="hide-button button--animated" style="background-color: #04FF04;color: #fff">查看答案
   </button><span class="hide-content">实际需要的编码符号</span></span>，就称该图像包含了编码冗余<br>（2）像素间冗余<br>对于一幅图像，很多<span class="hide-inline"><button type="button" class="hide-button button--animated" style="background-color: #04FF04;color: #fff">查看答案
-  </button><span class="hide-content">单个像素对视觉的贡献</span></span>是冗余的。它的值可以通过与它相邻的像素值为基础进行预测<br>（3）心理视觉冗余<br>有些信息在通常的视觉过程中与另外一些信息相比并不那么重要，这些信息被认为是心理 视觉冗余的，去除这些信息并不会明显降低图像质量</p>
+  </button><span class="hide-content">单个像素对视觉的贡献</span></span>是冗余的。它的值可以通过与它相邻的像素值为基础进行预测<br>（3）心理视觉冗余<br>有些信息在<span class="hide-inline"><button type="button" class="hide-button button--animated" style="background-color: #04FF04;color: #fff">查看答案
+  </button><span class="hide-content">通常的视觉过程中</span></span>通常的视觉过程中与另外一些信息相比并不那么重要，这些信息被认为是心理 视觉冗余的，去除这些信息并不会明显降低图像质量</p>
 </li>
 <li><p>7.保真度准则：<br>图像压缩可能会导致信息损失，需要有<span class="hide-inline"><button type="button" class="hide-button button--animated" style="background-color: #04FF04;color: #fff">查看答案
   </button><span class="hide-content">评价信息损失</span></span>的测度，以描述解码图像相<br>对于原始图像的<span class="hide-inline"><button type="button" class="hide-button button--animated" style="background-color: #04FF04;color: #fff">查看答案
@@ -2375,7 +2376,13 @@ data/data/包名/&lt;font color=&#39;orange&#39;&gt;cache&lt;/font&gt;
 </ul>
 <p>编码器：<img src="/2021/06/20/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/wps11.jpg" alt="img"></p>
 <p>解码器：<img src="/2021/06/20/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/wps12.jpg" alt="img"></p>
-<p>转换器（映射器）：减少像素间冗余<br>量化器：减少心理视觉冗余，该步操作不可逆<br>符号编码器：减少编码冗余<br>（进行无损压缩时，去掉量化器）</p>
+<span class="hide-inline"><button type="button" class="hide-button button--animated" style="background-color: #04FF04;color: #fff">查看答案
+  </button><span class="hide-content">转换器</span></span>（映射器）：减少像素间冗余
+<span class="hide-inline"><button type="button" class="hide-button button--animated" style="background-color: #04FF04;color: #fff">查看答案
+  </button><span class="hide-content">量化器</span></span>：减少心理视觉冗余，该步操作不可逆
+<span class="hide-inline"><button type="button" class="hide-button button--animated" style="background-color: #04FF04;color: #fff">查看答案
+  </button><span class="hide-content">符号编码器</span></span>：减少编码冗余
+<p>（进行无损压缩时，去掉量化器）</p>
 <ul>
 <li>10.信源的熵：<br>每个信源输出的平均信息。</li>
 </ul>
