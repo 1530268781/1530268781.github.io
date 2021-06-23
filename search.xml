@@ -2204,10 +2204,7 @@ data/data/包名/&lt;font color=&#39;orange&#39;&gt;cache&lt;/font&gt;
   </button><span class="hide-content">降低灰度级</span></span>，在正比函数下方，使图像<span class="hide-inline"><button type="button" class="hide-button button--animated" style="background-color: #04FF04;color: #fff">查看答案
   </button><span class="hide-content">变暗</span></span></p>
 <ul>
-<li><p>4.直方图的定义：h(r<del>k</del>)= n<del>k</del></p>
-<pre><code>                                                            p(r~k~)= n~k~/n
-</code></pre>
-<p>第二种定义的好处：<br>✓ 使函数值正则化到[0,1]区间，成为实数函数 ；<br>✓ 函数值的范围与像素的总数无关 ；<br>✓ 给出灰度级rk在图像中出现的概率密度统计</p>
+<li><p>4.直方图的定义：h(r<del>k</del>)= n<del>k</del>    p(r<del>k</del>)= n<del>k</del>/n<br>第二种定义的好处：<br>✓ 使函数值正则化到[0,1]区间，成为实数函数 ；<br>✓ 函数值的范围与像素的总数无关 ；<br>✓ 给出灰度级rk在图像中出现的概率密度统计</p>
 </li>
 <li><p>补充：</p>
 <ul>
