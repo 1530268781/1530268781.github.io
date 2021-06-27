@@ -2452,7 +2452,7 @@ data/data/包名/&lt;font color=&#39;orange&#39;&gt;cache&lt;/font&gt;
     <title>JAVA多线程并发</title>
     <url>/2021/06/22/JAVA%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91/</url>
     <content><![CDATA[<div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><p>问题描述：1个父线程，并发生成N（N作为参数传入）个子线程。设定全局变量 g_sum=0，每个子进程在 0至200中随机选择一个数；</p>
-<p>若子进程的进程ID是奇数则g_sum=g_sum-随机数，<br>若子进程的进程ID是偶数则g_sum=g_sum+随机数，</p>
+<p>若子线程的进程ID是奇数则g_sum=g_sum-随机数，<br>若子线程的进程ID是偶数则g_sum=g_sum+随机数，</p>
 <p>每个子线程对g_sum操作完成后都要通知父线程，父线程收到通知后输出“子线程{进程ID}对g_sum进行了[加/减]{随机数}操作，当前g_sum={新值}”，父进程将每次g_sum的新值进行记录，并对已记录的数组进行升序排列，每次重新排列后进行一次输出。</p>
 </div>
 
@@ -2499,6 +2499,54 @@ data/data/包名/&lt;font color=&#39;orange&#39;&gt;cache&lt;/font&gt;
         <tag>多线程</tag>
         <tag>JAVA</tag>
         <tag>同步锁</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网络实验八-无线路由器配置</title>
+    <url>/2021/06/27/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E6%97%A0%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h1 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h1><p>掌握无线路由器的配置</p>
+<p>掌握WireShake网络抓包和分析</p>
+<p>掌握开启电脑IIS</p>
+<h1 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h1><p>· Cisco Packet Tracer     WireShake</p>
+<h1 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h1><p>（1）无线路由器的配置，包括设置SSID，密码，加密类型等信息</p>
+<p>（2）WireShake网络抓包，分析账号和密码等数据信息</p>
+<p>（3）开启电脑网络信息服务，搭建一个简单的网站，并测试访问 </p>
+<h1 id="方案设计"><a href="#方案设计" class="headerlink" title="方案设计"></a>方案设计</h1><ul>
+<li>1.掌握无线路由器配置</li>
+</ul>
+<p>（1）新建packet tracer网络拓扑图（实验二为基础）</p>
+<p><img src="/2021/06/27/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E6%97%A0%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE/wps1.jpg" alt="img"> </p>
+<p>（2）新增一个服务器和无线路由器，配置器基本信息，包括IP地址、子网掩码和默认网关</p>
+<p>（3）通过一台主机Laptop2的WEB浏览器访问无线路由器的IP地址，授权登录（用户名和密码都是：admin）,登录到无线路由器的配置页面。在此可以完成路由器的一些配置，包括SSID，密码，网络模式，安全模式，管理者账号密码等。</p>
+<p><img src="/2021/06/27/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E6%97%A0%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE/wps2.jpg" alt="img">    <img src="/2021/06/27/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E6%97%A0%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE/wps3.jpg" alt="img"></p>
+<p>（4）增加两台移动设备，连接WiFi，测试访问服务器</p>
+<p><img src="/2021/06/27/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E6%97%A0%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE/wps4.jpg" alt="img">    <img src="/2021/06/27/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E6%97%A0%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE/wps5.jpg" alt="img"></p>
+<ul>
+<li>2.网络抓包和分析</li>
+</ul>
+<p>（1）选择网络接口和过滤器，开始抓包</p>
+<p><img src="/2021/06/27/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E6%97%A0%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE/wps6.jpg" alt="img"> </p>
+<p>（2）在浏览器中登录到教务系统</p>
+<p><img src="/2021/06/27/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E6%97%A0%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE/wps7.jpg" alt="img"> </p>
+<p>（3）通过过滤器查找自己感兴趣的数据</p>
+<p><img src="/2021/06/27/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E6%97%A0%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE/wps8.jpg" alt="img"> </p>
+<ul>
+<li>3.开启电脑IIS</li>
+</ul>
+<p>（1）在控制面板–程序–启用或关闭Windows功能中开启IIS</p>
+<p><img src="/2021/06/27/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E6%97%A0%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE/wps9.jpg" alt="img"> </p>
+<p>（2）在计算机管理中找到IIS服务，新建一个网站，选定好网站的物理路径，并将自己准备好的网站文件放入到该物理路径的文件夹下。</p>
+<p><img src="/2021/06/27/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E6%97%A0%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE/wps10.jpg" alt="img"> </p>
+<p><img src="/2021/06/27/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E6%97%A0%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE/wps11.jpg" alt="img"> </p>
+<p>（3）测试能否访问，在浏览器输入本机IPv4地址：172.19.160.1</p>
+<p><img src="/2021/06/27/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E6%97%A0%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE/wps12.jpg" alt="img"> </p>
+]]></content>
+      <categories>
+        <category>《计算机网络》</category>
+      </categories>
+      <tags>
+        <tag>网络实验</tag>
+        <tag>Cisco模拟器</tag>
       </tags>
   </entry>
 </search>
