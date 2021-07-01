@@ -22,7 +22,7 @@
     <title>网络实验四-DHCP动态分配IP</title>
     <url>/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-DHCP%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8DIP/</url>
     <content><![CDATA[<h1 id="实验四-DHCP动态分配IP"><a href="#实验四-DHCP动态分配IP" class="headerlink" title="实验四 DHCP动态分配IP"></a>实验四 DHCP动态分配IP</h1><h2 id="一、实验目的"><a href="#一、实验目的" class="headerlink" title="一、实验目的"></a>一、实验目的</h2><p>掌握DHCP（动态主机配置协议）工作原理<br>启动路由器的DHCP服务为局域网中的机器分配IP地址<br>启动服务器的DHCP服务为局域网中的机器分配IP地址</p>
-<h2 id="二、实验环境"><a href="#二、实验环境" class="headerlink" title="二、实验环境"></a>二、实验环境</h2><p>Cisco Packet Tracer</p>
+<h2 id="二、实验环境"><a href="#二、实验环境" class="headerlink" title="二、实验环境"></a>二、实验环境</h2><p>Cisco Packet Tracer</p>
 <h2 id="三、实验内容"><a href="#三、实验内容" class="headerlink" title="三、实验内容"></a>三、实验内容</h2><p>（1）新建Packet Tracer拓扑图（如图）；<br>（2）静态配置路由器的IP地址；<br>（3）左侧网络通过路由器DHCP动态分配各主机包括服务器的IP地址；<br>（4）右侧网络通过服务器DHCP动态分配各主机的IP地址。</p>
 <h2 id="四、方案设计"><a href="#四、方案设计" class="headerlink" title="四、方案设计"></a>四、方案设计</h2><h3 id="1-新建packet-tracer网络拓扑图"><a href="#1-新建packet-tracer网络拓扑图" class="headerlink" title="1.新建packet tracer网络拓扑图"></a>1.新建packet tracer网络拓扑图</h3><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-DHCP%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8DIP/wps7.jpg" alt="img" style="zoom: 80%;">
 
@@ -30,9 +30,13 @@
 
 <h3 id="2-启动路由器DHCP服务"><a href="#2-启动路由器DHCP服务" class="headerlink" title="2.启动路由器DHCP服务"></a>2.启动路由器DHCP服务</h3><p>(config)#ip dhcp pool test1<br>(dhcp-config)#network 192.168.1.0 255.255.255.0<br>(dhcp-config)#dns-server 192.168.1.1    //设置默认DNS服务器<br>(dhcp-config)#exit</p>
 <p>(config)#in f0/0<br>(config)#ip address 192.168.1.254 255.255.255.0<br>(config)#no shut</p>
-<h3 id="3-启动服务器DHCP服务"><a href="#3-启动服务器DHCP服务" class="headerlink" title="3.启动服务器DHCP服务"></a>3.启动服务器DHCP服务</h3><p>（1）先静态配置服务器的IP地址、子网掩码、默认网关和默认DNS服务器</p>
+<h3 id="3-启动服务器DHCP服务"><a href="#3-启动服务器DHCP服务" class="headerlink" title="3.启动服务器DHCP服务"></a>3.启动服务器DHCP服务</h3><ul>
+<li>（1）先静态配置服务器的IP地址、子网掩码、默认网关和默认DNS服务器</li>
+</ul>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-DHCP%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8DIP/wps8.jpg" alt="img"></p>
-<p>（2）再开启服务器DHCP服务</p>
+<ul>
+<li>（2）再开启服务器DHCP服务</li>
+</ul>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-DHCP%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8DIP/wps9.jpg" alt="img"></p>
 <h2 id="五、运行结果"><a href="#五、运行结果" class="headerlink" title="五、运行结果"></a>五、运行结果</h2><p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-DHCP%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8DIP/wps10.jpg" alt="img"></p>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-DHCP%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8DIP/wps11.jpg" alt="img"></p>
@@ -154,20 +158,26 @@
 <p>（6）启用服务器的DNS服务，给服务器的内部全局地址分配一个域名，并测试能否访问成功。  </p>
 <h2 id="四、方案设计"><a href="#四、方案设计" class="headerlink" title="四、方案设计"></a>四、方案设计</h2><h3 id="1-packet-tracer网络拓扑图"><a href="#1-packet-tracer网络拓扑图" class="headerlink" title="1. packet tracer网络拓扑图"></a><strong>1.</strong> packet tracer网络拓扑图</h3><p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-NAT%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2/wps1.jpg" alt="img"> </p>
 <h3 id="2-完成网络的基本配置"><a href="#2-完成网络的基本配置" class="headerlink" title="2. 完成网络的基本配置"></a><strong>2.</strong> 完成网络的基本配置</h3><p>包括各主句的IP地址、子网掩码、网关、默认DNS服务器等，以及路由表的配置，实现网络之间的连通。（略，见实验1-4）</p>
-<h3 id="3-配置动态NAT"><a href="#3-配置动态NAT" class="headerlink" title="3. 配置动态NAT"></a><strong>3.</strong> 配置动态NAT</h3><p>（1）定义NAT设备（路由器）的内外接口</p>
+<h3 id="3-配置动态NAT"><a href="#3-配置动态NAT" class="headerlink" title="3. 配置动态NAT"></a><strong>3.</strong> 配置动态NAT</h3><ul>
+<li><p>（1）定义NAT设备（路由器）的内外接口</p>
 <p>—R0上</p>
 <p>（config）int f0/0</p>
 <p>（config-if）<font color="cornflowerblue">ip nat inside</font></p>
 <p>（config）int f0/1</p>
 <p>（config-if）<font color="cornflowerblue">ip nat outside</font></p>
-<p>（2）定义NAT地址池</p>
+</li>
+<li><p>（2）定义NAT地址池</p>
 <p>— ip nat pool pool-name start-ip  end-ip netmask 子网掩码</p>
 <p>（config）<font color="cornflowerblue">ip nat pool</font> <font color="red">out</font> 202.106.0.4  202.106.0.24  <font color="cornflowerblue">netmask</font> 255.255.255.0</p>
-<p>（3）利用ACL(地址控制列表Address Control List)定义允许转换的本地地址列表</p>
+</li>
+<li><p>（3）利用ACL(地址控制列表Address Control List)定义允许转换的本地地址列表</p>
 <p>—access-list ACL号 permit  &lt;网段&gt;  &lt;子网掩码反码&gt;</p>
 <p>（config）<font color="cornflowerblue">access-list </font><font color="red">10</font> <font color="cornflowerblue">permit </font>192.168.0.0 0.0.0.255</p>
-<p>（4）定义内部本地地址与内部全局地址的转换关系</p>
+</li>
+<li><p>（4）定义内部本地地址与内部全局地址的转换关系</p>
 <p>（config<font color="cornflowerblue">）ip nat inside source list</font> <font color="red">10</font> <font color="cornflowerblue">pool </font><font color="red">out</font></p>
+</li>
+</ul>
 <h3 id="4-配置静态NAT"><a href="#4-配置静态NAT" class="headerlink" title="4. 配置静态NAT"></a><strong>4.</strong> 配置静态NAT</h3><p>（config）<font color="cornflowerblue">ip nat inside source static</font> 192.168.0.1  202.106.0.3</p>
 <p>（config）<font color="cornflowerblue">ip nat outside source static</font> 202.106.0.3 192.168.0.1</p>
 <h3 id="5-启动DNS服务"><a href="#5-启动DNS服务" class="headerlink" title="5.启动DNS服务"></a>5.启动DNS服务</h3><p>给服务器的内部全局地址分配一个域名</p>
@@ -210,17 +220,21 @@
   <entry>
     <title>网络实验三-OSPF+RIP路由配置</title>
     <url>/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-OSPF-RIP%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<h1 id="一、实验目的"><a href="#一、实验目的" class="headerlink" title="一、实验目的"></a>一、实验目的</h1><p>掌握综合路由器的配置方法；<br>  掌握查看通过路由重分布学习产生的路由；<br>  熟悉广域网线缆的链接方式；</p>
+    <content><![CDATA[<h1 id="一、实验目的"><a href="#一、实验目的" class="headerlink" title="一、实验目的"></a>一、实验目的</h1><p>  掌握综合路由器的配置方法；<br>  掌握查看通过路由重分布学习产生的路由；<br>  熟悉广域网线缆的链接方式；</p>
 <h1 id="二、实验环境"><a href="#二、实验环境" class="headerlink" title="二、实验环境"></a>二、实验环境</h1><p>Cisco Packet Tracer</p>
 <h1 id="三、实验内容"><a href="#三、实验内容" class="headerlink" title="三、实验内容"></a>三、实验内容</h1><p>新建Packet Tracer拓扑图<br>（1）在实验二基础上新增一个路由器R5连接到R4，配置R4各个接口的IP地址即子网掩码；<br>（2）新增一个网段192.168.7.0，重新配置PC1的ip地址与默认网关；<br>（3）在路由器R4上左侧配置RIP V2路由协议；右侧配置OSPF协议。<br>（4）在R4路由进程中引入外部路由，进行路由重分布。<br>（5）在路由器R5上配置RIP路由协议；<br>（6）验证PC1、PC0主机之间可以互相通信；</p>
 <h1 id="四、方案设计"><a href="#四、方案设计" class="headerlink" title="四、方案设计"></a>四、方案设计</h1><h2 id="1-新建packet-tracer网络拓扑图"><a href="#1-新建packet-tracer网络拓扑图" class="headerlink" title="1.新建packet tracer网络拓扑图"></a>1.新建packet tracer网络拓扑图</h2><p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-OSPF-RIP%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE/wps5.jpg" alt="img"></p>
 <h2 id="2-在路由器R4上左侧配置RIP-V2路由协议；右侧配置OSPF协议"><a href="#2-在路由器R4上左侧配置RIP-V2路由协议；右侧配置OSPF协议" class="headerlink" title="2.在路由器R4上左侧配置RIP V2路由协议；右侧配置OSPF协议"></a>2.在路由器R4上左侧配置RIP V2路由协议；右侧配置OSPF协议</h2><p>—-R4<br>(config) #router ospf 100<br>(config-router) #network 192.168.3.0 0.0.0.255 area 2<br>(config-router) #network 192.168.7.0 0.0.0.255 area 2<br>(config-router) #<font color="red">redistribute rip metric 10 subnets</font>  //将RIP路由重分布给OSPF路由协议<br>(config-router)#exit</p>
 <p>(config) #router rip<br>(config-router) #network 192.168.7.0<br>(config-router) #ver 2<br>(config-router) #no auto-s<br>(config-router) #<font color="red">redistribute ospf 100 matric 10</font>    //将OSPF路由重分布给RIP路由协议</p>
 <h2 id="3-在路由器R5上配置RIP路由协议"><a href="#3-在路由器R5上配置RIP路由协议" class="headerlink" title="3.在路由器R5上配置RIP路由协议"></a>3.在路由器R5上配置RIP路由协议</h2><p>router (config) #hostname R5<br>—-R5<br>(config)#router rip<br>(config-rout er)#network 192.168.7.0<br>(config-rout er)#network 192.168.2.0<br>(config-rout er)#ver 2<br>(config-rout er)#no auto-summary</p>
-<h1 id="五、运行结果"><a href="#五、运行结果" class="headerlink" title="五、运行结果"></a>五、运行结果</h1><p>（1）路由表</p>
+<h1 id="五、运行结果"><a href="#五、运行结果" class="headerlink" title="五、运行结果"></a>五、运行结果</h1><ul>
+<li>（1）路由表</li>
+</ul>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-OSPF-RIP%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE/wps6.jpg" alt="img"></p>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-OSPF-RIP%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE/wps7.jpg" alt="img"></p>
-<p>（2）测试网络连通性，在PC1上ping PC0</p>
+<ul>
+<li>（2）测试网络连通性，在PC1上ping PC0</li>
+</ul>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-OSPF-RIP%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE/wps8.jpg" alt="img"></p>
 <h1 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h1><p>1.路由重分布：为了在同一个网络中有效地支持多种路由协议，必须在不同的路由协议之间共享路由信息。在不同的路由协议之间交换路由信息的过程称为路由重分布，它将一种路由选择协议获悉的路由信息告知给另一种路由选择协议。</p>
 <p>2.为了支持本设备能够运行多个路由协议进程，系统软件提供了路由信息从一个路由进程重分布到另一个路由进程的功能。比如你可以将OSPF路由域的路由重新分布后通告RIP路由域中，也可以将RIP路由域的路由重新分布后通告到OSPF路由域中。路由的相互重分布可以在所有的IP路由协议之间进行。</p>
@@ -246,17 +260,38 @@
   <entry>
     <title>网络实验二-OSPF动态配合路由</title>
     <url>/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-OSPF%E5%8A%A8%E6%80%81%E9%85%8D%E5%90%88%E8%B7%AF%E7%94%B1/</url>
-    <content><![CDATA[<h1 id="一、实验目的"><a href="#一、实验目的" class="headerlink" title="一、实验目的"></a>一、实验目的</h1><p>熟掌握OSPF协议的配置方法：<br>掌握查看通过动态路由协议OSPF学习产生的路由；<br>熟悉广域网线缆的链接方式。<br></p>
-<h1 id="二、实验环境"><a href="#二、实验环境" class="headerlink" title="二、实验环境"></a>二、实验环境</h1><p>Cisco Packet Tracer</p>
+    <content><![CDATA[<h1 id="一、实验目的"><a href="#一、实验目的" class="headerlink" title="一、实验目的"></a>一、实验目的</h1><p>熟掌握OSPF协议的配置方法：<br>掌握查看通过动态路由协议OSPF学习产生的路由；<br>熟悉广域网线缆的链接方式。</p>
+<h1 id="二、实验环境"><a href="#二、实验环境" class="headerlink" title="二、实验环境"></a>二、实验环境</h1><p>Cisco Packet Tracer</p>
 <h1 id="三、实验内容"><a href="#三、实验内容" class="headerlink" title="三、实验内容"></a>三、实验内容</h1><p>（1）新建Packet Tracer拓扑图（如图）<br>（2）设置主机的IP地址及子网掩码；（同实验一）<br>（3）用命令行方式配置各个路由器各接口的IP地址及子网掩码；（同实验一）<br>（4）OSPF方式动态配置路由，实现两个网络连通并检验连通性。</p>
-<h1 id="四、方案设计"><a href="#四、方案设计" class="headerlink" title="四、方案设计"></a>四、方案设计</h1><p>1.新建packet tracer网络拓扑图</p>
+<h1 id="四、方案设计"><a href="#四、方案设计" class="headerlink" title="四、方案设计"></a>四、方案设计</h1><ul>
+<li>1.新建packet tracer网络拓扑图</li>
+</ul>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-OSPF%E5%8A%A8%E6%80%81%E9%85%8D%E5%90%88%E8%B7%AF%E7%94%B1/image-20210528202133291.png" alt="image-20210528202133291"></p>
-<p>2.设置各主机IP地址与子网掩码，分别为：</p>
+<ul>
+<li>2.设置各主机IP地址与子网掩码，分别为：</li>
+</ul>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-OSPF%E5%8A%A8%E6%80%81%E9%85%8D%E5%90%88%E8%B7%AF%E7%94%B1/image-20210528202142464.png" alt="image-20210528202142464" style="zoom:67%;"><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-OSPF%E5%8A%A8%E6%80%81%E9%85%8D%E5%90%88%E8%B7%AF%E7%94%B1/image-20210528202145959.png" alt="image-20210528202145959" style="zoom:67%;"></p>
-<p>3.选择命令行选项卡进入设备配置命令行界面（ＣＬＩ），用命令行方式配置路由器各个接口IP地址。（同实验一）<br>(1)回车：进入非特权模式 &gt;<br>(2)&gt;enable:进入特权模式 Router#<br>(3)#configure terminal:进入配置状态模式 Router(config)#<br>(4)(config)#interface fastEthernet 0/1：进入接口配置状态Router(config-if)#<br>(5)配置接口IP地址<br>(config-if)#ip address  202.168.1.254  255.255.255.0</p>
-<p>4.OSPF动态配置路由<br>(1)先进入配置状态模式(config)#    (同3)</p>
-<p>(2)OSPF动态配置路由表<br>–R3<br>(config)#router OSPF 100        //100是进程ID<br>(config-router)#network  192.168.1.0  0.0.0.255  area  1<br>(config-router)#network  192.168.4.0  0.0.0.255  area  1<br>–R1<br>(config)#router OSPF 100<br>(config-router)#network  192.168.4.0  0.0.0.255  area  1<br>(config-router)#network  192.168.5.0  0.0.0.255  area  0<br>–R0<br>(config)#router OSPF 100<br>(config-router)#network  192.168.5.0  0.0.0.255  area 0<br>(config-router)#network  192.168.6.0  0.0.0.255  area 0<br>–R2<br>(config)#router OSPF 100<br>(config-router)#network  192.168.6.0  0.0.0.255  area 0<br>(config-router)#network  192.168.3.0  0.0.0.255  area 2<br>–R4<br>(config)#router OSPF 100<br>(config-router)#network 192.168.3.0  0.0.0.255  area 2<br>(config-router)#network 192.168.7.0  0.0.0.255  area 2<br>（3）.测试主机与默认网关之间、两个局域网之间的连通性<br>ping IP地址</p>
-<h1 id="五、运行结果"><a href="#五、运行结果" class="headerlink" title="五、运行结果"></a>五、运行结果</h1><p>（1）OSPF动态路由配置（以router3为例）</p>
+<ul>
+<li>3.选择命令行选项卡进入设备配置命令行界面（ＣＬＩ），用命令行方式配置路由器各个接口IP地址。（同实验一）<ul>
+<li>(1)回车：进入非特权模式 &gt;</li>
+<li>(2)&gt;enable:进入特权模式 Router#</li>
+<li>(3)#configure terminal:进入配置状态模式 Router(config)#</li>
+<li>(4)(config)#interface fastEthernet 0/1：进入接口配置状态Router(config-if)#</li>
+<li>(5)配置接口IP地址<br>(config-if)#ip address  202.168.1.254  255.255.255.0</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>4.OSPF动态配置路由<ul>
+<li>(1)先进入配置状态模式(config)#    (同3)</li>
+<li>(2)OSPF动态配置路由表<br>–R3<br>(config)#router OSPF 100        //100是进程ID<br>(config-router)#network  192.168.1.0  0.0.0.255  area  1<br>(config-router)#network  192.168.4.0  0.0.0.255  area  1<br>–R1<br>(config)#router OSPF 100<br>(config-router)#network  192.168.4.0  0.0.0.255  area  1<br>(config-router)#network  192.168.5.0  0.0.0.255  area  0<br>–R0<br>(config)#router OSPF 100<br>(config-router)#network  192.168.5.0  0.0.0.255  area 0<br>(config-router)#network  192.168.6.0  0.0.0.255  area 0<br>–R2<br>(config)#router OSPF 100<br>(config-router)#network  192.168.6.0  0.0.0.255  area 0<br>(config-router)#network  192.168.3.0  0.0.0.255  area 2<br>–R4<br>(config)#router OSPF 100<br>(config-router)#network 192.168.3.0  0.0.0.255  area 2<br>(config-router)#network 192.168.7.0  0.0.0.255  area 2</li>
+<li>(3)测试主机与默认网关之间、两个局域网之间的连通性<br>ping IP地址</li>
+</ul>
+</li>
+</ul>
+<h1 id="五、运行结果"><a href="#五、运行结果" class="headerlink" title="五、运行结果"></a>五、运行结果</h1><ul>
+<li>（1）OSPF动态路由配置（以router3为例）</li>
+</ul>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-OSPF%E5%8A%A8%E6%80%81%E9%85%8D%E5%90%88%E8%B7%AF%E7%94%B1/image-20210528202233400.png" alt="image-20210528202233400"></p>
 <p>路由表</p>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-OSPF%E5%8A%A8%E6%80%81%E9%85%8D%E5%90%88%E8%B7%AF%E7%94%B1/image-20210528202238003.png" alt="image-20210528202238003"></p>
@@ -264,7 +299,9 @@
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-OSPF%E5%8A%A8%E6%80%81%E9%85%8D%E5%90%88%E8%B7%AF%E7%94%B1/image-20210528202303263.png" alt="image-20210528202303263"></p>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-OSPF%E5%8A%A8%E6%80%81%E9%85%8D%E5%90%88%E8%B7%AF%E7%94%B1/image-20210528202316860.png" alt="image-20210528202316860"></p>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-OSPF%E5%8A%A8%E6%80%81%E9%85%8D%E5%90%88%E8%B7%AF%E7%94%B1/image-20210528202320527.png" alt="image-20210528202320527"></p>
-<p>（2）测试网络连通性，在PC0上ping PC1</p>
+<ul>
+<li>（2）测试网络连通性，在PC0上ping PC1</li>
+</ul>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-OSPF%E5%8A%A8%E6%80%81%E9%85%8D%E5%90%88%E8%B7%AF%E7%94%B1/image-20210528202325845.png" alt="image-20210528202325845"></p>
 <h1 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h1><p>OSPF开放式最短路径优先协议，是目前网路中应用最广泛的路由协议之一。<br>属于内部网管路由协议，能够适应各种规模的网络环境，是典型的链路状态协议。<br>OSPF路由协议通过向全网扩散（洪泛法）本设备的链路状态信息，使网络中每台设备最终同步一个具有全网链路状态的数据库，然后路由器采用SPF算法，以自己为根，计算到达其他网络的最短路径，最终形成全网路由信息。</p>
 ]]></content>
@@ -279,44 +316,84 @@
   <entry>
     <title>网络实验一-静态配置路由+RIP动态配置路由</title>
     <url>/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1-RIP%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1/</url>
-    <content><![CDATA[<h1 id="一、实验目的"><a href="#一、实验目的" class="headerlink" title="一、实验目的"></a>一、实验目的</h1><p>熟悉广域网线缆的链接方式；<br>掌握路由器和主机各接口IP地址的配置；<br>掌握静态路由的配置方法和技巧，实现网络的连通性；<br>掌握RIP动态路由的配置方法和技巧，实现网络的连通性。</p>
-<h1 id="二、实验环境"><a href="#二、实验环境" class="headerlink" title="二、实验环境"></a>二、实验环境</h1><p>Cisco Packet Tracer</p>
+    <content><![CDATA[<h1 id="一、实验目的"><a href="#一、实验目的" class="headerlink" title="一、实验目的"></a>一、实验目的</h1><p>熟悉广域网线缆的链接方式；<br>掌握路由器和主机各接口IP地址的配置；<br>掌握静态路由的配置方法和技巧，实现网络的连通性；<br>掌握RIP动态路由的配置方法和技巧，实现网络的连通性。</p>
+<h1 id="二、实验环境"><a href="#二、实验环境" class="headerlink" title="二、实验环境"></a>二、实验环境</h1><p>Cisco Packet Tracer</p>
 <h1 id="三、实验内容"><a href="#三、实验内容" class="headerlink" title="三、实验内容"></a>三、实验内容</h1><p>（1）新建Packet Tracer拓扑图，三个局域网段通过两台路由器连接，两个网段分别有两台主机通过交换机与路由器相连；<br>（2）设置四台主机的IP地址及子网掩码；<br>（3）通过配置线连接主机与路由器，用命令行方式配置两台路由器各接口的IP地址及子网掩码；<br>（4）静态方式配置路由，实现两个网络连通并检验连通性；<br>（5）RIP方式动态配置路由，实现两个网络连通并检验连通性。</p>
-<h1 id="四、方案设计"><a href="#四、方案设计" class="headerlink" title="四、方案设计"></a>四、方案设计</h1><p>1.新建packet tracer网络拓扑图</p>
+<h1 id="四、方案设计"><a href="#四、方案设计" class="headerlink" title="四、方案设计"></a>四、方案设计</h1><ul>
+<li>1.新建packet tracer网络拓扑图</li>
+</ul>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1-RIP%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1/wps1.jpg" alt="img"></p>
-<p>2.设置各主机IP地址与子网掩码，分别为：</p>
+<ul>
+<li>2.设置各主机IP地址与子网掩码，分别为：</li>
+</ul>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1-RIP%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1/wps2.jpg" alt="img"></p>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1-RIP%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1/wps3-1622204035658.jpg" alt="img"></p>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1-RIP%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1/wps4.jpg" alt="img"></p>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1-RIP%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1/wps5.jpg" alt="img"></p>
-<p>3.选择命令行选项卡进入设备配置命令行界面（ＣＬＩ），用命令行方式配置路由器各个接口IP地址。</p>
-<p>(1)回车：进入非特权模式 &gt;</p>
-<p>(2)&gt;enable:进入特权模式 Router#</p>
-<p>(3)#configure terminal:进入配置状态模式 Router(config)#</p>
-<p>也可以输入conf t    (技巧：输入命令关键词可以只输入前面几个字母(只要这几个字母能跟别的命令区别开即可,即最小匹配)，不用输全。也可输入命令的一部分，再按Tab键，系统会自动补全命令单词。)</p>
-<p>(4)(config)#interface fastEthernet 0/1：进入接口配置状态Router(config-if)#<br>也可以输入in f 0/1；Inter fast 0/1；Interface faste 0/1</p>
-<p>(5)配置接口IP地址<br>(config-if)#ip address  202.168.1.254  255.255.255.0</p>
-<p>4.静态方式配置路由<br>(1)先进入配置状态模式(config)#    (同3)</p>
-<p>(2)静态配置路由表<br>(config)#ip route &lt;网络号&gt; &lt;掩码&gt; &lt;下一跳&gt;<br>如ip route 202.168.2.0 255.255.255.0 202.168.3.2</p>
-<p>（3）.测试主机与默认网关之间、两个局域网之间的连通性<br>ping IP地址<br>如在PC0的命令提示符界面输入 &gt;ping 202.168.2.1</p>
-<p>5.RIP动态配置路由<br>(1)先进入配置状态模式(config)#    (同3)</p>
-<p>(2)RIP动态配置路由表<br>(config)#router RIP<br>(config-router)#network 192.168.1.0<br>(config-router)#network 192.168.3.0<br>(config-router)#ver 2<br>(config-router)#no auto-summary</p>
-<p>（3）.测试主机与默认网关之间、两个局域网之间的连通性<br>ping IP地址</p>
-<h1 id="五、运行结果"><a href="#五、运行结果" class="headerlink" title="五、运行结果"></a>五、运行结果</h1><p>（1）配置IP地址（以router0为例）</p>
+<ul>
+<li><p>3.选择命令行选项卡进入设备配置命令行界面（ＣＬＩ），用命令行方式配置路由器各个接口IP地址。</p>
+<ul>
+<li><p>(1)回车：进入非特权模式 &gt;</p>
+</li>
+<li><p>(2)&gt;enable:进入特权模式 Router#</p>
+</li>
+<li><p>(3)#configure terminal:进入配置状态模式 Router(config)#</p>
+<p>​    也可以输入conf t    (技巧：输入命令关键词可以只输入前面几个字母(只要这几个字母能跟别的命令区别开即可,即最小匹配)，不用输全。也可输入命令的一部分，再按Tab键，系统会自动补全命令单词。)</p>
+</li>
+<li><p>(4)(config)#interface fastEthernet 0/1：进入接口配置状态Router(config-if)#<br>也可以输入in f 0/1；Inter fast 0/1；Interface faste 0/1</p>
+</li>
+<li><p>(5)配置接口IP地址<br>(config-if)#ip address  202.168.1.254  255.255.255.0</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>4.静态方式配置路由</p>
+<ul>
+<li>(1)先进入配置状态模式(config)#    (同3)</li>
+<li>(2)静态配置路由表<br>(config)#ip route &lt;网络号&gt; &lt;掩码&gt; &lt;下一跳&gt;<br>如ip route 202.168.2.0 255.255.255.0 202.168.3.2</li>
+<li>（3）.测试主机与默认网关之间、两个局域网之间的连通性<br>ping IP地址<br>如在PC0的命令提示符界面输入 &gt;ping 202.168.2.1</li>
+</ul>
+</li>
+<li><p>5.RIP动态配置路由</p>
+<ul>
+<li>(1)先进入配置状态模式(config)#    (同3)</li>
+<li>(2)RIP动态配置路由表<br>(config)#router RIP<br>(config-router)#network 192.168.1.0<br>(config-router)#network 192.168.3.0<br>(config-router)#ver 2<br>(config-router)#no auto-summary</li>
+<li>（3）.测试主机与默认网关之间、两个局域网之间的连通性<br>ping IP地址</li>
+</ul>
+</li>
+</ul>
+<h1 id="五、运行结果"><a href="#五、运行结果" class="headerlink" title="五、运行结果"></a>五、运行结果</h1><ul>
+<li>（1）配置IP地址（以router0为例）</li>
+</ul>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1-RIP%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1/wps6.jpg" alt="img"></p>
-<p>（2）静态路由配置（以router0为例）</p>
+<ul>
+<li>（2）静态路由配置（以router0为例）</li>
+</ul>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1-RIP%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1/wps7.jpg" alt="img"></p>
 <p>路由表</p>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1-RIP%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1/wps8.jpg" alt="img"></p>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1-RIP%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1/wps9.jpg" alt="img"></p>
-<p>（3）测试两个局域网主机间的连通性</p>
+<ul>
+<li>（3）测试两个局域网主机间的连通性</li>
+</ul>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1-RIP%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1/wps10.jpg" alt="img" style="zoom: 67%;"><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1-RIP%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1/wps11.jpg" alt="img" style="zoom: 67%;"></p>
-<p>（4）RIP动态路由配置（以router0为例）</p>
+<ul>
+<li>（4）RIP动态路由配置（以router0为例）</li>
+</ul>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1-RIP%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1/wps12.jpg" alt="img"></p>
 <p>路由表</p>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1-RIP%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1/wps13.jpg" alt="img"></p>
 <p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1-RIP%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1/wps14.jpg" alt="img"></p>
-<h1 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h1><p>（1）有些命令只能在特定模式下使用，注意命令提示符的变化；只有当路由器的路由表信息完成配置后，局域网之间才算真正的连通。<br>（2）路由器属于网络层设备，能够根据IP包头的信息，选择一条最佳路径，将数据包转发出去。实现不同网段的主机之间的互相访问。路由器是根据路由表进行选路和转发的。而路由表里就是由一条条路由信息组成。<br>（3）生成路由表主要有两种方法：手工配置和动态配置，即静态路由协议配置和动态路由协议配置。<br>（4）静态路由是指由网络管理员手工配置的路由信息。静态路由除了具有简单、高效、可靠的优点外，它的另一个好处是网络安全保密性高。缺省路由可以看做是静态路由的一种特殊情况。当数据在查找路由表时，没有找到和目标相匹配的路由表项时，为数据指定默认路由。<br>（5）RIP(Routing Information Protocols,路由信息协议)是应用较早、使用较普遍的IGP内部网管协议，适用于小型同类网络，是距离矢量协议；<br>（6）RIP协议通过跳数作为衡量路径开销的，RIP协议里规定最大跳数为15（超过为不可达），其优点是实现简单，开销较小，缺点是网络规模较小，“坏消息传的慢”；<br>（7）RIP协议有两个版本：RIPv1和RIPv2，RIPv1属于有类路由协议，不支持VLSM，以广播形式进行路由信息的更新，更新周期为30秒；RIPv2属于无类路由协议，支持VLSM，以组播形式进行路由更细。</p>
+<h1 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h1><ul>
+<li>（1）有些命令只能在特定模式下使用，注意命令提示符的变化；只有当路由器的路由表信息完成配置后，局域网之间才算真正的连通。</li>
+<li>（2）路由器属于网络层设备，能够根据IP包头的信息，选择一条最佳路径，将数据包转发出去。实现不同网段的主机之间的互相访问。路由器是根据路由表进行选路和转发的。而路由表里就是由一条条路由信息组成。</li>
+<li>（3）生成路由表主要有两种方法：手工配置和动态配置，即静态路由协议配置和动态路由协议配置。</li>
+<li>（4）静态路由是指由网络管理员手工配置的路由信息。静态路由除了具有简单、高效、可靠的优点外，它的另一个好处是网络安全保密性高。缺省路由可以看做是静态路由的一种特殊情况。当数据在查找路由表时，没有找到和目标相匹配的路由表项时，为数据指定默认路由。</li>
+<li>（5）RIP(Routing Information Protocols,路由信息协议)是应用较早、使用较普遍的IGP内部网管协议，适用于小型同类网络，是距离矢量协议；</li>
+<li>（6）RIP协议通过跳数作为衡量路径开销的，RIP协议里规定最大跳数为15（超过为不可达），其优点是实现简单，开销较小，缺点是网络规模较小，“坏消息传的慢”；</li>
+<li>（7）RIP协议有两个版本：RIPv1和RIPv2，RIPv1属于有类路由协议，不支持VLSM，以广播形式进行路由信息的更新，更新周期为30秒；RIPv2属于无类路由协议，支持VLSM，以组播形式进行路由更细。</li>
+</ul>
 ]]></content>
       <categories>
         <category>《计算机网络》</category>
@@ -2512,7 +2589,7 @@ data/data/包名/&lt;font color=&#39;orange&#39;&gt;cache&lt;/font&gt;
 <p>（2）WireShake网络抓包，分析账号和密码等数据信息</p>
 <p>（3）开启电脑网络信息服务，搭建一个简单的网站，并测试访问 </p>
 <h1 id="方案设计"><a href="#方案设计" class="headerlink" title="方案设计"></a>方案设计</h1><ul>
-<li>1.掌握无线路由器配置</li>
+<li>1.掌握无线路由器配置    </li>
 </ul>
 <p>（1）新建packet tracer网络拓扑图（实验二为基础）</p>
 <p><img src="/2021/06/27/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-%E6%97%A0%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE/wps1.jpg" alt="img"> </p>
