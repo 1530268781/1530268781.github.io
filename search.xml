@@ -2626,4 +2626,91 @@ data/data/包名/&lt;font color=&#39;orange&#39;&gt;cache&lt;/font&gt;
         <tag>Cisco模拟器</tag>
       </tags>
   </entry>
+  <entry>
+    <title>计算机网络实验总结</title>
+    <url>/2021/07/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h1><div class="tabs" id="基本命令"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#基本命令-1">基本命令</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="基本命令-1"><ul>
+<li>回车：进入非特权模式 &gt;</li>
+<li>enable: 进入特权模式 Router#</li>
+<li>configure terminal: 进入配置状态模式Router(config)#</li>
+<li>interface fastEthernet 0/1：进入接口配置状态Router(config-if)#</li>
+<li>ip address  202.168.1.254  255.255.255.0：配置接口IP地址</li>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+
+<h1 id="配置路由器"><a href="#配置路由器" class="headerlink" title="配置路由器"></a>配置路由器</h1><div class="tabs" id="配置路由器"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#配置路由器-1">静态配置</button></li><li class="tab"><button type="button" data-href="#配置路由器-2">OSPF</button></li><li class="tab"><button type="button" data-href="#配置路由器-3">OSPF+RIP</button></li><li class="tab"><button type="button" data-href="#配置路由器-4">EIGRP</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="配置路由器-1"><ul>
+<li><p>静态配置：(config)#ip route &lt;网络号&gt; &lt;掩码&gt; &lt;下一跳&gt;</p>
+</li>
+<li><p>RIP：</p>
+<ul>
+<li><p>(config)#router RIP</p>
+<p>(config-router)#network 192.168.1.0</p>
+<p>(config-router)#network 192.168.3.0</p>
+<p>(config-router)#ver 2</p>
+<p>(config-router)#no auto-summary</p>
+</li>
+</ul>
+</li>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="配置路由器-2"><ul>
+<li><p>–R3</p>
+<p> (config)#router OSPF 100        //100是进程ID</p>
+<p> (config-router)#network  192.168.1.0  0.0.0.255  area  1</p>
+<p> (config-router)#network  192.168.4.0  0.0.0.255  area  1</p>
+<p> （特别注意area不要弄错！！！）</p>
+</li>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="配置路由器-3"><ul>
+<li><p>在路由器R4上左侧配置RIP V2路由协议；右侧配置OSPF协议</p>
+<p> —-R4</p>
+<p> (config) #router ospf 100</p>
+<p> (config-router) #network 192.168.3.0 0.0.0.255 area 2</p>
+<p> (config-router) #network 192.168.7.0 0.0.0.255 area 2</p>
+<p> (config-router) #redistribute rip metric 10 subnets  //将RIP路由重分布给OSPF路由协议</p>
+<p> (config-router)#exit</p>
+<p> (config) #router rip</p>
+<p> (config-router) #network 192.168.7.0</p>
+<p> (config-router) #ver 2</p>
+<p> (config-router) #no auto-s</p>
+<p> (config-router) #redistribute ospf 100 matric 10    //将OSPF路由重分布给RIP路由协议</p>
+</li>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="配置路由器-4"><ul>
+<li><p>Router#conf t</p>
+<p> Router(config)#router eigrp 100                        //启动EIGRP路由协议</p>
+<p> Router(config-router)#network 202.192.0.0        //宣告直连主类网络号</p>
+<p> Router(config-router)#network 202.192.1.0</p>
+</li>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+
+<h1 id="NAT地址转换"><a href="#NAT地址转换" class="headerlink" title="NAT地址转换"></a>NAT地址转换</h1><div class="tabs" id="nat地址转换"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#nat地址转换-1">NAT地址转换</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="nat地址转换-1"><ul>
+<li>（1）定义NAT设备（路由器）的内外接口<br>  （config）int f0/0<br>  （config-if）ip nat inside<br>  （config）int f0/1<br>  （config-if）ip nat outside </li>
+<li>（2）定义NAT地址池<br>  — ip nat pool pool-name start-ip  end-ip netmask 子网掩码<br>  （config）ip nat pool out 202.106.0.4  202.106.0.24 netmask 255.255.255.0  </li>
+<li>（3）利用ACL(地址控制列表Address Control List)定义允许转换的本地地址列表<br>  — access-list ACL号 permit  &lt;网段&gt;  &lt;子网掩码反码&gt;<br>  （config）access-list 10 permit 192.168.0.0 0.0.0.255</li>
+<li>（4）定义内部本地地址与内部全局地址的转换关系<br>  （config）ip nat inside source list 10 pool out</li>
+<li>（5） 配置静态地址转换<br>  （config）ip nat inside source static 192.168.0.1  202.106.0.3<br>  （config）ip nat outside source static 202.106.0.3 192.168.0.1 </li>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+
+<h1 id="FTP服务"><a href="#FTP服务" class="headerlink" title="FTP服务"></a>FTP服务</h1><div class="tabs" id="ftp服务"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#ftp服务-1">FTP服务</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="ftp服务-1"><ul>
+<li>ftp FTP服务器域名</li>
+<li>Username：</li>
+<li>Password:</li>
+<li>dir:查看文件</li>
+<li>get 文件名：下载文件</li>
+<li>put 文件名：上传文件</li>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+
+<h1 id="Telnet远程登录"><a href="#Telnet远程登录" class="headerlink" title="Telnet远程登录"></a>Telnet远程登录</h1><div class="tabs" id="telnet远程登录"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#telnet远程登录-1">Telnet远程登录</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="telnet远程登录-1"><ul>
+<li><p>1.配置路由器启动Telnet服务的基本流程<br>（通过配置线连接PC主机RS232和路由器console接口进行配置）</p>
+<p>（1）设置“特权模式”使能加密密码：<br>Router(config)#enable secret 123</p>
+<p>（2）设置控制台（console配置线）密码：<br>Router(config)#line console 0<br>Router(config-line)#password 456<br>Router(config-line)#login<br>Router(config-line)#exit</p>
+<p>（3）设置远程登陆密码：<br>Router(config)#line vty 0 4<br>Router(config-line)#password 789<br>Router(config-line)#login<br>Router(config-line)#exit</p>
+</li>
+<li><p>2.通过PC主机远程登录到路由器<br>PC&gt;telnet 202.192.0.254<br>Password: 789<br>Router&gt;enable<br>Password: 12<br>Router#</p>
+</li>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>]]></content>
+      <categories>
+        <category>《计算机网络》</category>
+      </categories>
+      <tags>
+        <tag>网络实验</tag>
+        <tag>Cisco模拟器</tag>
+      </tags>
+  </entry>
 </search>
