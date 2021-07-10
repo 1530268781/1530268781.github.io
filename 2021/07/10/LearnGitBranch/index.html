@@ -1,0 +1,551 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LearnGitBranch | Welcome to Durango's blog!</title><meta name="keywords" content="Git,图解"><meta name="author" content="Durango,1530268781@qq.com"><meta name="copyright" content="Durango"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Git分支图解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LearnGitBranch">
+<meta property="og:url" content="http://www.durango.cn/2021/07/10/LearnGitBranch/index.html">
+<meta property="og:site_name" content="Welcome to Durango&#39;s blog!">
+<meta property="og:description" content="Git分支图解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.durango.cn/img/git_cover.jpg">
+<meta property="article:published_time" content="2021-07-10T01:11:33.000Z">
+<meta property="article:modified_time" content="2021-07-10T01:35:33.532Z">
+<meta property="article:author" content="Durango">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="图解">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.durango.cn/img/git_cover.jpg"><link rel="shortcut icon" href="/img/avatar2.jpg"><link rel="canonical" href="http://www.durango.cn/2021/07/10/LearnGitBranch/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: {"limitDay":1000,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Durango","link":"链接: ","source":"来源: Welcome to Durango's blog!","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'LearnGitBranch',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-10 09:35:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="APlayer.min.css"><div id="aplayer"></div><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js" async></script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/git_topImg.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Welcome to Durango's blog!</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">LearnGitBranch</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-10T01:11:33.000Z" title="发表于 2021-07-10 09:11:33">2021-07-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-10T01:35:33.532Z" title="更新于 2021-07-10 09:35:33">2021-07-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Git/">Git</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">674</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="LearnGitBranch"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a>基础篇</h1><h2 id="Git-commit-提交"><a href="#Git-commit-提交" class="headerlink" title="Git commit(提交)"></a>Git commit(提交)</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210707180217632.png" alt="image-20210707180217632"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707180229217.png" alt="image-20210707180229217"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707180240632.png" alt="image-20210707180240632"></p>
+<h2 id="Git-Branch-分支"><a href="#Git-Branch-分支" class="headerlink" title="Git Branch(分支)"></a>Git Branch(分支)</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210707180311964.png" alt="image-20210707180311964"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707180321593.png" alt="image-20210707180321593"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707180338498.png" alt="image-20210707180338498"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707180354850.png" alt="image-20210707180354850"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707180409051.png" alt="image-20210707180409051"></p>
+<p><font color="red">git checkout -b bugFix</font></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708092926600.png" alt="image-20210708092926600"></p>
+<h2 id="Git-Merge-合并1"><a href="#Git-Merge-合并1" class="headerlink" title="Git Merge(合并1)"></a>Git Merge(合并1)</h2><p>把<youBranch>合并到当前分支</youBranch></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707180502520.png" alt="image-20210707180502520"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707180520116.png" alt="image-20210707180520116"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707180535801.png" alt="image-20210707180535801"></p>
+<h2 id="Git-Rebase-合并2"><a href="#Git-Rebase-合并2" class="headerlink" title="Git Rebase(合并2)"></a>Git Rebase(合并2)</h2><p>把当前分支里的工作合并（复制）到<youbranch></youbranch></p>
+<p>git rebase branch1 branch2：将分支2的提交合并到分支1</p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707180641790.png" alt="image-20210707180641790"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707180657215.png" alt="image-20210707180657215"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707180715217.png" alt="image-20210707180715217"></p>
+<h1 id="高级篇"><a href="#高级篇" class="headerlink" title="高级篇"></a>高级篇</h1><h2 id="Git-checkout-在提交树上移动"><a href="#Git-checkout-在提交树上移动" class="headerlink" title="Git checkout(在提交树上移动)"></a>Git checkout(在提交树上移动)</h2><p>HEAD:是对当前提交记录的符号引用</p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707181102379.png" alt="image-20210707181102379"></p>
+<p>通过指定提交记录哈希值（如C1 C2）的方式在 Git 中移动</p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707182107038.png" alt="image-20210707182107038"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707182131190.png" alt="image-20210707182131190"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707182148057.png" alt="image-20210707182148057"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707182202895.png" alt="image-20210707182202895"></p>
+<h2 id="相对引用1（-）"><a href="#相对引用1（-）" class="headerlink" title="相对引用1（^）"></a>相对引用1（^）</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210707182718057.png" alt="image-20210707182718057"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707182755760.png" alt="image-20210707182755760"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707182857052.png" alt="image-20210707182857052"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707182916539.png" alt="image-20210707182916539"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707182947454.png" alt="image-20210707182947454"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210707183002457.png" alt="image-20210707183002457"></p>
+<h2 id="相对引用2（-）"><a href="#相对引用2（-）" class="headerlink" title="相对引用2（~）"></a>相对引用2（~）</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708094914804.png" alt="image-20210708094914804"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708094927037.png" alt="image-20210708094927037"></p>
+<p>强制修改分支位置:git branch -f <yourbranch> <yourdestination></yourdestination></yourbranch></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708094944297.png" alt="image-20210708094944297"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708094957557.png" alt="image-20210708094957557"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708095006899.png" alt="image-20210708095006899"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708095740561.png" alt="image-20210708095740561"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708095752419.png" alt="image-20210708095752419"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git branch -f main c6</span><br><span class="line">git checkout HEAD^</span><br><span class="line">git branch -f bugFix HEAD^</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Git-reset-Git-revert-撤销变更"><a href="#Git-reset-Git-revert-撤销变更" class="headerlink" title="Git reset|Git revert(撤销变更)"></a>Git reset|Git revert(撤销变更)</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708100028520.png" alt="image-20210708100028520"></p>
+<ul>
+<li>git Reset:用于本地</li>
+</ul>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708100107026.png" alt="image-20210708100107026"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708100127317.png" alt="image-20210708100127317"></p>
+<ul>
+<li>git revert:用于远程，将记录的撤销（回退）记录加到当前分支记录</li>
+</ul>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708100137372.png" alt="image-20210708100137372"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708100205219.png" alt="image-20210708100205219"></p>
+<h1 id="移动提交记录"><a href="#移动提交记录" class="headerlink" title="移动提交记录"></a>移动提交记录</h1><h2 id="Git-cherry-pick-整理提交记录"><a href="#Git-cherry-pick-整理提交记录" class="headerlink" title="Git cherry-pick(整理提交记录)"></a>Git cherry-pick(整理提交记录)</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708101132784.png" alt="image-20210708101132784"></p>
+<p>把一些提交号复制到当前位置</p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708101213736.png" alt="image-20210708101213736"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708101302552.png" alt="image-20210708101302552"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708101313112.png" alt="image-20210708101313112"></p>
+<h2 id="Git-rebase-i-交互式的-rebase"><a href="#Git-rebase-i-交互式的-rebase" class="headerlink" title="Git rebase -i (交互式的 rebase)"></a>Git rebase -i (交互式的 rebase)</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708101514919.png" alt="image-20210708101514919"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708101619930.png" alt="image-20210708101619930"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708101644114.png" alt="image-20210708101644114"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708101657579.png" alt="image-20210708101657579"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708101750066.png" alt="image-20210708101750066"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708101847656.png" alt="image-20210708101847656"></p>
+<h1 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h1><h2 id="本地栈式提交"><a href="#本地栈式提交" class="headerlink" title="本地栈式提交"></a>本地栈式提交</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708102217807.png" alt="image-20210708102217807"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708102740387.png" alt="image-20210708102740387"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708102759444.png" alt="image-20210708102759444"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708102807847.png" alt="image-20210708102807847"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout main</span><br><span class="line"></span><br><span class="line">git cherry-pick c5 或 git cherry-pick bugFix</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="提交的技巧-1"><a href="#提交的技巧-1" class="headerlink" title="提交的技巧 #1"></a>提交的技巧 #1</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708103425969.png" alt="image-20210708103425969"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708103558144.png" alt="image-20210708103558144"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708104016852.png" alt="image-20210708104016852"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708104024797.png" alt="image-20210708104024797"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i HEAD~2</span><br><span class="line">调整C2 C3</span><br><span class="line">//进行一些小修改</span><br><span class="line">git commit --amend</span><br><span class="line">git rebase -i HEAD~2</span><br><span class="line">调整C2&#x27;&#x27; C3</span><br><span class="line">//将main移动到修改的最前端</span><br><span class="line">git rebase caption main</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708104217724.png" alt="image-20210708104217724"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708105041296.png" alt="image-20210708105041296"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708105110953.png" alt="image-20210708105110953"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708105235499.png" alt="image-20210708105235499"></p>
+<h2 id="提交的技巧-2"><a href="#提交的技巧-2" class="headerlink" title="提交的技巧 #2"></a>提交的技巧 #2</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708105329986.png" alt="image-20210708105329986"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708105350522.png" alt="image-20210708105350522"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708105409069.png" alt="image-20210708105409069"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708105427238.png" alt="image-20210708105427238"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git checkout main</span><br><span class="line">git cherry-pick C2</span><br><span class="line">git commit --amend</span><br><span class="line">git cherry-pick C3</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708110350766.png" alt="image-20210708110350766"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708110400360.png" alt="image-20210708110400360"></p>
+<h2 id="Git-Tags"><a href="#Git-Tags" class="headerlink" title="Git Tags"></a>Git Tags</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708110500402.png" alt="image-20210708110500402"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708110931071.png" alt="image-20210708110931071"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708110943859.png" alt="image-20210708110943859"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708110956301.png" alt="image-20210708110956301"></p>
+<h2 id="Git-Describe"><a href="#Git-Describe" class="headerlink" title="Git Describe"></a>Git Describe</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708111252981.png" alt="image-20210708111252981"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708111345615.png" alt="image-20210708111345615"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708111406212.png" alt="image-20210708111406212"></p>
+<h1 id="高级话题"><a href="#高级话题" class="headerlink" title="高级话题"></a>高级话题</h1><h2 id="多分支-rebase"><a href="#多分支-rebase" class="headerlink" title="多分支 rebase"></a>多分支 rebase</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708113031307.png" alt="image-20210708113031307"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708113047650.png" alt="image-20210708113047650"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708113057624.png" alt="image-20210708113057624"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git rebase main bugFix</span><br><span class="line">git rebase bugFIx side</span><br><span class="line">git rebase side another</span><br><span class="line">git rebase another main</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="选择父提交记录"><a href="#选择父提交记录" class="headerlink" title="选择父提交记录"></a>选择父提交记录</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708122019936.png" alt="image-20210708122019936"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708122034460.png" alt="image-20210708122034460"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708122053452.png" alt="image-20210708122053452"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708122106658.png" alt="image-20210708122106658"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708122508583.png" alt="image-20210708122508583"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708122747166.png" alt="image-20210708122747166"></p>
+<p>^num是横向移动；~num是纵向移动</p>
+<h2 id="纠缠不清的分支"><a href="#纠缠不清的分支" class="headerlink" title="纠缠不清的分支"></a>纠缠不清的分支</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708124214014.png" alt="image-20210708124214014"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708125303011.png" alt="image-20210708125303011"><img src="/2021/07/10/LearnGitBranch/image-20210708125313507.png" alt="image-20210708125313507"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick C4 C3 C2</span><br><span class="line">git checkout two</span><br><span class="line">git cherry-pick C5 C4 C3 C2</span><br><span class="line">git branch -f three C2</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Push-amp-Pull-——-Git-远程仓库！"><a href="#Push-amp-Pull-——-Git-远程仓库！" class="headerlink" title="Push &amp; Pull —— Git 远程仓库！"></a>Push &amp; Pull —— Git 远程仓库！</h1><h2 id="Git-clone"><a href="#Git-clone" class="headerlink" title="Git clone"></a>Git clone</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708131220533.png" alt="image-20210708131220533"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708131436712.png" alt="image-20210708131436712"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708131503803.png" alt="image-20210708131503803"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708131528770.png" alt="image-20210708131528770"></p>
+<h2 id="远程分支"><a href="#远程分支" class="headerlink" title="远程分支"></a>远程分支</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708131730919.png" alt="image-20210708131730919"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708131814248.png" alt="image-20210708131814248"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708131823958.png" alt="image-20210708131823958"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708131851696.png" alt="image-20210708131851696"></p>
+<h2 id="Git-Fetch-抓取"><a href="#Git-Fetch-抓取" class="headerlink" title="Git Fetch(抓取)"></a>Git Fetch(抓取)</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708132039850.png" alt="image-20210708132039850"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708132118768.png" alt="image-20210708132118768"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708132146200.png" alt="image-20210708132146200"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708132156470.png" alt="image-20210708132156470"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708132324194.png" alt="image-20210708132324194"></p>
+<h2 id="Git-Pull（拉取-抓取-合并）"><a href="#Git-Pull（拉取-抓取-合并）" class="headerlink" title="Git Pull（拉取=抓取+合并）"></a>Git Pull（拉取=抓取+合并）</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708132614877.png" alt="image-20210708132614877"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708132632183.png" alt="image-20210708132632183"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708132732130.png" alt="image-20210708132732130"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708132745265.png" alt="image-20210708132745265"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708132847811.png" alt="image-20210708132847811"></p>
+<p>git pull=git fetch + git merge</p>
+<h2 id="模拟团队合作"><a href="#模拟团队合作" class="headerlink" title="模拟团队合作"></a>模拟团队合作</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708133042614.png" alt="image-20210708133042614"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708133055142.png" alt="image-20210708133055142"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708133104029.png" alt="image-20210708133104029"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708133141450.png" alt="image-20210708133141450"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708133506924.png" alt="image-20210708133506924"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708133517625.png" alt="image-20210708133517625"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone</span><br><span class="line">git fakeTeamwork 2 </span><br><span class="line">git commit </span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Git-Push-推送"><a href="#Git-Push-推送" class="headerlink" title="Git Push(推送)"></a>Git Push(推送)</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708133828791.png" alt="image-20210708133828791"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708133844106.png" alt="image-20210708133844106"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708133914152.png" alt="image-20210708133914152"></p>
+<h2 id="偏离的工作"><a href="#偏离的工作" class="headerlink" title="偏离的工作"></a>偏离的工作</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708134026480.png" alt="image-20210708134026480"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708134033083.png" alt="image-20210708134033083"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708134200396.png" alt="image-20210708134200396"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708134240816.png" alt="image-20210708134240816"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708134253823.png" alt="image-20210708134253823"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708134308393.png" alt="image-20210708134308393"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708134516265.png" alt="image-20210708134516265"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708134544127.png" alt="image-20210708134544127"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708134640963.png" alt="image-20210708134640963"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708134741663.png" alt="image-20210708134741663"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708134812644.png" alt="image-20210708134812644"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708134828932.png" alt="image-20210708134828932"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708135720602.png" alt="image-20210708135720602"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git pull = git fetch + git merge</span><br><span class="line"></span><br><span class="line">git pull --rebase = git fetch + git rebase</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708140648399.png" alt="image-20210708140648399"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708140710442.png" alt="image-20210708140710442"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708140725614.png" alt="image-20210708140725614"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708141024342.png" alt="image-20210708141024342"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708141038183.png" alt="image-20210708141038183"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git fake&#x27; Teamwork</span><br><span class="line">objective</span><br><span class="line">git commit</span><br><span class="line">git pull --rebase</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="远程服务器拒绝-Remote-Rejected"><a href="#远程服务器拒绝-Remote-Rejected" class="headerlink" title="远程服务器拒绝!(Remote Rejected)"></a>远程服务器拒绝!(Remote Rejected)</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708141215295.png" alt="image-20210708141215295"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708141250110.png" alt="image-20210708141250110"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708141325847.png" alt="image-20210708141325847"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708142008765.png" alt="image-20210708142008765"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708142015998.png" alt="image-20210708142015998"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git reset --hard o/main</span><br><span class="line">➊在本程序中默认的行为是--hard 硬重置，可</span><br><span class="line">以尽情省略掉那个选项以避免麻烦!但是要记录</span><br><span class="line">Git中默认的是--mixed。</span><br><span class="line">$ git checkout -b feature C2</span><br><span class="line">$ git push origin feature</span><br><span class="line">0 local branch &quot;feature&quot; set to track</span><br><span class="line">remote branch &quot;o/ feature&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="关于-origin-和它的周边-——-Git-远程仓库高级操作"><a href="#关于-origin-和它的周边-——-Git-远程仓库高级操作" class="headerlink" title="关于 origin 和它的周边 —— Git 远程仓库高级操作"></a>关于 origin 和它的周边 —— Git 远程仓库高级操作</h1><h2 id="合并特性分支"><a href="#合并特性分支" class="headerlink" title="合并特性分支"></a>合并特性分支</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708142416567.png" alt="image-20210708142416567"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708142507101.png" alt="image-20210708142507101"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708142610921.png" alt="image-20210708142610921"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708142622769.png" alt="image-20210708142622769"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708143546325.png" alt="image-20210708143546325"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708143555630.png" alt="image-20210708143555630"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git fetch</span><br><span class="line">$ git rebase o/main side1</span><br><span class="line">$ git rebase side1 side2</span><br><span class="line">$ git rebase side2 side3</span><br><span class="line">$ git rebase side3 main</span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="合并远程仓库"><a href="#合并远程仓库" class="headerlink" title="合并远程仓库"></a>合并远程仓库</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708144023265.png" alt="image-20210708144023265"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708144057908.png" alt="image-20210708144057908"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708144131116.png" alt="image-20210708144131116"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708144802230.png" alt="image-20210708144802230"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708144811391.png" alt="image-20210708144811391"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git checkout main</span><br><span class="line">git pull</span><br><span class="line">git merge side1</span><br><span class="line">git merge side2</span><br><span class="line">git merge side3</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="远程跟踪分支"><a href="#远程跟踪分支" class="headerlink" title="远程跟踪分支"></a>远程跟踪分支</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708145247050.png" alt="image-20210708145247050"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708145254765.png" alt="image-20210708145254765"></p>
+<h3 id="1-git-checkout-b-foo-o-main"><a href="#1-git-checkout-b-foo-o-main" class="headerlink" title="1. git checkout -b foo o/main"></a>1. git checkout -b foo o/main</h3><p><img src="/2021/07/10/LearnGitBranch/image-20210708145407891.png" alt="image-20210708145407891"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708145459743.png" alt="image-20210708145459743"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708145531527.png" alt="image-20210708145531527"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708145546365.png" alt="image-20210708145546365"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708145612482.png" alt="image-20210708145612482"></p>
+<h3 id="2-git-branch-u-o-main-foo"><a href="#2-git-branch-u-o-main-foo" class="headerlink" title="2.git branch -u o/main foo"></a>2.git branch -u o/main foo</h3><p><img src="/2021/07/10/LearnGitBranch/image-20210708145630700.png" alt="image-20210708145630700"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708145825968.png" alt="image-20210708145825968"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708150403153.png" alt="image-20210708150403153"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708150412005.png" alt="image-20210708150412005"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b side o/main</span><br><span class="line">git commit</span><br><span class="line">git pull --rebase</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Git-Push-的参数"><a href="#Git-Push-的参数" class="headerlink" title="Git Push 的参数"></a>Git Push 的参数</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708150947720.png" alt="image-20210708150947720"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708151031205.png" alt="image-20210708151031205"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708151130836.png" alt="image-20210708151130836"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708151209286.png" alt="image-20210708151209286"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708151219562.png" alt="image-20210708151219562"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708151234915.png" alt="image-20210708151234915"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708151308955.png" alt="image-20210708151308955"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708151359962.png" alt="image-20210708151359962"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708151407109.png" alt="image-20210708151407109"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push origin main</span><br><span class="line">git push origin foo</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="lt-place-gt-参数详解"><a href="#lt-place-gt-参数详解" class="headerlink" title="&lt;place&gt;参数详解"></a><code>&lt;place&gt;</code>参数详解</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708151517814.png" alt="image-20210708151517814"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708151558370.png" alt="image-20210708151558370"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708151630372.png" alt="image-20210708151630372"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708151713402.png" alt="image-20210708151713402"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708151724079.png" alt="image-20210708151724079"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708152005397.png" alt="image-20210708152005397"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708152017612.png" alt="image-20210708152017612"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push origin main^:foo</span><br><span class="line">git push origin foo:main</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Git-fetch-的参数"><a href="#Git-fetch-的参数" class="headerlink" title="Git fetch 的参数"></a>Git fetch 的参数</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708152517963.png" alt="image-20210708152517963"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708152526401.png" alt="image-20210708152526401"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708152550967.png" alt="image-20210708152550967"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708152623538.png" alt="image-20210708152623538"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708152648161.png" alt="image-20210708152648161"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708152724640.png" alt="image-20210708152724640"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708152754538.png" alt="image-20210708152754538"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708152807081.png" alt="image-20210708152807081"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708152821953.png" alt="image-20210708152821953"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708152832652.png" alt="image-20210708152832652"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708152844370.png" alt="image-20210708152844370"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708152855544.png" alt="image-20210708152855544"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708153609012.png" alt="image-20210708153609012"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708153618871.png" alt="image-20210708153618871"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin main~1:foo</span><br><span class="line">git fetch origin foo:main</span><br><span class="line">git checkout foo</span><br><span class="line">git merge main</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="古怪的-lt-source-gt"><a href="#古怪的-lt-source-gt" class="headerlink" title="古怪的 &lt;source&gt;"></a>古怪的 <code>&lt;source&gt;</code></h2><p> <img src="/2021/07/10/LearnGitBranch/image-20210708154016519.png" alt="image-20210708154016519"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708154055142.png" alt="image-20210708154055142"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708154118967.png" alt="image-20210708154118967"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708154128060.png" alt="image-20210708154128060"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708154143579.png" alt="image-20210708154143579"></p>
+<h2 id="Git-pull-参数"><a href="#Git-pull-参数" class="headerlink" title="Git pull 参数"></a>Git pull 参数</h2><p><img src="/2021/07/10/LearnGitBranch/image-20210708154252617.png" alt="image-20210708154252617"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708154310504.png" alt="image-20210708154310504"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708154322563.png" alt="image-20210708154322563"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708154340066.png" alt="image-20210708154340066"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708154417895.png" alt="image-20210708154417895"></p>
+<p><img src="/2021/07/10/LearnGitBranch/image-20210708154431000.png" alt="image-20210708154431000"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:1530268781@qq.com">Durango</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.durango.cn/2021/07/10/LearnGitBranch/">http://www.durango.cn/2021/07/10/LearnGitBranch/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.durango.cn" target="_blank">Welcome to Durango's blog!</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Git/">Git</a><a class="post-meta__tags" href="/tags/%E5%9B%BE%E8%A7%A3/">图解</a></div><div class="post_share"><div class="social-share" data-image="/img/git_cover.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/07/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93/"><img class="next-cover" src="/img/network.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">计算机网络实验总结</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%AF%87"><span class="toc-number">1.</span> <span class="toc-text">基础篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-commit-%E6%8F%90%E4%BA%A4"><span class="toc-number">1.1.</span> <span class="toc-text">Git commit(提交)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Branch-%E5%88%86%E6%94%AF"><span class="toc-number">1.2.</span> <span class="toc-text">Git Branch(分支)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Merge-%E5%90%88%E5%B9%B61"><span class="toc-number">1.3.</span> <span class="toc-text">Git Merge(合并1)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Rebase-%E5%90%88%E5%B9%B62"><span class="toc-number">1.4.</span> <span class="toc-text">Git Rebase(合并2)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E7%AF%87"><span class="toc-number">2.</span> <span class="toc-text">高级篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-checkout-%E5%9C%A8%E6%8F%90%E4%BA%A4%E6%A0%91%E4%B8%8A%E7%A7%BB%E5%8A%A8"><span class="toc-number">2.1.</span> <span class="toc-text">Git checkout(在提交树上移动)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%AF%B9%E5%BC%95%E7%94%A81%EF%BC%88-%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">相对引用1（^）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%AF%B9%E5%BC%95%E7%94%A82%EF%BC%88-%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">相对引用2（~）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-reset-Git-revert-%E6%92%A4%E9%94%80%E5%8F%98%E6%9B%B4"><span class="toc-number">2.4.</span> <span class="toc-text">Git reset|Git revert(撤销变更)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E6%8F%90%E4%BA%A4%E8%AE%B0%E5%BD%95"><span class="toc-number">3.</span> <span class="toc-text">移动提交记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-cherry-pick-%E6%95%B4%E7%90%86%E6%8F%90%E4%BA%A4%E8%AE%B0%E5%BD%95"><span class="toc-number">3.1.</span> <span class="toc-text">Git cherry-pick(整理提交记录)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-rebase-i-%E4%BA%A4%E4%BA%92%E5%BC%8F%E7%9A%84-rebase"><span class="toc-number">3.2.</span> <span class="toc-text">Git rebase -i (交互式的 rebase)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9D%82%E9%A1%B9"><span class="toc-number">4.</span> <span class="toc-text">杂项</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E6%A0%88%E5%BC%8F%E6%8F%90%E4%BA%A4"><span class="toc-number">4.1.</span> <span class="toc-text">本地栈式提交</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E7%9A%84%E6%8A%80%E5%B7%A7-1"><span class="toc-number">4.2.</span> <span class="toc-text">提交的技巧 #1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E7%9A%84%E6%8A%80%E5%B7%A7-2"><span class="toc-number">4.3.</span> <span class="toc-text">提交的技巧 #2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Tags"><span class="toc-number">4.4.</span> <span class="toc-text">Git Tags</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Describe"><span class="toc-number">4.5.</span> <span class="toc-text">Git Describe</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E8%AF%9D%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text">高级话题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%88%86%E6%94%AF-rebase"><span class="toc-number">5.1.</span> <span class="toc-text">多分支 rebase</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E7%88%B6%E6%8F%90%E4%BA%A4%E8%AE%B0%E5%BD%95"><span class="toc-number">5.2.</span> <span class="toc-text">选择父提交记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%A0%E7%BC%A0%E4%B8%8D%E6%B8%85%E7%9A%84%E5%88%86%E6%94%AF"><span class="toc-number">5.3.</span> <span class="toc-text">纠缠不清的分支</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Push-amp-Pull-%E2%80%94%E2%80%94-Git-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%EF%BC%81"><span class="toc-number">6.</span> <span class="toc-text">Push &amp; Pull —— Git 远程仓库！</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-clone"><span class="toc-number">6.1.</span> <span class="toc-text">Git clone</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF"><span class="toc-number">6.2.</span> <span class="toc-text">远程分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Fetch-%E6%8A%93%E5%8F%96"><span class="toc-number">6.3.</span> <span class="toc-text">Git Fetch(抓取)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Pull%EF%BC%88%E6%8B%89%E5%8F%96-%E6%8A%93%E5%8F%96-%E5%90%88%E5%B9%B6%EF%BC%89"><span class="toc-number">6.4.</span> <span class="toc-text">Git Pull（拉取&#x3D;抓取+合并）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E5%9B%A2%E9%98%9F%E5%90%88%E4%BD%9C"><span class="toc-number">6.5.</span> <span class="toc-text">模拟团队合作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Push-%E6%8E%A8%E9%80%81"><span class="toc-number">6.6.</span> <span class="toc-text">Git Push(推送)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%81%8F%E7%A6%BB%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="toc-number">6.7.</span> <span class="toc-text">偏离的工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8B%92%E7%BB%9D-Remote-Rejected"><span class="toc-number">6.8.</span> <span class="toc-text">远程服务器拒绝!(Remote Rejected)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-origin-%E5%92%8C%E5%AE%83%E7%9A%84%E5%91%A8%E8%BE%B9-%E2%80%94%E2%80%94-Git-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">7.</span> <span class="toc-text">关于 origin 和它的周边 —— Git 远程仓库高级操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%88%E5%B9%B6%E7%89%B9%E6%80%A7%E5%88%86%E6%94%AF"><span class="toc-number">7.1.</span> <span class="toc-text">合并特性分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%88%E5%B9%B6%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">7.2.</span> <span class="toc-text">合并远程仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E8%B7%9F%E8%B8%AA%E5%88%86%E6%94%AF"><span class="toc-number">7.3.</span> <span class="toc-text">远程跟踪分支</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-git-checkout-b-foo-o-main"><span class="toc-number">7.3.1.</span> <span class="toc-text">1. git checkout -b foo o&#x2F;main</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-git-branch-u-o-main-foo"><span class="toc-number">7.3.2.</span> <span class="toc-text">2.git branch -u o&#x2F;main foo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Push-%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-number">7.4.</span> <span class="toc-text">Git Push 的参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lt-place-gt-%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="toc-number">7.5.</span> <span class="toc-text">&lt;place&gt;参数详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-fetch-%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-number">7.6.</span> <span class="toc-text">Git fetch 的参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%A4%E6%80%AA%E7%9A%84-lt-source-gt"><span class="toc-number">7.7.</span> <span class="toc-text">古怪的 &lt;source&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-pull-%E5%8F%82%E6%95%B0"><span class="toc-number">7.8.</span> <span class="toc-text">Git pull 参数</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('/img/git_topImg.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Durango</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi,welcome to my <a target="_blank" rel="noopener" href="https://1530268781.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'krF5kMcSSzhBp49rUb2CjNu2-gzGzoHsz',
+      appKey: 'VJnaTN0zWPbBeDLnEaP8wDWF',
+      placeholder: '记得留下你的昵称和邮箱...可以快速收到回复',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><div class="aplayer no-destroy" data-id="1046323278" data-server="tencent" data-type="artist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="false" muted></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener toc scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":180,"height":250},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
