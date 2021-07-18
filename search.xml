@@ -2978,12 +2978,12 @@ data/data/包名/&lt;font color=&#39;orange&#39;&gt;cache&lt;/font&gt;
   <entry>
     <title>MySQL基础篇</title>
     <url>/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/</url>
-    <content><![CDATA[<h4 id="数据库基础"><a href="#数据库基础" class="headerlink" title="数据库基础"></a>数据库基础</h4><h5 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h5><p>​        数据库是一个按<font color="red">数据结构</font>来存储和管理数据的计算机软件系统。数据库的概念实际包括两层意思：</p>
+    <content><![CDATA[<h2 id="数据库基础"><a href="#数据库基础" class="headerlink" title="数据库基础"></a>数据库基础</h2><h3 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h3><p>​        数据库是一个按<font color="red">数据结构</font>来存储和管理数据的计算机软件系统。数据库的概念实际包括两层意思：</p>
 <p>​    （1）数据库是一个实体，它是能够合理保管数据的“仓库”，用户在该“仓库”中存放要管理的事务数据，“数据”和“库”两个概念结合成为数据库。</p>
 <p>​    （2）数据库是数据管理的新方法和技术，它能更合适的组织数据、更方便的维护数据、更严密的控制数据和更有效的利用数据。</p>
-<h5 id="2-数据库管理系统"><a href="#2-数据库管理系统" class="headerlink" title="2.数据库管理系统"></a>2.数据库管理系统</h5><p>​        数据库管理系统是数据库系统的核心组成部分，主要完成对数据库的操作与管理功能，实现数据库对象的创建、数据库存储数据的<font color="red">（CRUD）查询、添加、修改与删除</font>操作和数据库的用户管理、权限管理等。它的安全直接关系到整个数据库系统的安全。</p>
-<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210715161617639.png" alt="image-20210715161617639"></p>
-<h5 id="3-关系型数据库-VS-非关系型数据库（NoSQL）"><a href="#3-关系型数据库-VS-非关系型数据库（NoSQL）" class="headerlink" title="3.关系型数据库 VS 非关系型数据库（NoSQL）"></a>3.关系型数据库 VS 非关系型数据库（NoSQL）</h5><table>
+<h3 id="2-数据库管理系统"><a href="#2-数据库管理系统" class="headerlink" title="2.数据库管理系统"></a>2.数据库管理系统</h3><p>​        数据库管理系统是数据库系统的核心组成部分，主要完成对数据库的操作与管理功能，实现数据库对象的创建、数据库存储数据的<font color="red">（CRUD）查询、添加、修改与删除</font>操作和数据库的用户管理、权限管理等。它的安全直接关系到整个数据库系统的安全。</p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210715161617639-1626619077152.png" alt="image-20210715161617639"></p>
+<h3 id="3-关系型数据库-VS-非关系型数据库（NoSQL）"><a href="#3-关系型数据库-VS-非关系型数据库（NoSQL）" class="headerlink" title="3.关系型数据库 VS 非关系型数据库（NoSQL）"></a>3.关系型数据库 VS 非关系型数据库（NoSQL）</h3><table>
 <thead>
 <tr>
 <th align="center"></th>
@@ -3017,7 +3017,7 @@ data/data/包名/&lt;font color=&#39;orange&#39;&gt;cache&lt;/font&gt;
 <td align="center">横向扩展能力</td>
 </tr>
 </tbody></table>
-<h5 id="4-结构化查询语言SQL"><a href="#4-结构化查询语言SQL" class="headerlink" title="4.结构化查询语言SQL"></a>4.结构化查询语言SQL</h5><ul>
+<h3 id="4-结构化查询语言SQL"><a href="#4-结构化查询语言SQL" class="headerlink" title="4.结构化查询语言SQL"></a>4.结构化查询语言SQL</h3><ul>
 <li><p>专门用来和数据库通信的语言</p>
 </li>
 <li><p>优点</p>
@@ -3040,8 +3040,8 @@ data/data/包名/&lt;font color=&#39;orange&#39;&gt;cache&lt;/font&gt;
 </ul>
 </li>
 </ul>
-<h4 id="MySQL基础"><a href="#MySQL基础" class="headerlink" title="MySQL基础"></a>MySQL基础</h4><p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210716155635092.png" alt="image-20210716155635092"></p>
-<h5 id="1-介绍与安装"><a href="#1-介绍与安装" class="headerlink" title="1.介绍与安装"></a>1.介绍与安装</h5><p>MySQL是一款流行的开源数据库。它也是一个关系型数据库管理系统，2008年，mysql被sun公司收购，2009年sun公司被oracle公司收购，自此两个主流的数据库都归Oracle公司收购。</p>
+<h2 id="MySQL基础"><a href="#MySQL基础" class="headerlink" title="MySQL基础"></a>MySQL基础</h2><p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210716155635092-1626619077153.png" alt="image-20210716155635092"></p>
+<h3 id="1-介绍与安装"><a href="#1-介绍与安装" class="headerlink" title="1.介绍与安装"></a>1.介绍与安装</h3><p>MySQL是一款流行的开源数据库。它也是一个关系型数据库管理系统，2008年，mysql被sun公司收购，2009年sun公司被oracle公司收购，自此两个主流的数据库都归Oracle公司收购。</p>
 <ul>
 <li><p>MySQL的主要优势如下：</p>
 <ol>
@@ -3055,17 +3055,17 @@ data/data/包名/&lt;font color=&#39;orange&#39;&gt;cache&lt;/font&gt;
 <li><p>[安装]: <a href="https://blog.csdn.net/qq_38269362/article/details/107283338">https://blog.csdn.net/qq_38269362/article/details/107283338</a></p>
 </li>
 </ul>
-<h5 id="2-MySQL服务的启动和停止"><a href="#2-MySQL服务的启动和停止" class="headerlink" title="2.MySQL服务的启动和停止"></a>2.MySQL服务的启动和停止</h5><p>所谓MySQL服务是指一系列关于MySQL软件的后台进程，只有启动了MySQL服务才能对mysql软件进行操作。</p>
+<h3 id="2-MySQL服务的启动和停止"><a href="#2-MySQL服务的启动和停止" class="headerlink" title="2.MySQL服务的启动和停止"></a>2.MySQL服务的启动和停止</h3><p>所谓MySQL服务是指一系列关于MySQL软件的后台进程，只有启动了MySQL服务才能对mysql软件进行操作。</p>
 <ul>
 <li><p>方式一：右击计算机图标，在’管理’命令中打开计算机管理,选择服务和应用程序，点击服务节点。选择MySQL。</p>
-<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210716143306352.png" alt="image-20210716143306352"></p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210716143306352-1626619077153.png" alt="image-20210716143306352"></p>
 </li>
 <li><p>方式二：通过dos窗口命令行（管理员身份运行）</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net start mysql</span><br><span class="line">net stop mysql</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="3-MySQL服务的登录和退出"><a href="#3-MySQL服务的登录和退出" class="headerlink" title="3.MySQL服务的登录和退出"></a>3.MySQL服务的登录和退出</h5><ul>
+<h3 id="3-MySQL服务的登录和退出"><a href="#3-MySQL服务的登录和退出" class="headerlink" title="3.MySQL服务的登录和退出"></a>3.MySQL服务的登录和退出</h3><ul>
 <li><p>方式一：通过mysql自带的客户端（MySQL 5.5 Command Line Client 仅限于root用户）</p>
-<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210716144530148.png" alt="image-20210716144530148"></p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210716144530148-1626619077153.png" alt="image-20210716144530148"></p>
 </li>
 <li><p>方式二：通过Windows自带的客户端</p>
 <ul>
@@ -3074,26 +3074,25 @@ data/data/包名/&lt;font color=&#39;orange&#39;&gt;cache&lt;/font&gt;
 <li><p>退出：<font color="red">exit 或ctrl+C</font></p>
 </li>
 </ul>
-<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210716145007179.png" alt="image-20210716145007179"></p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210716145007179-1626619077153.png" alt="image-20210716145007179"></p>
 </li>
 </ul>
-<h5 id="4-MySQL常见命令"><a href="#4-MySQL常见命令" class="headerlink" title="4.MySQL常见命令"></a>4.MySQL常见命令</h5><p>​    注：sql命令以分号结尾</p>
+<h3 id="4-MySQL常见命令"><a href="#4-MySQL常见命令" class="headerlink" title="4.MySQL常见命令"></a>4.MySQL常见命令</h3><p>​    注：sql命令以分号结尾</p>
 <ul>
-<li><p>查看当前所有的数据库<br><font color="red">show databases;</font></p>
+<li><h4 id="查看当前所有的数据库"><a href="#查看当前所有的数据库" class="headerlink" title="查看当前所有的数据库"></a>查看当前所有的数据库</h4><p><font color="red">show databases;</font></p>
 </li>
-<li><p>打开指定的库<br><font color="red">use 库名;</font></p>
+<li><h4 id="打开指定的库"><a href="#打开指定的库" class="headerlink" title="打开指定的库"></a>打开指定的库</h4><p><font color="red">use 库名;</font></p>
 </li>
-<li><p>查看当前库的所有表<br><font color="red">show tables;</font></p>
+<li><h4 id="查看当前库的所有表"><a href="#查看当前库的所有表" class="headerlink" title="查看当前库的所有表"></a>查看当前库的所有表</h4><p><font color="red">show tables;</font></p>
 </li>
-<li><p>查看其它库的所有表<br><font color="red">show tables from 库名;</font></p>
+<li><h4 id="查看其它库的所有表"><a href="#查看其它库的所有表" class="headerlink" title="查看其它库的所有表"></a>查看其它库的所有表</h4><p><font color="red">show tables from 库名;</font></p>
 </li>
-<li><p>创建表<br><font color="red">create table 表名(</font></p>
+<li><h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><p><font color="red">create table 表名(</font></p>
 <p><font color="red">列名 列类型,</font><br><font color="red">列名 列类型，</font><br><font color="red">…    …);&lt;/</font></p>
 </li>
-<li><p>查看表结构<br><font color="red">desc 表名;</font>font&gt;</p>
+<li><h4 id="查看表结构"><a href="#查看表结构" class="headerlink" title="查看表结构"></a>查看表结构</h4><p><font color="red">desc 表名;</font>font&gt;</p>
 </li>
-<li><p>查看sql服务器版本</p>
-<ul>
+<li><h4 id="查看sql服务器版本"><a href="#查看sql服务器版本" class="headerlink" title="查看sql服务器版本"></a>查看sql服务器版本</h4><ul>
 <li>sql命令:select version();</li>
 <li>dos命令:mysql –version 或 mysql –V</li>
 </ul>
@@ -3103,7 +3102,7 @@ data/data/包名/&lt;font color=&#39;orange&#39;&gt;cache&lt;/font&gt;
 
 
 
-<h5 id="5-MySQL语法规范"><a href="#5-MySQL语法规范" class="headerlink" title="5.MySQL语法规范"></a>5.MySQL语法规范</h5><ul>
+<h3 id="5-MySQL语法规范"><a href="#5-MySQL语法规范" class="headerlink" title="5.MySQL语法规范"></a>5.MySQL语法规范</h3><ul>
 <li>1.不区分大小写,但建议关键字大写，表名、列名小写</li>
 <li>2.每条命令最好用分号结尾（\g也可以）<br>3.每条命令根据需要，可以进行缩进 或换行（建议关键字单独一行）</li>
 <li>4.注释<pre><code>单行注释：#注释文字
@@ -3112,7 +3111,45 @@ data/data/包名/&lt;font color=&#39;orange&#39;&gt;cache&lt;/font&gt;
 </code></pre>
 </li>
 </ul>
-]]></content>
+<h2 id="DQL语言的学习"><a href="#DQL语言的学习" class="headerlink" title="DQL语言的学习"></a>DQL语言的学习</h2><p>数据库结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A(myemployees) --&gt;B[departments]</span><br><span class="line">  A --&gt; C[employees]</span><br><span class="line">  A --&gt; D[jobs]</span><br><span class="line">  A --&gt; E[locations]</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-基础查询"><a href="#1-基础查询" class="headerlink" title="1.基础查询"></a>1.基础查询</h3><ul>
+<li><font color="red">select  要查询的字段|表达式|常量值|函数  from  表名;</font></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">语法：select 要查询的字段|表达式|常量值|函数 from 表名;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">#(<span class="number">1</span>)查询表中单个字段</span><br><span class="line"><span class="keyword">SELECT</span> `last_name` <span class="keyword">FROM</span> employees ;</span><br><span class="line"></span><br><span class="line">#(<span class="number">2</span>)查询表中多个字段</span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">  `last_name`,</span><br><span class="line">  `salary`,</span><br><span class="line">  `email` </span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  employees ;</span><br><span class="line"></span><br><span class="line">#(<span class="number">3</span>)查询所有字段 </span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> employees</span><br><span class="line"></span><br><span class="line">#(<span class="number">4</span>)查询常量值</span><br><span class="line"><span class="keyword">SELECT</span> <span class="number">100</span></span><br><span class="line"></span><br><span class="line">#(<span class="number">5</span>)查询表达式</span><br><span class="line"><span class="keyword">SELECT</span> <span class="number">100</span><span class="operator">%</span><span class="number">98</span></span><br><span class="line"></span><br><span class="line">#(<span class="number">6</span>)查询函数</span><br><span class="line"><span class="keyword">SELECT</span> VERSION();</span><br><span class="line"></span><br><span class="line">#(<span class="number">7</span>)为字段起别名</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">-便于理解</span></span><br><span class="line"><span class="comment">-如果要查询的字段有重名的情况，使用别名可以区分开来</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">#方式<span class="number">1</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="number">100</span><span class="operator">%</span><span class="number">98</span> <span class="keyword">AS</span> 结果</span><br><span class="line"><span class="keyword">SELECT</span> last_name <span class="keyword">AS</span> 姓,first_name <span class="keyword">AS</span> 名 <span class="keyword">FROM</span> employees</span><br><span class="line">#方式<span class="number">2</span></span><br><span class="line"><span class="keyword">SELECT</span> last_name 姓, first_name 名 <span class="keyword">FROM</span> employees</span><br><span class="line">#别名中含特殊符号(用双引号)</span><br><span class="line"><span class="keyword">SELECT</span> salary <span class="keyword">AS</span> &quot;out put&quot; <span class="keyword">FROM</span> employees</span><br><span class="line"></span><br><span class="line">#(<span class="number">8</span>)去重(关键字：<span class="keyword">distinct</span>)</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> department_id <span class="keyword">FROM</span> employees</span><br><span class="line"></span><br><span class="line">#（<span class="number">9</span>）<span class="operator">+</span>号的作用</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">select 100+90;两个操作数都为数值型，则做加法运算</span></span><br><span class="line"><span class="comment">其中一方为字符型，试图将字符型转换为数值型</span></span><br><span class="line"><span class="comment">select &#x27;100&#x27;+90;	=190</span></span><br><span class="line"><span class="comment">select &#x27;John&#x27;+90;	=0+90=90</span></span><br><span class="line"><span class="comment">select null+90;只要其中一方为null,则结果肯定为null</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">#(<span class="number">10</span>)拼接(关键字：concat)</span><br><span class="line"><span class="keyword">SELECT</span> CONCAT(last_name,first_name) <span class="keyword">AS</span> 姓名 <span class="keyword">FROM</span> employees</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-条件查询"><a href="#2-条件查询" class="headerlink" title="2.条件查询"></a>2.条件查询</h3><ul>
+<li><p><font color="red">语法：select  查询字段  from  表名  while 筛选条件;  </font></p>
+</li>
+<li><p>条件表达式：&gt;  &lt;  &gt;=  &lt;=  =  !=  &lt;&gt;</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">按条件表达式筛选</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">#案例一：查询工资<span class="operator">&gt;</span><span class="number">12000</span>的员工信息</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	<span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">	employees</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">	salary<span class="operator">&gt;</span><span class="number">12000</span>;</span><br><span class="line"></span><br><span class="line">#案例二：查询部门编号不等于<span class="number">90</span>的员工名和部门编号</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	last_name,</span><br><span class="line">	department_id</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">	employees</span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">	department_id<span class="operator">&lt;&gt;</span><span class="number">90</span>;</span><br></pre></td></tr></table></figure></li>
+<li><p>逻辑表达式：</p>
+<ul>
+<li><p>and（&amp;&amp;）:两个条件如果同时成立，结果为true，否则为false</p>
+</li>
+<li><p>or(||)：两个条件只要有一个成立，结果为true，否则为false</p>
+</li>
+<li><p>not(!)：如果条件成立，则not后为false，否则为true</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">按逻辑表达式筛选</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">#案例一：查询工资在<span class="number">10000</span>到<span class="number">20000</span>之间的员工名、工资以及奖金</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	last_name,</span><br><span class="line">	salary,</span><br><span class="line">	commission_pct</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">	employees</span><br><span class="line"><span class="keyword">WHERE</span> 	</span><br><span class="line">	salary<span class="operator">&gt;=</span><span class="number">10000</span> <span class="keyword">AND</span> salary<span class="operator">&lt;=</span><span class="number">20000</span>;</span><br><span class="line">	</span><br><span class="line">#案例二：查询部门编号不是在<span class="number">90</span>到<span class="number">110</span>之间，或者工资高于<span class="number">15000</span>的员工信息</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	<span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">	employees</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">	<span class="keyword">NOT</span>(department_id<span class="operator">&gt;=</span><span class="number">90</span> <span class="keyword">AND</span> department_id<span class="operator">&lt;=</span><span class="number">110</span>) <span class="keyword">OR</span> salary<span class="operator">&gt;</span><span class="number">15000</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>模糊查询：</p>
+<ul>
+<li><p>like</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">#<span class="comment">-------like</span></span><br><span class="line">#案例一：查询员工名字以s开头的员工信息（通配符：<span class="operator">%</span>任意多个字符，_任意单个字符）</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	<span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">	employees</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">	last_name <span class="keyword">LIKE</span> <span class="string">&#x27;s%&#x27;</span></span><br><span class="line"></span><br><span class="line">#案例二：查询员工名字中第三个字符为i,第四个字符为e的员工名和工资</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	last_name,</span><br><span class="line">	salary</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">	employees</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">	last_name <span class="keyword">LIKE</span> <span class="string">&#x27;__i_e%&#x27;</span> </span><br><span class="line">	</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">转义字符 \</span></span><br><span class="line"><span class="comment">自定义转义字符 &#x27;$&#x27; ESCAPE &#x27;$&#x27;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
+<li><p>between and</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">#<span class="comment">--------between and（可以替换 &lt;  and  &gt;）</span></span><br><span class="line">#案例：查询员工号在<span class="number">100</span>到<span class="number">120</span>之间的员工信息</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	<span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">	employees</span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">	employee_id <span class="keyword">BETWEEN</span> <span class="number">100</span> <span class="keyword">AND</span> <span class="number">120</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>in</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">#<span class="comment">------in（可以替换 = or = or = ……）</span></span><br><span class="line">#案例：查询员工的工种编号是 IT_PROG、AD_VP、AD_PRES中的一个的员工名和工种编号</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	last_name,</span><br><span class="line">	job_id</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">	employees</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">	job_id<span class="operator">=</span><span class="string">&#x27;IT_PROG&#x27;</span> <span class="keyword">OR</span> job_id<span class="operator">=</span><span class="string">&#x27;AD_VP&#x27;</span> <span class="keyword">OR</span> job_id<span class="operator">=</span><span class="string">&#x27;AD_PRES&#x27;</span>;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	last_name,</span><br><span class="line">	job_id</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">	employees</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">	job_id <span class="keyword">IN</span> (<span class="string">&#x27;IT_PROG&#x27;</span>,<span class="string">&#x27;AD_VP&#x27;</span>,<span class="string">&#x27;AD_PRES&#x27;</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p>is null | is not null</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">#<span class="comment">----is （not）null</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">判断null值不能用 = 和 &lt;&gt;,而要用 is 和 is not</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">#案例一：查询没有奖金的员工名和奖金率</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	last_name,</span><br><span class="line">	commission_pct</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">	employees</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">	commission_pct <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line">	</span><br><span class="line">#案例二：查询有奖金的员工名和奖金率</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	last_name,</span><br><span class="line">	commission_pct</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">	employees</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">	commission_pct <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="3-排序查询"><a href="#3-排序查询" class="headerlink" title="3.排序查询"></a>3.排序查询</h3><h3 id="4-常见函数"><a href="#4-常见函数" class="headerlink" title="4.常见函数"></a>4.常见函数</h3><h3 id="5-分组函数"><a href="#5-分组函数" class="headerlink" title="5.分组函数"></a>5.分组函数</h3><h3 id="6-分组查询"><a href="#6-分组查询" class="headerlink" title="6.分组查询"></a>6.分组查询</h3><h3 id="7-连接查询"><a href="#7-连接查询" class="headerlink" title="7.连接查询"></a>7.连接查询</h3><h3 id="8-子查询"><a href="#8-子查询" class="headerlink" title="8.子查询"></a>8.子查询</h3><h3 id="9-分页查询"><a href="#9-分页查询" class="headerlink" title="9.分页查询"></a>9.分页查询</h3><h3 id="10-union联合查询"><a href="#10-union联合查询" class="headerlink" title="10.union联合查询"></a>10.union联合查询</h3>]]></content>
       <categories>
         <category>MySQL</category>
       </categories>
