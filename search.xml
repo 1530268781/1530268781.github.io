@@ -3672,6 +3672,117 @@ On 连接条件
 </tbody></table>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tab_date(</span><br><span class="line">	t1 DATETIME,</span><br><span class="line">	t2 <span class="type">TIMESTAMP</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> tab_date <span class="keyword">VALUES</span>(NOW(),NOW());</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tab_date;</span><br><span class="line">#改时区</span><br><span class="line"><span class="keyword">SHOW</span> VARIABLES <span class="keyword">LIKE</span> <span class="string">&#x27;time_zone&#x27;</span>;</span><br><span class="line"><span class="keyword">SET</span> time_zone<span class="operator">=</span><span class="string">&#x27;+9:00&#x27;</span></span><br></pre></td></tr></table></figure>
 
+
+
+<h3 id="4-常见约束"><a href="#4-常见约束" class="headerlink" title="4.常见约束"></a>4.常见约束</h3><h4 id="（1）介绍"><a href="#（1）介绍" class="headerlink" title="（1）介绍"></a>（1）介绍</h4><ul>
+<li><p>含义：一种限制，用于限制表中的数据，为了保证表中数据的准确可靠性</p>
+</li>
+<li><p>分类：六大约束</p>
+<ul>
+<li>NOT NULL：非空。用于保证该字段非空（如姓名、学号）</li>
+<li>DEFAULT：默认。用于保证该字段有默认值（如姓名）</li>
+<li>PRIMARY KEY：主键。用于保证该字段唯一且非空（如学号、员工编号）</li>
+<li>UNIQUE：唯一。用于保证该字段的值唯一性，可以为空（如座位号）</li>
+<li>CHECK：检查【mysql不支持】。（如年龄、性别）</li>
+<li>FOREIGIN KEY：外键。用于限制两个表的关系，用于保证该字段的值必须来自于主表的关联列的值。在从表中添加外键约束，用于引用主表中某列的值（比如学生表的专业编号，员工表的部门编号，员工表的工种编号）</li>
+</ul>
+</li>
+<li><p>添加约束的时机：</p>
+<pre><code>1.创建表时
+2.修改表时
+</code></pre>
+</li>
+<li><p>约束的添加分类：</p>
+<pre><code>列级约束（六大约束都支持，但foreign key没有效果
+表级约束（除了&lt;font color=&#39;red&#39;&gt;非空、默认&lt;/font&gt;，其他都支持）
+</code></pre>
+</li>
+</ul>
+<h4 id="（2）创建表时添加约束"><a href="#（2）创建表时添加约束" class="headerlink" title="（2）创建表时添加约束"></a>（2）创建表时添加约束</h4><ul>
+<li><p>1.添加列级约束</p>
+<ul>
+<li><p>语法：</p>
+<p><font color="red">create table 表名(</font>    </p>
+<p>​    <font color="red">字段名 字段类型 列级约束，</font><br>​    <font color="red">字段名 字段类型 列级约束，</font><br>​    <font color="red">…</font><br><font color="red">)</font></p>
+</li>
+<li><p>举例</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DATABASE students;</span><br><span class="line">USE students;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> major(</span><br><span class="line">	id <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">	marjorName <span class="type">VARCHAR</span>(<span class="number">20</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> stuinfo(</span><br><span class="line">	id <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY, 		  #主键</span><br><span class="line">	stuName <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>, #非空</span><br><span class="line">	gender <span class="type">CHAR</span>(<span class="number">1</span>) <span class="keyword">CHECK</span>(gender<span class="operator">=</span><span class="string">&#x27;男&#x27;</span> <span class="keyword">OR</span> gender<span class="operator">=</span><span class="string">&#x27;女&#x27;</span>),#检查</span><br><span class="line">	seat <span class="type">INT</span> <span class="keyword">UNIQUE</span>, 	#唯一</span><br><span class="line">	age <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">18</span>, #默认</span><br><span class="line">	marjorId <span class="type">INT</span> <span class="keyword">REFERENCES</span> major(id) #外键：引用marjor表中的id为外键</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">#查看约束信息</span><br><span class="line"><span class="keyword">DESC</span> stuinfo;</span><br><span class="line">#查看stuinfo表中所有的索引，包括主键、外键、唯一</span><br><span class="line"><span class="keyword">SHOW</span> INDEX <span class="keyword">FROM</span> stuinfo;</span><br></pre></td></tr></table></figure></li>
+<li><p>2.添加表级约束</p>
+<ul>
+<li><p>语法：</p>
+<p><font color="red">create table 表名(</font>    </p>
+<p>​    <font color="red">字段名 字段类型,</font><br>​    <font color="red">字段名 字段类型,</font><br>​    <font color="red">…</font><br>​    <font color="red">constraint [约束名] 约束类型（字段名，</font><br>​    <font color="red">constraint [约束名] 约束类型（字段名）</font><br>​    <font color="red">…</font><br><font color="red">)</font></p>
+</li>
+<li><p>举例</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> stuinfo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> stuinfo(</span><br><span class="line">	id <span class="type">INT</span>,</span><br><span class="line">	stuName <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">	gender <span class="type">CHAR</span>(<span class="number">1</span>),</span><br><span class="line">	seat <span class="type">INT</span>,</span><br><span class="line">	majorId <span class="type">INT</span>,</span><br><span class="line">	<span class="keyword">CONSTRAINT</span> pk <span class="keyword">PRIMARY</span> KEY(id), #主键</span><br><span class="line">	<span class="keyword">CONSTRAINT</span> uq <span class="keyword">UNIQUE</span>(seat),	   #唯一</span><br><span class="line">	<span class="keyword">CONSTRAINT</span> ck <span class="keyword">CHECK</span>(gender<span class="operator">=</span><span class="string">&#x27;男&#x27;</span> <span class="keyword">OR</span> gender<span class="operator">=</span><span class="string">&#x27;女&#x27;</span>),#检查</span><br><span class="line">	<span class="keyword">CONSTRAINT</span> fk_stuinfo_major <span class="keyword">FOREIGN</span> KEY(majorid) <span class="keyword">REFERENCES</span> major(id)#外键</span><br><span class="line">); </span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>3.通用的写法（表级约束写外键约束）</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> studinfo(</span><br><span class="line">	id <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">	stuName <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	gender <span class="type">CHAR</span>(<span class="number">1</span>) <span class="keyword">CHECK</span>(gender<span class="operator">=</span><span class="string">&#x27;男&#x27;</span> <span class="keyword">OR</span> gender<span class="operator">=</span><span class="string">&#x27;女&#x27;</span>),</span><br><span class="line">	age <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">18</span>,</span><br><span class="line">	seat <span class="type">INT</span> UNICODE,</span><br><span class="line">	marjorId <span class="type">INT</span>,</span><br><span class="line">	<span class="keyword">CONSTRAINT</span> fk_stuinfo_major <span class="keyword">FOREIGN</span> KEY(majorId) <span class="keyword">REFERENCES</span> major(id)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li>4.primary key VS unique</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>保证唯一性</th>
+<th>是否允许为空</th>
+<th>一个表中可有几个</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PRIMARY KEY</td>
+<td>√</td>
+<td>×</td>
+<td>一个</td>
+</tr>
+<tr>
+<td>UNIQUE</td>
+<td>√</td>
+<td>√</td>
+<td>多个</td>
+</tr>
+</tbody></table>
+<ul>
+<li>5.foreign key<br>​    1.要求在从表设置外键关系<br>​    2.从表中外键列的类型和主表的关联列的类型要求一致或兼容，名称可以不一样<br>​    3.要求主表中的关联列必须是一个key(主键或唯一键）<br>​    4.插入数据时，先插入主表，再插入从表；删除数据时，先删除从表，再删除主表</li>
+</ul>
+<h4 id="3-修改表时添加约束"><a href="#3-修改表时添加约束" class="headerlink" title="(3)修改表时添加约束"></a>(3)修改表时添加约束</h4><ul>
+<li><p>语法：</p>
+<p>添加列级约束：</p>
+<pre><code>&lt;font color=&#39;red&#39;&gt;alter table 表名 modify column 字段名 字段类型 新约束;&lt;/font&gt;
+</code></pre>
+<p>添加表级约束：</p>
+<pre><code>&lt;font color=&#39;red&#39;&gt;alter table 表名 add 【constraint 约束名】 约束类型(字段名) 【外键的引用】 &lt;/font&gt;
+</code></pre>
+</li>
+<li><p>举例：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">#<span class="number">1.</span>添加非空约束</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo MODIFIER <span class="keyword">COLUMN</span> stuName <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>;</span><br><span class="line"></span><br><span class="line">#<span class="number">2.</span>添加默认约束</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo MODIFY age <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">18</span>;</span><br><span class="line"></span><br><span class="line">#<span class="number">3.</span>添加主键</span><br><span class="line">#（<span class="number">1</span>）列级约束</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo MODIFIER <span class="keyword">COLUMN</span> id <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY;</span><br><span class="line">#（<span class="number">2</span>）表级约束</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">ADD</span> <span class="keyword">PRIMARY</span> KEY(id);</span><br><span class="line"></span><br><span class="line">#<span class="number">4.</span>添加唯一键</span><br><span class="line">#（<span class="number">1</span>）列级约束</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo MODIFY <span class="keyword">COLUMN</span> id <span class="type">INT</span> <span class="keyword">UNIQUE</span>;</span><br><span class="line">#（<span class="number">2</span>）表级约束</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span>(seat);</span><br><span class="line"></span><br><span class="line">#<span class="number">5.</span>添加外键</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">ADD</span> <span class="keyword">FOREIGN</span> KEY(majorId) <span class="keyword">REFERENCES</span> major(id);</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> fk_sutinfo_major <span class="keyword">FOREIGN</span> KEY(majorId) <span class="keyword">REFERENCES</span> major(id);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="（4）修改表时删除约束"><a href="#（4）修改表时删除约束" class="headerlink" title="（4）修改表时删除约束"></a>（4）修改表时删除约束</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">#<span class="number">1.</span>删除非空约束</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo MODIFY <span class="keyword">COLUMN</span> stuName <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NULL</span>;</span><br><span class="line"></span><br><span class="line">#<span class="number">2.</span>删除默认约束</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo MODIFIER <span class="keyword">COLUMN</span> age <span class="type">INT</span>;</span><br><span class="line"></span><br><span class="line">#<span class="number">3.</span>删除主键</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">DROP</span> <span class="keyword">PRIMARY</span> KEY;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo MODIFY <span class="keyword">COLUMN</span> id <span class="keyword">PRIMARY</span> KEY;</span><br><span class="line"></span><br><span class="line">#<span class="number">4.</span>删除唯一键</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">DROP</span> INDEX seat;</span><br><span class="line"></span><br><span class="line">#<span class="number">5.</span>删除外键</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">DROP</span> <span class="keyword">FOREIGN</span> KEY fk_stuinfo_major;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-标识列"><a href="#5-标识列" class="headerlink" title="5.标识列"></a>5.标识列</h3><ul>
+<li><p>含义：又称为自增长列。可以不用手动的插入值，系统提供默认的序列值</p>
+</li>
+<li><p>特点：</p>
+<pre><code>1.标识列要求是一个key
+2.一个表中最多有一个标识列
+3.标识列的类型只能是数值型：int float double
+4.表示列可以通过SET auto_increment_increment=3设置步长；通过插入值设置初始值
+</code></pre>
+</li>
+<li><p>创建表时设置标识列</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tab_indentity(</span><br><span class="line">id <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY AUTO_INCREMENT,</span><br><span class="line">NAME <span class="type">VARCHAR</span>(<span class="number">20</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> tab_indentity;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> tab_indentity(NAME) <span class="keyword">VALUES</span>(<span class="string">&#x27;john&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> tab_indentity <span class="keyword">VALUES</span>(<span class="keyword">NULL</span>,<span class="string">&#x27;lucy&#x27;</span>);</span><br><span class="line"></span><br><span class="line">#查看自增长变量</span><br><span class="line"><span class="keyword">SHOW</span> VARIABLES <span class="keyword">LIKE</span> <span class="string">&#x27;%auto_increment%&#x27;</span>;</span><br><span class="line">#修改自增长步长</span><br><span class="line"><span class="keyword">SET</span> auto_increment_increment<span class="operator">=</span><span class="number">3</span>;</span><br></pre></td></tr></table></figure></li>
+<li><p>修改表时设置标识列</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tab_indentity MODIFIER <span class="keyword">COLUMN</span> id <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY AUTO_INCREMENT;</span><br><span class="line"></span><br><span class="line">#修改表时删除标识列</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tab_indentity MODIFIER <span class="keyword">COLUMN</span> id <span class="type">INT</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
 ]]></content>
       <categories>
         <category>《MySQL》</category>
