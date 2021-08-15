@@ -4515,13 +4515,353 @@ On 连接条件
 </ul>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[zlx@zlx-vmwarevirtualplatform 桌面]$ help umask</span><br><span class="line">umask: umask [-p] [-S] [模式]</span><br><span class="line">    显示或设定文件模式掩码。</span><br><span class="line">    </span><br><span class="line">    设定用户文件创建掩码为 MODE 模式。如果省略了 MODE，则</span><br><span class="line">    打印当前掩码的值。</span><br><span class="line">    </span><br><span class="line">    如果 MODE 模式以数字开头，则被当作八进制数解析；否则是一个</span><br><span class="line">    chmod(1) 可接收的符号模式串。</span><br><span class="line">    </span><br><span class="line">    选项：</span><br><span class="line">      -p	如果省略 MODE 模式，以可重用为输入的格式输入</span><br><span class="line">      -S	以符号形式输出，否则以八进制数格式输出</span><br><span class="line">    </span><br><span class="line">    退出状态：</span><br><span class="line">    返回成功，除非使用了无效的 MODE 模式或者选项。</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="第十章-Shell基础"><a href="#第十章-Shell基础" class="headerlink" title="第十章 Shell基础"></a>第十章 Shell基础</h2><h3 id="10-1-Shell概述"><a href="#10-1-Shell概述" class="headerlink" title="10.1 Shell概述"></a>10.1 Shell概述</h3><h4 id="10-1-1-Shell是什么"><a href="#10-1-1-Shell是什么" class="headerlink" title="10.1.1 Shell是什么"></a>10.1.1 Shell是什么</h4><ul>
+<h3 id="4-4-帮助命令-1"><a href="#4-4-帮助命令-1" class="headerlink" title="4.4 帮助命令"></a>4.4 帮助命令</h3><h5 id="（1）man-1"><a href="#（1）man-1" class="headerlink" title="（1）man"></a>（1）<font color="red">man</font></h5><ul>
+<li><p>命令英文原意：manual </p>
+</li>
+<li><p>命令所在路径：/usr/bin/man </p>
+</li>
+<li><p>执行权限：所有用户</p>
+</li>
+<li><p>语法：<font color="orange">man [命令或配置文件] </font></p>
+<ul>
+<li> (空格) 或 f 翻页 </li>
+<li> (Enter) 换行 </li>
+<li> q 或 Q 退出</li>
+</ul>
+</li>
+<li><p>功能描述：<font color="cornflowerblue">获得帮助信息</font></p>
+</li>
+<li><p>范例： </p>
+<ul>
+<li><p>$ man ls </p>
+<p>查看 ls 命令的帮助信息 </p>
+</li>
+<li><p>$ man services </p>
+<p>查看配置文件 services 的帮助信息</p>
+</li>
+<li><p>1 命令的帮助   5 配置文件的帮助</p>
+</li>
+<li><p>man 5 passwd -&gt; 查看配置文件的帮助</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）whatis-1"><a href="#（2）whatis-1" class="headerlink" title="（2）whatis"></a>（2）<font color="red">whatis</font></h5><ul>
+<li><p>语法：<font color="orange">whatis 命令</font></p>
+</li>
+<li><p>功能描述：<font color="cornflowerblue">获得命令的简单介绍信息</font></p>
+</li>
+<li><p>范例：whatis ls</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[zlx@zlx-vmwarevirtualplatform 桌面]$ whatis ls</span><br><span class="line">ls (1)               - list directory contents</span><br><span class="line">ls (1p)              - list directory contents</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="（3）apropos-1"><a href="#（3）apropos-1" class="headerlink" title="（3）apropos"></a>（3）<font color="red">apropos</font></h5><ul>
+<li>语法：<font color="orange">apropos 配置文件名称</font></li>
+<li>whatis 类似于精确查找</li>
+<li>apropos 模糊查找关键字 [功能等于 man -k ] [可以 tab 快速补全]</li>
+</ul>
+<h5 id="（3）help-1"><a href="#（3）help-1" class="headerlink" title="（3）help"></a>（3）<font color="red">help</font></h5><ul>
+<li><p>命令所在路径：Shell 内置命令</p>
+</li>
+<li><p>执行权限：所有用户</p>
+</li>
+<li><p>功能描述：<font color="cornflowerblue">获得 Shell 内置命令的帮助信息</font></p>
+</li>
+<li><p>范例： </p>
+<ul>
+<li><p>$ help umask </p>
+<p>查看 umask 命令的帮助信息</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[zlx@zlx-vmwarevirtualplatform 桌面]$ help umask</span><br><span class="line">umask: umask [-p] [-S] [模式]</span><br><span class="line">    显示或设定文件模式掩码。</span><br><span class="line">    </span><br><span class="line">    设定用户文件创建掩码为 MODE 模式。如果省略了 MODE，则</span><br><span class="line">    打印当前掩码的值。</span><br><span class="line">    </span><br><span class="line">    如果 MODE 模式以数字开头，则被当作八进制数解析；否则是一个</span><br><span class="line">    chmod(1) 可接收的符号模式串。</span><br><span class="line">    </span><br><span class="line">    选项：</span><br><span class="line">      -p	如果省略 MODE 模式，以可重用为输入的格式输入</span><br><span class="line">      -S	以符号形式输出，否则以八进制数格式输出</span><br><span class="line">    </span><br><span class="line">    退出状态：</span><br><span class="line">    返回成功，除非使用了无效的 MODE 模式或者选项。</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="4-5-用户管理命令"><a href="#4-5-用户管理命令" class="headerlink" title="4.5 用户管理命令"></a>4.5 用户管理命令</h3><h5 id="（1）useradd"><a href="#（1）useradd" class="headerlink" title="（1）useradd"></a>（1）<font color="red">useradd</font></h5><ul>
+<li><p>命令所在路径：/usr/sbin/useradd </p>
+</li>
+<li><p>执行权限：root </p>
+</li>
+<li><p>语法：<font color="orange">useradd 用户名</font></p>
+</li>
+<li><p>功能描述：<font color="cornflowerblue">添加新用户</font></p>
+</li>
+<li><p>范例： $ useradd zlx</p>
+</li>
+</ul>
+<h5 id="（2）passwd"><a href="#（2）passwd" class="headerlink" title="（2）passwd"></a>（2）<font color="red">passwd</font></h5><ul>
+<li><p>命令所在路径：/usr/bin/passwd </p>
+</li>
+<li><p>执行权限：所有用户</p>
+</li>
+<li><p>语法：<font color="orange">passwd 用户名</font></p>
+</li>
+<li><p>功能描述：<font color="cornflowerblue">设置用户密码</font></p>
+</li>
+<li><p>范例：$ passwd zlx</p>
+</li>
+<li><p>tips：普通用户只能更改自己密码，root 用户可以更好所有人密码</p>
+</li>
+</ul>
+<h5 id="（3）who"><a href="#（3）who" class="headerlink" title="（3）who"></a>（3）<font color="red">who</font></h5><ul>
+<li><p>命令所在路径：/usr/bin/who </p>
+</li>
+<li><p>执行权限：所有用户</p>
+</li>
+<li><p>语法：<font color="orange">who</font> </p>
+</li>
+<li><p>功能描述：<font color="cornflowerblue">查看登录用户信息</font></p>
+</li>
+<li><p>范例： $ who</p>
+</li>
+<li><p>tips</p>
+<ul>
+<li>第一列 登陆用户名</li>
+<li>第二列 登陆终端 【<strong>tty</strong>表示本地终端 <strong>pts</strong>表示远程登陆终端】</li>
+<li>第三列 登陆时间</li>
+<li>第四列 登陆主机的IP地址 【如果没有写表示本机登陆】</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[zlx@localhost ~]$ who</span><br><span class="line">zlx      tty2         2021-08-15 15:07 (tty2)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="（4）w"><a href="#（4）w" class="headerlink" title="（4）w"></a>（4）<font color="red">w</font></h5><ul>
+<li><p>命令所在路径：/usr/bin/w </p>
+</li>
+<li><p>执行权限：所有用户</p>
+</li>
+<li><p>语法：<font color="orange">w </font></p>
+</li>
+<li><p>功能描述：<font color="cornflowerblue">查看登录用户详细信息</font></p>
+</li>
+<li><p>范例： $ w</p>
+</li>
+<li><p>第一行显示 “16:02:04 up 56 min,  1 user,  load average: 0.03, 0.05, 0.01”  </p>
+<ul>
+<li>第一个 表示当前时间</li>
+<li>第二个 表示服务区系统连续运行时间，没有重启或者关机，衡量服务区稳定性</li>
+<li>第三个 表示当前总共有多少个用户登陆</li>
+<li>第四个 表示负载均衡指数，分别记录了过去一分钟，五分钟，十五分钟系统的负载情况，加起来除以三就是平均负载指数，系统的负载情况主要是指 CPU和内存的负载情况，数字大表示负载严重</li>
+<li>uptime命令也可以显示此项数据</li>
+</ul>
+</li>
+<li><p>第二行显示 “USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT”</p>
+<ul>
+<li>IDLE：表示用户登录过来后空闲多久</li>
+<li>JCPU：表示累计占用CPU时间</li>
+<li>PCPU：表示用户登录后执行的操作占用的CPU时间</li>
+<li>WHAT：表示执行的操作</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">16:02:04 up 56 min,  1 user,  load average: 0.03, 0.05, 0.01</span><br><span class="line">USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT</span><br><span class="line">zlx      tty2     tty2             15:07   56:16  59.42s  0.15s /usr/libexec/gsd-disk-</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="4-6-压缩解压命令"><a href="#4-6-压缩解压命令" class="headerlink" title="4.6 压缩解压命令"></a>4.6 压缩解压命令</h3><h5 id="（1）gzip-和-gunzip"><a href="#（1）gzip-和-gunzip" class="headerlink" title="（1）gzip 和 gunzip"></a>（1）<font color="red">gzip 和 gunzip</font></h5><ul>
+<li>**gzip [文件名] **： 压缩文件，只能压缩文件不能压缩目录，而且不保留原文件压缩后格式为：.gz</li>
+<li><strong>gunzip [压缩包名]</strong> ：解压缩.gz文件</li>
+<li><strong>gzip -d [压缩包名]</strong> ：解压缩.gz文件</li>
+</ul>
+<h5 id="（2）tar"><a href="#（2）tar" class="headerlink" title="（2）tar"></a>（2）<font color="red">tar</font></h5><ul>
+<li>压缩 c：<ul>
+<li><font color="orange">tar [选项] [压缩后文件名] [目录]</font><ul>
+<li>-c 打包</li>
+<li>-v 显示详细信息</li>
+<li>-f 指定文件名</li>
+<li>-z 打包同时压缩</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li>tar -cfv Japan.tar Japan<br>打包目录Japan 并且以Japan.tar命名</li>
+<li><font color="cornflowerblue">tar -zcfv Japan.tar.gz Japan</font><br>打包并且压缩 目录Japan 以Japan.tar.gz命名</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>解压缩 x：<ul>
+<li>tar [选项] [压缩文件名] [目录]<ul>
+<li>-x 解包</li>
+<li>-v 显示详细信息</li>
+<li>-f 指定解压文件名</li>
+<li>-z 解压缩</li>
+</ul>
+</li>
+<li>例子：<ul>
+<li>tar -xfv Japan.tar Japan<br>解包目录Japan.tar并且以Japan命名</li>
+<li><font color="cornflowerblue">tar -zxfv Japan.tar.gz</font><br>解压缩并且解包目录Japan.tar.gz以Japan命名</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="（3）zip-和-unzip"><a href="#（3）zip-和-unzip" class="headerlink" title="（3）zip 和 unzip"></a>（3）<font color="red">zip 和 unzip</font></h5><ul>
+<li>**zip [选项] [压缩后文件或目录名] [文件或目录]**：原文件会保留 而且提示压缩比 deflated<br>没有gzip压缩比大，不常用。</li>
+<li>压缩后格式为：.zip    zip -r：压缩目录</li>
+<li><strong>unzip [压缩文件]</strong> ：解压zip文件</li>
+</ul>
+<h5 id><a href="#" class="headerlink" title></a></h5><h5 id="（4）bzip2-和-bunzip2"><a href="#（4）bzip2-和-bunzip2" class="headerlink" title="（4）bzip2 和 bunzip2"></a>（4）<font color="red">bzip2 和 bunzip2</font></h5><ul>
+<li><strong>bzip2 [选项] [文件名]</strong> ：压缩文件，大型文件一般用这个压缩</li>
+<li>例子：<ul>
+<li>bzip2 -k Japan<br>-k：保留原文件 如果不需保留可去掉。生成Japan.bz2压缩文件</li>
+<li>他还可以与tar结合使用<br>tar -cjfv Japan.tar.bz2 Japan</li>
+</ul>
+</li>
+<li>**bunzip2 [选项] [压缩文件名]**： 解压文件<ul>
+<li>-k：保留压缩包</li>
+<li>与tar结合使用<br>tar -xjfv Japan.tar.bz2 Japan</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-7-网络命令"><a href="#4-7-网络命令" class="headerlink" title="4.7 网络命令"></a>4.7 网络命令</h3><h5 id="（1）write"><a href="#（1）write" class="headerlink" title="（1）write"></a>（1）<font color="red">write</font></h5><ul>
+<li><p>指令所在路径：/usr/bin/write </p>
+</li>
+<li><p>执行权限：所有用户</p>
+</li>
+<li><p>语法：write &lt;用户名&gt; </p>
+</li>
+<li><p>功能描述：给用户发信息，以 Ctrl+D 保存结束</p>
+</li>
+<li><p>范例： # write linzhiling</p>
+</li>
+<li><p><strong>tips:输入错误，control+delete 删除</strong> </p>
+</li>
+</ul>
+<h5 id="（2）wall"><a href="#（2）wall" class="headerlink" title="（2）wall"></a>（2）<font color="red">wall</font></h5><ul>
+<li><p>命令英文原意：write all </p>
+</li>
+<li><p>指令所在路径：/usr/bin/wall </p>
+</li>
+<li><p>执行权限：所有用户</p>
+</li>
+<li><p>语法：wall [message] </p>
+</li>
+<li><p>功能描述：发广播信息</p>
+</li>
+<li><p>范例： # wall ShenChao is a honest man!</p>
+</li>
+</ul>
+<h5 id="（3）ping"><a href="#（3）ping" class="headerlink" title="（3）ping"></a>（3）<font color="red">ping</font></h5><ul>
+<li><p>命令所在路径：/bin/ping </p>
+</li>
+<li><p>执行权限：所有用户</p>
+</li>
+<li><p>语法：ping 选项 IP 地址 </p>
+</li>
+<li><p>-c 指定发送次数</p>
+</li>
+<li><p>功能描述：测试网络连通性</p>
+</li>
+<li><p>范例： # ping 192.168.1.156</p>
+</li>
+</ul>
+<h5 id="（4）ifconfig"><a href="#（4）ifconfig" class="headerlink" title="（4）ifconfig"></a>（4）<font color="red">ifconfig</font></h5><ul>
+<li><p>命令所在路径：/sbin/ifconfig </p>
+</li>
+<li><p>执行权限：root </p>
+</li>
+<li><p>语法：ifconfig 网卡名称 IP 地址</p>
+</li>
+<li><p>功能描述：查看和设置网卡信息</p>
+</li>
+<li><p>范例：# ifconfig eth0 192.168.8.250</p>
+</li>
+</ul>
+<h5 id="（5）mail"><a href="#（5）mail" class="headerlink" title="（5）mail"></a>（5）<font color="red">mail</font></h5><ul>
+<li><p>命令所在路径：/bin/mail 执行权限：所有用户</p>
+</li>
+<li><p>语法：mail [用户名] </p>
+</li>
+<li><p>功能描述：查看发送电子邮件</p>
+</li>
+<li><p>范例：# mail root</p>
+</li>
+</ul>
+<h5 id="（6）last"><a href="#（6）last" class="headerlink" title="（6）last"></a>（6）<font color="red">last</font></h5><ul>
+<li><p>命令所在路径：/usr/bin/last </p>
+</li>
+<li><p>执行权限：所有用户</p>
+</li>
+<li><p>语法：last </p>
+</li>
+<li><p>功能描述：列出目前与过去登入系统的用户信息</p>
+</li>
+<li><p>范例：# last</p>
+</li>
+</ul>
+<h5 id="（7）lastlog"><a href="#（7）lastlog" class="headerlink" title="（7）lastlog"></a>（7）<font color="red">lastlog</font></h5><ul>
+<li><p>命令所在路径：/usr/bin/lastlog </p>
+</li>
+<li><p>执行权限：所有用户</p>
+</li>
+<li><p>语法：lastlog </p>
+</li>
+<li><p>功能描述：检查某特定用户上次登录的时间</p>
+</li>
+<li><p>范例：</p>
+<ul>
+<li>#lastlog </li>
+<li>#lastlog -u 502</li>
+</ul>
+</li>
+</ul>
+<h5 id="（8）traceroute"><a href="#（8）traceroute" class="headerlink" title="（8）traceroute"></a>（8）<font color="red">traceroute</font></h5><ul>
+<li><p>命令所在路径：/bin/traceroute 执行权限：所有用户</p>
+</li>
+<li><p>语法：traceroute </p>
+</li>
+<li><p>功能描述：显示数据包到主机间的路径</p>
+</li>
+<li><p>范例：# traceroute <a href="http://www.lampbrother.net/">www.lampbrother.net</a></p>
+</li>
+</ul>
+<h5 id="（9）netstat"><a href="#（9）netstat" class="headerlink" title="（9）netstat"></a>（9）<font color="red">netstat</font></h5><ul>
+<li><p>命令所在路径：/bin/netstat </p>
+</li>
+<li><p>执行权限：所有用户</p>
+</li>
+<li><p>语法：netstat [选项] </p>
+</li>
+<li><p>功能描述：显示网络相关信息</p>
+</li>
+<li><p>选项：</p>
+<ul>
+<li>-t ： TCP 协议 </li>
+<li>-u ： UDP 协议 </li>
+<li>-l ： 监听 </li>
+<li>-r ： 路由 </li>
+<li>-n ： 显示 IP 地址和端口号</li>
+</ul>
+</li>
+<li><p>范例： </p>
+<ul>
+<li># netstat -tlun 查看本机监听的端口</li>
+<li># netstat -an 查看本机所有的网络连接 </li>
+<li># netstat -rn 查看本机路由表</li>
+<li>查看某一端口是否被占用：netstat -tunlp |grep 2181</li>
+</ul>
+</li>
+</ul>
+<h5 id="（10）setup"><a href="#（10）setup" class="headerlink" title="（10）setup"></a>（10）<font color="red">setup</font></h5><ul>
+<li><p>命令所在路径：/usr/bin/setup </p>
+</li>
+<li><p>执行权限：root </p>
+</li>
+<li><p>语法：setup </p>
+</li>
+<li><p>功能描述：配置网络</p>
+</li>
+<li><p>范例：# setup</p>
+</li>
+</ul>
+<h5 id="（11）mount"><a href="#（11）mount" class="headerlink" title="（11）mount"></a>（11）<font color="red">mount</font></h5><ul>
+<li><p>命令位置：/bin/mount </p>
+</li>
+<li><p>执行权限：所有用户</p>
+</li>
+<li><p>命令语法：mount [-t 文件系统] 设备文件名 挂载点</p>
+</li>
+<li><p>范例：# mount -t iso9660 /dev/sr0 /mnt/cdrom</p>
+</li>
+</ul>
+<h3 id="4-8-挂载命令"><a href="#4-8-挂载命令" class="headerlink" title="4.8 挂载命令"></a>4.8 挂载命令</h3><h3 id="4-9-关机重启命令"><a href="#4-9-关机重启命令" class="headerlink" title="4.9 关机重启命令"></a>4.9 关机重启命令</h3><h2 id="第十章-Shell基础"><a href="#第十章-Shell基础" class="headerlink" title="第十章 Shell基础"></a>第十章 Shell基础</h2><h3 id="10-1-Shell概述"><a href="#10-1-Shell概述" class="headerlink" title="10.1 Shell概述"></a>10.1 Shell概述</h3><h4 id="10-1-1-Shell是什么"><a href="#10-1-1-Shell是什么" class="headerlink" title="10.1.1 Shell是什么"></a>10.1.1 Shell是什么</h4><ul>
 <li><p>Shell是一个<font color="orange">命令行解释器</font>，它为用户提供了一个向Linux内核发送请求以便运行程序的界面系统级程序，用户可以用Shell来 启动、挂起、停止甚至是编写一些程序。</p>
 <img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20210721142803916.png" alt="image-20210721142803916" style="zoom:50%;"></li>
 <li><p>Shell还是一个功能相当强大的<font color="orange">编程语言</font>， 易编写，易调试，灵活性较强。Shell是解释执行的<font color="orange">脚本语言</font>，在Shell中可以直接调用Linux系统命令。</p>
 </li>
 </ul>
-<h3 id><a href="#" class="headerlink" title></a></h3><h4 id="10-1-2-Shell的分类"><a href="#10-1-2-Shell的分类" class="headerlink" title="10.1.2 Shell的分类"></a>10.1.2 Shell的分类</h4><ul>
+<h3 id="-1"><a href="#-1" class="headerlink" title></a></h3><h4 id="10-1-2-Shell的分类"><a href="#10-1-2-Shell的分类" class="headerlink" title="10.1.2 Shell的分类"></a>10.1.2 Shell的分类</h4><ul>
 <li><p><font color="orange">Bourne Shell</font>:从1979起Unix就开始使用 Bourne Shell，Bourne Shell的主文件名为 sh。</p>
 </li>
 <li><p><font color="orange">C Shell</font>: C Shell主要在BSD版的Unix系 统中使用，其语法和C语言相类似而得名</p>
@@ -5864,7 +6204,7 @@ On 连接条件
 <li><p>语法：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if [ 条件判断式 ];then</span><br><span class="line">	程序</span><br><span class="line">fi </span><br></pre></td></tr></table></figure>
 
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if [ 条件判断式 ]</span><br><span class="line">then </span><br><span class="line">	程序 </span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if [ 条件判断式 ]</span><br><span class="line">	then </span><br><span class="line">		程序 </span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
 <li><p>注意：</p>
 <ul>
 <li>fi：if语句使用fi结尾，和一般语言使用大括号{…}结尾不同</li>
@@ -5872,19 +6212,22 @@ On 连接条件
 <li>then：后面跟符合条件之后执行的程序，可以放在[]之后，用“;”分割。也可以换行写入，就不需要“;”了</li>
 </ul>
 </li>
-<li><p>例子：判断分区使用率</p>
+<li><p>例子：<font color="cornflowerblue">判断分区使用率</font></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash <span class="comment">#统计根分区使用率</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author:zlx</span></span><br><span class="line">rate=$(df -h | grep &quot;/dev/sda1&quot; | awk &#x27;&#123;print $5&#125;&#x27; | cut -d &quot;%&quot; -f 1)</span><br><span class="line"><span class="meta">#</span><span class="bash">把根分区使用率作为变量值赋给变量rate</span></span><br><span class="line">if [ $rate -ge 80 ]</span><br><span class="line">	then</span><br><span class="line">		echo &quot;Warning! /dev/sda1 is full!&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash <span class="comment">#统计根分区使用率</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author:zlx</span></span><br><span class="line">rate=$(df -h | grep &quot;/dev/sda1&quot; | awk &#x27;&#123;print $5&#125;&#x27; | cut -d &quot;%&quot; -f 1)</span><br><span class="line"><span class="meta">#</span><span class="bash">把根分区使用率作为变量值赋给变量rate</span></span><br><span class="line">if [ $rate -ge 80 ];then</span><br><span class="line">	echo &quot;Warning! /dev/sda1 is full!&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h5 id="（2）双分支if条件语句"><a href="#（2）双分支if条件语句" class="headerlink" title="（2）双分支if条件语句"></a>（2）双分支if条件语句</h5><ul>
 <li><p>语法：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if [ 条件判断式] </span><br><span class="line">	then </span><br><span class="line">   		条件成立时，执行的程序 </span><br><span class="line">	else </span><br><span class="line">   		条件不成立时，执行的另一个程序</span><br><span class="line">fi </span><br></pre></td></tr></table></figure></li>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if [ 条件判断式];then </span><br><span class="line">	条件成立时，执行的程序 </span><br><span class="line">else </span><br><span class="line">	条件不成立时，执行的另一个程序</span><br><span class="line">fi </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if [ 条件判断式] </span><br><span class="line">	then </span><br><span class="line">		条件成立时，执行的程序 </span><br><span class="line">	else </span><br><span class="line">		条件不成立时，执行的另一个程序</span><br><span class="line">fi </span><br></pre></td></tr></table></figure></li>
 <li><p>举例</p>
 <ul>
-<li><p>备份文件信息及文件  (注：du -sh 文件 :获取文件夹大小)</p>
+<li><p><font color="cornflowerblue">备份文件信息及文件  </font>(注：du -sh 文件 :获取文件夹大小)</p>
+<p>备份文件：tar -zcf xxx.tar.gz 目标文件</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author:zlx</span></span><br><span class="line"><span class="meta">#</span><span class="bash">备份/home/zlx/桌面/shellPractice</span></span><br><span class="line">ntpdate asia.pool.ntp.org &amp;&gt; /dev/null #同步系统时间</span><br><span class="line">date=$(date +%y%m%d) #把当前系统时间按照“年月日”格式赋予变量date</span><br><span class="line">size=$(du -sh /home/zlx/桌面/shellPractice) #统计文件夹大小</span><br><span class="line">if [ -d /tmp/backup ] #如果目标存在且是文件夹</span><br><span class="line">	then	</span><br><span class="line">        #将文件夹大小以及备份时间存储到临时文件中</span><br><span class="line">        echo &quot;Date:$date&quot; &gt; /tmp/backup/shellinfo.txt #标准输出重定向（覆盖）</span><br><span class="line">        echo &quot;Size:$size&quot; &gt;&gt; /tmp/backup/shellinfo.txt  #标准输出重定向（追加）</span><br><span class="line">        cd /tmp/backup</span><br><span class="line">        tar -zcf /home/zlx/桌面/shellprac-$date.tar.gz /home/zlx/桌面/shellPractice shellinfo.txt &amp;&gt; /dev/null#打包压缩</span><br><span class="line">        rm -rf /tmp/backup/shellinfo.txt</span><br><span class="line">    else	</span><br><span class="line">        mkdir /tmp/backup</span><br><span class="line">        echo &quot;Data:$date&quot; &gt; /tmp/backup/shellinfo.txt</span><br><span class="line">        echo &quot;Size:$size&quot; &gt;&gt; /tmp/backup/shellinfo.txt</span><br><span class="line">        cd /tmp/backup</span><br><span class="line">        tar -zcf /home/zlx/桌面/shellprac-$date.tar.gz /home/zlx/桌面/shellPractice shellinfo.txt &amp;&gt; /dev/null</span><br><span class="line">        rm -rf /tmp/backup/shellinfo.txt</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
-<li><p>判断apache是否启动</p>
+<li><p><font color="cornflowerblue">判断apache是否启动</font></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author:zlx 2021-08-11</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">apache所在机器ip地址（默认80端口）</span></span><br><span class="line">ipport=127.0.0.1</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">获取apache是否是启动状态（通过-w全量匹配tcp的80端口）</span></span><br><span class="line">isopen=$(nmap -sT $ipport | grep -w 80/tcp | grep http | awk &#x27;&#123;print $2&#125;&#x27;)</span><br><span class="line"></span><br><span class="line">if [ &quot;$isopen&quot; == &quot;open&quot; ]</span><br><span class="line">   then</span><br><span class="line">        echo &quot;$(date) httpd is ok!&quot; &gt;&gt; /tmp/apache.log</span><br><span class="line">   else</span><br><span class="line">        # 启动apache</span><br><span class="line">        /etc/rc.d/init.d/httpd start &amp;&gt;/dev/null</span><br><span class="line">        echo &quot;$(date) restart httpd!&quot; &gt;&gt; /tmp/apache-err.log</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
 <p>tips：nmap 远程扫描，检查服务是否启动</p>
@@ -5896,9 +6239,55 @@ On 连接条件
 </ul>
 <h5 id="（3）多分支if条件语句"><a href="#（3）多分支if条件语句" class="headerlink" title="（3）多分支if条件语句"></a>（3）多分支if条件语句</h5><ul>
 <li><p>语法：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if [ 条件判断式1 ] </span><br><span class="line">	then </span><br><span class="line">		当条件判断式1成立时，执行程序1 </span><br><span class="line">elif [ 条件判断式2 ] </span><br><span class="line">	then</span><br><span class="line">		当条件判断式2成立时，执行程序2</span><br><span class="line">...省略更多条件... </span><br><span class="line">else </span><br><span class="line">	当所有条件都不成立时，最后执行此程序</span><br><span class="line"> fi </span><br></pre></td></tr></table></figure></li>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if [ 条件判断式1 ];then </span><br><span class="line">	当条件判断式1成立时，执行程序1 </span><br><span class="line">elif [ 条件判断式2 ];then</span><br><span class="line">	当条件判断式2成立时，执行程序2</span><br><span class="line">...省略更多条件... </span><br><span class="line">else </span><br><span class="line">	当所有条件都不成立时，最后执行此程序</span><br><span class="line">fi </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if [ 条件判断式1 ] </span><br><span class="line">	then </span><br><span class="line">		当条件判断式1成立时，执行程序1 </span><br><span class="line">elif [ 条件判断式2 ] </span><br><span class="line">	then</span><br><span class="line">		当条件判断式2成立时，执行程序2</span><br><span class="line">...省略更多条件... </span><br><span class="line">else </span><br><span class="line">	当所有条件都不成立时，最后执行此程序</span><br><span class="line">fi </span><br></pre></td></tr></table></figure></li>
+<li><p><font color="cornflowerblue">判断输入的文件类型</font></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span> </span><br><span class="line"><span class="meta">#</span><span class="bash">Author:zlx 2021-08-14</span></span><br><span class="line"><span class="meta">#</span><span class="bash">description:judge file <span class="built_in">type</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">读取键盘输入，并赋给变量file</span></span><br><span class="line">read -p &quot;Please input a filename:&quot; file</span><br><span class="line">if [ -z &quot;$file&quot; ]	#判断输入是否为空</span><br><span class="line">    then</span><br><span class="line">	echo &quot;Error,please input a filename&quot;</span><br><span class="line">	exit 1</span><br><span class="line">elif [ ! -e &quot;$file&quot; ]	#判断输入文件是否存在</span><br><span class="line">    then </span><br><span class="line">	echo &quot;Your input is not a file&quot;</span><br><span class="line">	exit 2</span><br><span class="line">elif [ -f &quot;$file&quot; ]</span><br><span class="line">    then</span><br><span class="line">	echo &quot;$file is a regulare file!&quot;</span><br><span class="line">elif [ -d &quot;$file&quot; ]</span><br><span class="line">    then</span><br><span class="line">	echo &quot;$file is a directory!&quot;</span><br><span class="line">else</span><br><span class="line">	echo &quot;$file is an other file!&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h4 id="11-5-2-case语句"><a href="#11-5-2-case语句" class="headerlink" title="11.5.2 case语句"></a>11.5.2 case语句</h4><h4 id="11-5-3-for循环"><a href="#11-5-3-for循环" class="headerlink" title="11.5.3 for循环"></a>11.5.3 for循环</h4><h4 id="11-5-4-while循环和until循环"><a href="#11-5-4-while循环和until循环" class="headerlink" title="11.5.4 while循环和until循环"></a>11.5.4 while循环和until循环</h4>]]></content>
+<h4 id="11-5-2-case语句"><a href="#11-5-2-case语句" class="headerlink" title="11.5.2 case语句"></a>11.5.2 case语句</h4><ul>
+<li><p>多分支case条件语句：case语句和if…elif…else语句一样都是多分支条件语句，不过和if多分支条件语句不同的是，case语句只能判断一种条件关系（等于关系），而if语句可以判断多种条件关系。</p>
+</li>
+<li><p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">case $变量名 in </span><br><span class="line">	&quot;值1&quot;)</span><br><span class="line">		如果变量的值等于值1，则执行程序1 </span><br><span class="line">	;; </span><br><span class="line">	&quot;值2&quot;) </span><br><span class="line">		如果变量的值等于值2，则执行程序2 </span><br><span class="line">	;; </span><br><span class="line">	...省略其他分支... </span><br><span class="line">		*) </span><br><span class="line">   		如果变量的值都不是以上的值，则执行此程序</span><br><span class="line">	;; </span><br><span class="line">esac</span><br></pre></td></tr></table></figure></li>
+<li><p><font color="cornflowerblue">判断用户输入</font></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author:zlx 2021-08-14</span></span><br><span class="line"><span class="meta">#</span><span class="bash">description:judge the input</span></span><br><span class="line">read -p &quot;Please choose yes/no:&quot; -t 10 choose</span><br><span class="line">case $choose in</span><br><span class="line">	&quot;yes&quot;)</span><br><span class="line">		echo &quot;Your choose is yes!&quot;</span><br><span class="line">	;;</span><br><span class="line">        &quot;no&quot;)</span><br><span class="line">		echo &quot;your choose is no!&quot;</span><br><span class="line">	;;</span><br><span class="line">        *)</span><br><span class="line">		echo &quot;Your choose is error!&quot;</span><br><span class="line">	;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="11-5-3-for循环"><a href="#11-5-3-for循环" class="headerlink" title="11.5.3 for循环"></a>11.5.3 for循环</h4><h5 id="（1）语法一"><a href="#（1）语法一" class="headerlink" title="（1）语法一"></a>（1）语法一</h5><ul>
+<li><p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">for 变量 in 值1 值2 值3</span><br><span class="line">	do </span><br><span class="line">		程序</span><br><span class="line">	done</span><br></pre></td></tr></table></figure></li>
+<li><p>例子：输出时间</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author:zlx 2021-08-14</span></span><br><span class="line"></span><br><span class="line">for time in morning noon afternoon evening</span><br><span class="line">    do</span><br><span class="line">		echo &quot;This time is $time!&quot;</span><br><span class="line">    done</span><br></pre></td></tr></table></figure></li>
+<li><p>优点：这种方法看起来很笨，需要把循环次数写入for，但是在系统管理的时候，当我们不确定循环次数的时候，比如解压缩一个文件里所有的压缩包，他会自动加入新的压缩包，这个时候我就需要用这种笨办法，这种后面加次数的也有一个好处，就是循环变量只要是由空格，或者回车，或者tab键隔开的，都可以算在内，所以才<font color="orange">能和cat，ls等命令结合使用</font>，cat命令执行之后显示的结果就是由回车隔开的，都可以算成是循环变量。在加入或者减少压缩包的时候，不需要修改脚本。</p>
+</li>
+<li><p>例子：<font color="cornflowerblue">批量解压缩</font></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author:zlx 2021-08-14</span></span><br><span class="line"></span><br><span class="line">cd /lamp</span><br><span class="line">ls *.tar.gz &gt; ls.log	#列出所有压缩文件，覆盖重定向到ls.log</span><br><span class="line">for i in $(cat ls.log)	#循环遍历ls.log中每一个压缩文件的记录</span><br><span class="line">    do</span><br><span class="line">        tar -zxf $i &amp;&gt; /dev/null	#解压缩</span><br><span class="line">    done</span><br><span class="line">rm -rf /lamp/ls.log</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="（2）语法二"><a href="#（2）语法二" class="headerlink" title="（2）语法二"></a>（2）语法二</h5><ul>
+<li><p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">for ((初始值;循环控制调节;变量变化))</span><br><span class="line">   do</span><br><span class="line">   	程序</span><br><span class="line">   done</span><br></pre></td></tr></table></figure></li>
+<li><p>例子：计算1加到100</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#Author:zlx 2021-08-14</span><br><span class="line"></span><br><span class="line">s=0</span><br><span class="line">for ((i=1;i&lt;=100;i++))</span><br><span class="line">    do</span><br><span class="line">	#s=$(($s+$i))			#数值运算，详见10.5.1</span><br><span class="line">	#s=$[$s+$i]</span><br><span class="line">	#s=$(expr $s + $i)</span><br><span class="line">	let s=s+i</span><br><span class="line">    done</span><br><span class="line">echo &quot;The sum of 1+2+3+...+100 is $s!&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p><font color="cornflowerblue">批量创建用户</font></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Author:zlx</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">批量添加新用户</span></span><br><span class="line">read -p &quot;Please input the number of users: &quot; -t 30 num  #输入创建用户个数</span><br><span class="line">read -p &quot;Please input user name: &quot; -t 30 name   #输入用户名</span><br><span class="line">read -p &quot;Please input the password of users: &quot; -t 30 pass   #输入用户密码</span><br><span class="line"></span><br><span class="line">if [ ! -z &quot;$name&quot; -a ! -z &quot;$num&quot; -a ! -z &quot;$pass&quot; ]    #判断输入信息是否为空 </span><br><span class="line">    then</span><br><span class="line">    	y=$(echo $num | sed s/&#x27;^[0-9]*$&#x27;//g)    #这里是判断输入的用户个数是否为数字，sed后也可以把^[0-9]*$换为&#x27;s/[0-9]//g&#x27;</span><br><span class="line">        if [ -z &quot;$y&quot; ]  #如果上一条语句输出为空，就是输入的用户个数为数字</span><br><span class="line">            then</span><br><span class="line">                for ((i=1;i&lt;=$num;i++)) #开始循环</span><br><span class="line">                    do</span><br><span class="line">                    	/usr/sbin/useradd &quot;$name$i&quot; &amp;&gt;/dev/null #建立用户</span><br><span class="line">                        echo $pass | /usr/bin/passwd --stdin &quot;$name$i&quot; &amp;&gt;/dev/null      #设置用户密码，与用户名相同</span><br><span class="line">                    done</span><br><span class="line">                    echo &quot;Build seccees!&quot;</span><br><span class="line">        fi</span><br><span class="line">fi </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="11-5-4-while循环和until循环"><a href="#11-5-4-while循环和until循环" class="headerlink" title="11.5.4 while循环和until循环"></a>11.5.4 while循环和until循环</h4><h5 id="（1）while-循环"><a href="#（1）while-循环" class="headerlink" title="（1）while 循环"></a>（1）while 循环</h5><ul>
+<li><p>while循环是不定循环，也称作条件循环 。只要条件判断式成立，循环就会一直继续，直到条件判断式不成立，循环才会停止。</p>
+</li>
+<li><p>语法</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">while [ 条件判断式 ] </span><br><span class="line">	do </span><br><span class="line">		程序 </span><br><span class="line">	done </span><br></pre></td></tr></table></figure></li>
+<li><p>从1加到100</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash  </span><br><span class="line">#Author: zlx</span><br><span class="line">#从1加到100</span><br><span class="line"></span><br><span class="line">i=1 </span><br><span class="line">s=0 </span><br><span class="line">while [ $i -le 100 ] #如果变量i的值小于等于100，则执行循环 </span><br><span class="line">	do </span><br><span class="line">        s=$(( $s+$i ))</span><br><span class="line">		i=$(( $i+1 )) </span><br><span class="line">	done </span><br><span class="line">echo &quot;The sum is: $s&quot;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="（2）until循环"><a href="#（2）until循环" class="headerlink" title="（2）until循环"></a>（2）until循环</h5><ul>
+<li><p>until循环，和while循环相反，until循环时只要条件判断式不成立则进行循环，并执行循环程序。一旦循环条件成立，则终止循环。</p>
+</li>
+<li><p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">until [ 条件判断式 ] </span><br><span class="line">	do </span><br><span class="line">		程序 </span><br><span class="line">	done </span><br></pre></td></tr></table></figure></li>
+<li><p>从1加到100</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span> </span><br><span class="line"><span class="meta">#</span><span class="bash">Author: zlx</span></span><br><span class="line"><span class="meta">#</span><span class="bash">从1加到100</span></span><br><span class="line"></span><br><span class="line">i=1 </span><br><span class="line">s=0 </span><br><span class="line">until [ $i -gt 100 ] #循环直到变量i的值大于100，就停止循环 </span><br><span class="line">	do </span><br><span class="line">        s=$(( $s+$i ))</span><br><span class="line">		i=$(( $i+1 )) </span><br><span class="line">	done </span><br><span class="line">echo &quot;The sum is: $s&quot;</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
       <categories>
         <category>《Linux》</category>
       </categories>
