@@ -3855,7 +3855,7 @@ On 连接条件
 <td>允许事务读取未被其他事务提交的变更。脏读、不可重复读、幻读</td>
 </tr>
 <tr>
-<td>READ COMMITED（读已提交数据）</td>
+<td>READ COMMITTED（读已提交数据）</td>
 <td>只允许事务读取已经被其他事务提交的变更，可以避免脏读，但不可重复读和幻读的问题任然存在</td>
 </tr>
 <tr>
@@ -3870,9 +3870,41 @@ On 连接条件
 <ul>
 <li>Oracle 支持的2 种事务隔离级别：READ COMMITED,  SERIALIZABLE。Oracle 默认的事务隔离级别为: READ  COMMITED  Mysql 支持4 种事务隔离级别. Mysql 默认的事务隔离级别为: <font color="red">REPEATABLE READ</font></li>
 <li>Mysql 支持4 种事务隔离级别. Mysql 默认的事务隔离级别为: <font color="red">REPEATABLE READ</font></li>
-<li>查看当前的隔离级别：<font color="red">SELECT @@tx_isolation;</font></li>
-<li>设置当前MySQL连接的隔离级别：<font color="red">set transaction isolation level 隔离级别类型;</font></li>
-<li>设置数据库系统的全局的隔离级别：<font color="red">set global transaction isolation level 隔离级别类型;</font></li>
+</ul>
+<h4 id="（3）设置事务的隔离级别"><a href="#（3）设置事务的隔离级别" class="headerlink" title="（3）设置事务的隔离级别"></a>（3）设置事务的隔离级别</h4><ul>
+<li><p>查看当前的隔离级别：</p>
+<p>​    <font color="red">SELECT @@tx_isolation;</font></p>
+</li>
+<li><p>设置当前MySQL连接会话的隔离级别：</p>
+<p>​    <font color="red">set session transaction isolation level 隔离级别类型;</font>该命令只对当前会话生效，不影响其他会话和全局的事务隔离级别配置。</p>
+</li>
+<li><p>设置下一次事务的事务隔离级别：</p>
+<p>​    <font color="red">set transaction isolation level 隔离级别类型；</font>该命令只对下一次事务生效，不会影响会话本身设置的事务隔离级别。</p>
+</li>
+<li><p>设置数据库系统的全局的隔离级别：</p>
+<p>​    <font color="red">set global transaction isolation level 隔离级别类型;</font>该命令不会影响当前已连接的会话的事务隔离级别，对于以后的连接会话生效。</p>
+</li>
+</ul>
+<h4 id="（4）举例"><a href="#（4）举例" class="headerlink" title="（4）举例"></a>（4）举例</h4><ul>
+<li><p>read uncommitted (脏读，不可重复读，幻读，更新丢失 都不能解决)</p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210823152455209.png" alt="image-20210823152455209"></p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210823152945662.png" alt="image-20210823152945662"></p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210823153532343.png" alt="image-20210823153532343"></p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210823154321948.png" alt="image-20210823154321948"></p>
+</li>
+</ul>
+<ul>
+<li><p>read committed (解决脏读，不可重复读，幻读，更新丢失仍存在)</p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210823160252930.png" alt="image-20210823160252930"></p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210823160729970.png" alt="image-20210823160729970"></p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210823161335871.png" alt="image-20210823161335871"></p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210823162011169.png" alt="image-20210823162011169"></p>
+</li>
+</ul>
+<ul>
+<li><p>repeated read</p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210823163921044.png" alt="image-20210823163921044"></p>
+</li>
 </ul>
 ]]></content>
       <categories>
