@@ -5236,7 +5236,7 @@ On 连接条件
 </li>
 <li><font color="red">：ab [a内容][b内容]</font><ul>
 <li>描述：替换，会自动把b内容替换成a</li>
-<li>例子：ab mymail <a href="mailto:&#x31;&#x35;&#51;&#48;&#x32;&#54;&#56;&#55;&#x38;&#x31;&#64;&#113;&#x71;&#46;&#99;&#111;&#x6d;">&#x31;&#x35;&#51;&#48;&#x32;&#54;&#56;&#55;&#x38;&#x31;&#64;&#113;&#x71;&#46;&#99;&#111;&#x6d;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#x31;&#53;&#x33;&#48;&#50;&#54;&#x38;&#x37;&#56;&#49;&#64;&#113;&#113;&#46;&#99;&#111;&#x6d;">&#x31;&#53;&#x33;&#48;&#50;&#54;&#x38;&#x37;&#56;&#49;&#64;&#113;&#113;&#46;&#99;&#111;&#x6d;</a></li>
+<li>例子：ab mymail <a href="mailto:&#49;&#x35;&#x33;&#x30;&#x32;&#x36;&#x38;&#55;&#x38;&#x31;&#64;&#x71;&#113;&#46;&#99;&#111;&#x6d;">&#49;&#x35;&#x33;&#x30;&#x32;&#x36;&#x38;&#55;&#x38;&#x31;&#64;&#x71;&#113;&#46;&#99;&#111;&#x6d;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#x31;&#x35;&#x33;&#48;&#50;&#54;&#56;&#55;&#x38;&#49;&#x40;&#x71;&#x71;&#46;&#x63;&#x6f;&#109;">&#x31;&#x35;&#x33;&#48;&#50;&#54;&#56;&#55;&#x38;&#49;&#x40;&#x71;&#x71;&#46;&#x63;&#x6f;&#109;</a></li>
 </ul>
 </li>
 <li>注意：定义的快捷键或ab的内容重启后会消失，这时需要我们在用户的家目录下写配置文件.vimrc，保持快捷键<ul>
@@ -5291,6 +5291,153 @@ On 连接条件
 <li>树形依赖：a→b→c</li>
 <li>环形依赖：a→b→c→a<br>环形依赖需要把a,b,c三个同时安装</li>
 <li>模块依赖：模块依赖查询网站：<a href="http://www.rpmfind.net/">www.rpmfind.net</a><br>如果安装时遇到问题，出现依赖性错误<br>被依赖文件以.so.[数字]结尾的为库依赖，需要直接安装这个软件，错误会自动解决<br>安装这个包时需要进入网站 <a href="http://www.rpmfind.net.查询被依赖文件/">www.rpmfind.net.查询被依赖文件</a></li>
+</ul>
+<h4 id="6-2-2-安装、升级与卸载"><a href="#6-2-2-安装、升级与卸载" class="headerlink" title="6.2.2 安装、升级与卸载"></a>6.2.2 安装、升级与卸载</h4><h5 id="（1）包全名与包名"><a href="#（1）包全名与包名" class="headerlink" title="（1）包全名与包名"></a>（1）包全名与包名</h5><ul>
+<li>包全名：操作的包是没有安装的软件包时， 使用包全名。而且要注意路径</li>
+<li>包名：：操作已经安装的软件包时，使用包名。是默认在搜索/var/lib/rpm中的数据库</li>
+</ul>
+<h5 id="（2）rpm安装"><a href="#（2）rpm安装" class="headerlink" title="（2）rpm安装"></a>（2）rpm安装</h5><ul>
+<li><p>rpm –ivh 包全名</p>
+</li>
+<li><p>选项： </p>
+<ul>
+<li>-i（install） 安装 </li>
+<li>-v（verbose） 显示详细信息 </li>
+<li>-h（hash） 显示进度 </li>
+<li>–nodeps 不检测依赖性。 一般不用，安装时都得显示依赖性</li>
+</ul>
+</li>
+</ul>
+<h5 id="（3）rpm包升级"><a href="#（3）rpm包升级" class="headerlink" title="（3）rpm包升级"></a>（3）rpm包升级</h5><ul>
+<li><p>rpm -Uvh 包全名</p>
+</li>
+<li><p>选项： </p>
+<ul>
+<li>-U（upgrade） 升级</li>
+</ul>
+</li>
+</ul>
+<h5 id="（4）rpm卸载"><a href="#（4）rpm卸载" class="headerlink" title="（4）rpm卸载"></a>（4）rpm卸载</h5><ul>
+<li><p>rpm -e 包名</p>
+</li>
+<li><p>选项： </p>
+<ul>
+<li>-e（erase） 卸载 </li>
+<li>–nodeps 不检查依赖性</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-2-3-查询"><a href="#6-2-3-查询" class="headerlink" title="6.2.3 查询"></a>6.2.3 查询</h4><h5 id="（1）查询是否安装"><a href="#（1）查询是否安装" class="headerlink" title="（1）查询是否安装"></a>（1）查询是否安装</h5><ul>
+<li><p>rpm -q 包名</p>
+<ul>
+<li>查询包是否安装</li>
+<li>选项： -q 查询（query）</li>
+</ul>
+</li>
+<li><p>rpm –qa </p>
+<ul>
+<li>查询所有已经安装的 RPM <em>包</em></li>
+<li>选项：-a 所有（all）</li>
+</ul>
+</li>
+<li><p>rpm -qa | grep [关键字]</p>
+<ul>
+<li>查询所有含义关键字的包，| 为管道符 。作用是管道符左边命令的输出就会作为管道符右边命令的输入</li>
+<li>注意：<br>1、管道命令只处理前一个命令正确输出，不处理错误输出。<br>2、管道命令右边命令，必须能够接收标准输入流命令才行。</li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）查询软件包详细信息"><a href="#（2）查询软件包详细信息" class="headerlink" title="（2）查询软件包详细信息"></a>（2）查询软件包详细信息</h5><ul>
+<li><p>rpm –qi 包名</p>
+</li>
+<li><p>查询安装过的软件包的详细信息</p>
+</li>
+<li><p>选项： </p>
+<ul>
+<li>-i 查询软件信息（information） </li>
+<li>-p 查询未安装包信息（package）</li>
+</ul>
+</li>
+</ul>
+<h5 id="（3）查询包中文件安装位置"><a href="#（3）查询包中文件安装位置" class="headerlink" title="（3）查询包中文件安装位置"></a>（3）查询包中文件安装位置</h5><ul>
+<li><p>rpm –ql 包名</p>
+</li>
+<li><p>选项： </p>
+<ul>
+<li>-l 列表（list） </li>
+<li>-p 查询未安装包信息（package）</li>
+</ul>
+</li>
+</ul>
+<h5 id="（4）查询系统文件属于哪个rpm包"><a href="#（4）查询系统文件属于哪个rpm包" class="headerlink" title="（4）查询系统文件属于哪个rpm包"></a>（4）查询系统文件属于哪个rpm包</h5><ul>
+<li><p> rpm –qf 系统文件名</p>
+</li>
+<li><p>选项： </p>
+<ul>
+<li>-f 查询系统文件属于哪个软件包（file）</li>
+</ul>
+</li>
+</ul>
+<h5 id="（5）查询软件包的依赖性"><a href="#（5）查询软件包的依赖性" class="headerlink" title="（5）查询软件包的依赖性"></a>（5）查询软件包的依赖性</h5><ul>
+<li><p>rpm –qR 包名</p>
+</li>
+<li><p>选项： </p>
+<ul>
+<li>-R 查询软件包的依赖性（requires） </li>
+<li>-p 查询未安装包信息（package）</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-2-4-校验和文件提取"><a href="#6-2-4-校验和文件提取" class="headerlink" title="6.2.4 校验和文件提取"></a>6.2.4 校验和文件提取</h4><h5 id="（1）rpm包校验"><a href="#（1）rpm包校验" class="headerlink" title="（1）rpm包校验"></a>（1）rpm包校验</h5><ul>
+<li><p> rpm –V 已安装的包名</p>
+</li>
+<li><p>选项： </p>
+<ul>
+<li>-V 校验指定 RPM 包中的文件（verify）</li>
+</ul>
+</li>
+<li><p>验证内容中的 8 个信息的具体内容如下：</p>
+<ul>
+<li>S 文件大小是否改变</li>
+<li>M 文件的类型或文件的权限（rwx）是否被改变</li>
+<li>5 文件 MD5 校验和是否改变（可以看成文件内容是否改变）</li>
+<li>D 设备的中，从代码是否改变</li>
+<li>L 文件路径是否改变</li>
+<li>U 文件的属主（所有者）是否改变</li>
+<li>G 文件的属组是否改变</li>
+<li>T 文件的修改时间是否改变</li>
+</ul>
+</li>
+<li><p>文件类型</p>
+<ul>
+<li><p>c 配置文件（config file） </p>
+</li>
+<li><p>d 普通文档（documentation） </p>
+</li>
+<li><p>g “鬼”文件（ghost file），很少见，就是该文件不应该被这个RPM包包含</p>
+</li>
+<li><p>l 授权文件（license file） </p>
+</li>
+<li><p>r 描述文件（read me）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）rpm包中文件提取"><a href="#（2）rpm包中文件提取" class="headerlink" title="（2）rpm包中文件提取"></a>（2）rpm包中文件提取</h5><ul>
+<li>rpm2cpio 包全名 | cpio -idv .文件绝对路径 <ul>
+<li>rpm2cpio ：将 rpm 包转换为 cpio 格式的命令</li>
+<li>cpio ：是一个标准工具，它用于创建软件档案文件和从档案文件中提取文件</li>
+</ul>
+</li>
+<li>cpio 选项 &lt; [文件|设备] <ul>
+<li>选项： <ul>
+<li>-i：copy-in 模式，还原 </li>
+<li>-d：还原时自动新建目录 </li>
+<li>-v：显示还原过程</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h2 id="第十章-Shell基础"><a href="#第十章-Shell基础" class="headerlink" title="第十章 Shell基础"></a>第十章 Shell基础</h2><h3 id="10-1-Shell概述"><a href="#10-1-Shell概述" class="headerlink" title="10.1 Shell概述"></a>10.1 Shell概述</h3><h4 id="10-1-1-Shell是什么"><a href="#10-1-1-Shell是什么" class="headerlink" title="10.1.1 Shell是什么"></a>10.1.1 Shell是什么</h4><ul>
 <li><p>Shell是一个<font color="orange">命令行解释器</font>，它为用户提供了一个向Linux内核发送请求以便运行程序的界面系统级程序，用户可以用Shell来 启动、挂起、停止甚至是编写一些程序。</p>
