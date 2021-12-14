@@ -3902,10 +3902,39 @@ On 连接条件
 </li>
 </ul>
 <ul>
-<li><p>repeated read</p>
+<li><p>repeatable read （解决脏读、不可重复读，未解决幻读、丢失更新）</p>
 <p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210823163921044.png" alt="image-20210823163921044"></p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210824153058925.png" alt="image-20210824153058925"></p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210824153530697-1639382732842.png" alt="image-20210824153530697"></p>
 </li>
 </ul>
+<ul>
+<li><p>serializable（四种并发问题都能解决）</p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210824154220383-1639382732842.png" alt="image-20210824154220383"></p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210824155313404-1639382732842.png" alt="image-20210824155313404"></p>
+<p><img src="/2021/07/18/MySQL%E5%9F%BA%E7%A1%80%E7%AF%87/image-20210824160049809-1639382732842.png" alt="image-20210824160049809"></p>
+</li>
+</ul>
+<h4 id="（5）设置回滚点"><a href="#（5）设置回滚点" class="headerlink" title="（5）设置回滚点"></a>（5）设置回滚点</h4><p>语法：回滚到point a，操作1仍然会提交，只有操作2会回滚</p>
+<p>​        set autocommit=0;</p>
+<p>​        start transaction;</p>
+<p>​        [操作1]</p>
+<p>​        savepoint a;</p>
+<p>​        [操作2]</p>
+<p>​        rollback to a;</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">set</span> autocommit<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line">Query OK, <span class="number">0</span> <span class="keyword">rows</span> affected (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">start</span> transaction;</span><br><span class="line">Query OK, <span class="number">0</span> <span class="keyword">rows</span> affected (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> balance;</span><br><span class="line"><span class="operator">+</span><span class="comment">------+------+-------+</span></span><br><span class="line"><span class="operator">|</span> id   <span class="operator">|</span> name <span class="operator">|</span> money <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+------+-------+</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">1</span> <span class="operator">|</span> zlx  <span class="operator">|</span>  <span class="number">1500</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">2</span> <span class="operator">|</span> zzx  <span class="operator">|</span>  <span class="number">1100</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">3</span> <span class="operator">|</span> ddj  <span class="operator">|</span>  <span class="number">1000</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">4</span> <span class="operator">|</span> zii  <span class="operator">|</span>  <span class="number">1000</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">5</span> <span class="operator">|</span> zij  <span class="operator">|</span>  <span class="number">1000</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+------+-------+</span></span><br><span class="line"><span class="number">5</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">delete</span> <span class="keyword">from</span> balance <span class="keyword">where</span> id<span class="operator">=</span><span class="number">4</span>;</span><br><span class="line">Query OK, <span class="number">1</span> <span class="type">row</span> affected (<span class="number">5.62</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">savepoint</span> a;</span><br><span class="line">Query OK, <span class="number">0</span> <span class="keyword">rows</span> affected (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">delete</span> <span class="keyword">from</span> balance <span class="keyword">where</span> id<span class="operator">=</span><span class="number">5</span>;</span><br><span class="line">Query OK, <span class="number">1</span> <span class="type">row</span> affected (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">rollback</span> <span class="keyword">to</span> a;</span><br><span class="line">Query OK, <span class="number">0</span> <span class="keyword">rows</span> affected (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> balance;</span><br><span class="line"><span class="operator">+</span><span class="comment">------+------+-------+</span></span><br><span class="line"><span class="operator">|</span> id   <span class="operator">|</span> name <span class="operator">|</span> money <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+------+-------+</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">1</span> <span class="operator">|</span> zlx  <span class="operator">|</span>  <span class="number">1500</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">2</span> <span class="operator">|</span> zzx  <span class="operator">|</span>  <span class="number">1100</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">3</span> <span class="operator">|</span> ddj  <span class="operator">|</span>  <span class="number">1000</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>    <span class="number">5</span> <span class="operator">|</span> zij  <span class="operator">|</span>  <span class="number">1000</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">------+------+-------+</span></span><br><span class="line"><span class="number">4</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><h3 id="视图的概念"><a href="#视图的概念" class="headerlink" title="视图的概念"></a>视图的概念</h3><p>（1）MySQL从5.0.1版本开始提供视图功能。一种虚拟存在的表，行和列的数据来自定义视图的查询中使用的表，并且是在使用视图时动态生成的，只保存了sql逻辑，不保存查询结果。</p>
+<p>（2）应用场景</p>
+<ul>
+<li>多个地方用到同样的查询结果</li>
+<li>该查询结果使用的sql语句较为复杂</li>
+</ul>
+<h3 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h3><p>（1）语法</p>
+<p>​    create view view_name</p>
+<p>​    as 查询语句;</p>
 ]]></content>
       <categories>
         <category>《MySQL》</category>
@@ -4877,23 +4906,399 @@ On 连接条件
 <li><p>范例：# setup</p>
 </li>
 </ul>
-<h5 id="（11）mount"><a href="#（11）mount" class="headerlink" title="（11）mount"></a>（11）<font color="red">mount</font></h5><ul>
-<li><p>命令位置：/bin/mount </p>
+<h3 id="4-8-挂载命令"><a href="#4-8-挂载命令" class="headerlink" title="4.8 挂载命令"></a>4.8 挂载命令</h3><h5 id="（1）mount"><a href="#（1）mount" class="headerlink" title="（1）mount"></a>（1）<font color="red">mount</font></h5><ul>
+<li>命令位置：/bin/mount </li>
+<li>执行权限：所有用户</li>
+<li>命令语法：mount [-t 文件系统] 设备文件名 挂载点</li>
+<li>范例：# mount -t iso9660 /dev/sr0 /mnt/cdrom</li>
+</ul>
+<h5 id="（2）步骤分析"><a href="#（2）步骤分析" class="headerlink" title="（2）步骤分析"></a>（2）步骤分析</h5><ul>
+<li><p>第一步</p>
+<p>放入光盘，虚拟机中放入，或者服务器下载ios文件</p>
 </li>
-<li><p>执行权限：所有用户</p>
+<li><p>第二步</p>
+<p>创建一个空目录，设为挂载点    mkdir /media/cdrom </p>
+<p>/media用来做光盘挂载的，/mnt 也可以</p>
 </li>
-<li><p>命令语法：mount [-t 文件系统] 设备文件名 挂载点</p>
+<li><p>第三步</p>
+<p>输入命令    mount -t iso9660 /dev/sr0 /media/cdrom</p>
+<p>设备文件名默认就是/dev/sr0，文件系统为iso9660 它是国际标准的cd文件格式，它告诉mount命令，我要挂载的是一个标准的cd。</p>
+<p>/dev/cdrom也可以写 /dev/sr0，/dev/cdrom是sr0的软链接</p>
 </li>
-<li><p>范例：# mount -t iso9660 /dev/sr0 /mnt/cdrom</p>
+<li><p>第四步</p>
+<p>进入挂载后的盘符    cd /media/cdrom</p>
+</li>
+<li><p>第五步</p>
+<p>卸载光盘</p>
+<p>先退出/media/cdrom，输入命令：cd；然后再输入命令：umount /dev/sr0</p>
+<p><strong>注意：如果之前挂载过其他盘，需要卸载之后才能挂载，输入命令：<br>umount /dev/sr0</strong></p>
 </li>
 </ul>
-<h3 id="4-8-挂载命令"><a href="#4-8-挂载命令" class="headerlink" title="4.8 挂载命令"></a>4.8 挂载命令</h3><h3 id="4-9-关机重启命令"><a href="#4-9-关机重启命令" class="headerlink" title="4.9 关机重启命令"></a>4.9 关机重启命令</h3><h2 id="第十章-Shell基础"><a href="#第十章-Shell基础" class="headerlink" title="第十章 Shell基础"></a>第十章 Shell基础</h2><h3 id="10-1-Shell概述"><a href="#10-1-Shell概述" class="headerlink" title="10.1 Shell概述"></a>10.1 Shell概述</h3><h4 id="10-1-1-Shell是什么"><a href="#10-1-1-Shell是什么" class="headerlink" title="10.1.1 Shell是什么"></a>10.1.1 Shell是什么</h4><ul>
+<h3 id="4-9-关机重启命令"><a href="#4-9-关机重启命令" class="headerlink" title="4.9 关机重启命令"></a>4.9 关机重启命令</h3><h5 id="（1）shutdown"><a href="#（1）shutdown" class="headerlink" title="（1）shutdown"></a>（1）<font color="red">shutdown</font></h5><ul>
+<li><p>语法：shutdown [选项] 时间</p>
+</li>
+<li><p>选项：</p>
+<ul>
+<li><p>-c：取消前一个关机命令<br>-h：关机<br>-r：重启</p>
+</li>
+<li><p>时间选项</p>
+<p>now 现在关机<br>20:30 八点半关机</p>
+</li>
+</ul>
+</li>
+<li><p>范例：</p>
+<ul>
+<li>shutdown -h now 关机</li>
+<li>shutdown -c 取消上一次设定的关机时间</li>
+<li>在服务器上重启需要谨慎，需要先停掉服务，否则物理内存会坏<br>而且远程服务器只能重启，关机后需要管理员手动开机</li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）其他关机命令"><a href="#（2）其他关机命令" class="headerlink" title="（2）其他关机命令"></a>（2）其他关机命令</h5><ul>
+<li>halt</li>
+<li>poweroff 相当于直接断电</li>
+<li>init 0</li>
+<li>推荐使用shutdown关机，会保存正在运行的服务</li>
+</ul>
+<h5 id="（3）其他重启命令"><a href="#（3）其他重启命令" class="headerlink" title="（3）其他重启命令"></a>（3）其他重启命令</h5><ul>
+<li>reboot</li>
+<li>init 6</li>
+</ul>
+<h5 id="（3）系统的运行级别"><a href="#（3）系统的运行级别" class="headerlink" title="（3）系统的运行级别"></a>（3）系统的运行级别</h5><ul>
+<li><p>init 0-6</p>
+<ul>
+<li>0：关机</li>
+<li>1：单用户 进入选项菜单 只有root用户登陆进去 相当于Windows安全模式F8，只不过没有图形界面</li>
+<li>2：不完全多用户，不含NFS服务，没有图形界面 NFS网络文件系统，Linux之间文件传输共享方式，除了NFS服务，和3一样。</li>
+<li>3：完全多用户，没有图形界面</li>
+<li>4：未分配，没有图形界面</li>
+<li>5：图形界面</li>
+<li>6：重启</li>
+</ul>
+</li>
+<li><p>查询系统运行级别：runlevel</p>
+</li>
+<li><p>退出登录命令：logout</p>
+<p><strong>注意：在服务器中一定要在操作完成之后退出登陆，否则其他人会直接进入你的服务器，造成非常大的损失。最基本的安全意识一定要有！！！</strong></p>
+</li>
+</ul>
+<h2 id="第五章-文本编辑器vim"><a href="#第五章-文本编辑器vim" class="headerlink" title="第五章 文本编辑器vim"></a>第五章 文本编辑器vim</h2><h3 id="5-1-vim常用操作"><a href="#5-1-vim常用操作" class="headerlink" title="5.1 vim常用操作"></a>5.1 vim常用操作</h3><h4 id="5-1-1-vim简介"><a href="#5-1-1-vim简介" class="headerlink" title="5.1.1 vim简介"></a>5.1.1 vim简介</h4><ul>
+<li><p>Vim 是一个功能强大的全屏幕文本编辑器， 是 Linux/UNIX 上最常用的文本编辑器， 它的作用是建立、编辑、显示文本文件。</p>
+</li>
+<li><p>Vim 没有菜单，只有命令。</p>
+</li>
+</ul>
+<h4 id="5-1-2-vim工作模式"><a href="#5-1-2-vim工作模式" class="headerlink" title="5.1.2 vim工作模式"></a>5.1.2 vim工作模式</h4><p><img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20210817092541707.png" alt="image-20210817092541707"></p>
+<h5 id="（1）三种模式"><a href="#（1）三种模式" class="headerlink" title="（1）三种模式"></a>（1）三种模式</h5><ul>
+<li><p>命令模式：vi/vim+文件名进入命令模式，不可以输入文字，只能识别命令</p>
+</li>
+<li><p>插入模式：按i/a/o命令进入，可继续输入文字，按Esc退出</p>
+</li>
+<li><p>编辑模式：在命令模式下按“：”，即可进入编辑模式，可以输入编辑命令，比如保持并退出。</p>
+</li>
+</ul>
+<h5 id="（2）插入命令"><a href="#（2）插入命令" class="headerlink" title="（2）插入命令"></a>（2）插入命令</h5><p>​    a i o</p>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">a</td>
+<td align="center">在光标所在<font color="cornflowerblue">字符后</font>插入</td>
+</tr>
+<tr>
+<td align="center">A</td>
+<td align="center">在光标所在行<font color="cornflowerblue">行尾</font>插入</td>
+</tr>
+<tr>
+<td align="center">i</td>
+<td align="center">在光标所在<font color="cornflowerblue">字符前</font>插入</td>
+</tr>
+<tr>
+<td align="center">I</td>
+<td align="center">在光标所在行<font color="cornflowerblue">行首</font>插入</td>
+</tr>
+<tr>
+<td align="center">o</td>
+<td align="center">在光标下插入新行</td>
+</tr>
+<tr>
+<td align="center">O</td>
+<td align="center">在光标上插入新行</td>
+</tr>
+</tbody></table>
+<h5 id="（3）定位命令"><a href="#（3）定位命令" class="headerlink" title="（3）定位命令"></a>（3）定位命令</h5><p>​    G</p>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">:set nu</td>
+<td align="center">设置行号</td>
+</tr>
+<tr>
+<td align="center">:set nonu</td>
+<td align="center">取消行号</td>
+</tr>
+<tr>
+<td align="center">gg</td>
+<td align="center">到第一行</td>
+</tr>
+<tr>
+<td align="center">G</td>
+<td align="center">到最后一行</td>
+</tr>
+<tr>
+<td align="center">nG</td>
+<td align="center">到第n行</td>
+</tr>
+<tr>
+<td align="center">: n</td>
+<td align="center">到第n行 和上面一样的格式</td>
+</tr>
+<tr>
+<td align="center">$</td>
+<td align="center">移动到行尾</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">移动到行首</td>
+</tr>
+</tbody></table>
+<h5 id="（4）删除命令"><a href="#（4）删除命令" class="headerlink" title="（4）删除命令"></a>（4）删除命令</h5><p>​    x d</p>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">x</td>
+<td align="center">删除光标所在处的字符</td>
+</tr>
+<tr>
+<td align="center">nx</td>
+<td align="center">删除光标所在处后n个字符</td>
+</tr>
+<tr>
+<td align="center">dd</td>
+<td align="center">删除光标所在行</td>
+</tr>
+<tr>
+<td align="center">ndd</td>
+<td align="center">删除下面n行</td>
+</tr>
+<tr>
+<td align="center">dG</td>
+<td align="center">删除光标所在行到文件末尾的内容</td>
+</tr>
+<tr>
+<td align="center">D</td>
+<td align="center">删除光标所在处到行尾内容</td>
+</tr>
+<tr>
+<td align="center">:m,nd</td>
+<td align="center">删除指定范围的行 m-n的行全部被删除</td>
+</tr>
+</tbody></table>
+<h5 id="（5）复制和剪切命令"><a href="#（5）复制和剪切命令" class="headerlink" title="（5）复制和剪切命令"></a>（5）复制和剪切命令</h5><p>​    yy dd p</p>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">yy</td>
+<td align="center">复制当前行</td>
+</tr>
+<tr>
+<td align="center">nyy</td>
+<td align="center">复制当前行以下n行</td>
+</tr>
+<tr>
+<td align="center">dd</td>
+<td align="center">剪切当前行</td>
+</tr>
+<tr>
+<td align="center">ndd</td>
+<td align="center">剪切当前行以下n行</td>
+</tr>
+<tr>
+<td align="center">p</td>
+<td align="center">粘贴在当前光标所在行下</td>
+</tr>
+<tr>
+<td align="center">P</td>
+<td align="center">粘贴在当前光标所在行上</td>
+</tr>
+</tbody></table>
+<h5 id="（6）替换和取消命令"><a href="#（6）替换和取消命令" class="headerlink" title="（6）替换和取消命令"></a>（6）替换和取消命令</h5><p>​    r R</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r</td>
+<td>替换光标所在处字符</td>
+</tr>
+<tr>
+<td>R</td>
+<td>从光标所在处开始替换字符，按Esc结束</td>
+</tr>
+<tr>
+<td>u</td>
+<td>撤消上一操作</td>
+</tr>
+</tbody></table>
+<h5 id="（7）搜索和替换命令"><a href="#（7）搜索和替换命令" class="headerlink" title="（7）搜索和替换命令"></a>（7）搜索和替换命令</h5><ul>
+<li><p>/string 搜索指定字符串string，与less命令操作类似</p>
+<ul>
+<li>搜索时忽略大小写:set ic</li>
+<li>搜索时不忽略大小写:set noic</li>
+<li>n 搜索指定字符串的下一个出现位置</li>
+</ul>
+</li>
+<li><p>:%s/oldString/newString/g   不询问,全文替换指定字符串</p>
+</li>
+<li><p>:%s/oldString/newString/c   询问确认，全文替换指定字符串</p>
+</li>
+<li><p>:m,ns/oldString/newString/g 在一定范围内替换指定字符串</p>
+</li>
+</ul>
+<h5 id="（8）保持和退出命令"><a href="#（8）保持和退出命令" class="headerlink" title="（8）保持和退出命令"></a>（8）保持和退出命令</h5><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:w</td>
+<td>保存修改</td>
+</tr>
+<tr>
+<td>:w new_filename</td>
+<td>另存为指定文件</td>
+</tr>
+<tr>
+<td>:wq</td>
+<td>保存修改并退出</td>
+</tr>
+<tr>
+<td>ZZ</td>
+<td>快捷键，保存修改退出</td>
+</tr>
+<tr>
+<td>:q!</td>
+<td>不保存修改退出</td>
+</tr>
+<tr>
+<td>:wq!</td>
+<td>保存修改并退出（所有者或root可用）</td>
+</tr>
+</tbody></table>
+<h3 id="5-2-vim使用技巧"><a href="#5-2-vim使用技巧" class="headerlink" title="5.2 vim使用技巧"></a>5.2 vim使用技巧</h3><ol>
+<li><font color="red">：r  !命令</font><ul>
+<li>描述：在当前vim文档中，导入命令执行结果</li>
+<li>例子：r !date 直接把当前时间导入当前的Vim文档</li>
+</ul>
+</li>
+<li><font color="red">：map [快捷键] [触发命令] </font><ul>
+<li>描述：定义快捷键</li>
+<li>注意：其中快捷键需要按ctrl+v+需要设定的键位，设定好之后颜色会变，比如想设定ctrl p为快捷键那么就按ctrl+v+p 会出现^P ，不能按shift+6出现的^,这两个虽然看起来一样但是颜色不一样。触发命令按需要执行的命令的先后顺序来排列，比如给脚本加注释#键就可以把[触发命令]设为I#</li>
+<li>例子：map ^P I#  给脚本行首加#注释</li>
+</ul>
+</li>
+<li><font color="red">：m,ns/^/#/g </font><ul>
+<li>描述：指定连续行注释</li>
+</ul>
+</li>
+<li><font color="red">：m,ns/^#//g </font><ul>
+<li>描述：取消连续行注释</li>
+</ul>
+</li>
+<li><font color="red">：m,ns/^/ \ / \ //g </font><ul>
+<li>描述：给连续行首加// </li>
+<li>注意//是//的转义</li>
+</ul>
+</li>
+<li><font color="red">：ab [a内容][b内容]</font><ul>
+<li>描述：替换，会自动把b内容替换成a</li>
+<li>例子：ab mymail <a href="mailto:&#x31;&#x35;&#51;&#48;&#x32;&#54;&#56;&#55;&#x38;&#x31;&#64;&#113;&#x71;&#46;&#99;&#111;&#x6d;">&#x31;&#x35;&#51;&#48;&#x32;&#54;&#56;&#55;&#x38;&#x31;&#64;&#113;&#x71;&#46;&#99;&#111;&#x6d;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#x31;&#53;&#x33;&#48;&#50;&#54;&#x38;&#x37;&#56;&#49;&#64;&#113;&#113;&#46;&#99;&#111;&#x6d;">&#x31;&#53;&#x33;&#48;&#50;&#54;&#x38;&#x37;&#56;&#49;&#64;&#113;&#113;&#46;&#99;&#111;&#x6d;</a></li>
+</ul>
+</li>
+<li>注意：定义的快捷键或ab的内容重启后会消失，这时需要我们在用户的家目录下写配置文件.vimrc，保持快捷键<ul>
+<li>root用户在/root/.vimrc</li>
+<li>其他用户在/home/username/.vimrc中编辑</li>
+</ul>
+</li>
+</ol>
+<p><img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/vim%E9%94%AE%E7%9B%98%E5%9B%BE.gif" alt="vim键盘图"></p>
+<h2 id="第六章-软件包管理"><a href="#第六章-软件包管理" class="headerlink" title="第六章 软件包管理"></a>第六章 软件包管理</h2><h3 id="6-1-软件包管理简介"><a href="#6-1-软件包管理简介" class="headerlink" title="6.1 软件包管理简介"></a>6.1 软件包管理简介</h3><h4 id="6-1-1-源码包"><a href="#6-1-1-源码包" class="headerlink" title="6.1.1 源码包"></a>6.1.1 源码包</h4><p>可以看到源代码，但是安装时间较慢；脚本安装包 类似Windows安装软件， 他是写了安装界面的源码包</p>
+<ul>
+<li>优点：<ul>
+<li>1.开源，如果有足够的能力，可以修改源代码</li>
+<li>2.可以自由选择所需的功能</li>
+<li>3.软件是编译安装，所以更适合自己的系统，使用更加稳定也效率更高</li>
+<li>4.卸载方便，直接删除安装目录</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>1.安装过程步骤较多，尤其安装较大的软件集合时（如LAMP环境搭建），容易出现拼写错误</li>
+<li>2.编译过程时间较长，安装比二进制安装时间长</li>
+<li>3.因为是编译安装，安装过程中一旦报错新手很难解决</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-1-2-二进制包"><a href="#6-1-2-二进制包" class="headerlink" title="6.1.2 二进制包"></a>6.1.2 二进制包</h4><p><font color="red">RPM包</font>，系统默认包，厂商已经进行了编译，看不到源代码，但是安装时间较快</p>
+<ul>
+<li><p>优点：</p>
+<ul>
+<li>1.包管理系统简单，只通过几个命令就可以实现包的安装，升级，查询和卸载</li>
+<li>2.安装速度比源码包安装快得多</li>
+</ul>
+</li>
+<li><p>缺点：</p>
+<ul>
+<li>1.经过编译，不再可以看到源代码</li>
+<li>2.功能选择不如源码包灵活</li>
+<li>3.<font color="orange">依赖性</font> ：依赖性指的是要想安装A包就得先安装B包，要想安装B包又得先安装C包，所以只能以CBA的顺序安装RPM包，删除的时候得按ABC顺序删除安装包，基本上所有的RPM包全有依赖性</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rpm 是由红帽公司开发的软件包管理方式，使用 rpm 我们可以方便的进行软件的安装、查询、卸载、升</span><br><span class="line">级等工作。但是 rpm 软件包之间的依赖性问题往往会很繁琐,尤其是软件由多个 rpm 包组成时。</span><br><span class="line">yum（全称为 Yellow dog Updater, Modified）是一个在 Fedora 和 RedHat 以及 SUSE 中的 Shell 前端软件包</span><br><span class="line">管理器。基于 RPM 包管理，能够从指定的服务器自动下载 RPM 包并且安装，可以自动处理依赖性关</span><br><span class="line">系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="6-2-rpm命令管理"><a href="#6-2-rpm命令管理" class="headerlink" title="6.2 rpm命令管理"></a>6.2 rpm命令管理</h3><h4 id="6-2-1-包命名与依赖性"><a href="#6-2-1-包命名与依赖性" class="headerlink" title="6.2.1 包命名与依赖性"></a>6.2.1 包命名与依赖性</h4><h5 id="（1）rpm包命名规则"><a href="#（1）rpm包命名规则" class="headerlink" title="（1）rpm包命名规则"></a>（1）rpm包命名规则</h5><p>​    <strong>Httpd-2.2.15.el6.centos.1.i686.rpm</strong></p>
+<ul>
+<li>Httpd 软件包包名</li>
+<li>2.2.15 软件版本<br>15 软件发布的次数</li>
+<li>el6.centos 适合的Linux平台</li>
+<li>i686 适合的硬件平台 noarch 表示任何硬件平台都可以安装</li>
+<li>rpm rpm包扩展名<br>如果自己组建rpm包，都以rpm结尾，这样更加清晰，其他管理员可以明白</li>
+<li>注意：Httpd-2.2.15.el6.centos.1.i686.rpm为包全名，Httpd 为包名是有区别的，Linux系统命令严格区分两者</li>
+</ul>
+<h5 id="（2）依赖性"><a href="#（2）依赖性" class="headerlink" title="（2）依赖性"></a>（2）依赖性</h5><ul>
+<li>树形依赖：a→b→c</li>
+<li>环形依赖：a→b→c→a<br>环形依赖需要把a,b,c三个同时安装</li>
+<li>模块依赖：模块依赖查询网站：<a href="http://www.rpmfind.net/">www.rpmfind.net</a><br>如果安装时遇到问题，出现依赖性错误<br>被依赖文件以.so.[数字]结尾的为库依赖，需要直接安装这个软件，错误会自动解决<br>安装这个包时需要进入网站 <a href="http://www.rpmfind.net.查询被依赖文件/">www.rpmfind.net.查询被依赖文件</a></li>
+</ul>
+<h2 id="第十章-Shell基础"><a href="#第十章-Shell基础" class="headerlink" title="第十章 Shell基础"></a>第十章 Shell基础</h2><h3 id="10-1-Shell概述"><a href="#10-1-Shell概述" class="headerlink" title="10.1 Shell概述"></a>10.1 Shell概述</h3><h4 id="10-1-1-Shell是什么"><a href="#10-1-1-Shell是什么" class="headerlink" title="10.1.1 Shell是什么"></a>10.1.1 Shell是什么</h4><ul>
 <li><p>Shell是一个<font color="orange">命令行解释器</font>，它为用户提供了一个向Linux内核发送请求以便运行程序的界面系统级程序，用户可以用Shell来 启动、挂起、停止甚至是编写一些程序。</p>
 <img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20210721142803916.png" alt="image-20210721142803916" style="zoom:50%;"></li>
 <li><p>Shell还是一个功能相当强大的<font color="orange">编程语言</font>， 易编写，易调试，灵活性较强。Shell是解释执行的<font color="orange">脚本语言</font>，在Shell中可以直接调用Linux系统命令。</p>
 </li>
 </ul>
-<h3 id="-1"><a href="#-1" class="headerlink" title></a></h3><h4 id="10-1-2-Shell的分类"><a href="#10-1-2-Shell的分类" class="headerlink" title="10.1.2 Shell的分类"></a>10.1.2 Shell的分类</h4><ul>
+<h4 id="10-1-2-Shell的分类"><a href="#10-1-2-Shell的分类" class="headerlink" title="10.1.2 Shell的分类"></a>10.1.2 Shell的分类</h4><ul>
 <li><p><font color="orange">Bourne Shell</font>:从1979起Unix就开始使用 Bourne Shell，Bourne Shell的主文件名为 sh。</p>
 </li>
 <li><p><font color="orange">C Shell</font>: C Shell主要在BSD版的Unix系 统中使用，其语法和C语言相类似而得名</p>
