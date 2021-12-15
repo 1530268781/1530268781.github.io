@@ -3980,6 +3980,114 @@ On 连接条件
 <td>增删改查</td>
 </tr>
 </tbody></table>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>系统变量：全局变量，会话变量</p>
+<p>自定义变量：用户变量，局部变量</p>
+<h3 id="1-系统变量"><a href="#1-系统变量" class="headerlink" title="1.系统变量"></a>1.系统变量</h3><p>说明：变量由系统提供，不是用户定义，属于服务器层面</p>
+<h4 id="（1）相关命令"><a href="#（1）相关命令" class="headerlink" title="（1）相关命令"></a>（1）相关命令</h4><ul>
+<li><p>（1）查看所有的系统变量</p>
+<p>​    show global| 【session】 variables;</p>
+</li>
+<li><p>（2）查看满足条件的部分系统变量</p>
+<p>​    show global | 【session】 variables like ‘%char%’;</p>
+</li>
+<li><p>（3）查看指定的某个系统变量的值</p>
+<p>​    select @@global|【session】.系统变量名；</p>
+</li>
+<li><p>（4）为某个系统变量赋值</p>
+<p>​    方式一：set global|【session】 系统变量名 = 值；</p>
+<p>​    方式二：set @@global|【session】.系统变量名 = 值；</p>
+</li>
+</ul>
+<p>注意：如果是全局级别的系统变量，需要加global；如果是会话级别的系统变量，需要加session；不加默认为会话级别</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SHOW GLOBAL VARIABLES\G;</span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">Variable_name: auto_increment_increment</span><br><span class="line">        Value: 1</span><br><span class="line">*************************** 2. row ***************************</span><br><span class="line">Variable_name: auto_increment_offset</span><br><span class="line">        Value: 1</span><br><span class="line">*************************** 3. row ***************************</span><br><span class="line">Variable_name: autocommit</span><br><span class="line">        Value: ON</span><br><span class="line">*************************** 4. row ***************************</span><br><span class="line">Variable_name: automatic_sp_privileges</span><br><span class="line">        Value: ON</span><br><span class="line">*************************** 5. row ***************************</span><br><span class="line">Variable_name: back_log</span><br><span class="line">        Value: 50</span><br><span class="line">*************************** 6. row ***************************</span><br><span class="line">Variable_name: basedir</span><br><span class="line">        Value: C:/Program Files (x86)/MySQL/MySQL Server 5.5/</span><br><span class="line">*************************** 7. row ***************************</span><br><span class="line">Variable_name: big_tables</span><br><span class="line">        Value: OFF</span><br><span class="line">*************************** 8. row ***************************</span><br><span class="line">Variable_name: binlog_cache_size</span><br><span class="line">        Value: 32768</span><br><span class="line">*************************** 9. row ***************************</span><br><span class="line">Variable_name: binlog_direct_non_transactional_updates</span><br><span class="line">        Value: OFF</span><br><span class="line">*************************** 10. row ***************************</span><br><span class="line">Variable_name: binlog_format</span><br></pre></td></tr></table></figure>
+
+<h4 id="（2）全局变量"><a href="#（2）全局变量" class="headerlink" title="（2）全局变量"></a>（2）全局变量</h4><ul>
+<li>作用域：服务器每次启动将所有的全局变量赋初始值，针对于所有的会话（连接）有效，但不能跨重启</li>
+</ul>
+<h4 id="（3）会话变量"><a href="#（3）会话变量" class="headerlink" title="（3）会话变量"></a>（3）会话变量</h4><ul>
+<li>作用域：仅仅针对于当前会话（连接）有效</li>
+</ul>
+<h3 id="2-自定义变量"><a href="#2-自定义变量" class="headerlink" title="2.自定义变量"></a>2.自定义变量</h3><p>说明：变量由用户自定义</p>
+<h4 id="（1）用户变量"><a href="#（1）用户变量" class="headerlink" title="（1）用户变量"></a>（1）用户变量</h4><ul>
+<li><p>作用域：针对于当前会话（连接）有效，同于会话变量作用域</p>
+</li>
+<li><p>声明并初始化：</p>
+<ul>
+<li>方式一：set @用户变量名 = 值；</li>
+<li>方式二：set @用户变量名 := 值；</li>
+<li>方式三：select @用户变量名 := 值；</li>
+</ul>
+</li>
+<li><p>赋值（更新）</p>
+<ul>
+<li><p>方式一：(set或select)</p>
+<ul>
+<li>set @用户变量名 = 值；</li>
+<li>set @用户变量名 := 值；</li>
+<li>select @用户变量名 := 值；</li>
+</ul>
+</li>
+<li><p>方式二：（select into）</p>
+<p>​    select 字段 into @变量名 from 表；</p>
+<p>​    要求查询出的是一个值</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set @name=&#x27;john&#x27;;</span><br><span class="line">set @age:=32;</span><br><span class="line">select @count=1;</span><br><span class="line"></span><br><span class="line">select count(*) into @count</span><br><span class="line">from employee;</span><br><span class="line"></span><br><span class="line">select @count;</span><br></pre></td></tr></table></figure></li>
+<li><p>查看</p>
+<p>select @变量名</p>
+</li>
+</ul>
+<h4 id="（2）局部变量"><a href="#（2）局部变量" class="headerlink" title="（2）局部变量"></a>（2）局部变量</h4><ul>
+<li><p>作用域：仅仅在定义它的begin end中有效，定义应为begin end中的第一句话</p>
+</li>
+<li><p>声明（并初始化）</p>
+<ul>
+<li><font color="red">declare</font> 变量名 <font color="red"> 类型</font>；</li>
+<li>declare 变量名 类型 default 值；</li>
+</ul>
+</li>
+<li><p>赋值</p>
+<ul>
+<li><p>方式一：(set或select)</p>
+<ul>
+<li>set 局部变量名 = 值；</li>
+<li>set 局部变量名 := 值；</li>
+<li>select @局部变量名 := 值；</li>
+</ul>
+</li>
+<li><p>方式二：（select into）</p>
+<p>​    select 字段 into 变量名 from 表；</p>
+</li>
+</ul>
+</li>
+<li><p>查看</p>
+<p>select 局部变量名；</p>
+</li>
+</ul>
+<h4 id="（3）对比"><a href="#（3）对比" class="headerlink" title="（3）对比"></a>（3）对比</h4><table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">作用域</th>
+<th align="center">定义和使用位置</th>
+<th align="center">语法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">用户变量</td>
+<td align="center">当前会话</td>
+<td align="center">会话中任何地方</td>
+<td align="center">必须加@符号</td>
+</tr>
+<tr>
+<td align="center">局部变量</td>
+<td align="center">begin end中</td>
+<td align="center">只能在begin end中，且为第一句话</td>
+<td align="center">一般不用加@符号，需要限定类型</td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 用户变量</span><br><span class="line">mysql&gt; SET @m=1;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SET @n=2;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SET @sum=@m+@n;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT @sum;</span><br><span class="line">+------+</span><br><span class="line">| @sum |</span><br><span class="line">+------+</span><br><span class="line">|    3 |</span><br><span class="line">+------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>《MySQL》</category>
@@ -5281,7 +5389,7 @@ On 连接条件
 </li>
 <li><font color="red">：ab [a内容][b内容]</font><ul>
 <li>描述：替换，会自动把b内容替换成a</li>
-<li>例子：ab mymail <a href="mailto:&#49;&#x35;&#x33;&#x30;&#x32;&#x36;&#x38;&#55;&#x38;&#x31;&#64;&#x71;&#113;&#46;&#99;&#111;&#x6d;">&#49;&#x35;&#x33;&#x30;&#x32;&#x36;&#x38;&#55;&#x38;&#x31;&#64;&#x71;&#113;&#46;&#99;&#111;&#x6d;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#x31;&#x35;&#x33;&#48;&#50;&#54;&#56;&#55;&#x38;&#49;&#x40;&#x71;&#x71;&#46;&#x63;&#x6f;&#109;">&#x31;&#x35;&#x33;&#48;&#50;&#54;&#56;&#55;&#x38;&#49;&#x40;&#x71;&#x71;&#46;&#x63;&#x6f;&#109;</a></li>
+<li>例子：ab mymail <a href="mailto:&#x31;&#x35;&#x33;&#x30;&#50;&#54;&#x38;&#55;&#x38;&#x31;&#x40;&#113;&#x71;&#46;&#x63;&#111;&#x6d;">&#x31;&#x35;&#x33;&#x30;&#50;&#54;&#x38;&#55;&#x38;&#x31;&#x40;&#113;&#x71;&#46;&#x63;&#111;&#x6d;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#49;&#x35;&#x33;&#48;&#50;&#54;&#56;&#55;&#56;&#49;&#x40;&#x71;&#113;&#46;&#99;&#111;&#x6d;">&#49;&#x35;&#x33;&#48;&#50;&#54;&#56;&#55;&#56;&#49;&#x40;&#x71;&#113;&#46;&#99;&#111;&#x6d;</a></li>
 </ul>
 </li>
 <li>注意：定义的快捷键或ab的内容重启后会消失，这时需要我们在用户的家目录下写配置文件.vimrc，保持快捷键<ul>
@@ -5484,6 +5592,128 @@ On 连接条件
 </ul>
 </li>
 </ul>
+<h3 id="6-3-rpm包管理"><a href="#6-3-rpm包管理" class="headerlink" title="6.3 rpm包管理"></a>6.3 rpm包管理</h3><h4 id="6-3-1-IP地址配置和网络yum源"><a href="#6-3-1-IP地址配置和网络yum源" class="headerlink" title="6.3.1 IP地址配置和网络yum源"></a>6.3.1 IP地址配置和网络yum源</h4><h5 id="（1）IP地址配置"><a href="#（1）IP地址配置" class="headerlink" title="（1）IP地址配置"></a>（1）IP地址配置</h5><ul>
+<li><p>红帽使用<font color="orange">setup </font>命令配置IP，子网掩码，网关，DNS<br>然后<font color="orange">service network restart </font>重启网络服务</p>
+</li>
+<li><p>CentOS7使用<font color="orange">nmtui</font>命令配置IP，子网掩码，网关，DNS<br>然后service network restart 重启网络服务</p>
+</li>
+<li><p>启动网卡</p>
+<p> vi /etc/sysconfig/network-scripts/ifcfg-eth0 </p>
+<p>把 <strong>ONBOOT=“no”</strong> 改为 <strong>ONBOOT=“yes“</strong> </p>
+</li>
+<li><p>重启网络服务</p>
+<p>service network restart </p>
+</li>
+</ul>
+<h5 id="（2）网络yum源"><a href="#（2）网络yum源" class="headerlink" title="（2）网络yum源"></a>（2）网络yum源</h5><ul>
+<li><p><font color="red">vi /etc/yum.repos.d/CentOS-Base.repo</font><br>其中：</p>
+<ul>
+<li>CentOS-Base.repo为网络yum源</li>
+<li>CentOS-Media.repo为本地磁盘yum源</li>
+</ul>
+</li>
+<li><p> 进入yum内部配置文件中可以看到以下内容：</p>
+</li>
+<li><p>[base]：容器名称，一定要放在[]中</p>
+</li>
+<li><p>name：容器说明，可以自己随便写</p>
+</li>
+<li><p>mirrorlist：镜像站点，这个可以注释掉</p>
+</li>
+<li><p>baseurl：我们的yum源服务器的地址。默认是CentOS的官方的yum源服务器，是可以使用的，如果觉得慢可以改成你喜欢的yum镜像源地址</p>
+</li>
+<li><p>enabled：此容器是否生效<br>如果不写或者写成enable=1都是生效的，写成enable=0就是不生效</p>
+</li>
+<li><p>gpgcheck：如果1是指RPM的数字证书生效，如果是0则不生效</p>
+</li>
+<li><p>gpgkey：数字证书的公钥文件保存位置。不用修改</p>
+</li>
+</ul>
+<p>  <img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20211215145608598.png" alt="image-20211215145608598"></p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">镜像列表系统使用客户机的连接IP地址和每个镜像的更新状态来选择地理位置上的当前镜像接近客户。</span><br><span class="line">你应该在CentOS更新中使用这个，除非你手动选择其他镜像。</span><br><span class="line">如果镜像列表不适合您，您可以尝试注释掉的baseurl行。</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-3-2-yum命令"><a href="#6-3-2-yum命令" class="headerlink" title="6.3.2 yum命令"></a>6.3.2 yum命令</h4><h5 id="（1）常用yum命令"><a href="#（1）常用yum命令" class="headerlink" title="（1）常用yum命令"></a>（1）常用yum命令</h5><ul>
+<li><p>查询</p>
+<ul>
+<li>yum list      #查询所有可用软件包列表 </li>
+<li>yum search 关键字     #搜索服务器上所有和关键字相关的包</li>
+</ul>
+</li>
+<li><p>安装</p>
+<ul>
+<li> yum –y install 包名</li>
+<li>install 安装</li>
+<li>-y 自动回答 yes</li>
+</ul>
+</li>
+<li><p>升级</p>
+<ul>
+<li>yum -y update 包名、</li>
+<li>update 升级 </li>
+<li>-y 自动回答 yes</li>
+</ul>
+<p>==注意：yum -y update 后必须加包名，否则就是全盘更新，包括Linux内核也会更新，Linux内核在更新完成之后需要在本地进行配置，内核才可以启动，如果你是在服务器上跑这条命令，服务器直接崩溃，永远无法连接，再也不能启动！！！==</p>
+</li>
+<li><p>卸载</p>
+<ul>
+<li> yum -y remove 包名</li>
+<li> remove 卸载 </li>
+<li>-y 自动回答 yes</li>
+</ul>
+<p>==注意：yum -y remove卸载会把包所有的依赖包都会卸载，有时候会把系统文件也同时卸载，小心使用，尽量不要多用！==</p>
+</li>
+<li><p>Linux服务器安装软件包原则：</p>
+<p>最小化安装，不安装多余软件，使用什么软件安装什么软件，手工装，尽量不卸载，尤其yum卸载尽量不要用！！！</p>
+</li>
+</ul>
+<h5 id="（2）yum软件组管理命令"><a href="#（2）yum软件组管理命令" class="headerlink" title="（2）yum软件组管理命令"></a>（2）yum软件组管理命令</h5><ul>
+<li><p>yum grouplist</p>
+<p>#列出所有可用的软件组列表 </p>
+</li>
+<li><p> yum groupinstall 软件组名</p>
+</li>
+</ul>
+<p>  #安装指定软件组，组名可以由 grouplist 查询出来</p>
+<ul>
+<li><p>yum groupremove 软件组名</p>
+<p>#卸载指定软件组</p>
+</li>
+<li><p>tips:安装软件包组 有空格 用””括起来</p>
+</li>
+</ul>
+<h4 id="6-3-3-光盘yum源搭建"><a href="#6-3-3-光盘yum源搭建" class="headerlink" title="6.3.3 光盘yum源搭建"></a>6.3.3 光盘yum源搭建</h4><h5 id="（1）光盘yum源搭建"><a href="#（1）光盘yum源搭建" class="headerlink" title="（1）光盘yum源搭建"></a>（1）光盘yum源搭建</h5><ul>
+<li><p>第一步：挂载光盘</p>
+<pre><code> mount /dev/cdrom /mnt/cdrom/ 
+</code></pre>
+</li>
+<li><p>第二步：让网络yum源失效</p>
+<p>​    把/etc/yum.repos.d/文件里除了CentOS-Media.repo文件的其他文件全部改名，把repo后缀改了，随便改一个，比如.bak<br>​    还可以让每个文件里面的enabled=0</p>
+</li>
+</ul>
+<p>​    改名具体命令： mv CentOS-Base.repo \ CentOS-Base.repo.bak </p>
+<ul>
+<li><p>第三步：修改光盘yum源文件</p>
+<p>​     vim CentOS-Media.repo </p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[c6-media] 	#叫什么都可以</span><br><span class="line">name=CentOS-$releasever - Media 	# 名称叫什么都可以</span><br><span class="line">baseurl=file:///mnt/cdrom </span><br><span class="line"><span class="meta">#</span><span class="bash">地址为你自己的光盘挂载地址</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> file:///media/cdrom/</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> file:///media/cdrecorder/</span> </span><br><span class="line"><span class="meta">#</span><span class="bash">注释这两个不存在的地址 （ 不注释也没事，但是会显示报错）</span></span><br><span class="line">gpgcheck=1 </span><br><span class="line">enabled=1 </span><br><span class="line"><span class="meta">#</span><span class="bash">把 enabled=0 改为 enabled=1，让这个 yum 源配置文件生效</span></span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="（2）Linux系统中挂载和使用光盘基本步骤"><a href="#（2）Linux系统中挂载和使用光盘基本步骤" class="headerlink" title="（2）Linux系统中挂载和使用光盘基本步骤"></a>（2）Linux系统中挂载和使用光盘基本步骤</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 创建挂载点 </span><br><span class="line">mkdir /mnt/cdrom</span><br><span class="line">在 /mnt 目录下创建一个空文件夹 cdrom 作为光盘的挂载点（任何一个空目录都可以作为挂载点）。</span><br><span class="line"></span><br><span class="line">2. 打开光驱，放入光盘 </span><br><span class="line">如果用的是 VMware 中的虚拟机，进入虚拟机设置，选择“CD/DVD”硬件，勾选“已连接”和“启动时连接”，在连接处，选择“使用 ISO 映像文件”，浏览选择本地电脑中下载好的 ISO 光盘镜像文件，确定即可。</span><br><span class="line"></span><br><span class="line">3. 执行挂载命令</span><br><span class="line">mount -t iso9660 /dev/sr0 /mnt/cdrom</span><br><span class="line">或者</span><br><span class="line">mount /dev/sr0 /mnt/cdrom</span><br><span class="line">iso9660 是光盘的默认文件系统。</span><br><span class="line">由于 linux 系统可以自动识别光盘的文件系统，故“-t iso9660”也可以省略不写。</span><br><span class="line">光盘的设备文件名是固定的，一般为/dev/cdrom 或/dev/sr0。</span><br><span class="line">挂载成功后，就可以通过挂载点读取光盘里面的数据。</span><br><span class="line"></span><br><span class="line">4. 查看光盘中的数据</span><br><span class="line">cd /mnt/cdrom</span><br><span class="line">ls -l</span><br><span class="line">注意：操作完成之后，如果要取出光盘，必须解除挂载。</span><br><span class="line"></span><br><span class="line">5. 解除挂载</span><br><span class="line">不能在挂载点目录下解除挂载，必须先切换到其他目录（如用户家目录）。</span><br><span class="line">切换到用户家目录</span><br><span class="line">umount /dev/sr0</span><br><span class="line">或者</span><br><span class="line">umount /mnt/cdrom</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
 <h2 id="第十章-Shell基础"><a href="#第十章-Shell基础" class="headerlink" title="第十章 Shell基础"></a>第十章 Shell基础</h2><h3 id="10-1-Shell概述"><a href="#10-1-Shell概述" class="headerlink" title="10.1 Shell概述"></a>10.1 Shell概述</h3><h4 id="10-1-1-Shell是什么"><a href="#10-1-1-Shell是什么" class="headerlink" title="10.1.1 Shell是什么"></a>10.1.1 Shell是什么</h4><ul>
 <li><p>Shell是一个<font color="orange">命令行解释器</font>，它为用户提供了一个向Linux内核发送请求以便运行程序的界面系统级程序，用户可以用Shell来 启动、挂起、停止甚至是编写一些程序。</p>
 <img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20210721142803916.png" alt="image-20210721142803916" style="zoom:50%;"></li>
