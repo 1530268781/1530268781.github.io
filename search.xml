@@ -5389,7 +5389,7 @@ On 连接条件
 </li>
 <li><font color="red">：ab [a内容][b内容]</font><ul>
 <li>描述：替换，会自动把b内容替换成a</li>
-<li>例子：ab mymail <a href="mailto:&#x31;&#x35;&#x33;&#x30;&#50;&#54;&#x38;&#55;&#x38;&#x31;&#x40;&#113;&#x71;&#46;&#x63;&#111;&#x6d;">&#x31;&#x35;&#x33;&#x30;&#50;&#54;&#x38;&#55;&#x38;&#x31;&#x40;&#113;&#x71;&#46;&#x63;&#111;&#x6d;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#49;&#x35;&#x33;&#48;&#50;&#54;&#56;&#55;&#56;&#49;&#x40;&#x71;&#113;&#46;&#99;&#111;&#x6d;">&#49;&#x35;&#x33;&#48;&#50;&#54;&#56;&#55;&#56;&#49;&#x40;&#x71;&#113;&#46;&#99;&#111;&#x6d;</a></li>
+<li>例子：ab mymail <a href="mailto:&#x31;&#x35;&#x33;&#x30;&#50;&#54;&#x38;&#x37;&#56;&#49;&#64;&#113;&#113;&#46;&#x63;&#111;&#109;">&#x31;&#x35;&#x33;&#x30;&#50;&#54;&#x38;&#x37;&#56;&#49;&#64;&#113;&#113;&#46;&#x63;&#111;&#109;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#49;&#x35;&#x33;&#48;&#50;&#54;&#56;&#x37;&#x38;&#49;&#64;&#113;&#113;&#x2e;&#x63;&#111;&#109;">&#49;&#x35;&#x33;&#48;&#50;&#54;&#56;&#x37;&#x38;&#49;&#64;&#113;&#113;&#x2e;&#x63;&#111;&#109;</a></li>
 </ul>
 </li>
 <li>注意：定义的快捷键或ab的内容重启后会消失，这时需要我们在用户的家目录下写配置文件.vimrc，保持快捷键<ul>
@@ -5708,12 +5708,114 @@ On 连接条件
 
 
 
-
-
-
-
-
-
+<h3 id="6-4-源码包管理"><a href="#6-4-源码包管理" class="headerlink" title="6.4 源码包管理"></a>6.4 源码包管理</h3><h4 id="6-4-1-源码包和rpm包的区别"><a href="#6-4-1-源码包和rpm包的区别" class="headerlink" title="6.4.1 源码包和rpm包的区别"></a>6.4.1 源码包和rpm包的区别</h4><h5 id="（1）区别"><a href="#（1）区别" class="headerlink" title="（1）区别"></a>（1）区别</h5><p>​        安装之前的区别：概念上的区别</p>
+<p>​        安装之后的区别：安装位置不同</p>
+<h5 id="（2）rpm包安装位置"><a href="#（2）rpm包安装位置" class="headerlink" title="（2）rpm包安装位置"></a>（2）rpm包安装位置</h5><p>​    安装在默认位置中</p>
+<table>
+<thead>
+<tr>
+<th>默认安装路径</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/etc/</td>
+<td>配置文件安装目录</td>
+</tr>
+<tr>
+<td>/usr/bin/</td>
+<td>可执行的命令安装目录</td>
+</tr>
+<tr>
+<td>/usr/lib/</td>
+<td>程序所使用的函数库保存位置</td>
+</tr>
+<tr>
+<td>/usr/share/doc/</td>
+<td>基本的软件使用手册保存位置</td>
+</tr>
+<tr>
+<td>/usr/share/man/</td>
+<td>帮助文件保存位置</td>
+</tr>
+</tbody></table>
+<h5 id="（3）源码包安装路径"><a href="#（3）源码包安装路径" class="headerlink" title="（3）源码包安装路径"></a>（3）源码包安装路径</h5><p>​    安装在指定位置中，一般是    /usr/local/软件名/</p>
+<h5 id="（4）安装位置不同带来的影响"><a href="#（4）安装位置不同带来的影响" class="headerlink" title="（4）安装位置不同带来的影响"></a>（4）安装位置不同带来的影响</h5><ul>
+<li><p>RPM 包安装的服务可以使用系统服务管理命令（service）来管理，例如 RPM 包安装的 apache 的启动方法是：</p>
+<ul>
+<li><p>/etc/rc.d/init.d/httpd start </p>
+</li>
+<li><p>service httpd start</p>
+</li>
+<li><p>RPM包的启动文件全在/etc/rc.d/init.d/里，servic会搜索RPM包所有的安装路径，所以service才能启动RPM包软件，但是启动不了源码包软件，因为源码包在/usr/local里，和RPM包不一样</p>
+</li>
+</ul>
+</li>
+<li><p>而源码包安装的服务则不能被服务管理命令管理，因为没有安装到默认路径中。所以只能用绝对路径进行服务的管理，如：</p>
+<ul>
+<li>/usr/local/apache2/bin/apachectl start</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-4-2-源码包安装过程"><a href="#6-4-2-源码包安装过程" class="headerlink" title="6.4.2 源码包安装过程"></a>6.4.2 源码包安装过程</h4><p>以“安装Apache”为例说明</p>
+<h5 id="（1）安装准备"><a href="#（1）安装准备" class="headerlink" title="（1）安装准备"></a>（1）安装准备</h5><ul>
+<li><p>安装C语言编译器</p>
+<p><strong>yum -y install gcc gcc-c++ autoconf pcre pcre-devel make automake</strong></p>
+</li>
+<li><p>下载源码包</p>
+<p><strong><a href="http://mirror.bit.edu.cn/apache/httpd/">http://mirror.bit.edu.cn/apache/httpd/</a></strong></p>
+<p>选择任何版本，比如：httpd-2.4.43.tar.bz2 版本</p>
+</li>
+</ul>
+<h5 id="（2）注意事项"><a href="#（2）注意事项" class="headerlink" title="（2）注意事项"></a>（2）注意事项</h5><ul>
+<li><p>源码包保存位置：/usr/local/src</p>
+</li>
+<li><p>软件安装位置：/usr/local</p>
+</li>
+<li><p>如何确定安装过程报错：</p>
+<p>安装过程停止，并出现error，warning或者no提示，即发生错误</p>
+</li>
+<li><p>把电脑下载好的源码包传输到Linux系统或者服务器上</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Windows下载WinSCP软件进行本机与虚拟机或者远程传输</span><br><span class="line"></span><br><span class="line">Mac连接远程阿里云服务器，终端使用命令 scp进行传输：</span><br><span class="line">scp -r localfile.txt username@192.168.0.1:/home/username/</span><br><span class="line">其中，</span><br><span class="line">１）scp是命令，-r是参数</span><br><span class="line">２）localfile.txt 是文件的路径和文件名</span><br><span class="line">３）username是服务器账号，一般为root</span><br><span class="line">４）192.168.0.1是要上传的服务器ip地址</span><br><span class="line">５）/home/username/是要拷入的文件夹路径，一般为/root 家目录</span><br><span class="line">例子：</span><br><span class="line">scp -r /Users/yangyangyang/Desktop/httpd-2.4.43.tar.bz2 root@47.95.5.171:/root</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="（3）解压下载的源码包"><a href="#（3）解压下载的源码包" class="headerlink" title="（3）解压下载的源码包"></a>（3）解压下载的源码包</h5><ul>
+<li>bar.bz2压缩包：使用命令 tar -jxvf httpd-2.4.43.tar.bz2</li>
+<li>tar.gz压缩包：使用命令tar -zxvf </li>
+</ul>
+<h5 id="（4）进入压缩目录"><a href="#（4）进入压缩目录" class="headerlink" title="（4）进入压缩目录"></a>（4）进入压缩目录</h5><ul>
+<li>输入命令：cd httpd-2.4.43<ul>
+<li>INSTALL：安装说明</li>
+<li>README：使用说明</li>
+</ul>
+</li>
+<li>进入安装说明：vi INSTALL<br>$ ./configure –prefix=PREFIX 编译前准备<br>$ make 进行编译<br>$ make install 编译安装<br>$ PREFIX/bin/apachectl star 启动命令</li>
+<li>这些为详细的安装步骤，其中：<br>./configure为软件配置与检查 我们也称编译前准备<br>1.定义需要的功能选项。<br>2.检测系统环境是否符合安装要求<br>3.把定义好的功能选项和检测系统环境的信息都写入Makefile文件，用于后续的编辑。</li>
+</ul>
+<h5 id="（5）定义安装路径"><a href="#（5）定义安装路径" class="headerlink" title="（5）定义安装路径"></a>（5）定义安装路径</h5><p>​    退出之后<br>​    输入命令：./configure –prefix=/usr/local/apache2<br>​    如果报错显示：<br>​    进以下网址寻求解决办法<br>​    <a href="http://www.cnblogs.com/yuzhaokai0523/p/4382974.html">http://www.cnblogs.com/yuzhaokai0523/p/4382974.html</a></p>
+<h5 id="（6）进行编译"><a href="#（6）进行编译" class="headerlink" title="（6）进行编译"></a>（6）进行编译</h5><p>​    输入命令：make 进行编译</p>
+<h5 id="（7）进行安装"><a href="#（7）进行安装" class="headerlink" title="（7）进行安装"></a>（7）进行安装</h5><p>​    输入命令：make install 编译安装</p>
+<h5 id="（8）启动"><a href="#（8）启动" class="headerlink" title="（8）启动"></a>（8）启动</h5><p>​    输入命令：/usr/local/apache2/bin/apachectl start</p>
+<p>​    $ PREFIX/bin/apachectl star中 $ PREFIX为软件安装路径</p>
+<h5 id="（9）启动apach遇到错误"><a href="#（9）启动apach遇到错误" class="headerlink" title="（9）启动apach遇到错误"></a>（9）启动apach遇到错误</h5><p>​    <strong>httpd: Could not reliably determine the server’s fully qualified domain name</strong></p>
+<p>​    解决办法：</p>
+<p>​    1.cd /usr/local/apache2/conf<br>​    2.vi httpd.conf<br>​    找到#ServerName <a href="http://www.example.com/">www.example.com:80</a><br>​    并且在下面一行添加<br>​    ServerName localhost:80     # localhost可以换成阿里云的IP<br>​    3.保存并退出<br>​    4.再重新启动apache<br>​    /usr/local/apache2/bin/apachectl start</p>
+<h3 id="6-5-脚本包安装"><a href="#6-5-脚本包安装" class="headerlink" title="6.5 脚本包安装"></a>6.5 脚本包安装</h3><h4 id="6-5-1-脚本安装包"><a href="#6-5-1-脚本安装包" class="headerlink" title="6.5.1 脚本安装包"></a>6.5.1 脚本安装包</h4><ul>
+<li><p>脚本安装包并不是独立的软件包类型，常见安装的是源码包。</p>
+</li>
+<li><p>是人为把安装过程写成了自动安装的脚本，只要执行脚本，定义简单的参数，就可以完成安装。</p>
+</li>
+<li><p>非常类似于 Windows 下软件的安装方式。</p>
+</li>
+</ul>
+<h4 id="6-5-2-Wemin"><a href="#6-5-2-Wemin" class="headerlink" title="6.5.2 Wemin"></a>6.5.2 Wemin</h4><h5 id="（1）Wemin的作用"><a href="#（1）Wemin的作用" class="headerlink" title="（1）Wemin的作用"></a>（1）Wemin的作用</h5><p>​    Webmin 是一个基于 Web 的 Linux 系统管理界面。您就可以通过图形化的方式设置用户帐号、Apache、DNS、文件共享等服务。</p>
+<h5 id="（2）安装过程"><a href="#（2）安装过程" class="headerlink" title="（2）安装过程"></a>（2）安装过程</h5><ul>
+<li><p>下载软件<a href="http://sourceforge.net/projects/webadmin/files/webmin/">http://sourceforge.net/projects/webadmin/files/webmin/</a></p>
+</li>
+<li><p>解压缩，并进入加压缩目录</p>
+</li>
+<li><p>执行安装脚本</p>
+</li>
+</ul>
 <h2 id="第十章-Shell基础"><a href="#第十章-Shell基础" class="headerlink" title="第十章 Shell基础"></a>第十章 Shell基础</h2><h3 id="10-1-Shell概述"><a href="#10-1-Shell概述" class="headerlink" title="10.1 Shell概述"></a>10.1 Shell概述</h3><h4 id="10-1-1-Shell是什么"><a href="#10-1-1-Shell是什么" class="headerlink" title="10.1.1 Shell是什么"></a>10.1.1 Shell是什么</h4><ul>
 <li><p>Shell是一个<font color="orange">命令行解释器</font>，它为用户提供了一个向Linux内核发送请求以便运行程序的界面系统级程序，用户可以用Shell来 启动、挂起、停止甚至是编写一些程序。</p>
 <img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20210721142803916.png" alt="image-20210721142803916" style="zoom:50%;"></li>
