@@ -4088,6 +4088,49 @@ On 连接条件
 </tbody></table>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 用户变量</span><br><span class="line">mysql&gt; SET @m=1;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SET @n=2;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SET @sum=@m+@n;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT @sum;</span><br><span class="line">+------+</span><br><span class="line">| @sum |</span><br><span class="line">+------+</span><br><span class="line">|    3 |</span><br><span class="line">+------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
 
+
+
+<h2 id="存储过程和函数"><a href="#存储过程和函数" class="headerlink" title="存储过程和函数"></a>存储过程和函数</h2><p>好处：</p>
+<p>1.提高代码的重用性</p>
+<p>2.简化操作</p>
+<h3 id="1-存储过程"><a href="#1-存储过程" class="headerlink" title="1.存储过程"></a>1.存储过程</h3><h4 id="（1）含义"><a href="#（1）含义" class="headerlink" title="（1）含义"></a>（1）含义</h4><p>​    一组预先编译好的SQL语句的集合，可理解成批处理语句</p>
+<h4 id="（2）好处"><a href="#（2）好处" class="headerlink" title="（2）好处"></a>（2）好处</h4><p>​    1.提高代码的重用性</p>
+<p>​    2.简化操作</p>
+<p>​    3.减少了编译次数并且减少了和数据库服务器的连接次数，提高了效率</p>
+<h4 id="（3）语法"><a href="#（3）语法" class="headerlink" title="（3）语法"></a>（3）语法</h4><ul>
+<li><p>创建</p>
+<ul>
+<li><p>语法</p>
+<p>create <font color="red">procedure</font> 存储过程名(参数列表)</p>
+<p>begin</p>
+<p>​        方法体</p>
+<p>end</p>
+</li>
+<li><p>参数列表包含三部分：</p>
+<p>​    参数模式 参数名 参数类型</p>
+<p>​    例如：in stuname varchar(20)</p>
+</li>
+<li><p>参数模式：</p>
+<ul>
+<li>in：该参数可以作为输入，也就是说该参数需要调用方传入值</li>
+<li>out：该参数可以作为输出，也就是说该参数可以作为返回值</li>
+<li>inout：该参数既可以作为输入，又可以作为输出，也就是该参数急需要传入值，有可以返回值</li>
+</ul>
+</li>
+<li><p>如果方法体只有一句话，则begin end可以省略；存储过程中的每条SQL语句的结尾都要求必须加分号；存储过程的结尾可以使用delimiter重新设置</p>
+<ul>
+<li>delimiter 结束标记    如delimiter $</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>调用<ul>
+<li>call 存储过程名(实参列表)；</li>
+</ul>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>《MySQL》</category>
@@ -5389,7 +5432,7 @@ On 连接条件
 </li>
 <li><font color="red">：ab [a内容][b内容]</font><ul>
 <li>描述：替换，会自动把b内容替换成a</li>
-<li>例子：ab mymail <a href="mailto:&#x31;&#x35;&#x33;&#x30;&#50;&#54;&#x38;&#x37;&#56;&#49;&#64;&#113;&#113;&#46;&#x63;&#111;&#109;">&#x31;&#x35;&#x33;&#x30;&#50;&#54;&#x38;&#x37;&#56;&#49;&#64;&#113;&#113;&#46;&#x63;&#111;&#109;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#49;&#x35;&#x33;&#48;&#50;&#54;&#56;&#x37;&#x38;&#49;&#64;&#113;&#113;&#x2e;&#x63;&#111;&#109;">&#49;&#x35;&#x33;&#48;&#50;&#54;&#56;&#x37;&#x38;&#49;&#64;&#113;&#113;&#x2e;&#x63;&#111;&#109;</a></li>
+<li>例子：ab mymail <a href="mailto:&#x31;&#53;&#51;&#x30;&#50;&#54;&#x38;&#55;&#x38;&#49;&#64;&#x71;&#x71;&#46;&#99;&#x6f;&#x6d;">&#x31;&#53;&#51;&#x30;&#50;&#54;&#x38;&#55;&#x38;&#49;&#64;&#x71;&#x71;&#46;&#99;&#x6f;&#x6d;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#x31;&#x35;&#x33;&#48;&#x32;&#x36;&#x38;&#x37;&#x38;&#x31;&#x40;&#113;&#113;&#x2e;&#99;&#111;&#x6d;">&#x31;&#x35;&#x33;&#48;&#x32;&#x36;&#x38;&#x37;&#x38;&#x31;&#x40;&#113;&#113;&#x2e;&#99;&#111;&#x6d;</a></li>
 </ul>
 </li>
 <li>注意：定义的快捷键或ab的内容重启后会消失，这时需要我们在用户的家目录下写配置文件.vimrc，保持快捷键<ul>
@@ -5814,6 +5857,123 @@ On 连接条件
 <li><p>解压缩，并进入加压缩目录</p>
 </li>
 <li><p>执行安装脚本</p>
+</li>
+</ul>
+<h2 id="第七章-用户和用户组管理"><a href="#第七章-用户和用户组管理" class="headerlink" title="第七章 用户和用户组管理"></a>第七章 用户和用户组管理</h2><h3 id="7-1-用户配置文件"><a href="#7-1-用户配置文件" class="headerlink" title="7.1 用户配置文件"></a>7.1 用户配置文件</h3><h4 id="7-1-1-用户信息文件-etc-passwd"><a href="#7-1-1-用户信息文件-etc-passwd" class="headerlink" title="7.1.1 用户信息文件 /etc/passwd"></a>7.1.1 用户信息文件 /etc/passwd</h4><h5 id="1-用户管理简介"><a href="#1-用户管理简介" class="headerlink" title="(1)用户管理简介"></a>(1)用户管理简介</h5><ul>
+<li><p>越是对服务器安全性要求高的服务器，越需要建立合理的用户权限等级制度和服务器操作规范。</p>
+</li>
+<li><p>在 Linux 中主要是通过用户配置文件来查看和修改用户信息</p>
+</li>
+<li><p>通过命令：man 5 passwd 来查看passwd配置文件帮助信息 5代表配置文件</p>
+</li>
+</ul>
+<h5 id="（2）-etc-passwd-配置文件"><a href="#（2）-etc-passwd-配置文件" class="headerlink" title="（2）/etc/passwd 配置文件"></a>（2）/etc/passwd 配置文件</h5><ul>
+<li><p>第 1 字段：用户名称</p>
+</li>
+<li><p>第 2 字段：密码标志</p>
+</li>
+<li><p>第 3 字段：UID（用户 ID） </p>
+<ul>
+<li>0： 超级用户</li>
+<li>1-499： 系统用户（伪用户）</li>
+<li>500-65535： 普通用户(centos7 从 1000 开始计算) </li>
+</ul>
+</li>
+<li><p>第 4 字段：GID（用户初始组 ID）[不推荐修改初始组] </p>
+</li>
+<li><p>第 5 字段：用户说明</p>
+</li>
+<li><p>第 6 字段：家目录</p>
+<ul>
+<li>普通用户：/home/用户名/ </li>
+<li>超级用户：/root/ </li>
+</ul>
+</li>
+<li><p>第 7 字段：登录之后的 Shell</p>
+</li>
+<li><p><img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20211217154607305.png" alt="image-20211217154607305"></p>
+</li>
+</ul>
+<h5 id="（3）初始组和附加组"><a href="#（3）初始组和附加组" class="headerlink" title="（3）初始组和附加组"></a>（3）初始组和附加组</h5><ul>
+<li><p> 初始组：就是指用户一登录就立刻拥有这个用户组的相关权限，每个用户的初始组只能有一个，一般就是和这个用户的用户名相同的组名作为这个用户的初始组。</p>
+</li>
+<li><p>附加组：指用户可以加入多个其他的用户组，并拥有这些组的权限，附加组可以有多个。</p>
+</li>
+</ul>
+<h5 id="（2）Shell是什么"><a href="#（2）Shell是什么" class="headerlink" title="（2）Shell是什么"></a>（2）Shell是什么</h5><ul>
+<li><p>Shell 就是 Linux 的命令解释器。</p>
+</li>
+<li><p>在/etc/passwd 当中，除了标准 Shell 是/bin/bash 之外，还可以是/sbin/nologin，/usr/bin/passwd 等。</p>
+</li>
+<li><p>tips:暂时禁用用户，可以把/bin/bash -&gt; /bin/nologin</p>
+</li>
+</ul>
+<h4 id="7-1-2-影子文件-etc-shadow"><a href="#7-1-2-影子文件-etc-shadow" class="headerlink" title="7.1.2 影子文件/etc/shadow"></a>7.1.2 影子文件/etc/shadow</h4><h5 id="（1）影子文件-etc-shadow"><a href="#（1）影子文件-etc-shadow" class="headerlink" title="（1）影子文件/etc/shadow"></a>（1）影子文件/etc/shadow</h5><ul>
+<li><p>第 1 字段：用户名</p>
+</li>
+<li><p>第 2 字段：加密密码</p>
+<ul>
+<li>加密算法升级为 SHA512 散列加密算法</li>
+<li>如果密码位是“!!”或“*”代表没有密码，不能登录</li>
+</ul>
+</li>
+<li><p>第 3 字段：密码最后一次修改日期</p>
+<ul>
+<li>使用 1970 年 1 月 1 日作为标准时间，每过一天时间戳加 1 </li>
+</ul>
+</li>
+<li><p>第 4 字段：两次密码的修改间隔时间（和第 3 字段相比）</p>
+</li>
+<li><p>第 5 字段：密码有效期（和第 3 字段相比）</p>
+</li>
+<li><p>第 6 字段：密码修改到期前的警告天数（和第 5 字段相比）</p>
+</li>
+<li><p>第 7 字段：密码过期后的宽限天数（和第 5 字段相比）</p>
+<ul>
+<li>0：代表密码过期后立即失效</li>
+<li>-1：则代表密码永远不会失效。</li>
+</ul>
+</li>
+<li><p> 第 8 字段：账号失效时间</p>
+</li>
+<li><p>要用时间戳表示</p>
+</li>
+<li><p>第 9 字段：保留</p>
+</li>
+</ul>
+<p><img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20211217155913026.png" alt="image-20211217155913026"></p>
+<h5 id="（2）时间戳换算"><a href="#（2）时间戳换算" class="headerlink" title="（2）时间戳换算"></a>（2）时间戳换算</h5><ul>
+<li>把时间戳换算为日期<ul>
+<li>date -d “1970-01-01 16066 days” </li>
+</ul>
+</li>
+<li>把日期换算为时间戳<ul>
+<li>echo $(($(date –date=”2014/01/06” +%s)/86400+1))</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@iZwz9evxymdqdx2e88fv2sZ ~]# date -d &quot;1970-01-01 16066 days&quot;</span><br><span class="line">Fri Dec 27 00:00:00 CST 2013</span><br><span class="line">[root@iZwz9evxymdqdx2e88fv2sZ ~]# echo $(($(date --date=&quot;2014/01/06&quot; +%s)/86400+1))</span><br><span class="line">16076</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="7-1-3-组信息文件和组密码文件"><a href="#7-1-3-组信息文件和组密码文件" class="headerlink" title="7.1.3 组信息文件和组密码文件"></a>7.1.3 组信息文件和组密码文件</h4><h5 id="（1）组信息文件-etc-group"><a href="#（1）组信息文件-etc-group" class="headerlink" title="（1）组信息文件/etc/group"></a>（1）组信息文件/etc/group</h5><ul>
+<li><p>​    第一字段：组名</p>
+</li>
+<li><p>​    第二字段：组密码标志</p>
+</li>
+<li><p>​    第三字段：GID </p>
+</li>
+<li><p>​    第四字段：组中附加用户</p>
+</li>
+</ul>
+<h5 id="（2）组密码文件-etc-gshadow"><a href="#（2）组密码文件-etc-gshadow" class="headerlink" title="（2）组密码文件/etc/gshadow"></a>（2）组密码文件/etc/gshadow</h5><ul>
+<li><p>第一字段：组名</p>
+</li>
+<li><p>第二字段：组密码 (不推荐使用，可以理解为给组设置个小组长) </p>
+</li>
+<li><p>第三字段：组管理员用户名</p>
+</li>
+<li><p>第四字段：组中附加用户</p>
 </li>
 </ul>
 <h2 id="第十章-Shell基础"><a href="#第十章-Shell基础" class="headerlink" title="第十章 Shell基础"></a>第十章 Shell基础</h2><h3 id="10-1-Shell概述"><a href="#10-1-Shell概述" class="headerlink" title="10.1 Shell概述"></a>10.1 Shell概述</h3><h4 id="10-1-1-Shell是什么"><a href="#10-1-1-Shell是什么" class="headerlink" title="10.1.1 Shell是什么"></a>10.1.1 Shell是什么</h4><ul>
