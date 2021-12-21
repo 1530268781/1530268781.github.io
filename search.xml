@@ -4127,7 +4127,59 @@ On 连接条件
 </ul>
 <ul>
 <li>调用<ul>
-<li>call 存储过程名(实参列表)；</li>
+<li><font color="red">call</font> 存储过程名(实参列表)；</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-函数"><a href="#2-函数" class="headerlink" title="2.函数"></a>2.函数</h3><h4 id="（1）函数与存储过程区别"><a href="#（1）函数与存储过程区别" class="headerlink" title="（1）函数与存储过程区别"></a>（1）函数与存储过程区别</h4><ul>
+<li>存储过程：可以有0个返回，也可以有过个返回；适合做批量插入、批量更新</li>
+<li>函数：有且仅有1个返回；适合做处理数据后返回一个结果的情况</li>
+</ul>
+<h4 id="（2）语法"><a href="#（2）语法" class="headerlink" title="（2）语法"></a>（2）语法</h4><ul>
+<li><p>创建</p>
+<ul>
+<li><p>语法</p>
+<p>create function 函数名(参数列表)  returns 返回类型</p>
+<p>begin</p>
+<p>​        函数体</p>
+<p>end</p>
+</li>
+<li><p>参数列表包含两部分</p>
+<ul>
+<li>参数名 参数类型</li>
+</ul>
+</li>
+<li><p>函数体</p>
+<ul>
+<li>肯定有return语句</li>
+</ul>
+</li>
+<li><p>如果函数体只有一句话，则begin end可以省略；存储过程中的每条SQL语句的结尾都要求必须加分号；存储过程的结尾可以使用delimiter重新设置</p>
+<ul>
+<li>delimiter 结束标记    如delimiter </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>调用</p>
+<ul>
+<li><font color="red">select</font> 函数名(参数列表)</li>
+</ul>
+</li>
+<li><p>举例</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#1.无参有返回</span><br><span class="line"># 案例：返回公司员工个数</span><br><span class="line">CREATE FUNCTION myf!() RETURNS INT</span><br><span class="line">BEGIN</span><br><span class="line">	DECLARE c INT DEFAULT 0; #定义变量</span><br><span class="line">	SELECT COUNT(*) INTO c;		#赋值</span><br><span class="line">	RETURN c;</span><br><span class="line">END $</span><br><span class="line"></span><br><span class="line">SELECT myf!()$	#调用</span><br><span class="line"></span><br><span class="line">#2.有参有返回</span><br><span class="line"># 案例：更加员工名返回工资</span><br><span class="line">CREATE FUNCTION myf@(empName VARCHAR(20)) RETURNS DOUBLE</span><br><span class="line">BEGIN</span><br><span class="line">	SET @sal=0;    #定义用户变量</span><br><span class="line">	SELECT salary</span><br><span class="line">	FROM employees</span><br><span class="line">	WHERE last_name = empName;</span><br><span class="line">	RETURN @sal;</span><br><span class="line">END $</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="（3）查看和删除函数"><a href="#（3）查看和删除函数" class="headerlink" title="（3）查看和删除函数"></a>（3）查看和删除函数</h4><ul>
+<li><p>查看函数定义</p>
+<ul>
+<li>show create function 函数名；</li>
+</ul>
+</li>
+<li><p>删除函数</p>
+<ul>
+<li>drop function 函数名；</li>
 </ul>
 </li>
 </ul>
@@ -5432,7 +5484,7 @@ On 连接条件
 </li>
 <li><font color="red">：ab [a内容][b内容]</font><ul>
 <li>描述：替换，会自动把b内容替换成a</li>
-<li>例子：ab mymail <a href="mailto:&#x31;&#53;&#51;&#x30;&#50;&#54;&#x38;&#55;&#x38;&#49;&#64;&#x71;&#x71;&#46;&#99;&#x6f;&#x6d;">&#x31;&#53;&#51;&#x30;&#50;&#54;&#x38;&#55;&#x38;&#49;&#64;&#x71;&#x71;&#46;&#99;&#x6f;&#x6d;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#x31;&#x35;&#x33;&#48;&#x32;&#x36;&#x38;&#x37;&#x38;&#x31;&#x40;&#113;&#113;&#x2e;&#99;&#111;&#x6d;">&#x31;&#x35;&#x33;&#48;&#x32;&#x36;&#x38;&#x37;&#x38;&#x31;&#x40;&#113;&#113;&#x2e;&#99;&#111;&#x6d;</a></li>
+<li>例子：ab mymail <a href="mailto:&#49;&#53;&#51;&#x30;&#50;&#54;&#x38;&#x37;&#x38;&#x31;&#64;&#x71;&#x71;&#46;&#99;&#x6f;&#109;">&#49;&#53;&#51;&#x30;&#50;&#54;&#x38;&#x37;&#x38;&#x31;&#64;&#x71;&#x71;&#46;&#99;&#x6f;&#109;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#x31;&#x35;&#x33;&#x30;&#50;&#x36;&#56;&#55;&#56;&#x31;&#64;&#x71;&#113;&#46;&#99;&#x6f;&#109;">&#x31;&#x35;&#x33;&#x30;&#50;&#x36;&#56;&#55;&#56;&#x31;&#64;&#x71;&#113;&#46;&#99;&#x6f;&#109;</a></li>
 </ul>
 </li>
 <li>注意：定义的快捷键或ab的内容重启后会消失，这时需要我们在用户的家目录下写配置文件.vimrc，保持快捷键<ul>
@@ -5859,7 +5911,7 @@ On 连接条件
 <li><p>执行安装脚本</p>
 </li>
 </ul>
-<h2 id="第七章-用户和用户组管理"><a href="#第七章-用户和用户组管理" class="headerlink" title="第七章 用户和用户组管理"></a>第七章 用户和用户组管理</h2><h3 id="7-1-用户配置文件"><a href="#7-1-用户配置文件" class="headerlink" title="7.1 用户配置文件"></a>7.1 用户配置文件</h3><h4 id="7-1-1-用户信息文件-etc-passwd"><a href="#7-1-1-用户信息文件-etc-passwd" class="headerlink" title="7.1.1 用户信息文件 /etc/passwd"></a>7.1.1 用户信息文件 /etc/passwd</h4><h5 id="1-用户管理简介"><a href="#1-用户管理简介" class="headerlink" title="(1)用户管理简介"></a>(1)用户管理简介</h5><ul>
+<h2 id="第七章-用户和用户组管理"><a href="#第七章-用户和用户组管理" class="headerlink" title="第七章 用户和用户组管理"></a>第七章 用户和用户组管理</h2><h3 id="7-1-用户配置文件"><a href="#7-1-用户配置文件" class="headerlink" title="7.1 用户配置文件"></a>7.1 用户配置文件</h3><h4 id="7-1-1-用户信息文件-etc-passwd"><a href="#7-1-1-用户信息文件-etc-passwd" class="headerlink" title="7.1.1 用户信息文件 /etc/passwd"></a>7.1.1 用户信息文件 /etc/passwd</h4><h5 id="（1）用户管理简介"><a href="#（1）用户管理简介" class="headerlink" title="（1）用户管理简介"></a>（1）用户管理简介</h5><ul>
 <li><p>越是对服务器安全性要求高的服务器，越需要建立合理的用户权限等级制度和服务器操作规范。</p>
 </li>
 <li><p>在 Linux 中主要是通过用户配置文件来查看和修改用户信息</p>
@@ -5956,24 +6008,246 @@ On 连接条件
 
 
 
-<h4 id="7-1-3-组信息文件和组密码文件"><a href="#7-1-3-组信息文件和组密码文件" class="headerlink" title="7.1.3 组信息文件和组密码文件"></a>7.1.3 组信息文件和组密码文件</h4><h5 id="（1）组信息文件-etc-group"><a href="#（1）组信息文件-etc-group" class="headerlink" title="（1）组信息文件/etc/group"></a>（1）组信息文件/etc/group</h5><ul>
-<li><p>​    第一字段：组名</p>
+<h4 id="7-1-3-组信息文件"><a href="#7-1-3-组信息文件" class="headerlink" title="7.1.3 组信息文件"></a>7.1.3 组信息文件</h4><h5 id="（1）组信息文件-etc-group"><a href="#（1）组信息文件-etc-group" class="headerlink" title="（1）组信息文件/etc/group"></a>（1）组信息文件/etc/group</h5><ul>
+<li>​    第一字段：组名</li>
+<li>​    第二字段：组密码标志</li>
+<li>​    第三字段：GID </li>
+<li>​    第四字段：组中附加用户</li>
+</ul>
+<h4 id="7-1-4-组密码文件"><a href="#7-1-4-组密码文件" class="headerlink" title="7.1.4 组密码文件"></a>7.1.4 组密码文件</h4><h5 id="（1）组密码文件-etc-gshadow"><a href="#（1）组密码文件-etc-gshadow" class="headerlink" title="（1）组密码文件/etc/gshadow"></a>（1）组密码文件/etc/gshadow</h5><ul>
+<li>第一字段：组名</li>
+<li>第二字段：组密码 (不推荐使用，可以理解为给组设置个小组长) </li>
+<li>第三字段：组管理员用户名</li>
+<li>第四字段：组中附加用户</li>
+</ul>
+<h3 id="7-2-用户管理相关文件"><a href="#7-2-用户管理相关文件" class="headerlink" title="7.2 用户管理相关文件"></a>7.2 用户管理相关文件</h3><h5 id="（1）-用户的家目录"><a href="#（1）-用户的家目录" class="headerlink" title="（1） 用户的家目录"></a>（1） 用户的家目录</h5><ul>
+<li><p>普通用户：/home/用户名/，所有者和所属组都是此用户，权限是 700 </p>
 </li>
-<li><p>​    第二字段：组密码标志</p>
-</li>
-<li><p>​    第三字段：GID </p>
-</li>
-<li><p>​    第四字段：组中附加用户</p>
+<li><p>超级用户：/root/，所有者和所属组都是 root 用户，权限是 550 </p>
 </li>
 </ul>
-<h5 id="（2）组密码文件-etc-gshadow"><a href="#（2）组密码文件-etc-gshadow" class="headerlink" title="（2）组密码文件/etc/gshadow"></a>（2）组密码文件/etc/gshadow</h5><ul>
-<li><p>第一字段：组名</p>
+<h5 id="（2）用户的邮箱"><a href="#（2）用户的邮箱" class="headerlink" title="（2）用户的邮箱"></a>（2）用户的邮箱</h5><ul>
+<li>/var/spool/mail/用户名/ </li>
+</ul>
+<h5 id="（3）用户模板目录"><a href="#（3）用户模板目录" class="headerlink" title="（3）用户模板目录"></a>（3）用户模板目录</h5><ul>
+<li>/etc/skel/</li>
+</ul>
+<h3 id="7-3-用户管理命令"><a href="#7-3-用户管理命令" class="headerlink" title="7.3 用户管理命令"></a>7.3 用户管理命令</h3><h4 id="7-3-1-用户添加命令-useradd"><a href="#7-3-1-用户添加命令-useradd" class="headerlink" title="7.3.1 用户添加命令 useradd"></a>7.3.1 用户添加命令 useradd</h4><h5 id="（1）useradd命令格式"><a href="#（1）useradd命令格式" class="headerlink" title="（1）useradd命令格式"></a>（1）useradd命令格式</h5><ul>
+<li><p>useradd [选项] 用户名</p>
 </li>
-<li><p>第二字段：组密码 (不推荐使用，可以理解为给组设置个小组长) </p>
+<li><p>选项： </p>
+<ul>
+<li>-u UID： 手工指定用户的 UID 号 </li>
+<li>-d 家目录： 手工指定用户的家目录 </li>
+<li>-c 用户说明： 手工指定用户的说明 </li>
+<li>-g 组名： 手工指定用户的初始组 </li>
+<li>-G 组名： 指定用户的附加组 </li>
+<li>-s shell： 手工指定用户的登录 shell。默认是/bin/bash </li>
+</ul>
 </li>
-<li><p>第三字段：组管理员用户名</p>
+</ul>
+<h5 id="（2）添加默认用户"><a href="#（2）添加默认用户" class="headerlink" title="（2）添加默认用户"></a>（2）添加默认用户</h5><ul>
+<li><p>[root@localhost ~]# useradd lamp </p>
 </li>
-<li><p>第四字段：组中附加用户</p>
+<li><p>[root@localhost ~]# grep “lamp” /etc/passwd l</p>
+</li>
+<li><p>[root@localhost ~]# grep “lamp” /etc/shadow </p>
+</li>
+<li><p>[root@localhost ~]# grep “lamp” /etc/group </p>
+</li>
+<li><p>[root@localhost ~]# grep “lamp” /etc/gshadow </p>
+</li>
+<li><p>[root@localhost ~]# ll -d /home/lamp/ </p>
+</li>
+<li><p>[root@localhost ~]# ll /var/spool/mail/lamp</p>
+</li>
+</ul>
+<h5 id="（3）指定选项添加用户"><a href="#（3）指定选项添加用户" class="headerlink" title="（3）指定选项添加用户"></a>（3）指定选项添加用户</h5><ul>
+<li><p>groupadd lamp1 </p>
+</li>
+<li><p>useradd -u 550 -g lamp1 -G root -d /home/lamp1 \ -c “test user” -s /bin/bash lamp1、</p>
+</li>
+</ul>
+<h5 id="（4）用户默认值文件"><a href="#（4）用户默认值文件" class="headerlink" title="（4）用户默认值文件"></a>（4）用户默认值文件</h5><p>​    里面定义了建立用户的默认信息</p>
+<ul>
+<li><p>/etc/default/useradd </p>
+<ul>
+<li><p>GROUP=100 #用户默认组 </p>
+</li>
+<li><p>HOME=/home #用户家目录 </p>
+</li>
+<li><p>INACTIVE=-1 #密码过期宽限天数（7） </p>
+</li>
+<li><p>EXPIRE= #密码失效时间（8） </p>
+</li>
+<li><p>SHELL=/bin/bash #默认 shell </p>
+</li>
+<li><p>SKEL=/etc/skel #模板目录</p>
+</li>
+<li><p>CREATE_MAIL_SPOOL=yes #是否建立邮箱</p>
+</li>
+</ul>
+</li>
+<li><p>/etc/login.defs </p>
+<ul>
+<li><p>PASS_MAX_DAYS 99999 #密码有效期（5） </p>
+</li>
+<li><p>PASS_MIN_DAYS 0 #密码修改间隔（4） </p>
+</li>
+<li><p>PASS_MIN_LEN 5 #密码最小 5 位（PAM） </p>
+</li>
+<li><p>PASS_WARN_AGE 7 #密码到期警告（6） </p>
+</li>
+<li><p>UID_MIN 500 #最小和最大 UID 范围</p>
+</li>
+<li><p>GID_MAX 60000 </p>
+</li>
+<li><p>ENCRYPT_METHOD SHA512 #加密模式</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-3-2-修改用户密码-passwd"><a href="#7-3-2-修改用户密码-passwd" class="headerlink" title="7.3.2 修改用户密码 passwd"></a>7.3.2 修改用户密码 passwd</h4><h5 id="（1）passwd-命令格式"><a href="#（1）passwd-命令格式" class="headerlink" title="（1）passwd 命令格式"></a>（1）passwd 命令格式</h5><ul>
+<li><p>passwd [选项] 用户名</p>
+</li>
+<li><p>选项： </p>
+<ul>
+<li>-S 查询用户密码的密码状态。仅 root 用户可用。</li>
+<li>-l 暂时锁定用户。仅 root 用户可用 </li>
+<li>-u 解锁用户。仅 root 用户可用 </li>
+<li>–stdin 可以通过管道符输出的数据作为用户的密码。</li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）查看密码状态"><a href="#（2）查看密码状态" class="headerlink" title="（2）查看密码状态"></a>（2）查看密码状态</h5><ul>
+<li><p>passwd -S lamp </p>
+</li>
+<li><p>lamp PS 2013-01-06 0 99999 7 -1 </p>
+<ul>
+<li><p>用户名 密码设定时间（2013-01-06） 密码修改间隔时间（0） 密码有效期（99999 ） 警告</p>
+<p>时间（7） 密码不失效（-1）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="（3）锁定用户和解锁用户"><a href="#（3）锁定用户和解锁用户" class="headerlink" title="（3）锁定用户和解锁用户"></a>（3）锁定用户和解锁用户</h5><ul>
+<li><p>passwd -l lamp </p>
+</li>
+<li><p>passwd -u lamp </p>
+</li>
+</ul>
+<h5 id="（4）-使用字符串作为用户的密码"><a href="#（4）-使用字符串作为用户的密码" class="headerlink" title="（4） 使用字符串作为用户的密码"></a>（4） 使用字符串作为用户的密码</h5><ul>
+<li>echo “123” | passwd –stdin lamp（shell 脚本可能会用到）</li>
+</ul>
+<h4 id="7-3-3-修改用户信息-usermod"><a href="#7-3-3-修改用户信息-usermod" class="headerlink" title="7.3.3 修改用户信息 usermod"></a>7.3.3 修改用户信息 usermod</h4><h5 id="（1）命令"><a href="#（1）命令" class="headerlink" title="（1）命令"></a>（1）命令</h5><ul>
+<li><p>usermod [选项] 用户名</p>
+</li>
+<li><p>选项：</p>
+<ul>
+<li>-u UID： 修改用户的 UID 号 </li>
+<li>-c 用户说明： 修改用户的说明信息</li>
+<li>-G 组名： 修改用户的附加组</li>
+<li>-L： 临时锁定用户（Lock） </li>
+<li>-U： 解锁用户锁定（Unlock）</li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）举例"><a href="#（2）举例" class="headerlink" title="（2）举例"></a>（2）举例</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# usermod -c &quot;test user&quot; lamp</span><br><span class="line">修改用户的说明</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# usermod -G root lamp</span><br><span class="line">把 lamp 用户加入 root 组 </span><br><span class="line"></span><br><span class="line">[root@localhost ~]# usermod -L lamp</span><br><span class="line">锁定用户</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# usermod -U lamp</span><br><span class="line">解锁用户</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="7-3-4-修改用户密码状态-chage"><a href="#7-3-4-修改用户密码状态-chage" class="headerlink" title="7.3.4 修改用户密码状态 chage"></a>7.3.4 修改用户密码状态 chage</h4><h5 id="（1）命令-1"><a href="#（1）命令-1" class="headerlink" title="（1）命令"></a>（1）命令</h5><ul>
+<li><p>chage [选项] 用户名</p>
+</li>
+<li><p>选项：</p>
+<ul>
+<li>-l： 列出用户的详细密码状态</li>
+<li>-d 日期： 修改密码最后一次更改日期（shadow3 字段）</li>
+<li> -m 天数： 两次密码修改间隔（4 字段）</li>
+<li>-M 天数： 密码有效期（5 字段）</li>
+<li>-W 天数： 密码过期前警告天数（6 字段）</li>
+<li>-I 天数： 密码过后宽限天数（7 字段）</li>
+<li>-E 日期： 账号失效时间（8 字段）</li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）举例-1"><a href="#（2）举例-1" class="headerlink" title="（2）举例"></a>（2）举例</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# chage -d 0 lamp </span><br><span class="line">这个命令其实是把密码修改日期归 0 了（shadow 第 3 字段）#这样用户一登陆就要修改</span><br><span class="line">密码</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="7-3-4-删除用户-userdel"><a href="#7-3-4-删除用户-userdel" class="headerlink" title="7.3.4 删除用户 userdel"></a>7.3.4 删除用户 userdel</h4><h5 id="（1）删除用户-userdel"><a href="#（1）删除用户-userdel" class="headerlink" title="（1）删除用户 userdel"></a>（1）删除用户 userdel</h5><ul>
+<li><p> userdel [-r] 用户名</p>
+</li>
+<li><p>选项： </p>
+<ul>
+<li>-r 删除用户的同时删除用户家目录 </li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）查看用户ID"><a href="#（2）查看用户ID" class="headerlink" title="（2）查看用户ID"></a>（2）查看用户ID</h5><ul>
+<li>id 用户名</li>
+</ul>
+<h4 id="7-3-5-切换用户-su"><a href="#7-3-5-切换用户-su" class="headerlink" title="7.3.5 切换用户 su"></a>7.3.5 切换用户 su</h4><ul>
+<li><p> su [选项] 用户名</p>
+</li>
+<li><p>选项</p>
+<ul>
+<li><p>- ： 选项只使用“-”代表连带用户的环境变量一起切换 (env 命令查看当前环</p>
+<p>境变量) </p>
+</li>
+<li><p>-c  命令： 仅执行一次命令，而不切换用户身份 </p>
+</li>
+<li><p>例子</p>
+<ul>
+<li><p>$ su – root </p>
+<p>#切换成 root </p>
+</li>
+<li><p>su - root -c “useradd user3” </p>
+<p>#不切换成 root，但是执行 useradd 命令添加 user1 用户</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-4-用户组管理命令"><a href="#7-4-用户组管理命令" class="headerlink" title="7.4 用户组管理命令"></a>7.4 用户组管理命令</h3><h5 id="（1）添加用户组"><a href="#（1）添加用户组" class="headerlink" title="（1）添加用户组"></a>（1）添加用户组</h5><ul>
+<li><p>groupadd [选项] 组名</p>
+</li>
+<li><p>选项：</p>
+<ul>
+<li>-g GID #指定组 ID</li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）修改用户组"><a href="#（2）修改用户组" class="headerlink" title="（2）修改用户组"></a>（2）修改用户组</h5><ul>
+<li><p>groupmod [选项] 组名</p>
+</li>
+<li><p>选项：</p>
+<ul>
+<li><p>-g GID     #修改组 ID</p>
+</li>
+<li><p>-n 新组名     #修改组名</p>
+</li>
+<li><p>例：[root@localhost ~]# groupmod -n yxlm lol</p>
+<p>#把组名 lol 修改为 yxlm</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="（3）删除用户组"><a href="#（3）删除用户组" class="headerlink" title="（3）删除用户组"></a>（3）删除用户组</h5><ul>
+<li><p>groupdel [选项] 组名</p>
+</li>
+<li><p>tips:删除组的时候，组内不允许有初始用户存在。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> groupadd lol</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> useradd -g lol timo</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> useradd -G lol yasuo</span></span><br><span class="line"></span><br><span class="line">因为 timo 是初始组是 lol。删除 lol 会导致 timo 没有初始组。所以不可删。需要先删除用户。</span><br><span class="line">而 yasuo 是附加组。可删。</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="（4）-把用户添加入组或从组中删除"><a href="#（4）-把用户添加入组或从组中删除" class="headerlink" title="（4） 把用户添加入组或从组中删除"></a>（4） 把用户添加入组或从组中删除</h5><ul>
+<li><p>groupdel [选项] 组名</p>
+</li>
+<li><p>选项：</p>
+<ul>
+<li>-a 用户名： 把用户加入组</li>
+<li>-d 用户名： 把用户从组中删除</li>
+</ul>
 </li>
 </ul>
 <h2 id="第十章-Shell基础"><a href="#第十章-Shell基础" class="headerlink" title="第十章 Shell基础"></a>第十章 Shell基础</h2><h3 id="10-1-Shell概述"><a href="#10-1-Shell概述" class="headerlink" title="10.1 Shell概述"></a>10.1 Shell概述</h3><h4 id="10-1-1-Shell是什么"><a href="#10-1-1-Shell是什么" class="headerlink" title="10.1.1 Shell是什么"></a>10.1.1 Shell是什么</h4><ul>
