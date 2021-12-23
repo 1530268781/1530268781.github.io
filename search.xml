@@ -5562,7 +5562,7 @@ On 连接条件
 </li>
 <li><font color="red">：ab [a内容][b内容]</font><ul>
 <li>描述：替换，会自动把b内容替换成a</li>
-<li>例子：ab mymail <a href="mailto:&#49;&#53;&#51;&#48;&#50;&#54;&#x38;&#55;&#x38;&#x31;&#64;&#113;&#x71;&#x2e;&#99;&#x6f;&#x6d;">&#49;&#53;&#51;&#48;&#50;&#54;&#x38;&#55;&#x38;&#x31;&#64;&#113;&#x71;&#x2e;&#99;&#x6f;&#x6d;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#x31;&#x35;&#51;&#x30;&#50;&#54;&#x38;&#55;&#x38;&#49;&#64;&#113;&#x71;&#x2e;&#x63;&#111;&#x6d;">&#x31;&#x35;&#51;&#x30;&#50;&#54;&#x38;&#55;&#x38;&#49;&#64;&#113;&#x71;&#x2e;&#x63;&#111;&#x6d;</a></li>
+<li>例子：ab mymail <a href="mailto:&#x31;&#x35;&#51;&#x30;&#x32;&#x36;&#56;&#x37;&#x38;&#x31;&#64;&#x71;&#113;&#46;&#x63;&#111;&#109;">&#x31;&#x35;&#51;&#x30;&#x32;&#x36;&#56;&#x37;&#x38;&#x31;&#64;&#x71;&#113;&#46;&#x63;&#111;&#109;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#49;&#53;&#51;&#48;&#50;&#54;&#x38;&#55;&#56;&#x31;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#x6d;">&#49;&#53;&#51;&#48;&#50;&#54;&#x38;&#55;&#56;&#x31;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#x6d;</a></li>
 </ul>
 </li>
 <li>注意：定义的快捷键或ab的内容重启后会消失，这时需要我们在用户的家目录下写配置文件.vimrc，保持快捷键<ul>
@@ -7204,6 +7204,139 @@ On 连接条件
 <li>Setfacl -m d:u:用户名:权限 目录名 </li>
 <li>可以在权限后面加-R来进行递归</li>
 </ul>
+</li>
+</ul>
+<p>、</p>
+<h3 id="8-2-文件特殊权限"><a href="#8-2-文件特殊权限" class="headerlink" title="8.2 文件特殊权限"></a>8.2 文件特殊权限</h3><h4 id="8-2-1-SetUID"><a href="#8-2-1-SetUID" class="headerlink" title="8.2.1 SetUID"></a>8.2.1 SetUID</h4><h5 id="（1）SetUID的功能"><a href="#（1）SetUID的功能" class="headerlink" title="（1）SetUID的功能"></a>（1）SetUID的功能</h5><ul>
+<li><p>只有可以执行的<font color="red">二进制程序</font>才能设定 SUID 权限</p>
+</li>
+<li><p>命令执行者要对该程序拥有 x（执行）权限</p>
+</li>
+<li><p><font color="orange">命令执行者在执行该程序时获得该程序文件属主的身份</font>（在执行程序的过程中灵魂附体为文件的属主）</p>
+</li>
+<li><p>SetUID 权限只在该程序执行过程中有效，也就是说身份改变只在程序执行过程中有效 </p>
+</li>
+<li><p>passwd 命令拥有 SetUID 权限，所以普通可以修改自己的密码</p>
+<ul>
+<li><p>[root@localhost ~]# ll /usr/bin/passwd </p>
+<p>-rw**<font color="red">s</font>**r-xr-x. 1 root root 25980 2 月 22 2012 /usr/bin/passwd </p>
+</li>
+</ul>
+</li>
+<li><p>cat 命令没有 SetUID 权限，所以普通用户不能查看/etc/shadow 文件内容</p>
+<ul>
+<li>[root@localhost ~]# ll /bin/cat -rwxr-xr-x 1 root root 47976 6 月 22 2012 /bin/cat</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20211222132551724.png" alt="image-20211222132551724"></p>
+<h5 id="（2）设定SetUID的方法"><a href="#（2）设定SetUID的方法" class="headerlink" title="（2）设定SetUID的方法"></a>（2）设定SetUID的方法</h5><ul>
+<li>chmod 4755 文件名    # 4代表SUID</li>
+<li>chmod u+s 文件名</li>
+</ul>
+<h5 id="（3）取消SetUID的方法"><a href="#（3）取消SetUID的方法" class="headerlink" title="（3）取消SetUID的方法"></a>（3）取消SetUID的方法</h5><ul>
+<li>chmod 755 文件名</li>
+<li>chmod u-s 文件名</li>
+</ul>
+<h5 id="（4）危险的SetUID"><a href="#（4）危险的SetUID" class="headerlink" title="（4）危险的SetUID"></a>（4）危险的SetUID</h5><ul>
+<li>关键目录应严格控制写权限。比如“/”、“/usr”等 </li>
+<li>用户的密码设置要严格遵守密码三原则</li>
+<li>对系统中默认应该具有 SetUID 权限的文件作一列表，定时检查有没有这之外的文件被设置了 SetUID 权限</li>
+</ul>
+<h4 id="8-2-2-SetGID"><a href="#8-2-2-SetGID" class="headerlink" title="8.2.2  SetGID"></a>8.2.2  SetGID</h4><h5 id="（1）SetGID-针对文件的作用"><a href="#（1）SetGID-针对文件的作用" class="headerlink" title="（1）SetGID 针对文件的作用"></a>（1）SetGID 针对文件的作用</h5><ul>
+<li><p>只有可执行的二进制程序才能设置 SGID 权限</p>
+</li>
+<li><p>命令执行者要对该程序拥有 x（执行）权限 </p>
+</li>
+<li><p>命令执行在执行程序的时候，组身份升级为该程序文件的属组</p>
+</li>
+<li><p>SetGID 权限同样只在该程序执行过程中有效，也就是说组身份改变只在程序执行过程中有效</p>
+<ul>
+<li><p>[root@localhost ~]# ll /usr/bin/locate </p>
+<p>-rwx–s–x 1 root slocate 35612 8 月 24 2010 /usr/bin/locate </p>
+<p>[root@localhost ~]# ll /var/lib/mlocate/mlocate.db </p>
+<p>-rw-r—– 1 root slocate 1838850 1 月 20 04:29 /var/lib/mlocate/mlocate.db</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）SetGID-针对目录的作用"><a href="#（2）SetGID-针对目录的作用" class="headerlink" title="（2）SetGID 针对目录的作用"></a>（2）SetGID 针对目录的作用</h5><ul>
+<li><p>普通用户必须对此目录拥有 r 和 x 权限，才能进入此目录</p>
+</li>
+<li><p>普通用户在此目录中的有效组会变成此目录的属组</p>
+</li>
+<li><p>若普通用户对此目录拥有 w 权限时，新建的文件的默认属组是这个目录</p>
+</li>
+</ul>
+<h5 id="（3）设定-SetGID"><a href="#（3）设定-SetGID" class="headerlink" title="（3）设定 SetGID"></a>（3）设定 SetGID</h5><ul>
+<li><p>chmod 2755 文件名    # 2 代表 SGID</p>
+</li>
+<li><p>chmod g+s 文件名 </p>
+</li>
+</ul>
+<h5 id="（4）-取消-SetGID"><a href="#（4）-取消-SetGID" class="headerlink" title="（4） 取消 SetGID"></a>（4） 取消 SetGID</h5><ul>
+<li><p>chmod 755 文件名</p>
+</li>
+<li><p>chmod g-s 文件名</p>
+</li>
+</ul>
+<h4 id="8-3-3-Sticky-BIT"><a href="#8-3-3-Sticky-BIT" class="headerlink" title="8.3.3 Sticky BIT"></a>8.3.3 Sticky BIT</h4><h5 id="（1）SBIT-粘着位作用"><a href="#（1）SBIT-粘着位作用" class="headerlink" title="（1）SBIT 粘着位作用"></a>（1）SBIT 粘着位作用</h5><ul>
+<li><p>粘着位目前只对目录有效</p>
+</li>
+<li><p>普通用户对该目录拥有 w 和 x 权限，即普通用户可以在此目录拥有写入权限 </p>
+</li>
+<li><p>如果没有粘着位，因为普通用户拥有 w 权限，所以可以删除此目录下所有文件，包括其他用户建立的文件。</p>
+</li>
+<li><p>一但赋予了粘着位，除了 root 可以删除所有文件，普通用户就算拥有 w 权限，也只能删除自己建立的文件，但是不能删除其他用户建立的文件 。</p>
+</li>
+</ul>
+<h5 id="（2）设置与取消粘着位"><a href="#（2）设置与取消粘着位" class="headerlink" title="（2）设置与取消粘着位"></a>（2）设置与取消粘着位</h5><ul>
+<li><p>设置粘着位</p>
+<ul>
+<li>chmod 1755 目录名    #1代表粘着位</li>
+<li>chmod o+t 目录名</li>
+</ul>
+</li>
+<li><p>取消粘着位</p>
+<ul>
+<li>chmod 777 目录名</li>
+<li>chmod o-t 目录名</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-3-文件系统属性chattr权限"><a href="#8-3-文件系统属性chattr权限" class="headerlink" title="8.3 文件系统属性chattr权限"></a>8.3 文件系统属性chattr权限</h3><h5 id="（1）chattr命令格式"><a href="#（1）chattr命令格式" class="headerlink" title="（1）chattr命令格式"></a>（1）chattr命令格式</h5><ul>
+<li>chattr [+ - =] [选项] 文件名或者目录名<br>+：增加权限<br>-：删除权限<br>=：等于某权限</li>
+<li>选项：<ul>
+<li>i：如果对文件设置i属性，那么不允许对文件进行删除，改名，也不能添加和修改数据；如果对目录设置i属性,那么只能修改目录下文件的数据，但是不允许建立和删除文件</li>
+<li>a：如果对文件设置a属性，那么只能在文件中增加数据，但是不能删除或者修改数据；如果对目录设置a属性,那么只允许在目录中建立和修改文件，但是不允许删除文件</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）查看文件系统属性"><a href="#（2）查看文件系统属性" class="headerlink" title="（2）查看文件系统属性"></a>（2）查看文件系统属性</h5><ul>
+<li>lsattr [选项] 文件名<ul>
+<li>-a：显示所有文件和目录</li>
+<li>-d：若目标是目录，仅列出目录本身的属性，而不是子文件的</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-4-系统命令sudo权限"><a href="#8-4-系统命令sudo权限" class="headerlink" title="8.4 系统命令sudo权限"></a>8.4 系统命令sudo权限</h3><h5 id="（1）sudo-权限"><a href="#（1）sudo-权限" class="headerlink" title="（1）sudo 权限"></a>（1）sudo 权限</h5><ul>
+<li>root 把本来只能超级用户执行的命令赋予普通用户执行。</li>
+<li>sudo 的操作对象是系统命令</li>
+</ul>
+<h5 id="（2）sudo-使用"><a href="#（2）sudo-使用" class="headerlink" title="（2）sudo 使用"></a>（2）sudo 使用</h5><ul>
+<li><p>visudo     #实际修改的是/etc/sudoers 文件 </p>
+</li>
+<li><p>```shell<br>root ALL=(ALL) ALL<br>#用户名 被管理主机的地址=（可使用的身份） 授权命令（绝对路径）</p>
+<p>%wheel ALL=(ALL) ALL<br>#%组名 被管理主机的地址=（可使用的身份） 授权命令（绝对路径）<br>#被管理主机的地址：本机IP或者ALL，限制的不是来源IP，而是访问IP</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 授权 sc 用户可以重启服务器</span><br><span class="line"></span><br><span class="line">  ```shell</span><br><span class="line">  [root@localhost ~]# visudo </span><br><span class="line">  sc ALL= /sbin/shutdown –r now</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="（3）其他"><a href="#（3）其他" class="headerlink" title="（3）其他"></a>（3）其他</h5><ul>
+<li><p>普通用户执行 sudo 赋予的命令    </p>
+<p>**sudo [授权命令的绝对路径] **<br>例子：<br>sudo /sbin/shutdown -r now</p>
+</li>
+<li><p>查看可用的sudo命令</p>
+<p><strong>sudo -l</strong> </p>
 </li>
 </ul>
 <h2 id="第十一章-Shell编程"><a href="#第十一章-Shell编程" class="headerlink" title="第十一章 Shell编程"></a>第十一章 Shell编程</h2><h3 id="11-1-基础正则表达式"><a href="#11-1-基础正则表达式" class="headerlink" title="11.1 基础正则表达式"></a>11.1 基础正则表达式</h3><h4 id="11-1-1-正则表达式与通配符"><a href="#11-1-1-正则表达式与通配符" class="headerlink" title="11.1.1 正则表达式与通配符"></a>11.1.1 正则表达式与通配符</h4><ul>
