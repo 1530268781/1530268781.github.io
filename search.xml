@@ -5562,7 +5562,7 @@ On 连接条件
 </li>
 <li><font color="red">：ab [a内容][b内容]</font><ul>
 <li>描述：替换，会自动把b内容替换成a</li>
-<li>例子：ab mymail <a href="mailto:&#x31;&#x35;&#51;&#x30;&#x32;&#x36;&#56;&#x37;&#x38;&#x31;&#64;&#x71;&#113;&#46;&#x63;&#111;&#109;">&#x31;&#x35;&#51;&#x30;&#x32;&#x36;&#56;&#x37;&#x38;&#x31;&#64;&#x71;&#113;&#46;&#x63;&#111;&#109;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#49;&#53;&#51;&#48;&#50;&#54;&#x38;&#55;&#56;&#x31;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#x6d;">&#49;&#53;&#51;&#48;&#50;&#54;&#x38;&#55;&#56;&#x31;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#x6d;</a></li>
+<li>例子：ab mymail <a href="mailto:&#49;&#53;&#x33;&#48;&#50;&#x36;&#56;&#x37;&#56;&#x31;&#64;&#113;&#x71;&#x2e;&#99;&#x6f;&#109;">&#49;&#53;&#x33;&#48;&#50;&#x36;&#56;&#x37;&#56;&#x31;&#64;&#113;&#x71;&#x2e;&#99;&#x6f;&#109;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#49;&#53;&#x33;&#48;&#50;&#x36;&#56;&#55;&#56;&#x31;&#x40;&#x71;&#113;&#x2e;&#x63;&#x6f;&#109;">&#49;&#53;&#x33;&#48;&#50;&#x36;&#56;&#55;&#56;&#x31;&#x40;&#x71;&#113;&#x2e;&#x63;&#x6f;&#109;</a></li>
 </ul>
 </li>
 <li>注意：定义的快捷键或ab的内容重启后会消失，这时需要我们在用户的家目录下写配置文件.vimrc，保持快捷键<ul>
@@ -6328,6 +6328,380 @@ On 连接条件
 </ul>
 </li>
 </ul>
+<h2 id="第八章-权限管理"><a href="#第八章-权限管理" class="headerlink" title="第八章 权限管理"></a>第八章 权限管理</h2><h3 id="8-1-ACL权限"><a href="#8-1-ACL权限" class="headerlink" title="8.1 ACL权限"></a>8.1 ACL权限</h3><h4 id="8-1-1-ACL权限简介与开启"><a href="#8-1-1-ACL权限简介与开启" class="headerlink" title="8.1.1 ACL权限简介与开启"></a>8.1.1 ACL权限简介与开启</h4><h5 id="（1）ACL权限简介"><a href="#（1）ACL权限简介" class="headerlink" title="（1）ACL权限简介"></a>（1）ACL权限简介</h5><p>​        ACL 是 Access Control List 的缩写，主要的目的是在提供传统的 owner,group,others 的</p>
+<p>​    read,write,execute 权限之外的细部权限设定。ACL 可以针对单一使用者，单一文件或目录来进行</p>
+<p>​    r,w,x 的权限规范，对于需要特殊权限的使用状况非常有帮助。</p>
+<p><img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20211221150819748.png" alt="image-20211221150819748"></p>
+<h5 id="（2）查看分区ACL权限是否开启"><a href="#（2）查看分区ACL权限是否开启" class="headerlink" title="（2）查看分区ACL权限是否开启"></a>（2）查看分区ACL权限是否开启</h5><ul>
+<li><p>dumpe2fs -h /dev/sda3 </p>
+<p>#dumpe2fs 命令是查询指定分区详细文件系统信息的命令</p>
+</li>
+<li><p>选项： -h 仅显示超级块中信息，而不显示磁盘块组的详细信息</p>
+</li>
+</ul>
+<h5 id="（3）临时开启分区ACL权限"><a href="#（3）临时开启分区ACL权限" class="headerlink" title="（3）临时开启分区ACL权限"></a>（3）临时开启分区ACL权限</h5><ul>
+<li><p>mount -o remount,acl /</p>
+<p>#重新挂载根分区，并挂载加入 acl 权限 </p>
+</li>
+</ul>
+<h5 id="（4）永久开启ACL权限"><a href="#（4）永久开启ACL权限" class="headerlink" title="（4）永久开启ACL权限"></a>（4）永久开启ACL权限</h5><ul>
+<li>vim /etc/fstab<br>显示：UUID=59d9ca7b-4f39-4c0c-9334-c56c182076b5 / ext4 defaults 1 1</li>
+<li>在ext4后面的 defaults加,acl 成为<br>UUID=59d9ca7b-4f39-4c0c-9334-c56c182076b5 / ext4 defaults,acl 1 1</li>
+<li>然后输入：mount -o remount /<br>重新挂载文件系统或重启系统，使修改生效</li>
+<li>Linux现在一般所有分区全部默认开启ACL，不用修改配置</li>
+</ul>
+<h4 id="8-1-2-ACL权限查看与设定"><a href="#8-1-2-ACL权限查看与设定" class="headerlink" title="8.1.2 ACL权限查看与设定"></a>8.1.2 ACL权限查看与设定</h4><h5 id="（1）查看ACL权限"><a href="#（1）查看ACL权限" class="headerlink" title="（1）查看ACL权限"></a>（1）查看ACL权限</h5><ul>
+<li><p>getfacl 文件名 </p>
+<p>查看ACL命令 查看ACL权限</p>
+</li>
+</ul>
+<h5 id="（2）设定ACL权限"><a href="#（2）设定ACL权限" class="headerlink" title="（2）设定ACL权限"></a>（2）设定ACL权限</h5><ul>
+<li><p>setfacl [选项] 文件名</p>
+</li>
+<li><p>选型：</p>
+<ul>
+<li>-m：设定ACL权限<br>例子：<ul>
+<li>setfacl -m u:st:rx /tmp/project 给用户st设定ACL权限读和操作</li>
+<li>setfacl -m g:tg1:rwx /tmp/project 给用户组tg1设定ACL权限读，写和操作<br>-x：删除指定的ACL权限</li>
+</ul>
+</li>
+<li>-b：删除所有的ACL权限</li>
+<li>-d：设定默认的ACL权限</li>
+<li>-k：删除默认ACL权限</li>
+<li>-R：递归设定ACL权限</li>
+</ul>
+</li>
+<li><p>举例</p>
+<ul>
+<li>给用户设定ACL权限</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# useradd zhangsan </span><br><span class="line">[root@localhost ~]# useradd lisi </span><br><span class="line">[root@localhost ~]# useradd st </span><br><span class="line">[root@localhost ~]# groupadd tgroup</span><br><span class="line">[root@localhost ~]# mkdir /project </span><br><span class="line">[root@localhost ~]# chown root:tgroup /project/ </span><br><span class="line">[root@localhost ~]# chmod 770 /project/ </span><br><span class="line">[root@localhost ~]# setfacl -m u:st:rx /project/ </span><br><span class="line"><span class="meta">#</span><span class="bash">给用户 st 赋予 r-x 权限，使用“u:用户名:权限”格式</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>给用户组设定ACL权限</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost /]# groupadd tgroup2 </span><br><span class="line">[root@localhost /]# setfacl -m g:tgroup2:rwx project/ </span><br><span class="line"><span class="meta">#</span><span class="bash">为组 tgroup2 分配 ACl 权限。使用“g:组名:权限”格式</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="8-1-3-最大有效权限与删除ACL权限"><a href="#8-1-3-最大有效权限与删除ACL权限" class="headerlink" title="8.1.3 最大有效权限与删除ACL权限"></a>8.1.3 最大有效权限与删除ACL权限</h4><h5 id="（1）最大有效权限mask"><a href="#（1）最大有效权限mask" class="headerlink" title="（1）最大有效权限mask"></a>（1）最大有效权限mask</h5><ul>
+<li>mask是用来指导最大有效权限的。如果给用户赋予了ACL权限，是需要和mask 的权限“相与”才能得到用户的真正权限</li>
+<li>setfscl -m m:rx 文件名<br>设定mask权限为r-x。使用“m:权限”格式</li>
+<li>为了防止用户或者用户组给的权限过高，提前设定</li>
+</ul>
+<h5 id="（2）权限删除"><a href="#（2）权限删除" class="headerlink" title="（2）权限删除"></a>（2）权限删除</h5><ul>
+<li>setfacl -x u:用户名 文件名    #删除指定用户的ACL权限</li>
+<li>setfacl -x g:组名 文件名    #删除指定用户组的ACL权限</li>
+<li>setfacl -b 文件名    #删除文件的所有ACL权限</li>
+</ul>
+<h4 id="8-1-4-ACL权限递归与默认"><a href="#8-1-4-ACL权限递归与默认" class="headerlink" title="8.1.4 ACL权限递归与默认"></a>8.1.4 ACL权限递归与默认</h4><h5 id="（1）递归ACL权限"><a href="#（1）递归ACL权限" class="headerlink" title="（1）递归ACL权限"></a>（1）递归ACL权限</h5><ul>
+<li>递归是父目录在设定ACL权限时，所有的子文件和子目录也会拥有相同的ACL权限</li>
+<li>命令：<ul>
+<li>setfacl -m u:用户名:权限 -R 目录名 </li>
+<li>-R必须在这个位置</li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）默认ACL权限"><a href="#（2）默认ACL权限" class="headerlink" title="（2）默认ACL权限"></a>（2）默认ACL权限</h5><ul>
+<li>默认ACL权限的作用是，如果给父目录设定默认ACL权限，那么父目录中所有新建的子文件和子目录都会继承父目录的ACL权限</li>
+<li>命令：<ul>
+<li>Setfacl -m d:u:用户名:权限 目录名 </li>
+<li>可以在权限后面加-R来进行递归</li>
+</ul>
+</li>
+</ul>
+<p>、</p>
+<h3 id="8-2-文件特殊权限"><a href="#8-2-文件特殊权限" class="headerlink" title="8.2 文件特殊权限"></a>8.2 文件特殊权限</h3><h4 id="8-2-1-SetUID"><a href="#8-2-1-SetUID" class="headerlink" title="8.2.1 SetUID"></a>8.2.1 SetUID</h4><h5 id="（1）SetUID的功能"><a href="#（1）SetUID的功能" class="headerlink" title="（1）SetUID的功能"></a>（1）SetUID的功能</h5><ul>
+<li><p>只有可以执行的<font color="red">二进制程序</font>才能设定 SUID 权限</p>
+</li>
+<li><p>命令执行者要对该程序拥有 x（执行）权限</p>
+</li>
+<li><p><font color="orange">命令执行者在执行该程序时获得该程序文件属主的身份</font>（在执行程序的过程中灵魂附体为文件的属主）</p>
+</li>
+<li><p>SetUID 权限只在该程序执行过程中有效，也就是说身份改变只在程序执行过程中有效 </p>
+</li>
+<li><p>passwd 命令拥有 SetUID 权限，所以普通可以修改自己的密码</p>
+<ul>
+<li><p>[root@localhost ~]# ll /usr/bin/passwd </p>
+<p>-rw**<font color="red">s</font>**r-xr-x. 1 root root 25980 2 月 22 2012 /usr/bin/passwd </p>
+</li>
+</ul>
+</li>
+<li><p>cat 命令没有 SetUID 权限，所以普通用户不能查看/etc/shadow 文件内容</p>
+<ul>
+<li>[root@localhost ~]# ll /bin/cat -rwxr-xr-x 1 root root 47976 6 月 22 2012 /bin/cat</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20211222132551724.png" alt="image-20211222132551724"></p>
+<h5 id="（2）设定SetUID的方法"><a href="#（2）设定SetUID的方法" class="headerlink" title="（2）设定SetUID的方法"></a>（2）设定SetUID的方法</h5><ul>
+<li>chmod 4755 文件名    # 4代表SUID</li>
+<li>chmod u+s 文件名</li>
+</ul>
+<h5 id="（3）取消SetUID的方法"><a href="#（3）取消SetUID的方法" class="headerlink" title="（3）取消SetUID的方法"></a>（3）取消SetUID的方法</h5><ul>
+<li>chmod 755 文件名</li>
+<li>chmod u-s 文件名</li>
+</ul>
+<h5 id="（4）危险的SetUID"><a href="#（4）危险的SetUID" class="headerlink" title="（4）危险的SetUID"></a>（4）危险的SetUID</h5><ul>
+<li>关键目录应严格控制写权限。比如“/”、“/usr”等 </li>
+<li>用户的密码设置要严格遵守密码三原则</li>
+<li>对系统中默认应该具有 SetUID 权限的文件作一列表，定时检查有没有这之外的文件被设置了 SetUID 权限</li>
+</ul>
+<h4 id="8-2-2-SetGID"><a href="#8-2-2-SetGID" class="headerlink" title="8.2.2  SetGID"></a>8.2.2  SetGID</h4><h5 id="（1）SetGID-针对文件的作用"><a href="#（1）SetGID-针对文件的作用" class="headerlink" title="（1）SetGID 针对文件的作用"></a>（1）SetGID 针对文件的作用</h5><ul>
+<li><p>只有可执行的二进制程序才能设置 SGID 权限</p>
+</li>
+<li><p>命令执行者要对该程序拥有 x（执行）权限 </p>
+</li>
+<li><p>命令执行在执行程序的时候，组身份升级为该程序文件的属组</p>
+</li>
+<li><p>SetGID 权限同样只在该程序执行过程中有效，也就是说组身份改变只在程序执行过程中有效</p>
+<ul>
+<li><p>[root@localhost ~]# ll /usr/bin/locate </p>
+<p>-rwx–s–x 1 root slocate 35612 8 月 24 2010 /usr/bin/locate </p>
+<p>[root@localhost ~]# ll /var/lib/mlocate/mlocate.db </p>
+<p>-rw-r—– 1 root slocate 1838850 1 月 20 04:29 /var/lib/mlocate/mlocate.db</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）SetGID-针对目录的作用"><a href="#（2）SetGID-针对目录的作用" class="headerlink" title="（2）SetGID 针对目录的作用"></a>（2）SetGID 针对目录的作用</h5><ul>
+<li><p>普通用户必须对此目录拥有 r 和 x 权限，才能进入此目录</p>
+</li>
+<li><p>普通用户在此目录中的有效组会变成此目录的属组</p>
+</li>
+<li><p>若普通用户对此目录拥有 w 权限时，新建的文件的默认属组是这个目录</p>
+</li>
+</ul>
+<h5 id="（3）设定-SetGID"><a href="#（3）设定-SetGID" class="headerlink" title="（3）设定 SetGID"></a>（3）设定 SetGID</h5><ul>
+<li><p>chmod 2755 文件名    # 2 代表 SGID</p>
+</li>
+<li><p>chmod g+s 文件名 </p>
+</li>
+</ul>
+<h5 id="（4）-取消-SetGID"><a href="#（4）-取消-SetGID" class="headerlink" title="（4） 取消 SetGID"></a>（4） 取消 SetGID</h5><ul>
+<li><p>chmod 755 文件名</p>
+</li>
+<li><p>chmod g-s 文件名</p>
+</li>
+</ul>
+<h4 id="8-3-3-Sticky-BIT"><a href="#8-3-3-Sticky-BIT" class="headerlink" title="8.3.3 Sticky BIT"></a>8.3.3 Sticky BIT</h4><h5 id="（1）SBIT-粘着位作用"><a href="#（1）SBIT-粘着位作用" class="headerlink" title="（1）SBIT 粘着位作用"></a>（1）SBIT 粘着位作用</h5><ul>
+<li><p>粘着位目前只对目录有效</p>
+</li>
+<li><p>普通用户对该目录拥有 w 和 x 权限，即普通用户可以在此目录拥有写入权限 </p>
+</li>
+<li><p>如果没有粘着位，因为普通用户拥有 w 权限，所以可以删除此目录下所有文件，包括其他用户建立的文件。</p>
+</li>
+<li><p>一但赋予了粘着位，除了 root 可以删除所有文件，普通用户就算拥有 w 权限，也只能删除自己建立的文件，但是不能删除其他用户建立的文件 。</p>
+</li>
+</ul>
+<h5 id="（2）设置与取消粘着位"><a href="#（2）设置与取消粘着位" class="headerlink" title="（2）设置与取消粘着位"></a>（2）设置与取消粘着位</h5><ul>
+<li><p>设置粘着位</p>
+<ul>
+<li>chmod 1755 目录名    #1代表粘着位</li>
+<li>chmod o+t 目录名</li>
+</ul>
+</li>
+<li><p>取消粘着位</p>
+<ul>
+<li>chmod 777 目录名</li>
+<li>chmod o-t 目录名</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-3-文件系统属性chattr权限"><a href="#8-3-文件系统属性chattr权限" class="headerlink" title="8.3 文件系统属性chattr权限"></a>8.3 文件系统属性chattr权限</h3><h5 id="（1）chattr命令格式"><a href="#（1）chattr命令格式" class="headerlink" title="（1）chattr命令格式"></a>（1）chattr命令格式</h5><ul>
+<li>chattr [+ - =] [选项] 文件名或者目录名<br>+：增加权限<br>-：删除权限<br>=：等于某权限</li>
+<li>选项：<ul>
+<li>i：如果对文件设置i属性，那么不允许对文件进行删除，改名，也不能添加和修改数据；如果对目录设置i属性,那么只能修改目录下文件的数据，但是不允许建立和删除文件</li>
+<li>a：如果对文件设置a属性，那么只能在文件中增加数据，但是不能删除或者修改数据；如果对目录设置a属性,那么只允许在目录中建立和修改文件，但是不允许删除文件</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）查看文件系统属性"><a href="#（2）查看文件系统属性" class="headerlink" title="（2）查看文件系统属性"></a>（2）查看文件系统属性</h5><ul>
+<li>lsattr [选项] 文件名<ul>
+<li>-a：显示所有文件和目录</li>
+<li>-d：若目标是目录，仅列出目录本身的属性，而不是子文件的</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-4-系统命令sudo权限"><a href="#8-4-系统命令sudo权限" class="headerlink" title="8.4 系统命令sudo权限"></a>8.4 系统命令sudo权限</h3><h5 id="（1）sudo-权限"><a href="#（1）sudo-权限" class="headerlink" title="（1）sudo 权限"></a>（1）sudo 权限</h5><ul>
+<li>root 把本来只能超级用户执行的命令赋予普通用户执行。</li>
+<li>sudo 的操作对象是系统命令</li>
+</ul>
+<h5 id="（2）sudo-使用"><a href="#（2）sudo-使用" class="headerlink" title="（2）sudo 使用"></a>（2）sudo 使用</h5><ul>
+<li><p>visudo     #实际修改的是/etc/sudoers 文件 </p>
+</li>
+<li><p>```shell<br>root ALL=(ALL) ALL<br>#用户名 被管理主机的地址=（可使用的身份） 授权命令（绝对路径）</p>
+<p>%wheel ALL=(ALL) ALL<br>#%组名 被管理主机的地址=（可使用的身份） 授权命令（绝对路径）<br>#被管理主机的地址：本机IP或者ALL，限制的不是来源IP，而是访问IP</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 授权 sc 用户可以重启服务器</span><br><span class="line"></span><br><span class="line">  ```shell</span><br><span class="line">  [root@localhost ~]# visudo </span><br><span class="line">  sc ALL= /sbin/shutdown –r now</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="（3）其他"><a href="#（3）其他" class="headerlink" title="（3）其他"></a>（3）其他</h5><ul>
+<li><p>普通用户执行 sudo 赋予的命令    </p>
+<p>**sudo [授权命令的绝对路径] **<br>例子：<br>sudo /sbin/shutdown -r now</p>
+</li>
+<li><p>查看可用的sudo命令</p>
+<p><strong>sudo -l</strong> </p>
+</li>
+</ul>
+<h2 id="第九章-文件系统管理"><a href="#第九章-文件系统管理" class="headerlink" title="第九章 文件系统管理"></a>第九章 文件系统管理</h2><h3 id="9-1-分区和文件系统"><a href="#9-1-分区和文件系统" class="headerlink" title="9.1 分区和文件系统"></a>9.1 分区和文件系统</h3><h5 id="（1）分区类型"><a href="#（1）分区类型" class="headerlink" title="（1）分区类型"></a>（1）分区类型</h5><ul>
+<li>主分区：总共最多只能分四个</li>
+<li>扩展分区：只能有一个，也算作主分区的一种，也就是说主分区加扩展分区最多有四个。但是扩展分区不能存储数据和格式化，必须再划分成逻辑分区才能使用。</li>
+<li>逻辑分区：逻辑分区是在扩展分区中划分的，如果是 IDE 硬盘，Linux 最多支持59 个逻辑分区，如果是 SCSI 硬盘 Linux 最多支持 11 个逻辑分区</li>
+</ul>
+<h5 id="（2）分区的表示方法"><a href="#（2）分区的表示方法" class="headerlink" title="（2）分区的表示方法"></a>（2）分区的表示方法</h5><p>​    <img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20211223121525506.png" alt="image-20211223121525506"></p>
+<p>​    <img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20211223121533212.png" alt="image-20211223121533212"></p>
+<p>​    <img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20211223121538848.png" alt="image-20211223121538848"></p>
+<p>​    <img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20211223121543169.png" alt="image-20211223121543169"></p>
+<h5 id="（3）文件系统"><a href="#（3）文件系统" class="headerlink" title="（3）文件系统"></a>（3）文件系统</h5><ul>
+<li>ext2：是 ext 文件系统的升级版本，Red Hat Linux7.2 版本以前的系统默认都是ext2 文件系统。1993 年发布，最大支持 16TB 的分区和最大 2TB 的文件（1TB=1024GB=1024*1024KB）</li>
+<li>ext3： ext3 文件系统是 ext2 文件系统的升级版本，最大的区别就是带日志功能，以在系统突然停止时提高文件系统的可靠性。支持最大 16TB 的分区和最大2TB 的文件</li>
+<li>ext4：它是 ext3 文件系统的升级版。ext4 在性能、伸缩性和可靠性方面进行了大量改进。EXT4 的变化可以说是翻天覆地的，比如向下兼容 EXT3、最大 1EB 文件系统和 16TB 文件、无限数量子目录、Extents 连续数据块概念、多块分配、延迟分配、持久预分配、快速 FSCK、日志校验、无日志模式、在线碎片整理、inode 增强、默认启用 barrier 等。是 CentOS 6.3 的默认文件系统 （1EB=1024PB=1024*1024TB）</li>
+</ul>
+<h3 id="9-2-文件系统常用命令"><a href="#9-2-文件系统常用命令" class="headerlink" title="9.2 文件系统常用命令"></a>9.2 文件系统常用命令</h3><h4 id="9-2-1-df-命令、du-命令、fsck-命令和-dump2fs-命令"><a href="#9-2-1-df-命令、du-命令、fsck-命令和-dump2fs-命令" class="headerlink" title="9.2.1 df 命令、du 命令、fsck 命令和 dump2fs 命令"></a>9.2.1 df 命令、du 命令、fsck 命令和 dump2fs 命令</h4><h5 id="（1）文件系统查看命令-df"><a href="#（1）文件系统查看命令-df" class="headerlink" title="（1）文件系统查看命令 df"></a>（1）文件系统查看命令 df</h5><ul>
+<li><p> df [选项] [挂载点] </p>
+</li>
+<li><p>选项： </p>
+<ul>
+<li><p>-a 显示所有的文件系统信息，包括特殊文件系统，如 /proc、/sysfs </p>
+</li>
+<li><p>-h 使用习惯单位显示容量，如 KB，MB 或 GB 等 </p>
+</li>
+<li><p>-T 显示文件系统类型 </p>
+</li>
+<li><p>-m 以 MB 为单位显示容量 </p>
+</li>
+<li><p>-k 以 KB 为单位显示容量。默认就是以 KB 为单位</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）统计目录或文件大小-du"><a href="#（2）统计目录或文件大小-du" class="headerlink" title="（2）统计目录或文件大小 du"></a>（2）统计目录或文件大小 du</h5><ul>
+<li><p>du [选项] [目录或文件名] </p>
+</li>
+<li><p>选项： </p>
+<ul>
+<li><p>-a 显示每个子文件的磁盘占用量。默认只统计 子目录的磁盘占用量 </p>
+</li>
+<li><p>-h 使用习惯单位显示磁盘占用量，如 KB，MB 或 GB 等 </p>
+</li>
+<li><p>-s 统计总占用量，而不列出子目录和子文件的 占用量</p>
+</li>
+</ul>
+</li>
+<li><p><strong>du 命令和 df 命令的区别</strong></p>
+<ul>
+<li><p>df 命令是从文件系统考虑的，不光要考虑文件占用的空间，还要统计被命令或程序占用的空间（最常见的就是文件已经删除，但是程序并没有释放空间）</p>
+</li>
+<li><p>du 命令是面向文件的，只会计算文件或目录占用的空间</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="（3）文件系统修复命令-fsck"><a href="#（3）文件系统修复命令-fsck" class="headerlink" title="（3）文件系统修复命令 fsck"></a>（3）文件系统修复命令 fsck</h5><ul>
+<li><p> fsck [选项] 分区设备文件名</p>
+</li>
+<li><p>选项： </p>
+<ul>
+<li><p>-a： 不用显示用户提示，自动修复文件系统 </p>
+</li>
+<li><p>-y： 自动修复。和-a 作用一致，不过有些文件系统只支 持-y </p>
+</li>
+</ul>
+</li>
+<li><p><strong>注意：知道就行，不必操作，有可能弄崩溃系统</strong></p>
+</li>
+</ul>
+<h5 id="（4）显示磁盘状态命令-dumpe2fs"><a href="#（4）显示磁盘状态命令-dumpe2fs" class="headerlink" title="（4）显示磁盘状态命令 dumpe2fs"></a>（4）显示磁盘状态命令 dumpe2fs</h5><ul>
+<li> dumpe2fs 分区设备文件名</li>
+</ul>
+<h4 id="9-2-2-挂载命令"><a href="#9-2-2-挂载命令" class="headerlink" title="9.2.2 挂载命令"></a>9.2.2 挂载命令</h4><h5 id="（1）查询与自动挂载"><a href="#（1）查询与自动挂载" class="headerlink" title="（1）查询与自动挂载"></a>（1）查询与自动挂载</h5><ul>
+<li><p>mount [-l] </p>
+<p>#查询系统中已经挂载的设备，-l 会显示卷标名称 </p>
+</li>
+<li><p>mount –a </p>
+<p>#依据配置文件/etc/fstab 的内容，自动挂载 </p>
+</li>
+</ul>
+<h5 id="（2）挂载命令格式"><a href="#（2）挂载命令格式" class="headerlink" title="（2）挂载命令格式"></a>（2）挂载命令格式</h5><ul>
+<li>mount [-t 文件系统] [-L 卷标名] [-o 特殊选项] 设备文件名 挂载点</li>
+<li>-t 文件系统:加入文件系统类型来指定挂载的类型，如果文件系统是硬盘，分区就写ext3、ext4 ，如果是光盘，就写iso9660</li>
+<li>-L 卷标名: 挂载指定卷标的分区，而不是按照设备文件名挂载</li>
+<li>-o 特殊选项:可以指定挂载的额外选项</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>atime/noatime</td>
+<td>更新访问时间/不更新访问时间。访问分区文件时，是否更新文件 的访问时间，默认为更新</td>
+</tr>
+<tr>
+<td>async/sync</td>
+<td>异步/同步，默认为异步</td>
+</tr>
+<tr>
+<td>auto/noauto</td>
+<td>自动/手动，mount –a命令执行时，是否会自动安装/etc/fstab文件内容挂载，默认为自动</td>
+</tr>
+<tr>
+<td>defaults</td>
+<td>定义默认值，相当于rw,suid,dev,exec,auto,nouser,async这七个选项</td>
+</tr>
+<tr>
+<td>exec/noexec</td>
+<td>执行/不执行，设定是否允许在文件系统中执行可执行文件，默认 是exec允许</td>
+</tr>
+<tr>
+<td>remount</td>
+<td>重新挂载已经挂载的文件系统，一般用于指定修改特殊权限</td>
+</tr>
+<tr>
+<td>rw/ro</td>
+<td>读写/只读，文件系统挂载时，是否具有读写权限，默认是rw</td>
+</tr>
+<tr>
+<td>suid/nosuid</td>
+<td>具有/不具有SUID权限，设定文件系统是否具有SUID和SGID的权限，默认是具有</td>
+</tr>
+<tr>
+<td>user/nouser</td>
+<td>允许/不允许普通用户挂载，设定文件系统是否允许普通用户挂载 默认是不允许，只有root可以挂载分区</td>
+</tr>
+<tr>
+<td>usrquota</td>
+<td>写入代表文件系统支持用户磁盘配额，默认不支持</td>
+</tr>
+<tr>
+<td>grpquota</td>
+<td>写入代表文件系统支持组磁盘配额，默认不支持</td>
+</tr>
+</tbody></table>
+<p>注意：针对的都是分区</p>
+<h4 id="9-2-3-挂载光盘与U盘"><a href="#9-2-3-挂载光盘与U盘" class="headerlink" title="9.2.3 挂载光盘与U盘"></a>9.2.3 挂载光盘与U盘</h4><h5 id="（1）挂载光盘"><a href="#（1）挂载光盘" class="headerlink" title="（1）挂载光盘"></a>（1）挂载光盘</h5><ul>
+<li><p>建立挂载点</p>
+<p>mkdir /mnt/cdrom/<br>mount -t iso9660 /dev/cdrom /mnt/cdrom/</p>
+</li>
+<li><p>挂载光盘</p>
+<p>mount /dev/sr0 /mnt/cdrom/</p>
+</li>
+<li><p>卸载命令</p>
+<p>umount 设备文件名或挂载点</p>
+<p>umount /mnt/cdrom</p>
+</li>
+</ul>
+<h5 id="（2）挂载U盘"><a href="#（2）挂载U盘" class="headerlink" title="（2）挂载U盘"></a>（2）挂载U盘</h5><ul>
+<li>fdisk –l    #查看U盘设备文件名</li>
+<li>mount -t vfat /dev/sdb1 /mnt/usb/</li>
+<li>卸载命令<br>umount 设备文件名或挂载点</li>
+</ul>
+<h4 id="9-2-4-支持NTFS文件系统"><a href="#9-2-4-支持NTFS文件系统" class="headerlink" title="9.2.4 支持NTFS文件系统"></a>9.2.4 支持NTFS文件系统</h4><h5 id="（1）下载-NTFS-3G-插件"><a href="#（1）下载-NTFS-3G-插件" class="headerlink" title="（1）下载 NTFS-3G 插件"></a>（1）下载 NTFS-3G 插件</h5><p>​    <a href="http://www.tuxera.com/community/ntfs-3g-">http://www.tuxera.com/community/ntfs-3g-</a> download/ </p>
+<h5 id="（2）安装-NTFS-3G"><a href="#（2）安装-NTFS-3G" class="headerlink" title="（2）安装 NTFS-3G"></a>（2）安装 NTFS-3G</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# tar -zxvf ntfs-3g_ntfsprogs-2013.1.13.tgz </span><br><span class="line"><span class="meta">#</span><span class="bash">解压</span></span><br><span class="line"></span><br><span class="line">[root@localhost ~]# cd ntfs-3g_ntfsprogs-2013.1.13 </span><br><span class="line"><span class="meta">#</span><span class="bash">进入解压目录</span></span><br><span class="line"></span><br><span class="line">[root@localhost ntfs-3g_ntfsprogs-2013.1.13]# ./configure </span><br><span class="line"><span class="meta">#</span><span class="bash">编译器准备。没有指定安装目录，安装到默认位置中</span></span><br><span class="line"></span><br><span class="line">[root@localhost ntfs-3g_ntfsprogs-2013.1.13]# make </span><br><span class="line"><span class="meta">#</span><span class="bash">编译</span></span><br><span class="line"></span><br><span class="line">[root@localhost ntfs-3g_ntfsprogs-2013.1.13]# make install </span><br><span class="line"><span class="meta">#</span><span class="bash">编译安装</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="（3）-使用"><a href="#（3）-使用" class="headerlink" title="（3） 使用"></a>（3） 使用</h5><p>​    mount -t ntfs-3g 分区设备文件名 挂载点</p>
 <h2 id="第十章-Shell基础"><a href="#第十章-Shell基础" class="headerlink" title="第十章 Shell基础"></a>第十章 Shell基础</h2><h3 id="10-1-Shell概述"><a href="#10-1-Shell概述" class="headerlink" title="10.1 Shell概述"></a>10.1 Shell概述</h3><h4 id="10-1-1-Shell是什么"><a href="#10-1-1-Shell是什么" class="headerlink" title="10.1.1 Shell是什么"></a>10.1.1 Shell是什么</h4><ul>
 <li><p>Shell是一个<font color="orange">命令行解释器</font>，它为用户提供了一个向Linux内核发送请求以便运行程序的界面系统级程序，用户可以用Shell来 启动、挂起、停止甚至是编写一些程序。</p>
 <img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20210721142803916.png" alt="image-20210721142803916" style="zoom:50%;"></li>
@@ -6687,10 +7061,10 @@ On 连接条件
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">date ; dd if=/dev/zero of=/root/testfile bs=1k count=100000 ; date</span><br></pre></td></tr></table></figure>
 
 <p>[root@localhost ~]# ls anaconda-ks.cfg &amp;&amp; echo yes </p>
-</li>
-</ul>
 <p>[root@localhost ~]# ls /root/test || echo “no </p>
 <p>[root@localhost ~]# 命令 &amp;&amp; echo yes || echo no</p>
+</li>
+</ul>
 <ul>
 <li><p><strong>管道符</strong></p>
 <ul>
@@ -7124,219 +7498,6 @@ On 连接条件
 </li>
 <li>登陆后欢迎信息：/etc/motd , 不管是本地登录，还是远程登录，都可以显示此欢迎信息</li>
 </ul>
-</li>
-</ul>
-<h2 id="第八章-权限管理"><a href="#第八章-权限管理" class="headerlink" title="第八章 权限管理"></a>第八章 权限管理</h2><h3 id="8-1-ACL权限"><a href="#8-1-ACL权限" class="headerlink" title="8.1 ACL权限"></a>8.1 ACL权限</h3><h4 id="8-1-1-ACL权限简介与开启"><a href="#8-1-1-ACL权限简介与开启" class="headerlink" title="8.1.1 ACL权限简介与开启"></a>8.1.1 ACL权限简介与开启</h4><h5 id="（1）ACL权限简介"><a href="#（1）ACL权限简介" class="headerlink" title="（1）ACL权限简介"></a>（1）ACL权限简介</h5><p>​        ACL 是 Access Control List 的缩写，主要的目的是在提供传统的 owner,group,others 的</p>
-<p>​    read,write,execute 权限之外的细部权限设定。ACL 可以针对单一使用者，单一文件或目录来进行</p>
-<p>​    r,w,x 的权限规范，对于需要特殊权限的使用状况非常有帮助。</p>
-<p><img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20211221150819748.png" alt="image-20211221150819748"></p>
-<h5 id="（2）查看分区ACL权限是否开启"><a href="#（2）查看分区ACL权限是否开启" class="headerlink" title="（2）查看分区ACL权限是否开启"></a>（2）查看分区ACL权限是否开启</h5><ul>
-<li><p>dumpe2fs -h /dev/sda3 </p>
-<p>#dumpe2fs 命令是查询指定分区详细文件系统信息的命令</p>
-</li>
-<li><p>选项： -h 仅显示超级块中信息，而不显示磁盘块组的详细信息</p>
-</li>
-</ul>
-<h5 id="（3）临时开启分区ACL权限"><a href="#（3）临时开启分区ACL权限" class="headerlink" title="（3）临时开启分区ACL权限"></a>（3）临时开启分区ACL权限</h5><ul>
-<li><p>mount -o remount,acl /</p>
-<p>#重新挂载根分区，并挂载加入 acl 权限 </p>
-</li>
-</ul>
-<h5 id="（4）永久开启ACL权限"><a href="#（4）永久开启ACL权限" class="headerlink" title="（4）永久开启ACL权限"></a>（4）永久开启ACL权限</h5><ul>
-<li>vim /etc/fstab<br>显示：UUID=59d9ca7b-4f39-4c0c-9334-c56c182076b5 / ext4 defaults 1 1</li>
-<li>在ext4后面的 defaults加,acl 成为<br>UUID=59d9ca7b-4f39-4c0c-9334-c56c182076b5 / ext4 defaults,acl 1 1</li>
-<li>然后输入：mount -o remount /<br>重新挂载文件系统或重启系统，使修改生效</li>
-<li>Linux现在一般所有分区全部默认开启ACL，不用修改配置</li>
-</ul>
-<h4 id="8-1-2-ACL权限查看与设定"><a href="#8-1-2-ACL权限查看与设定" class="headerlink" title="8.1.2 ACL权限查看与设定"></a>8.1.2 ACL权限查看与设定</h4><h5 id="（1）查看ACL权限"><a href="#（1）查看ACL权限" class="headerlink" title="（1）查看ACL权限"></a>（1）查看ACL权限</h5><ul>
-<li><p>getfacl 文件名 </p>
-<p>查看ACL命令 查看ACL权限</p>
-</li>
-</ul>
-<h5 id="（2）设定ACL权限"><a href="#（2）设定ACL权限" class="headerlink" title="（2）设定ACL权限"></a>（2）设定ACL权限</h5><ul>
-<li><p>setfacl [选项] 文件名</p>
-</li>
-<li><p>选型：</p>
-<ul>
-<li>-m：设定ACL权限<br>例子：<ul>
-<li>setfacl -m u:st:rx /tmp/project 给用户st设定ACL权限读和操作</li>
-<li>setfacl -m g:tg1:rwx /tmp/project 给用户组tg1设定ACL权限读，写和操作<br>-x：删除指定的ACL权限</li>
-</ul>
-</li>
-<li>-b：删除所有的ACL权限</li>
-<li>-d：设定默认的ACL权限</li>
-<li>-k：删除默认ACL权限</li>
-<li>-R：递归设定ACL权限</li>
-</ul>
-</li>
-<li><p>举例</p>
-<ul>
-<li>给用户设定ACL权限</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# useradd zhangsan </span><br><span class="line">[root@localhost ~]# useradd lisi </span><br><span class="line">[root@localhost ~]# useradd st </span><br><span class="line">[root@localhost ~]# groupadd tgroup</span><br><span class="line">[root@localhost ~]# mkdir /project </span><br><span class="line">[root@localhost ~]# chown root:tgroup /project/ </span><br><span class="line">[root@localhost ~]# chmod 770 /project/ </span><br><span class="line">[root@localhost ~]# setfacl -m u:st:rx /project/ </span><br><span class="line"><span class="meta">#</span><span class="bash">给用户 st 赋予 r-x 权限，使用“u:用户名:权限”格式</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>给用户组设定ACL权限</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost /]# groupadd tgroup2 </span><br><span class="line">[root@localhost /]# setfacl -m g:tgroup2:rwx project/ </span><br><span class="line"><span class="meta">#</span><span class="bash">为组 tgroup2 分配 ACl 权限。使用“g:组名:权限”格式</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="8-1-3-最大有效权限与删除ACL权限"><a href="#8-1-3-最大有效权限与删除ACL权限" class="headerlink" title="8.1.3 最大有效权限与删除ACL权限"></a>8.1.3 最大有效权限与删除ACL权限</h4><h5 id="（1）最大有效权限mask"><a href="#（1）最大有效权限mask" class="headerlink" title="（1）最大有效权限mask"></a>（1）最大有效权限mask</h5><ul>
-<li>mask是用来指导最大有效权限的。如果给用户赋予了ACL权限，是需要和mask 的权限“相与”才能得到用户的真正权限</li>
-<li>setfscl -m m:rx 文件名<br>设定mask权限为r-x。使用“m:权限”格式</li>
-<li>为了防止用户或者用户组给的权限过高，提前设定</li>
-</ul>
-<h5 id="（2）权限删除"><a href="#（2）权限删除" class="headerlink" title="（2）权限删除"></a>（2）权限删除</h5><ul>
-<li>setfacl -x u:用户名 文件名    #删除指定用户的ACL权限</li>
-<li>setfacl -x g:组名 文件名    #删除指定用户组的ACL权限</li>
-<li>setfacl -b 文件名    #删除文件的所有ACL权限</li>
-</ul>
-<h4 id="8-1-4-ACL权限递归与默认"><a href="#8-1-4-ACL权限递归与默认" class="headerlink" title="8.1.4 ACL权限递归与默认"></a>8.1.4 ACL权限递归与默认</h4><h5 id="（1）递归ACL权限"><a href="#（1）递归ACL权限" class="headerlink" title="（1）递归ACL权限"></a>（1）递归ACL权限</h5><ul>
-<li>递归是父目录在设定ACL权限时，所有的子文件和子目录也会拥有相同的ACL权限</li>
-<li>命令：<ul>
-<li>setfacl -m u:用户名:权限 -R 目录名 </li>
-<li>-R必须在这个位置</li>
-</ul>
-</li>
-</ul>
-<h5 id="（2）默认ACL权限"><a href="#（2）默认ACL权限" class="headerlink" title="（2）默认ACL权限"></a>（2）默认ACL权限</h5><ul>
-<li>默认ACL权限的作用是，如果给父目录设定默认ACL权限，那么父目录中所有新建的子文件和子目录都会继承父目录的ACL权限</li>
-<li>命令：<ul>
-<li>Setfacl -m d:u:用户名:权限 目录名 </li>
-<li>可以在权限后面加-R来进行递归</li>
-</ul>
-</li>
-</ul>
-<p>、</p>
-<h3 id="8-2-文件特殊权限"><a href="#8-2-文件特殊权限" class="headerlink" title="8.2 文件特殊权限"></a>8.2 文件特殊权限</h3><h4 id="8-2-1-SetUID"><a href="#8-2-1-SetUID" class="headerlink" title="8.2.1 SetUID"></a>8.2.1 SetUID</h4><h5 id="（1）SetUID的功能"><a href="#（1）SetUID的功能" class="headerlink" title="（1）SetUID的功能"></a>（1）SetUID的功能</h5><ul>
-<li><p>只有可以执行的<font color="red">二进制程序</font>才能设定 SUID 权限</p>
-</li>
-<li><p>命令执行者要对该程序拥有 x（执行）权限</p>
-</li>
-<li><p><font color="orange">命令执行者在执行该程序时获得该程序文件属主的身份</font>（在执行程序的过程中灵魂附体为文件的属主）</p>
-</li>
-<li><p>SetUID 权限只在该程序执行过程中有效，也就是说身份改变只在程序执行过程中有效 </p>
-</li>
-<li><p>passwd 命令拥有 SetUID 权限，所以普通可以修改自己的密码</p>
-<ul>
-<li><p>[root@localhost ~]# ll /usr/bin/passwd </p>
-<p>-rw**<font color="red">s</font>**r-xr-x. 1 root root 25980 2 月 22 2012 /usr/bin/passwd </p>
-</li>
-</ul>
-</li>
-<li><p>cat 命令没有 SetUID 权限，所以普通用户不能查看/etc/shadow 文件内容</p>
-<ul>
-<li>[root@localhost ~]# ll /bin/cat -rwxr-xr-x 1 root root 47976 6 月 22 2012 /bin/cat</li>
-</ul>
-</li>
-</ul>
-<p><img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20211222132551724.png" alt="image-20211222132551724"></p>
-<h5 id="（2）设定SetUID的方法"><a href="#（2）设定SetUID的方法" class="headerlink" title="（2）设定SetUID的方法"></a>（2）设定SetUID的方法</h5><ul>
-<li>chmod 4755 文件名    # 4代表SUID</li>
-<li>chmod u+s 文件名</li>
-</ul>
-<h5 id="（3）取消SetUID的方法"><a href="#（3）取消SetUID的方法" class="headerlink" title="（3）取消SetUID的方法"></a>（3）取消SetUID的方法</h5><ul>
-<li>chmod 755 文件名</li>
-<li>chmod u-s 文件名</li>
-</ul>
-<h5 id="（4）危险的SetUID"><a href="#（4）危险的SetUID" class="headerlink" title="（4）危险的SetUID"></a>（4）危险的SetUID</h5><ul>
-<li>关键目录应严格控制写权限。比如“/”、“/usr”等 </li>
-<li>用户的密码设置要严格遵守密码三原则</li>
-<li>对系统中默认应该具有 SetUID 权限的文件作一列表，定时检查有没有这之外的文件被设置了 SetUID 权限</li>
-</ul>
-<h4 id="8-2-2-SetGID"><a href="#8-2-2-SetGID" class="headerlink" title="8.2.2  SetGID"></a>8.2.2  SetGID</h4><h5 id="（1）SetGID-针对文件的作用"><a href="#（1）SetGID-针对文件的作用" class="headerlink" title="（1）SetGID 针对文件的作用"></a>（1）SetGID 针对文件的作用</h5><ul>
-<li><p>只有可执行的二进制程序才能设置 SGID 权限</p>
-</li>
-<li><p>命令执行者要对该程序拥有 x（执行）权限 </p>
-</li>
-<li><p>命令执行在执行程序的时候，组身份升级为该程序文件的属组</p>
-</li>
-<li><p>SetGID 权限同样只在该程序执行过程中有效，也就是说组身份改变只在程序执行过程中有效</p>
-<ul>
-<li><p>[root@localhost ~]# ll /usr/bin/locate </p>
-<p>-rwx–s–x 1 root slocate 35612 8 月 24 2010 /usr/bin/locate </p>
-<p>[root@localhost ~]# ll /var/lib/mlocate/mlocate.db </p>
-<p>-rw-r—– 1 root slocate 1838850 1 月 20 04:29 /var/lib/mlocate/mlocate.db</p>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="（2）SetGID-针对目录的作用"><a href="#（2）SetGID-针对目录的作用" class="headerlink" title="（2）SetGID 针对目录的作用"></a>（2）SetGID 针对目录的作用</h5><ul>
-<li><p>普通用户必须对此目录拥有 r 和 x 权限，才能进入此目录</p>
-</li>
-<li><p>普通用户在此目录中的有效组会变成此目录的属组</p>
-</li>
-<li><p>若普通用户对此目录拥有 w 权限时，新建的文件的默认属组是这个目录</p>
-</li>
-</ul>
-<h5 id="（3）设定-SetGID"><a href="#（3）设定-SetGID" class="headerlink" title="（3）设定 SetGID"></a>（3）设定 SetGID</h5><ul>
-<li><p>chmod 2755 文件名    # 2 代表 SGID</p>
-</li>
-<li><p>chmod g+s 文件名 </p>
-</li>
-</ul>
-<h5 id="（4）-取消-SetGID"><a href="#（4）-取消-SetGID" class="headerlink" title="（4） 取消 SetGID"></a>（4） 取消 SetGID</h5><ul>
-<li><p>chmod 755 文件名</p>
-</li>
-<li><p>chmod g-s 文件名</p>
-</li>
-</ul>
-<h4 id="8-3-3-Sticky-BIT"><a href="#8-3-3-Sticky-BIT" class="headerlink" title="8.3.3 Sticky BIT"></a>8.3.3 Sticky BIT</h4><h5 id="（1）SBIT-粘着位作用"><a href="#（1）SBIT-粘着位作用" class="headerlink" title="（1）SBIT 粘着位作用"></a>（1）SBIT 粘着位作用</h5><ul>
-<li><p>粘着位目前只对目录有效</p>
-</li>
-<li><p>普通用户对该目录拥有 w 和 x 权限，即普通用户可以在此目录拥有写入权限 </p>
-</li>
-<li><p>如果没有粘着位，因为普通用户拥有 w 权限，所以可以删除此目录下所有文件，包括其他用户建立的文件。</p>
-</li>
-<li><p>一但赋予了粘着位，除了 root 可以删除所有文件，普通用户就算拥有 w 权限，也只能删除自己建立的文件，但是不能删除其他用户建立的文件 。</p>
-</li>
-</ul>
-<h5 id="（2）设置与取消粘着位"><a href="#（2）设置与取消粘着位" class="headerlink" title="（2）设置与取消粘着位"></a>（2）设置与取消粘着位</h5><ul>
-<li><p>设置粘着位</p>
-<ul>
-<li>chmod 1755 目录名    #1代表粘着位</li>
-<li>chmod o+t 目录名</li>
-</ul>
-</li>
-<li><p>取消粘着位</p>
-<ul>
-<li>chmod 777 目录名</li>
-<li>chmod o-t 目录名</li>
-</ul>
-</li>
-</ul>
-<h3 id="8-3-文件系统属性chattr权限"><a href="#8-3-文件系统属性chattr权限" class="headerlink" title="8.3 文件系统属性chattr权限"></a>8.3 文件系统属性chattr权限</h3><h5 id="（1）chattr命令格式"><a href="#（1）chattr命令格式" class="headerlink" title="（1）chattr命令格式"></a>（1）chattr命令格式</h5><ul>
-<li>chattr [+ - =] [选项] 文件名或者目录名<br>+：增加权限<br>-：删除权限<br>=：等于某权限</li>
-<li>选项：<ul>
-<li>i：如果对文件设置i属性，那么不允许对文件进行删除，改名，也不能添加和修改数据；如果对目录设置i属性,那么只能修改目录下文件的数据，但是不允许建立和删除文件</li>
-<li>a：如果对文件设置a属性，那么只能在文件中增加数据，但是不能删除或者修改数据；如果对目录设置a属性,那么只允许在目录中建立和修改文件，但是不允许删除文件</li>
-<li></li>
-</ul>
-</li>
-</ul>
-<h5 id="（2）查看文件系统属性"><a href="#（2）查看文件系统属性" class="headerlink" title="（2）查看文件系统属性"></a>（2）查看文件系统属性</h5><ul>
-<li>lsattr [选项] 文件名<ul>
-<li>-a：显示所有文件和目录</li>
-<li>-d：若目标是目录，仅列出目录本身的属性，而不是子文件的</li>
-</ul>
-</li>
-</ul>
-<h3 id="8-4-系统命令sudo权限"><a href="#8-4-系统命令sudo权限" class="headerlink" title="8.4 系统命令sudo权限"></a>8.4 系统命令sudo权限</h3><h5 id="（1）sudo-权限"><a href="#（1）sudo-权限" class="headerlink" title="（1）sudo 权限"></a>（1）sudo 权限</h5><ul>
-<li>root 把本来只能超级用户执行的命令赋予普通用户执行。</li>
-<li>sudo 的操作对象是系统命令</li>
-</ul>
-<h5 id="（2）sudo-使用"><a href="#（2）sudo-使用" class="headerlink" title="（2）sudo 使用"></a>（2）sudo 使用</h5><ul>
-<li><p>visudo     #实际修改的是/etc/sudoers 文件 </p>
-</li>
-<li><p>```shell<br>root ALL=(ALL) ALL<br>#用户名 被管理主机的地址=（可使用的身份） 授权命令（绝对路径）</p>
-<p>%wheel ALL=(ALL) ALL<br>#%组名 被管理主机的地址=（可使用的身份） 授权命令（绝对路径）<br>#被管理主机的地址：本机IP或者ALL，限制的不是来源IP，而是访问IP</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 授权 sc 用户可以重启服务器</span><br><span class="line"></span><br><span class="line">  ```shell</span><br><span class="line">  [root@localhost ~]# visudo </span><br><span class="line">  sc ALL= /sbin/shutdown –r now</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h5 id="（3）其他"><a href="#（3）其他" class="headerlink" title="（3）其他"></a>（3）其他</h5><ul>
-<li><p>普通用户执行 sudo 赋予的命令    </p>
-<p>**sudo [授权命令的绝对路径] **<br>例子：<br>sudo /sbin/shutdown -r now</p>
-</li>
-<li><p>查看可用的sudo命令</p>
-<p><strong>sudo -l</strong> </p>
 </li>
 </ul>
 <h2 id="第十一章-Shell编程"><a href="#第十一章-Shell编程" class="headerlink" title="第十一章 Shell编程"></a>第十一章 Shell编程</h2><h3 id="11-1-基础正则表达式"><a href="#11-1-基础正则表达式" class="headerlink" title="11.1 基础正则表达式"></a>11.1 基础正则表达式</h3><h4 id="11-1-1-正则表达式与通配符"><a href="#11-1-1-正则表达式与通配符" class="headerlink" title="11.1.1 正则表达式与通配符"></a>11.1.1 正则表达式与通配符</h4><ul>
