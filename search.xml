@@ -5562,7 +5562,7 @@ On 连接条件
 </li>
 <li><font color="red">：ab [a内容][b内容]</font><ul>
 <li>描述：替换，会自动把b内容替换成a</li>
-<li>例子：ab mymail <a href="mailto:&#49;&#53;&#x33;&#48;&#50;&#x36;&#56;&#x37;&#56;&#x31;&#64;&#113;&#x71;&#x2e;&#99;&#x6f;&#109;">&#49;&#53;&#x33;&#48;&#50;&#x36;&#56;&#x37;&#56;&#x31;&#64;&#113;&#x71;&#x2e;&#99;&#x6f;&#109;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#49;&#53;&#x33;&#48;&#50;&#x36;&#56;&#55;&#56;&#x31;&#x40;&#x71;&#113;&#x2e;&#x63;&#x6f;&#109;">&#49;&#53;&#x33;&#48;&#50;&#x36;&#56;&#55;&#56;&#x31;&#x40;&#x71;&#113;&#x2e;&#x63;&#x6f;&#109;</a></li>
+<li>例子：ab mymail <a href="mailto:&#x31;&#x35;&#51;&#48;&#x32;&#54;&#56;&#55;&#x38;&#x31;&#64;&#x71;&#x71;&#46;&#99;&#x6f;&#109;">&#x31;&#x35;&#51;&#48;&#x32;&#54;&#56;&#55;&#x38;&#x31;&#64;&#x71;&#x71;&#46;&#99;&#x6f;&#109;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#49;&#53;&#51;&#x30;&#x32;&#54;&#x38;&#x37;&#56;&#x31;&#64;&#x71;&#x71;&#46;&#x63;&#111;&#109;">&#49;&#53;&#51;&#x30;&#x32;&#54;&#x38;&#x37;&#56;&#x31;&#64;&#x71;&#x71;&#46;&#x63;&#111;&#109;</a></li>
 </ul>
 </li>
 <li>注意：定义的快捷键或ab的内容重启后会消失，这时需要我们在用户的家目录下写配置文件.vimrc，保持快捷键<ul>
@@ -6702,6 +6702,145 @@ On 连接条件
 
 
 <h5 id="（3）-使用"><a href="#（3）-使用" class="headerlink" title="（3） 使用"></a>（3） 使用</h5><p>​    mount -t ntfs-3g 分区设备文件名 挂载点</p>
+<h3 id="9-3-fdisk分区"><a href="#9-3-fdisk分区" class="headerlink" title="9.3 fdisk分区"></a>9.3 fdisk分区</h3><h4 id="9-3-1-fdisk命令分区过程"><a href="#9-3-1-fdisk命令分区过程" class="headerlink" title="9.3.1 fdisk命令分区过程"></a>9.3.1 fdisk命令分区过程</h4><ul>
+<li><p>通过虚拟机加入新硬盘</p>
+<ul>
+<li>查看新硬盘<br>fdisk -l</li>
+</ul>
+</li>
+<li><p>使用fdisk命令分区<br>fdisk /dev/sdb 后面不能加数字 因为此时硬盘还没有分区<br>通过交互进行分区，交互指令如下：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a</td>
+<td>设置可引导标记</td>
+</tr>
+<tr>
+<td>b</td>
+<td>编辑bsd磁盘标签</td>
+</tr>
+<tr>
+<td>c</td>
+<td>设置DOS操作系统兼容标记</td>
+</tr>
+<tr>
+<td>d</td>
+<td>删除一个分区</td>
+</tr>
+<tr>
+<td>l</td>
+<td>显示已知的文件系统类型。82为Linux swap分区，83为Linux分区</td>
+</tr>
+<tr>
+<td>m</td>
+<td>显示帮助菜单</td>
+</tr>
+<tr>
+<td>n</td>
+<td>新建分区</td>
+</tr>
+<tr>
+<td>o</td>
+<td>建立空白DOS分区表</td>
+</tr>
+<tr>
+<td>p</td>
+<td>显示分区列表</td>
+</tr>
+<tr>
+<td>q</td>
+<td>不保存退出</td>
+</tr>
+<tr>
+<td>s</td>
+<td>新建空白SUN磁盘标签</td>
+</tr>
+<tr>
+<td>t</td>
+<td>改变一个分区的系统ID</td>
+</tr>
+<tr>
+<td>u</td>
+<td>改变显示记录单位</td>
+</tr>
+<tr>
+<td>v</td>
+<td>验证分区表</td>
+</tr>
+<tr>
+<td>w</td>
+<td>保存退出</td>
+</tr>
+<tr>
+<td>x</td>
+<td>附加功能(仅专家)</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>重新读取分区表信息</p>
+<ul>
+<li>partprobe</li>
+</ul>
+</li>
+<li><p>格式化分区</p>
+<ul>
+<li>mkfs -t ext4 /dev/sdb1</li>
+</ul>
+</li>
+<li><p>建立挂载点并挂载</p>
+<ul>
+<li>mkdir /disk1</li>
+<li>mkdir /disk5</li>
+<li>mount /dev/sdb1 /disk1/</li>
+<li>mount /dev/sdb5 /disk5/</li>
+</ul>
+</li>
+</ul>
+<h4 id="9-3-2-分区自动挂载与fstab文件修复"><a href="#9-3-2-分区自动挂载与fstab文件修复" class="headerlink" title="9.3.2 分区自动挂载与fstab文件修复"></a>9.3.2 分区自动挂载与fstab文件修复</h4><ul>
+<li>上一节说的挂载操作在重启之后便会消失，每次重启都得重新挂载，使用我们需要把它写入系统挂载命令文件中，每次开机都会自动扫描挂载，使用/etc/fstab文件，将挂载信息写入文件</li>
+</ul>
+<ul>
+<li><p>/etc/fstab文件<br>第一字段：分区设备文件名或UUID(硬盘通用唯一识别码)<br>第二字段：挂载点<br>第三字段:文件系统名称<br>第四字段:挂载参数<br>第五字段:指定分区是否被dump备份，0代表不备份，1 代表每天备份，2代表不定期备份<br>第六字段:指定分区是否被fsck检测，0代表不检测，其 他数字代表检测的优先级，那么当然1的优先级比2高<br>注意：在写入文件之后先不要着急重启，我们可以先用mount -a命令来实现系统自动重新挂载，如果出现错误会提示，不至于系统崩溃</p>
+</li>
+<li><p>/etc/fstab文件修复<br>如果一旦写错了，出现了报错，可以在开机显示之后出现一个让你输入root用户密码的界面，再输入密码之后，可以使用vim /etc/fstab进入fstab文件修改错误，如果出现文件只有只读权限，不能修改，强制保存也不行，退出文件输入命令：mount -o remount,rw / ，重新把根分区挂载读写权限，就可以保存了，而且只能在根分区没有错误，在本机登陆，不能使用服务器或者远程连接的情况下才能修复。</p>
+</li>
+</ul>
+<h3 id="9-4-新建swap分区"><a href="#9-4-新建swap分区" class="headerlink" title="9.4 新建swap分区"></a>9.4 新建swap分区</h3><ul>
+<li>swap 分区通常被称为交换分区，这是一块特殊的硬盘空间，即当实际内存不够用的时候，操作系统会从内存中取出一部分暂时不用的数据，放在交换分区中，从而为当前运行的程序腾出足够的内存空间。也就是说，当内存不够用时，我们使用 swap 分区来临时顶替。这种“拆东墙，补西墙”的方式应用于几乎所有的操作系统中。</li>
+</ul>
+<ul>
+<li><p>free命令</p>
+<ul>
+<li>free 查看内存与swap分区使用状况</li>
+<li>-m：按MB字节显示</li>
+</ul>
+</li>
+<li><p>缓存与缓冲：</p>
+<ul>
+<li>cached(缓存):是指把读取出来的数据保存在内存当中，当再次读取时，不用读取硬盘而直接从内存当中读取，加速了数据的读取过程</li>
+<li>buffer(缓冲):是指在写入数据时，先把分散的写入操作保存到内存当中，当达到一定程度再集中写入硬盘， 减少了磁盘碎片和硬盘的反复寻道，加速了数据的写入过程</li>
+</ul>
+</li>
+<li><p>新建swap分区</p>
+<p>fdisk /dev/sdb<br>进行交互式操作<br>别忘记把分区ID改为82 ，记得保存，然后重启</p>
+</li>
+<li><p>格式化<br>分区完之后需要格式化<br>mkswap /dev/sdb1 这里不能使用mkfs进行格式化</p>
+</li>
+</ul>
+<ul>
+<li>加入swap分区<br>swapon /dev/sdb1 加入swap分区</li>
+</ul>
+<ul>
+<li>如果不想用了使用以下命令取消：<br>swapoff /dev/sdb1 取消swap分区</li>
+</ul>
+<ul>
+<li>swap分区开机自动挂载<br>vi /etc/fstab<br>/dev/sdb1 swap swap defaults 0 0<br>注意：swap前面没有/，他不是根分区下的<br>修改之后使用mount -a 命令来检测错误</li>
+</ul>
 <h2 id="第十章-Shell基础"><a href="#第十章-Shell基础" class="headerlink" title="第十章 Shell基础"></a>第十章 Shell基础</h2><h3 id="10-1-Shell概述"><a href="#10-1-Shell概述" class="headerlink" title="10.1 Shell概述"></a>10.1 Shell概述</h3><h4 id="10-1-1-Shell是什么"><a href="#10-1-1-Shell是什么" class="headerlink" title="10.1.1 Shell是什么"></a>10.1.1 Shell是什么</h4><ul>
 <li><p>Shell是一个<font color="orange">命令行解释器</font>，它为用户提供了一个向Linux内核发送请求以便运行程序的界面系统级程序，用户可以用Shell来 启动、挂起、停止甚至是编写一些程序。</p>
 <img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20210721142803916.png" alt="image-20210721142803916" style="zoom:50%;"></li>
