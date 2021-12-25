@@ -5562,7 +5562,7 @@ On 连接条件
 </li>
 <li><font color="red">：ab [a内容][b内容]</font><ul>
 <li>描述：替换，会自动把b内容替换成a</li>
-<li>例子：ab mymail <a href="mailto:&#x31;&#x35;&#51;&#48;&#x32;&#54;&#56;&#55;&#x38;&#x31;&#64;&#x71;&#x71;&#46;&#99;&#x6f;&#109;">&#x31;&#x35;&#51;&#48;&#x32;&#54;&#56;&#55;&#x38;&#x31;&#64;&#x71;&#x71;&#46;&#99;&#x6f;&#109;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#49;&#53;&#51;&#x30;&#x32;&#54;&#x38;&#x37;&#56;&#x31;&#64;&#x71;&#x71;&#46;&#x63;&#111;&#109;">&#49;&#53;&#51;&#x30;&#x32;&#54;&#x38;&#x37;&#56;&#x31;&#64;&#x71;&#x71;&#46;&#x63;&#111;&#109;</a></li>
+<li>例子：ab mymail <a href="mailto:&#49;&#x35;&#51;&#48;&#50;&#54;&#x38;&#55;&#x38;&#x31;&#x40;&#x71;&#x71;&#46;&#99;&#x6f;&#x6d;">&#49;&#x35;&#51;&#48;&#50;&#54;&#x38;&#55;&#x38;&#x31;&#x40;&#x71;&#x71;&#46;&#99;&#x6f;&#x6d;</a>  当你在vim文档中输入mymail时按回车或者空格会自动变成<a href="mailto:&#49;&#53;&#x33;&#x30;&#50;&#x36;&#x38;&#x37;&#x38;&#49;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;">&#49;&#53;&#x33;&#x30;&#50;&#x36;&#x38;&#x37;&#x38;&#49;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;</a></li>
 </ul>
 </li>
 <li>注意：定义的快捷键或ab的内容重启后会消失，这时需要我们在用户的家目录下写配置文件.vimrc，保持快捷键<ul>
@@ -8272,6 +8272,101 @@ On 连接条件
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">until [ 条件判断式 ] </span><br><span class="line">	do </span><br><span class="line">		程序 </span><br><span class="line">	done </span><br></pre></td></tr></table></figure></li>
 <li><p>从1加到100</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span> </span><br><span class="line"><span class="meta">#</span><span class="bash">Author: zlx</span></span><br><span class="line"><span class="meta">#</span><span class="bash">从1加到100</span></span><br><span class="line"></span><br><span class="line">i=1 </span><br><span class="line">s=0 </span><br><span class="line">until [ $i -gt 100 ] #循环直到变量i的值大于100，就停止循环 </span><br><span class="line">	do </span><br><span class="line">        s=$(( $s+$i ))</span><br><span class="line">		i=$(( $i+1 )) </span><br><span class="line">	done </span><br><span class="line">echo &quot;The sum is: $s&quot;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="第十二章-服务管理"><a href="#第十二章-服务管理" class="headerlink" title="第十二章 服务管理"></a>第十二章 服务管理</h2><h3 id="12-1服务简介与分类"><a href="#12-1服务简介与分类" class="headerlink" title="12.1服务简介与分类"></a>12.1服务简介与分类</h3><h5 id="（1）服务的分类"><a href="#（1）服务的分类" class="headerlink" title="（1）服务的分类"></a>（1）服务的分类</h5><p>​    <img src="/2021/07/20/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/20200529121600849.png" alt="服务的分类"></p>
+<h5 id="（2）启动与自启动"><a href="#（2）启动与自启动" class="headerlink" title="（2）启动与自启动"></a>（2）启动与自启动</h5><ul>
+<li>服务启动：就是在当前系统中让服务运行，并提供功能。</li>
+<li>服务自启动：自启动是指让服务在系统开机或重启动之后，随着系统的启动而自动启动服务。</li>
+</ul>
+<h5 id="（3）查询已安装的服务"><a href="#（3）查询已安装的服务" class="headerlink" title="（3）查询已安装的服务"></a>（3）查询已安装的服务</h5><ul>
+<li><p>RPM包安装的服务</p>
+<ul>
+<li><p><font color="red">chkconfig –list</font></p>
+<p>查看服务自启动状态，可以看到所有RPM包安装的服务</p>
+</li>
+<li><p><font color="red">ps aux</font></p>
+<p>查看启动服务的进程</p>
+</li>
+</ul>
+</li>
+<li><p>源码包安装的服务</p>
+<ul>
+<li>查看服务安装位置，一般是/usr/local/下</li>
+</ul>
+</li>
+<li><p>RPM 安装服务和源码包安装服务的区别</p>
+<ul>
+<li>RPM 安装服务和源码包安装服务的区别就是安装位置的不同</li>
+<li>源码包安装在指定位置，一般是/usr/local/ </li>
+<li>RPM 包安装在默认位置中</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-2-rpm包安装服务的管理"><a href="#12-2-rpm包安装服务的管理" class="headerlink" title="12.2 rpm包安装服务的管理"></a>12.2 rpm包安装服务的管理</h3><h4 id="12-2-1-独立的服务管理"><a href="#12-2-1-独立的服务管理" class="headerlink" title="12.2.1 独立的服务管理"></a>12.2.1 独立的服务管理</h4><h5 id="（1）rpm包安装服务的位置"><a href="#（1）rpm包安装服务的位置" class="headerlink" title="（1）rpm包安装服务的位置"></a>（1）rpm包安装服务的位置</h5><ul>
+<li>RPM 安装服务和源码包安装服务的区别就是安装位置的不同<ul>
+<li>源码包安装在指定位置，一般是/usr/local/ </li>
+<li>RPM 包安装在默认位置中</li>
+</ul>
+</li>
+<li>/etc/init.d/    #启动脚本位置</li>
+<li>/etc/sysconfig/    #初始化环境配置文件位置</li>
+<li>/etc/    #配置文件位置</li>
+<li>/etc/xinetd.conf    #xinetd配置文件</li>
+<li>/etc/xinetd.d/    #基于xinetd服务的启动脚本</li>
+<li>/var/lib/    #服务产生的数据放在这里</li>
+<li>/var/log/    #日志</li>
+</ul>
+<h5 id="（2）独立服务的启动"><a href="#（2）独立服务的启动" class="headerlink" title="（2）独立服务的启动"></a>（2）独立服务的启动</h5><ul>
+<li>/etc/rc.d/init.d/独立服务名 start|stop|status|restart</li>
+<li>service 独立服务名 start|stop|restart|status</li>
+<li>service –status-all <ul>
+<li>查询服务器全部已经安装的RPM包的服务的运行状态</li>
+<li>CentOS7为systemctl list-unit-files</li>
+</ul>
+</li>
+</ul>
+<h5 id="（3）独立的服务自启动"><a href="#（3）独立的服务自启动" class="headerlink" title="（3）独立的服务自启动"></a>（3）独立的服务自启动</h5><ul>
+<li><p>chkconfig [–level 运行级别] [独立服务名] [on|off]</p>
+<ul>
+<li>chkconfig –level 2345 htttpd on  #下次开机自启动apache</li>
+<li>chkconfig –level 2345 htttpd off  #下次开机不自启动apache</li>
+</ul>
+</li>
+<li><p>修改/etc/rc.d/rc.local文件</p>
+<p>把“/etc/rc.d/init.d/ 独立服务名 start ”写入文件</p>
+</li>
+<li><p>使用ntsysv命令管理自启动</p>
+<p>如果没有ntsysv命令，yum -y install ntsysv下载即可，不过这个也是红帽专有的</p>
+</li>
+<li><p><font color="red">tips:service 和 chkconfig 命令的功能在 Centos7 中好像都被抛弃了。被 <strong>systemctl</strong> 取代。</font></p>
+<p><a href="https://blog.csdn.net/cds86333774/article/details/51165361">参考博文：Centos7 下的 systemctl 命令与 service 和 chkconfig</a></p>
+</li>
+</ul>
+<h4 id="12-2-2-基于xinetd服务的管理"><a href="#12-2-2-基于xinetd服务的管理" class="headerlink" title="12.2.2 基于xinetd服务的管理"></a>12.2.2 基于xinetd服务的管理</h4><p>​    <strong>Xinetd：</strong>即 extended internet daemon，是新一代的网络守护进程服务程序，又叫超级 Internet 服</p>
+<p>务器，常用来管理多种轻量级 Internet 服务。Xinetd 提供类似于 inetd+tcp_wrapper 的功能，但是更</p>
+<p>加强大和安全</p>
+<p>​    Telnet协议是TCP/IP协议族中的一员，是Internet远程 登录服务的标准协议和主要方式。不过现在已经被ssh替代。</p>
+<h5 id="（1）安装-xinetd-与-telnet"><a href="#（1）安装-xinetd-与-telnet" class="headerlink" title="（1）安装 xinetd 与 telnet"></a>（1）安装 xinetd 与 telnet</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# yum -y install xinetd </span><br><span class="line">[root@localhost ~]# yum -y install telnet-server</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="（2）xinetd服务的启动"><a href="#（2）xinetd服务的启动" class="headerlink" title="（2）xinetd服务的启动"></a>（2）xinetd服务的启动</h5><ul>
+<li>进入配置文件，把disable=yes改为no</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">service telnet 	# 服务的名称为 telnet</span><br><span class="line">&#123; </span><br><span class="line">flags = REUSE 	# 标志为 REUSE，设定 TCP/IP socket 可重用</span><br><span class="line">socket_type = stream 	# 使用 TCP 协议数据包 </span><br><span class="line">wait = no 	# 允许多个连接同时连接 </span><br><span class="line">user = root	# 启动服务的用户为 root </span><br><span class="line">server = /usr/sbin/in.telnetd 	# 服务的启动程序 </span><br><span class="line">log_on_failure += USERID 	# 登陆失败后，记录用户的 ID </span><br><span class="line">disable = no 	# 服务不启动</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>重启xinetd服务</p>
+<p>service xinetd restart</p>
+</li>
+</ul>
+<p>（3）xinetd服务的自启动</p>
+<ul>
+<li><p>chkconfig telnet on</p>
+</li>
+<li><p>ntsysv</p>
+<p>基于xinetd的服务自启动和启动是相通的，非常不适合做服务器管理，开启自启动，服务自动启动。关闭自启动，服务也关闭 。</p>
+</li>
 </ul>
 ]]></content>
       <categories>
