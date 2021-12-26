@@ -9344,6 +9344,16 @@ On 连接条件
 <p>返回对应元素的索引下标, begin为开始索引，end为结束索引,当 value 不存在时触发ValueError错误 </p>
 </li>
 </ul>
+<ul>
+<li><p>L.<strong>count</strong>(x)</p>
+<p>用于统计某个元素在列表中出现的次数 </p>
+</li>
+</ul>
+<ul>
+<li><p>L.<strong>pop</strong>([index])</p>
+<p>删除索引对应的元素，如果不加索引，默认删除最后元素，同时返回删除元素的引用关系</p>
+</li>
+</ul>
 <h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><ul>
 <li><p>L.<strong>insert</strong>(index,  obj)</p>
 <p>将某个元素插放到列表中指定的位置 </p>
@@ -9371,22 +9381,27 @@ On 连接条件
 </li>
 </ul>
 <h1 id="二、字典"><a href="#二、字典" class="headerlink" title="二、字典"></a>二、字典</h1><h2 id="查找-1"><a href="#查找-1" class="headerlink" title="查找"></a>查找</h2><ul>
-<li><p><strong>get</strong>(key,  default=None)<br>返回指定键的值，如果值不在字典中返回default值</p>
-</li>
-<li><p><strong>setdefault</strong>(key,  default=None)<br>和get()类似, 但如果键不存在于字典中，将会添加键并将值设为default</p>
-</li>
-<li><p><strong>popitem</strong>()<br>随机返回并删除字典中的一对键和值(一般删除末尾对)。</p>
-</li>
-<li><p><strong>items</strong>()<br>以列表返回可遍历的(键, 值)  元组数组</p>
-</li>
-<li><p><strong>keys</strong>()<br>返回一个迭代器，可以使用 list() 来转换为列表</p>
-</li>
-<li><p><strong>values</strong>()<br>返回一个迭代器，可以使用 list() 来转换为列表</p>
-</li>
+<li><strong>get</strong>(key,  default=None)<br>返回指定键的值，如果值不在字典中返回default值</li>
+</ul>
+<ul>
+<li><strong>setdefault</strong>(key,  default=None)<br>和get()类似, 但如果键不存在于字典中，将会添加键并将值设为default</li>
+</ul>
+<ul>
+<li><strong>popitem</strong>()<br>随机返回并删除字典中的一对键和值(一般删除末尾对)。</li>
+</ul>
+<ul>
+<li><strong>items</strong>()<br>以列表返回可遍历的(键, 值)  元组数组</li>
+</ul>
+<ul>
+<li><strong>keys</strong>()<br>返回一个迭代器，可以使用 list() 来转换为列表</li>
+</ul>
+<ul>
+<li><strong>values</strong>()<br>返回一个迭代器，可以使用 list() 来转换为列表</li>
 </ul>
 <h2 id="修改-1"><a href="#修改-1" class="headerlink" title="修改"></a>修改</h2><ul>
-<li><p><strong>update</strong>(dict2)<br>字典记录累加，把字典参数 dict2 的 key/value(键/值) 对更新到字典 dict 里。</p>
-</li>
+<li><strong>update</strong>(dict2)<br>字典记录累加，把字典参数 dict2 的 key/value(键/值) 对更新到字典 dict 里。</li>
+</ul>
+<ul>
 <li><p><strong>clear</strong>()</p>
 <p>删除字典内所有元素</p>
 </li>
