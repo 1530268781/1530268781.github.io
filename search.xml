@@ -9501,4 +9501,82 @@ On 连接条件
         <tag>容器</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Python-collections模块</title>
+    <url>/2022/01/07/Python-collections%E6%A8%A1%E5%9D%97/</url>
+    <content><![CDATA[<h1 id="collections介绍"><a href="#collections介绍" class="headerlink" title="collections介绍"></a>collections介绍</h1><ul>
+<li><p>collections模块实现一些特定的数据类型，可以替代Python中常用的内置数据类型如dict, list, set,tuple，简单说就是对基本数据类型做了更上一层的处理。</p>
+</li>
+<li><p>collections是日常工作中的重点、高频模块，常用类型有：</p>
+<ul>
+<li><p>计数器（Counter）</p>
+</li>
+<li><p>双向队列（deque）</p>
+</li>
+<li><p>默认字典（defaultdict）</p>
+</li>
+<li><p>有序字典（OrderedDict）</p>
+</li>
+<li><p>可命名元组（namedtuple）　</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="1-Counter"><a href="#1-Counter" class="headerlink" title="1. Counter"></a>1. Counter</h1><ul>
+<li><p>Counter作为字典dicit（）的一个子类用来进行hashtable计数，将元素进行数量统计，计数后返回一个字典，键值为元素，值为元素个数</p>
+</li>
+<li><p>常用方法</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法名</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">most_common(int)</td>
+<td align="center">按照元素出现的次数进行从高到低的排序，返回前int个元素的字典</td>
+</tr>
+<tr>
+<td align="center">elements</td>
+<td align="center">返回经过计算器Counter后的元素，返回的是一个迭代器</td>
+</tr>
+<tr>
+<td align="center">update</td>
+<td align="center">和set集合的update一样，对集合进行并集更新</td>
+</tr>
+<tr>
+<td align="center">subtract</td>
+<td align="center">和update类似，只是update是做加法，subtract做减法,从另一个集合中减去本集合的元素</td>
+</tr>
+<tr>
+<td align="center">items</td>
+<td align="center">返回由Counter生成的字典的所有item</td>
+</tr>
+<tr>
+<td align="center">keys</td>
+<td align="center">返回由Counter生成的字典的所有key</td>
+</tr>
+<tr>
+<td align="center">values</td>
+<td align="center">返回由Counter生成的字典的所有value</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<ul>
+<li><p>示例代码</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"></span><br><span class="line"><span class="built_in">str</span> = <span class="string">&quot;abcabccabde&quot;</span></span><br><span class="line">li = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line">dic = &#123;<span class="string">&#x27;a&#x27;</span> : <span class="number">2</span>, <span class="string">&#x27;b&#x27;</span> : <span class="number">2</span>, <span class="string">&#x27;c&#x27;</span> : <span class="number">3</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Counter对象获取各个元素的个数，返回字典</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Counter(str):&quot;</span>, Counter(<span class="built_in">str</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Counter(li):&quot;</span>, Counter(li))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Counter(dic):&quot;</span>, Counter(dic))</span><br><span class="line"></span><br><span class="line"><span class="comment"># most_common(int)按照元素出现的次数进行从高到低的排序，返回前int个元素的元组（键，值）</span></span><br><span class="line">d1 = Counter(<span class="built_in">str</span>)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;d1.most_common(2):&quot;</span>,d1.most_common(<span class="number">2</span>))</span><br><span class="line">d1 = Counter(<span class="built_in">str</span>)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;d1.most_common():&quot;</span>,d1.most_common())    <span class="comment"># 不加参数返回所有</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># elements返回经过计算器Counter后的元素，返回的是一个迭代器</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;sorted(d1.elements()):&quot;</span>, <span class="built_in">sorted</span>(d1.elements()))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;list(d1.elements()):&quot;</span>, <span class="built_in">list</span>(d1.elements()))</span><br><span class="line"></span><br><span class="line"><span class="comment"># update和set集合的update一样，对集合进行并集更新</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;d1.update(&#x27;aaa&#x27;):&quot;</span>, d1.update(<span class="string">&quot;aaa&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(d1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># subtract 和update类似，只是update是做加法，subtract做减法,从另一个集合中减去本集合的元素</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;d1.substract(&#x27;aab&#x27;):&quot;</span>, d1.subtract(<span class="string">&quot;aab&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(d1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># items 返回由Counter生成的字典的所有item</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;d1.items():&quot;</span>, d1.items())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回由Counter生成的字典的所有key</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;d1.keys():&quot;</span>, d1.keys())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回由Counter生成的字典的所有value</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;d1.values():&quot;</span>, d1.values())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">Counter(<span class="built_in">str</span>): Counter(&#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;e&#x27;</span>: <span class="number">1</span>&#125;)</span><br><span class="line">Counter(li): Counter(&#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">1</span>&#125;)</span><br><span class="line">Counter(dic): Counter(&#123;<span class="string">&#x27;c&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;a&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">2</span>&#125;)</span><br><span class="line">    </span><br><span class="line">d1.most_common(<span class="number">2</span>): [(<span class="string">&#x27;a&#x27;</span>, <span class="number">3</span>), (<span class="string">&#x27;b&#x27;</span>, <span class="number">3</span>)]</span><br><span class="line">d1.most_common(): [(<span class="string">&#x27;a&#x27;</span>, <span class="number">3</span>), (<span class="string">&#x27;b&#x27;</span>, <span class="number">3</span>), (<span class="string">&#x27;c&#x27;</span>, <span class="number">3</span>), (<span class="string">&#x27;d&#x27;</span>, <span class="number">1</span>), (<span class="string">&#x27;e&#x27;</span>, <span class="number">1</span>)]</span><br><span class="line">    </span><br><span class="line"><span class="built_in">sorted</span>(d1.elements()): [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>]</span><br><span class="line"><span class="built_in">list</span>(d1.elements()): [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>]</span><br><span class="line">    </span><br><span class="line">d1.update(<span class="string">&#x27;aaa&#x27;</span>): <span class="literal">None</span></span><br><span class="line">Counter(&#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">6</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;e&#x27;</span>: <span class="number">1</span>&#125;)</span><br><span class="line"></span><br><span class="line">d1.substract(<span class="string">&#x27;aab&#x27;</span>): <span class="literal">None</span></span><br><span class="line">Counter(&#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">4</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;e&#x27;</span>: <span class="number">1</span>&#125;)</span><br><span class="line"></span><br><span class="line">d1.items(): dict_items([(<span class="string">&#x27;a&#x27;</span>, <span class="number">4</span>), (<span class="string">&#x27;b&#x27;</span>, <span class="number">2</span>), (<span class="string">&#x27;c&#x27;</span>, <span class="number">3</span>), (<span class="string">&#x27;d&#x27;</span>, <span class="number">1</span>), (<span class="string">&#x27;e&#x27;</span>, <span class="number">1</span>)])</span><br><span class="line">    </span><br><span class="line">d1.keys(): dict_keys([<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>])</span><br><span class="line">    </span><br><span class="line">d1.values(): dict_values([<span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>])</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>《Python》</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>容器</tag>
+      </tags>
+  </entry>
 </search>
