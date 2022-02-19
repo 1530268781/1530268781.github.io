@@ -9643,4 +9643,54 @@ On 连接条件
         <tag>容器</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Python-lambda表达式</title>
+    <url>/2022/02/19/Python-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h2 id="Python-lambda表达式"><a href="#Python-lambda表达式" class="headerlink" title="Python lambda表达式"></a>Python lambda表达式</h2><h3 id="一、语法和介绍"><a href="#一、语法和介绍" class="headerlink" title="一、语法和介绍"></a>一、语法和介绍</h3><ul>
+<li>语法：<font color="red">lambda argument_list: expression</font><ul>
+<li>lambda函数：又称“匿名函数”</li>
+<li>argument_list：参数列表，作为函数的输入</li>
+<li>expression：表达式，只能用到参数列表中出现的参数，根据表达式计算得到的值作为函数的输出</li>
+</ul>
+</li>
+<li>介绍：<ul>
+<li>lambda的函数体只有一个表达式，而非代码块，代码简洁</li>
+<li>lambda函数无需命名即可快速调用</li>
+<li>简单单行函数或一次性函数可以用lambda表达式来书写</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、用法"><a href="#二、用法" class="headerlink" title="二、用法"></a>二、用法</h3><ol>
+<li><p>匿名调用和命名调用</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># def函数写法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line"><span class="comment"># lambada表达式既可以匿名直接调用，也可以赋值给某个变量再调用</span></span><br><span class="line"><span class="comment"># 匿名调用</span></span><br><span class="line"><span class="built_in">print</span>((<span class="keyword">lambda</span> x, y: x + y)(<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 命名调用</span></span><br><span class="line">a = <span class="keyword">lambda</span> x, y: x + y</span><br><span class="line"><span class="built_in">print</span>(a(<span class="number">2</span>, <span class="number">3</span>))</span><br></pre></td></tr></table></figure></li>
+<li><p>作为函数法返回值</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">lambda</span> x, y: x + y</span><br></pre></td></tr></table></figure></li>
+<li><p>与其他函数配合使用</p>
+<ul>
+<li><p>filter(function, iterable)函数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 过滤掉某些不符合条件的元素</span></span><br><span class="line"><span class="comment"># 其中iterable可以为列表、字符串或元组，逐一对元素通过function的条件进行筛选，然后保留下满足条件的数据。python3返回的是一个迭代器，可以用list进行转换得到输出结果</span></span><br><span class="line"><span class="comment"># 此时lambda函数用于指定过滤列表元素的条件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 保留奇数</span></span><br><span class="line">nums = <span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x % <span class="number">2</span> == <span class="number">1</span>, nums))</span><br><span class="line"><span class="built_in">print</span>(nums)</span><br></pre></td></tr></table></figure></li>
+<li><p>map(function, iterable)函数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 会根据提供的function函数对指定序列做映射</span></span><br><span class="line"><span class="comment"># 逐一对元素通过function操作,返回的是一个迭代器，可以用list进行转换</span></span><br><span class="line"><span class="comment"># 此时lambda函数用于指定映射规则</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出平方</span></span><br><span class="line">nums = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> x: x ** <span class="number">2</span>, nums))</span><br><span class="line"><span class="built_in">print</span>(nums)</span><br></pre></td></tr></table></figure></li>
+<li><p>reduce(function, iterable)函数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 对参数序列中的元素进行累计</span></span><br><span class="line"><span class="comment"># 函数先将iterable中的第1和第2个元素进行function操作，将得到的结果与第3个数进行function操作，如此累积</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 求和</span></span><br><span class="line">nums = reduce(<span class="keyword">lambda</span> x, y: x + y, nums)</span><br><span class="line"><span class="built_in">print</span>(nums)</span><br></pre></td></tr></table></figure></li>
+<li><p>sorted(iterable, key = function) 和 iterable.sort(key = function)函数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 此时lambda函数用于指定对列表中所有元素进行排序的准则</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 按字符串长度排序</span></span><br><span class="line">s = [<span class="string">&quot;abdc&quot;</span>, <span class="string">&quot;djind&quot;</span>, <span class="string">&quot;in&quot;</span>, <span class="string">&quot;a&quot;</span>]</span><br><span class="line">s.sort(key=<span class="keyword">lambda</span> x: <span class="built_in">len</span>(x))</span><br><span class="line"><span class="built_in">print</span>(s)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按字典的键排序</span></span><br><span class="line">d = &#123;<span class="number">4</span>: <span class="string">&quot;hhh&quot;</span>, <span class="number">3</span>: <span class="string">&quot;jidn&quot;</span>, <span class="number">5</span>: <span class="string">&quot;djien&quot;</span>&#125;</span><br><span class="line">d = <span class="built_in">dict</span>(<span class="built_in">sorted</span>(d.items(), key=<span class="keyword">lambda</span> x: x[<span class="number">0</span>]))</span><br><span class="line"><span class="built_in">print</span>(d)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 按元组的某一位排序</span></span><br><span class="line">d = [(<span class="number">1</span>,<span class="number">2</span>),(<span class="number">1</span>,<span class="number">3</span>),(<span class="number">4</span>,<span class="number">0</span>)]</span><br><span class="line">d = <span class="built_in">list</span>(<span class="built_in">sorted</span>(d, key = <span class="keyword">lambda</span> x: x[<span class="number">1</span>]))</span><br><span class="line"><span class="built_in">print</span>(d)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h3 id="三、举例"><a href="#三、举例" class="headerlink" title="三、举例"></a>三、举例</h3><p>​    将字符串按照字母顺序排序</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># python中的字符串类型是不允许直接修改元素的。必须先把要排序的字符串放在容器里，如list。然后在通过sort函数排序，最后还原成字符串</span></span><br><span class="line">s=<span class="string">&quot;string&quot;</span></span><br><span class="line">l=<span class="built_in">list</span>(s)</span><br><span class="line">l.sort()</span><br><span class="line">s=<span class="string">&quot;&quot;</span>.join(l)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s=<span class="string">&quot;string&quot;</span></span><br><span class="line"><span class="comment"># 通过lambda表达式一行搞定</span></span><br><span class="line"><span class="comment"># 表达式为 （x.sort(), x）[1] 去元组中的第二个数,即已经排好序的参数x,而传入的参数是list(s)</span></span><br><span class="line">s=<span class="string">&quot;&quot;</span>.join((<span class="keyword">lambda</span> x:(x.sort(),x)[<span class="number">1</span>])(<span class="built_in">list</span>(s)))</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>《Python》</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>匿名函数</tag>
+        <tag>lambda表达式</tag>
+      </tags>
+  </entry>
 </search>
