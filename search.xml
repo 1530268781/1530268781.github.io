@@ -9657,6 +9657,48 @@ On 连接条件
 </ul>
 </li>
 </ul>
+<h1 id="4-有序字典-OrderedDict"><a href="#4-有序字典-OrderedDict" class="headerlink" title="4. 有序字典 OrderedDict"></a>4. 有序字典 OrderedDict</h1><ul>
+<li><p>python中的字典dict是无序的，即迭代遍历（键，值）的顺序可能和插入的顺序不一致，因为它是按照hash来存储的。 常规dict并不跟踪插入顺序，迭代处理会根据键在散列表中存储的顺序来生成值。在OrderDict中则相反，它会记住元素插入的顺序，并在创建迭代器时使用这个顺序。 </p>
+</li>
+<li><p>OrderedDict提供了一个有序的字典结构，内部维护这一个根据键插入顺序排序的双向链表，在迭代操作的时候保持了元素插入时的顺序。需要注意的是，一个OrderedDic的大小是一个普通字典的两倍，因为内部维护了另外一个链表，所有在数据量大的时候，如果不要求保持插入顺序，最好用普通字典。</p>
+</li>
+<li><p>有序字典和普通字典的相等测试：有序字典是对顺序敏感的，即元素插入顺序不同，两个有序字典就不同；普通字典对顺序是不敏感的，即元素插入顺序不同，两个普通字典仍相同。</p>
+</li>
+<li><p>有序字典除具有普通字典的原始方法外，还提供了和顺序相关的操作，popitem(last=True)以LIFO方式弹出元素（last=False则以FIFO方式）；reversed(dict)返回一个逆序的orderedDict对象</p>
+</li>
+<li><pre><code class="python">from collections import OrderedDict
+d = &#123;&#125;
+d[&#39;a&#39;] = &#39;A&#39;
+d[&#39;b&#39;] = &#39;B&#39;
+d[&#39;c&#39;] = &#39;C&#39;
+for k, v in d.items():
+    print(k, v)
+b = &#123;&#125;
+b[&#39;a&#39;] = &#39;A&#39;
+b[&#39;c&#39;] = &#39;C&#39;
+b[&#39;b&#39;] = &#39;B&#39;
+for k, v in d.items():
+    print(k, v)
+print(d == b)   # True
+
+d = OrderedDict()
+d[&#39;a&#39;] = &#39;A&#39;
+d[&#39;b&#39;] = &#39;B&#39;
+d[&#39;c&#39;] = &#39;C&#39;
+for k, v in d.items():
+    print(k, v)
+b = OrderedDict()
+b[&#39;a&#39;] = &#39;A&#39;
+b[&#39;c&#39;] = &#39;C&#39;
+b[&#39;b&#39;] = &#39;B&#39;
+for k, v in d.items():
+    print(k, v)
+print(d == b)   # False
+
+print(d.popitem(last=True))
+</code></pre>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>《Python》</category>
