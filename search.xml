@@ -8381,7 +8381,7 @@ On 连接条件
     <title>Go语言学习笔记</title>
     <url>/2021/07/28/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h3 id="Go语言概述"><a href="#Go语言概述" class="headerlink" title="Go语言概述"></a>Go语言概述</h3><h4 id="1-Go语言简介"><a href="#1-Go语言简介" class="headerlink" title="1.Go语言简介"></a>1.Go语言简介</h4><ul>
-<li><p>Go 是一个开源的编程语言，它能让<font color="cornflowerblue">构造简单、可靠且高效的软件</font>font&gt;变得容易。</p>
+<li><p>Go 是一个开源的编程语言，它能让<font color="cornflowerblue">构造简单、可靠且高效的软件</font>变得容易。</p>
 </li>
 <li><p>Go是从2007年末由Robert Griesemer, Rob Pike, Ken Thompson主持开发，后来还加入了Ian Lance Taylor, Russ Cox等人，并最终于2009年11月开源，在2012年早些时候发布了Go 1稳定版本。现在Go的开发已经是完全开放的，并且拥有一个活跃的社区。</p>
 </li>
