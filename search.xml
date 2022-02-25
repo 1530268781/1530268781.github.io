@@ -9515,7 +9515,7 @@ On 连接条件
   <entry>
     <title>Python-collections模块</title>
     <url>/2022/01/07/Python-collections%E6%A8%A1%E5%9D%97/</url>
-    <content><![CDATA[<h1 id="collections介绍"><a href="#collections介绍" class="headerlink" title="collections介绍"></a>collections介绍</h1><ul>
+    <content><![CDATA[<ul>
 <li><p>collections模块实现一些特定的数据类型，可以替代Python中常用的内置数据类型如dict, list, set,tuple，简单说就是对基本数据类型做了更上一层的处理。</p>
 </li>
 <li><p>collections是日常工作中的重点、高频模块，常用类型有：</p>
