@@ -9492,6 +9492,17 @@ On 连接条件
 <p>返回一个原字符串左对齐,并使用 fillchar 填充至长度  width 的新字符串，fillchar 默认为空格。</p>
 </li>
 </ul>
+<h2 id="分割"><a href="#分割" class="headerlink" title="分割"></a>分割</h2><ul>
+<li><p>str.<strong>split</strong>(‘分割符’)</p>
+<p>将str按指定的一个分隔符进行分割</p>
+</li>
+<li><p><strong>re.split</strong>(‘分割符1|分割符2|…’, str)    或    <strong>re.split</strong>(r’[分割符1, 分割符2, …]’, str) </p>
+<p>​    将str按指定的一些分隔符进行分割，不保留分隔符</p>
+</li>
+<li><p><strong>re.split</strong>(‘==(==分割符1|分割符2|…==)==’, str)    或    <strong>re.split</strong>(r’==(==[分割符1, 分割符2, …]==)==’, str) </p>
+<p>​    将str按指定的一些分隔符进行分割，不保留分隔符</p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>《Python》</category>
