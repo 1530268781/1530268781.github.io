@@ -9668,7 +9668,30 @@ On 连接条件
 </ul>
 </li>
 </ul>
-<h1 id="4-有序字典-OrderedDict"><a href="#4-有序字典-OrderedDict" class="headerlink" title="4. 有序字典 OrderedDict"></a>4. 有序字典 OrderedDict</h1><ul>
+<h1 id="4-具名元组namedtuple"><a href="#4-具名元组namedtuple" class="headerlink" title="4. 具名元组namedtuple"></a>4. 具名元组namedtuple</h1><ul>
+<li><p>普通元组的局限性： 不能为元组内部的数据进行命名，所以往往我们并不知道一个元组所要表达的意义 </p>
+</li>
+<li><p> <strong>namedtuple</strong>： 引入了 <strong>collections.namedtuple</strong> 这个工厂函数，来构造一个带字段名的元组。具名元组的实例和普通元组消耗的内存一样多，因为字段名都被存在对应的类里面。这个类跟普通的对象实例比起来也要小一些，因为 Python 不会用 <strong>dict</strong> 来存放这些实例的属性。</p>
+</li>
+<li><p>定义格式：<font color="cornflowerblue">collections.namedtuple(typename, field_names, verbose=False, rename=False) </font></p>
+<ul>
+<li> <strong>typename</strong>：元组名称</li>
+<li> <strong>field_names</strong>: 元组中元素的名称</li>
+<li> <strong>rename</strong>: 如果元素名称中含有 python 的关键字，则必须设置为 rename=True</li>
+<li> <strong>verbose</strong>: 默认就好</li>
+</ul>
+</li>
+<li><p>创建命名元组并实例化</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建一个具名元组，需要两个参数，一个是元组名，另一个是元组的各个字段名。</span></span><br><span class="line"><span class="comment"># 后者可以是有多个字符串组成的可迭代对象，或者是有空格分隔开的字段名组成的字符串</span></span><br><span class="line">User = namedtuple(<span class="string">&#x27;User&#x27;</span>, [<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;id&#x27;</span>])</span><br><span class="line">User = namedtuple(<span class="string">&#x27;User&#x27;</span>, <span class="string">&#x27;name age id&#x27;</span>)</span><br><span class="line"><span class="comment"># User是具名元组的变量名，&#x27;User&#x27;是具名元组的名称,一般相同</span></span><br><span class="line"></span><br><span class="line">zlx = User(<span class="string">&#x27;zlx&#x27;</span>, <span class="string">&#x27;22&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(zlx)</span><br></pre></td></tr></table></figure></li>
+<li><p>具名元组的特有属性</p>
+<ul>
+<li>类属性**_fields**： 包含这个类所有字段名的元组 </li>
+<li>类方法 **_make(iterable)**：接受一个可迭代对象来生产这个类的实例 </li>
+<li>实例方法 **_asdict()**：把具名元组以 collections.OrderedDict 的形式返回，可以利用它来把元组里的信息友好的展示出来 </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 获取所有字段名</span></span><br><span class="line"><span class="built_in">print</span>(zlx._fields)</span><br><span class="line"><span class="comment"># -&gt; (&#x27;name&#x27;, &#x27;age&#x27;, &#x27;id&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取各个字段的值</span></span><br><span class="line"><span class="built_in">print</span>(zlx.name)</span><br><span class="line"><span class="built_in">print</span>(zlx.age)</span><br><span class="line"><span class="built_in">print</span>(zlx.<span class="built_in">id</span>)</span><br><span class="line"><span class="comment"># -&gt; zlx</span></span><br><span class="line"><span class="comment"># -&gt; 22</span></span><br><span class="line"><span class="comment"># -&gt; 123456</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改对象属性，注意要使用&quot;_replace&quot;方法</span></span><br><span class="line">zlx = zlx._replace(age=<span class="number">18</span>)</span><br><span class="line"><span class="built_in">print</span>(zlx)</span><br><span class="line"><span class="comment"># -&gt; User(name=&#x27;zlx&#x27;, age=18, id=&#x27;123456&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将User对象转换成字典，注意要使用&quot;_asdict&quot;</span></span><br><span class="line"><span class="built_in">print</span>(zlx._asdict())</span><br><span class="line"><span class="comment"># -&gt; &#123;&#x27;name&#x27;: &#x27;zlx&#x27;, &#x27;age&#x27;: 18, &#x27;id&#x27;: &#x27;123456&#x27;&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="5-有序字典-OrderedDict"><a href="#5-有序字典-OrderedDict" class="headerlink" title="5. 有序字典 OrderedDict"></a>5. 有序字典 OrderedDict</h1><ul>
 <li><p>python中的字典dict是无序的，即迭代遍历（键，值）的顺序可能和插入的顺序不一致，因为它是按照hash来存储的。 常规dict并不跟踪插入顺序，迭代处理会根据键在散列表中存储的顺序来生成值。在OrderDict中则相反，它会记住元素插入的顺序，并在创建迭代器时使用这个顺序。 </p>
 </li>
 <li><p>OrderedDict提供了一个有序的字典结构，内部维护这一个根据键插入顺序排序的双向链表，在迭代操作的时候保持了元素插入时的顺序。需要注意的是，一个OrderedDic的大小是一个普通字典的两倍，因为内部维护了另外一个链表，所有在数据量大的时候，如果不要求保持插入顺序，最好用普通字典。</p>
@@ -9677,29 +9700,38 @@ On 连接条件
 </li>
 <li><p>有序字典除具有普通字典的原始方法外，还提供了和顺序相关的操作，popitem(last=True)以LIFO方式弹出元素（last=False则以FIFO方式）；reversed(dict)返回一个逆序的orderedDict对象</p>
 </li>
-<li><p>```python<br>from collections import OrderedDict<br>d = {}<br>d[‘a’] = ‘A’<br>d[‘b’] = ‘B’<br>d[‘c’] = ‘C’<br>for k, v in d.items():</p>
-<pre><code>print(k, v)
+<li><pre><code class="python">from collections import OrderedDict
+d = &#123;&#125;
+d[&#39;a&#39;] = &#39;A&#39;
+d[&#39;b&#39;] = &#39;B&#39;
+d[&#39;c&#39;] = &#39;C&#39;
+for k, v in d.items():
+    print(k, v)
+b = &#123;&#125;
+b[&#39;a&#39;] = &#39;A&#39;
+b[&#39;c&#39;] = &#39;C&#39;
+b[&#39;b&#39;] = &#39;B&#39;
+for k, v in d.items():
+    print(k, v)
+print(d == b)   # True
+
+d = OrderedDict()
+d[&#39;a&#39;] = &#39;A&#39;
+d[&#39;b&#39;] = &#39;B&#39;
+d[&#39;c&#39;] = &#39;C&#39;
+for k, v in d.items():
+    print(k, v)
+b = OrderedDict()
+b[&#39;a&#39;] = &#39;A&#39;
+b[&#39;c&#39;] = &#39;C&#39;
+b[&#39;b&#39;] = &#39;B&#39;
+for k, v in d.items():
+    print(k, v)
+print(d == b)   # False
+
+print(d.popitem(last=True))
 </code></pre>
-<p>b = {}<br>b[‘a’] = ‘A’<br>b[‘c’] = ‘C’<br>b[‘b’] = ‘B’<br>for k, v in d.items():</p>
-<pre><code>print(k, v)
-</code></pre>
-<p>print(d == b)   # True</p>
-<p>d = OrderedDict()<br>d[‘a’] = ‘A’<br>d[‘b’] = ‘B’<br>d[‘c’] = ‘C’<br>for k, v in d.items():</p>
-<pre><code>print(k, v)
-</code></pre>
-<p>b = OrderedDict()<br>b[‘a’] = ‘A’<br>b[‘c’] = ‘C’<br>b[‘b’] = ‘B’<br>for k, v in d.items():</p>
-<pre><code>print(k, v)
-</code></pre>
-<p>print(d == b)   # False</p>
-<p>print(d.popitem(last=True))</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 5. 具名元组namedtuple</span><br><span class="line"></span><br><span class="line">- 普通元组的局限性： 不能为元组内部的数据进行命名，所以往往我们并不知道一个元组所要表达的意义 </span><br><span class="line"></span><br><span class="line">-  **namedtuple**： 引入了 **collections.namedtuple** 这个工厂函数，来构造一个带字段名的元组。具名元组的实例和普通元组消耗的内存一样多，因为字段名都被存在对应的类里面。这个类跟普通的对象实例比起来也要小一些，因为 Python 不会用 __dict__ 来存放这些实例的属性。</span><br><span class="line"></span><br><span class="line">- 定义格式：&lt;font color=&#x27;cornflowerblue&#x27;&gt;collections.namedtuple(typename, field_names, verbose=False, rename=False) &lt;/font&gt;</span><br><span class="line">  </span><br><span class="line">  -  **typename**：元组名称</span><br><span class="line">  -  **field_names**: 元组中元素的名称</span><br><span class="line">  -  **rename**: 如果元素名称中含有 python 的关键字，则必须设置为 rename=True</span><br><span class="line">  -  **verbose**: 默认就好</span><br><span class="line">  </span><br><span class="line">- 创建命名元组并实例化</span><br><span class="line"></span><br><span class="line">  ```python</span><br><span class="line">  # 创建一个具名元组，需要两个参数，一个是元组名，另一个是元组的各个字段名。</span><br><span class="line">  # 后者可以是有多个字符串组成的可迭代对象，或者是有空格分隔开的字段名组成的字符串</span><br><span class="line">  User = namedtuple(&#x27;User&#x27;, [&#x27;name&#x27;, &#x27;age&#x27;, &#x27;id&#x27;])</span><br><span class="line">  User = namedtuple(&#x27;User&#x27;, &#x27;name age id&#x27;)</span><br><span class="line">  # User是具名元组的变量名，&#x27;User&#x27;是具名元组的名称,一般相同</span><br><span class="line">  </span><br><span class="line">  zlx = User(&#x27;zlx&#x27;, &#x27;22&#x27;, &#x27;123456&#x27;)</span><br><span class="line">  print(zlx)</span><br></pre></td></tr></table></figure></li>
-<li><p>具名元组的特有属性</p>
-<ul>
-<li>类属性**_fields**： 包含这个类所有字段名的元组 </li>
-<li> 类方法 **_make(iterable)**：接受一个可迭代对象来生产这个类的实例 </li>
-<li> 实例方法 **_asdict()**：把具名元组以 collections.OrderedDict 的形式返回，可以利用它来把元组里的信息友好的展示出来 </li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 获取所有字段名</span></span><br><span class="line"><span class="built_in">print</span>(zlx._fields)</span><br><span class="line"><span class="comment"># -&gt; (&#x27;name&#x27;, &#x27;age&#x27;, &#x27;id&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取各个字段的值</span></span><br><span class="line"><span class="built_in">print</span>(zlx.name)</span><br><span class="line"><span class="built_in">print</span>(zlx.age)</span><br><span class="line"><span class="built_in">print</span>(zlx.<span class="built_in">id</span>)</span><br><span class="line"><span class="comment"># -&gt; zlx</span></span><br><span class="line"><span class="comment"># -&gt; 22</span></span><br><span class="line"><span class="comment"># -&gt; 123456</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改对象属性，注意要使用&quot;_replace&quot;方法</span></span><br><span class="line">zlx = zlx._replace(age=<span class="number">18</span>)</span><br><span class="line"><span class="built_in">print</span>(zlx)</span><br><span class="line"><span class="comment"># -&gt; User(name=&#x27;zlx&#x27;, age=18, id=&#x27;123456&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将User对象转换成字典，注意要使用&quot;_asdict&quot;</span></span><br><span class="line"><span class="built_in">print</span>(zlx._asdict())</span><br><span class="line"><span class="comment"># -&gt; &#123;&#x27;name&#x27;: &#x27;zlx&#x27;, &#x27;age&#x27;: 18, &#x27;id&#x27;: &#x27;123456&#x27;&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</li>
 </ul>
 ]]></content>
       <categories>
