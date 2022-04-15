@@ -9839,4 +9839,66 @@ print(d.popitem(last=True))
         <tag>容器</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Matlab学习笔记</title>
+    <url>/2022/04/15/Matlab%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="一、命名规则"><a href="#一、命名规则" class="headerlink" title="一、命名规则"></a>一、命名规则</h2><ul>
+<li>变量名区分大小写</li>
+<li>变量名长度不超过63位 (MATLAB R2012a 32bit和64bit计算机上测试结果)</li>
+<li>变量名以字母开头，可以由字母、数字和下划线组成,但不能使用标点</li>
+<li>变量名应简洁明了，通过变量名可以直观看出变量所表示的物理意义</li>
+</ul>
+<ul>
+<li>clear all：除Workspace中所有的变量</li>
+<li>clc ：清除Command Window中的所有命令</li>
+<li>注释：%%或%</li>
+</ul>
+<h2 id="二、数据类型"><a href="#二、数据类型" class="headerlink" title="二、数据类型"></a>二、数据类型</h2><h3 id="1-数字"><a href="#1-数字" class="headerlink" title="1. 数字"></a>1. 数字</h3><ul>
+<li>rand：生成均匀分布的伪随机数，分布在（0~1）之间<ul>
+<li>rand(m, n)：生成m行n列的均匀分布的伪随机数</li>
+<li>rand(m, n, ‘double’)：生成指定精度的均匀分布的伪随机数，参数还可以是’single’</li>
+<li>rand(RandStream, m, n)利用指定的RandStream（随机种子）生成为随机数</li>
+</ul>
+</li>
+<li>randn：生成标准正态分布的伪随机数（均值为0，方差为1，语法同上）</li>
+<li>randi：生成均匀分布的伪随机数<ul>
+<li>randi(iMax)：在开区间(0，iMax)生成均匀分布的为随机整数</li>
+<li>randi(iMax)：在开区间(0, iMax)生成m*n型随机矩阵</li>
+<li>randi([iMin, iMax], m, n)：在开区间(iMin, iMax)生成m*n型随机矩阵</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-字符与字符串"><a href="#2-字符与字符串" class="headerlink" title="2. 字符与字符串"></a>2. 字符与字符串</h3><h3 id="3-矩阵"><a href="#3-矩阵" class="headerlink" title="3. 矩阵"></a>3. 矩阵</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A = [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>; <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>; <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]	<span class="comment">% 定义矩阵</span></span><br><span class="line">B = A&#x27;		<span class="comment">% 求矩阵的转置</span></span><br><span class="line">C = A(:)	<span class="comment">% 矩阵向量化（竖直方向）</span></span><br><span class="line">D = inv(A)	<span class="comment">% 求矩阵的逆矩阵</span></span><br><span class="line"></span><br><span class="line">E = <span class="built_in">zeros</span>(<span class="number">10</span>, <span class="number">5</span>, <span class="number">3</span>)	<span class="comment">% 创建10行5列全是0的3维矩阵</span></span><br><span class="line">E(:, :, <span class="number">1</span>) = <span class="built_in">rand</span>(<span class="number">10</span>, <span class="number">5</span>)</span><br><span class="line">E(:, :, <span class="number">2</span>) = randi([<span class="number">3</span>, <span class="number">8</span>], <span class="number">10</span>, <span class="number">5</span>)</span><br><span class="line">E(:, :, <span class="number">3</span>) = <span class="built_in">randn</span>(<span class="number">10</span>, <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-元胞数组ceil"><a href="#4-元胞数组ceil" class="headerlink" title="4. 元胞数组ceil"></a>4. 元胞数组ceil</h3><ul>
+<li>元胞数组是MATLAB中特有的一种数据类型，是数组的一种，其内部元素可以是属于不同的数据类型，概念理解上，可以认为它和c语言里面的结构体、C++里面的对象很类似。元胞数组是matlab中的特色数据类型，它不同于其它数据类型(如字符型，字符数组或者叫字符串，以及一般的算术数据和数组)。它特有的存取数据方法决定了它的特点，它有给人一种查询信息的感觉，可以逐渐追踪一直到所有的变量全部翻译成基本的数据信息。它的class函数输出就是cell(细胞之意)。</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A = <span class="built_in">ceil</span>(<span class="number">1</span>, <span class="number">6</span>)	<span class="comment">% 生成一个1行5列的元胞数组</span></span><br><span class="line">A[<span class="number">2</span>] = <span class="built_in">eye</span>(<span class="number">3</span>)	<span class="comment">% 将一个3*3的单位矩阵赋值给元胞数组第2个盒子（注意：索引从1开始）</span></span><br><span class="line">A[<span class="number">5</span>] = <span class="built_in">magic</span>(<span class="number">5</span>)	<span class="comment">% 将一个5*5幻方矩阵赋值给元胞数组第5个盒子</span></span><br><span class="line">B = A[<span class="number">2</span>]		<span class="comment">% 将元胞数组第5个盒子取出</span></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<h3 id="5-结构体struct"><a href="#5-结构体struct" class="headerlink" title="5. 结构体struct"></a>5. 结构体struct</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">books = struct(<span class="string">&#x27;name&#x27;</span>, &#123;&#123;<span class="string">&#x27;Math&#x27;</span>, <span class="string">&#x27;English&#x27;</span>&#125;&#125;, <span class="string">&#x27;price&#x27;</span>, [<span class="number">30</span>, <span class="number">40</span>])</span><br><span class="line">books.name	<span class="comment">% 属性</span></span><br><span class="line">books.name(<span class="number">1</span>)	<span class="comment">% 取出的是ceil</span></span><br><span class="line">books.name&#123;<span class="number">1</span>&#125;	<span class="comment">% 取出的是字符串</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="三、矩阵操作"><a href="#三、矩阵操作" class="headerlink" title="三、矩阵操作"></a>三、矩阵操作</h2><h3 id="1-矩阵定义与构造"><a href="#1-矩阵定义与构造" class="headerlink" title="1. 矩阵定义与构造"></a>1. 矩阵定义与构造</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A = [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>; <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>; <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]</span><br><span class="line">B = <span class="number">1</span>:<span class="number">2</span>:<span class="number">9</span>			<span class="comment">% 生成从1到9步长为2的一行多列矩阵</span></span><br><span class="line">C = <span class="built_in">repmat</span>(B, <span class="number">3</span>, <span class="number">2</span>)	<span class="comment">% 将矩阵B按照3行2列复制生成矩阵</span></span><br><span class="line">D = <span class="built_in">ones</span>(<span class="number">2</span>, <span class="number">4</span>)		<span class="comment">% 创建2行4列全是1的矩阵</span></span><br><span class="line">E = <span class="built_in">zeros</span>(<span class="number">10</span>, <span class="number">5</span>, <span class="number">3</span>)	<span class="comment">% 创建10行5列全是0的3维矩阵</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-矩阵的四则运算"><a href="#2-矩阵的四则运算" class="headerlink" title="2. 矩阵的四则运算"></a>2. 矩阵的四则运算</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">C = A + B</span><br><span class="line">D = A - B</span><br><span class="line">E = A * B</span><br><span class="line">F = A .* B	<span class="comment">% 对应项相乘</span></span><br><span class="line">G = A / B	<span class="comment">% 等价于A*inv(B)</span></span><br><span class="line">H = A ./ B	<span class="comment">% 对应项相除</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-矩阵下标"><a href="#3-矩阵下标" class="headerlink" title="3. 矩阵下标"></a>3. 矩阵下标</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">B = A(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">C = A(<span class="number">2</span>, :)</span><br><span class="line">D = A(:, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">[m, n] = <span class="built_in">find</span>(A &gt; <span class="number">20</span>)	<span class="comment">% 找到A中值大于20的索引值，m表示行索引，n表示列索引</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="四、程序结构"><a href="#四、程序结构" class="headerlink" title="四、程序结构"></a>四、程序结构</h2>]]></content>
+      <categories>
+        <category>《Matlab》</category>
+      </categories>
+      <tags>
+        <tag>Matlab</tag>
+      </tags>
+  </entry>
 </search>
