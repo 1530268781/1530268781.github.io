@@ -9827,7 +9827,7 @@ print(d.popitem(last=True))
 <p>​    将str按指定的一些分隔符进行分割，不保留分隔符</p>
 </li>
 <li><p><strong>re.split</strong>(‘(分割符1|分割符2|…)’, str)    或    <strong>re.split</strong>(r’([分割符1, 分割符2, …])’, str) </p>
-<p>​    将str按指定的一些分隔符进行分割，不保留分隔符</p>
+<p>​    将str按指定的一些分隔符进行分割，保留分隔符</p>
 </li>
 </ul>
 ]]></content>
@@ -9893,7 +9893,31 @@ print(d.popitem(last=True))
 
 
 
-<h2 id="四、程序结构"><a href="#四、程序结构" class="headerlink" title="四、程序结构"></a>四、程序结构</h2>]]></content>
+<h2 id="四、程序结构"><a href="#四、程序结构" class="headerlink" title="四、程序结构"></a>四、程序结构</h2><h3 id="1-for循环"><a href="#1-for循环" class="headerlink" title="1. for循环"></a>1. for循环</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> 循环变量 = 初值:步长:中值			<span class="comment">% 步长默认值为1</span></span><br><span class="line">	执行语句<span class="number">1</span></span><br><span class="line">	、、、</span><br><span class="line">	执行语句n</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-while循环"><a href="#2-while循环" class="headerlink" title="2. while循环"></a>2. while循环</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> 条件表达式</span><br><span class="line">	执行语句<span class="number">1</span></span><br><span class="line">	、、、</span><br><span class="line">	执行语句<span class="number">2</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-if分支结构"><a href="#3-if分支结构" class="headerlink" title="3. if分支结构"></a>3. if分支结构</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if 条件表达式</span><br><span class="line">	语句体</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">if 条件表达式</span><br><span class="line">	语句体1</span><br><span class="line">else</span><br><span class="line">	语句体2</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="五、基本绘图操作"><a href="#五、基本绘图操作" class="headerlink" title="五、基本绘图操作"></a>五、基本绘图操作</h2><h3 id="1-二维平面绘图"><a href="#1-二维平面绘图" class="headerlink" title="1. 二维平面绘图"></a>1. 二维平面绘图</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">x = <span class="number">0</span>:<span class="number">0.01</span>:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">y = <span class="built_in">sin</span>(x);</span><br><span class="line"><span class="built_in">figure</span>  <span class="comment">% 建立一个幕布</span></span><br><span class="line"><span class="built_in">plot</span>(x,y)   <span class="comment">% 绘图</span></span><br><span class="line">title(<span class="string">&#x27;y=sin(x)&#x27;</span>)   <span class="comment">% 标题</span></span><br><span class="line">xlabel(<span class="string">&#x27;x&#x27;</span>) <span class="comment">% x轴标签</span></span><br><span class="line">ylabel(<span class="string">&#x27;sin(x)&#x27;</span>)    <span class="comment">% y轴标签</span></span><br><span class="line">xlim([<span class="number">0</span> <span class="number">2</span>*<span class="built_in">pi</span>])  <span class="comment">% x轴取值范围</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/15/Matlab%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1650249994373.png" alt="1650249994373"></p>
+<h3 id="2-绘制双Y曲线"><a href="#2-绘制双Y曲线" class="headerlink" title="2. 绘制双Y曲线"></a>2. 绘制双Y曲线</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 绘制双y曲线</span></span><br><span class="line">x = <span class="number">0</span>:<span class="number">0.01</span>:<span class="number">20</span>;</span><br><span class="line">y1 = <span class="number">200</span>*<span class="built_in">exp</span>(<span class="number">-0.05</span>*x).*<span class="built_in">sin</span>(x);   <span class="comment">% *是矩阵相乘，.*是矩阵对应项相乘</span></span><br><span class="line">y2 = <span class="number">0.8</span>*<span class="built_in">exp</span>(<span class="number">-0.5</span>*x).*<span class="built_in">sin</span>(<span class="number">10</span>*x);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span></span><br><span class="line">title(<span class="string">&#x27;Mutiple Decay Rates&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;Time (\musec)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">yyaxis left</span><br><span class="line"><span class="built_in">plot</span>(x,y1)</span><br><span class="line">ylabel(<span class="string">&#x27;Slow Decay&#x27;</span>)</span><br><span class="line"></span><br><span class="line">yyaxis right</span><br><span class="line"><span class="built_in">plot</span>(x,y2)</span><br><span class="line">ylabel(<span class="string">&#x27;Fast Decay&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/15/Matlab%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1650250039875.png" alt="1650250039875"></p>
+<h3 id="3-三维绘图"><a href="#3-三维绘图" class="headerlink" title="3. 三维绘图"></a>3. 三维绘图</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">t = <span class="number">0</span>:<span class="built_in">pi</span>/<span class="number">50</span>:<span class="number">10</span>*<span class="built_in">pi</span>;</span><br><span class="line"><span class="built_in">plot3</span>(<span class="built_in">sin</span>(t),<span class="built_in">cos</span>(t),t)</span><br><span class="line">xlabel(<span class="string">&#x27;sin(t)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;cos(t)&#x27;</span>)</span><br><span class="line">zlabel(<span class="string">&#x27;t&#x27;</span>)</span><br><span class="line">grid on     <span class="comment">% 打开网格</span></span><br><span class="line">axis square</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/15/Matlab%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1650250188559.png" alt="1650250188559"></p>
+<h3 id="4-双峰函数"><a href="#4-双峰函数" class="headerlink" title="4. 双峰函数"></a>4. 双峰函数</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">[x,y,z] = peaks(<span class="number">30</span>);</span><br><span class="line">mesh(x,y,z)</span><br><span class="line">grid on</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/15/Matlab%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1650250259611.png" alt="1650250259611"></p>
+]]></content>
       <categories>
         <category>《Matlab》</category>
       </categories>
