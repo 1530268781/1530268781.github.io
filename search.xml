@@ -10893,7 +10893,7 @@ print(d.popitem(last=True))
 
 
 
-<h1 id="14-函数式编程"><a href="#14-函数式编程" class="headerlink" title="14. 函数式编程"></a>14. 函数式编程</h1><ul>
+<h2 id="14-函数式编程"><a href="#14-函数式编程" class="headerlink" title="14. 函数式编程"></a>14. 函数式编程</h2><ul>
 <li><p>定义：用一系列函数解决问题。</p>
 <ul>
 <li>函数可以<strong>赋值给变量</strong>，赋值后变量绑定函数。</li>
@@ -10911,74 +10911,117 @@ print(d.popitem(last=True))
 
 
 
-<h4 id="（1）lambda-表达式"><a href="#（1）lambda-表达式" class="headerlink" title="（1）lambda 表达式"></a>（1）lambda 表达式</h4><p>(1) 定义：是一种匿名方法</p>
-<p>(2) 作用：</p>
-<p>– 作为参数传递时语法简洁，优雅，代码可读性强。</p>
-<p>– 随时创建和销毁，减少程序耦合度。</p>
-<p>(3) 语法</p>
+<h4 id="（1）lambda-表达式"><a href="#（1）lambda-表达式" class="headerlink" title="（1）lambda 表达式"></a>（1）lambda 表达式</h4><p>​    <a href="/2022/02/19/Python-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="Python-lambda表达式">Python-lambda表达式</a></p>
+<ul>
+<li>定义：是一种匿名方法</li>
+</ul>
+<ul>
+<li><p>作用：</p>
+<ul>
+<li>作为参数传递时语法简洁，优雅，代码可读性强。</li>
+<li>随时创建和销毁，减少程序耦合度。</li>
+</ul>
+</li>
+<li><p>语法</p>
+</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定义：</span></span><br><span class="line">变量 = <span class="keyword">lambda</span> 形参: 方法体</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用：</span></span><br><span class="line">变量(实参)</span><br></pre></td></tr></table></figure>
 
-<p>(4) 说明：</p>
-<p>– 形参没有可以不填</p>
-<p>– 方法体只能有一条语句，且不支持赋值语句。</p>
+<ul>
+<li>说明：<ul>
+<li>形参没有可以不填</li>
+<li>方法体只能有一条语句，且不支持赋值语句。</li>
+</ul>
+</li>
+</ul>
 <p>(5) 演示：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> common.iterable_tools <span class="keyword">import</span> IterableHelper</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义函数,在列表中查找所有大于100的数</span></span><br><span class="line"><span class="comment"># def condition01(number):</span></span><br><span class="line"><span class="comment">#     return number &gt; 100</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义函数,在列表中查找所有偶数</span></span><br><span class="line"><span class="comment"># def condition02(number):</span></span><br><span class="line"><span class="comment">#     return number % 2 == 0</span></span><br><span class="line"></span><br><span class="line">list01 = [<span class="number">342</span>, <span class="number">4</span>, <span class="number">54</span>, <span class="number">56</span>, <span class="number">6776</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> IterableHelper.find_all(list01,<span class="keyword">lambda</span> number: number &gt; <span class="number">100</span>):</span><br><span class="line">    <span class="built_in">print</span>(item)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> IterableHelper.find_all(list01,<span class="keyword">lambda</span> number: number % <span class="number">2</span> == <span class="number">0</span>):</span><br><span class="line">    <span class="built_in">print</span>(item)</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="5-1-2-内置高阶函数"><a href="#5-1-2-内置高阶函数" class="headerlink" title="5.1.2 内置高阶函数"></a>5.1.2 内置高阶函数</h3><p>(1) map（函数，可迭代对象）：使用可迭代对象中的每个元素调用函数，将返回值作为新可迭代对象元素；返回值为新可迭代对象。</p>
-<p>(2) filter(函数，可迭代对象)：根据条件筛选可迭代对象中的元素，返回值为新可迭代对象。</p>
-<p>(3) sorted(可迭代对象，key = 函数,reverse = bool值)：排序，返回值为排序结果。</p>
-<p>(4) max(可迭代对象，key = 函数)：根据函数获取可迭代对象的最大值。</p>
-<p>(5) min(可迭代对象，key = 函数)：根据函数获取可迭代对象的最小值。</p>
-<p>(6) 演示：</p>
+<h4 id="（2）内置高阶函数"><a href="#（2）内置高阶函数" class="headerlink" title="（2）内置高阶函数"></a>（2）内置高阶函数</h4><ul>
+<li>map（函数，可迭代对象）：使用可迭代对象中的每个元素调用函数，将返回值作为新可迭代对象元素；返回值为新可迭代对象。</li>
+</ul>
+<ul>
+<li>filter(函数，可迭代对象)：根据条件筛选可迭代对象中的元素，返回值为新可迭代对象。</li>
+</ul>
+<ul>
+<li>sorted(可迭代对象，key = 函数, reverse = bool值)：排序，返回值为排序结果。</li>
+</ul>
+<ul>
+<li>max(可迭代对象，key = 函数)：根据函数获取可迭代对象的最大值。</li>
+</ul>
+<ul>
+<li>min(可迭代对象，key = 函数)：根据函数获取可迭代对象的最小值。</li>
+</ul>
+<ul>
+<li>演示：</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, eid, did, name, money</span>):</span></span><br><span class="line">        self.eid = eid  <span class="comment"># 员工编号</span></span><br><span class="line">        self.did = did  <span class="comment"># 部门编号</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.money = money</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 员工列表</span></span><br><span class="line">list_employees = [</span><br><span class="line">    Employee(<span class="number">1001</span>, <span class="number">9002</span>, <span class="string">&quot;师父&quot;</span>, <span class="number">60000</span>),</span><br><span class="line">    Employee(<span class="number">1002</span>, <span class="number">9001</span>, <span class="string">&quot;孙悟空&quot;</span>, <span class="number">50000</span>),</span><br><span class="line">    Employee(<span class="number">1003</span>, <span class="number">9002</span>, <span class="string">&quot;猪八戒&quot;</span>, <span class="number">20000</span>),</span><br><span class="line">    Employee(<span class="number">1004</span>, <span class="number">9001</span>, <span class="string">&quot;沙僧&quot;</span>, <span class="number">30000</span>),</span><br><span class="line">    Employee(<span class="number">1005</span>, <span class="number">9001</span>, <span class="string">&quot;小白龙&quot;</span>, <span class="number">15000</span>),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. map 映射</span></span><br><span class="line"><span class="comment"># 需求:获取所有员工姓名</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> <span class="built_in">map</span>(<span class="keyword">lambda</span> item: item.name, list_employees):</span><br><span class="line">    <span class="built_in">print</span>(item)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. filter 过滤器</span></span><br><span class="line"><span class="comment"># 需求：查找所有部门是9002的员工</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> <span class="built_in">filter</span>(<span class="keyword">lambda</span> item: item.did == <span class="number">9002</span>, list_employees):</span><br><span class="line">    <span class="built_in">print</span>(item.__dict__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. max min 最值</span></span><br><span class="line">emp = <span class="built_in">max</span>(list_employees, key=<span class="keyword">lambda</span> emp: emp.money)</span><br><span class="line"><span class="built_in">print</span>(emp.__dict__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. sorted</span></span><br><span class="line"><span class="comment"># 升序排列</span></span><br><span class="line">new_list = <span class="built_in">sorted</span>(list_employees, key=<span class="keyword">lambda</span> emp: emp.money)</span><br><span class="line"><span class="built_in">print</span>(new_list)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 降序排列</span></span><br><span class="line">new_list = <span class="built_in">sorted</span>(list_employees, key=<span class="keyword">lambda</span> emp: emp.money, reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(new_list)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>练习：</p>
-<p>– 在商品列表，获取所有名称与单价</p>
-<p>– 在商品列表中，获取所有单价小于10000的商品</p>
-<p>– 对商品列表，根据单价进行降序排列</p>
-<p>– 获取元组中长度最大的列表  ([1,1],[2,2,2],[3,3,3])</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Commodity</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, cid=<span class="number">0</span>, name=<span class="string">&quot;&quot;</span>, price=<span class="number">0</span></span>):</span></span><br><span class="line">    	self.cid = cid</span><br><span class="line">        self.name = name</span><br><span class="line">        self.price = price</span><br><span class="line"></span><br><span class="line">list_commodity_infos = [</span><br><span class="line">  Commodity(<span class="number">1001</span>, <span class="string">&quot;屠龙刀&quot;</span>, <span class="number">10000</span>),</span><br><span class="line">  Commodity(<span class="number">1002</span>, <span class="string">&quot;倚天剑&quot;</span>, <span class="number">10000</span>),</span><br><span class="line">  Commodity(<span class="number">1003</span>, <span class="string">&quot;金箍棒&quot;</span>, <span class="number">52100</span>),</span><br><span class="line">  Commodity(<span class="number">1004</span>, <span class="string">&quot;口罩&quot;</span>, <span class="number">20</span>),</span><br><span class="line">  Commodity(<span class="number">1005</span>, <span class="string">&quot;酒精&quot;</span>, <span class="number">30</span>),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
 
-
-<h2 id="5-2-函数作为返回值"><a href="#5-2-函数作为返回值" class="headerlink" title="5.2 函数作为返回值"></a>5.2 函数作为返回值</h2><p>逻辑连续，当内部函数被调用时，不脱离当前的逻辑。</p>
-<h3 id="5-2-1-闭包"><a href="#5-2-1-闭包" class="headerlink" title="5.2.1 闭包"></a>5.2.1 闭包</h3><p>(1) 三要素：</p>
-<p>– 必须有一个内嵌函数。</p>
-<p>– 内嵌函数必须引用外部函数中变量。</p>
-<p>– 外部函数返回值必须是内嵌函数。</p>
-<p>(2) 语法</p>
+<h3 id="14-2-函数作为返回值"><a href="#14-2-函数作为返回值" class="headerlink" title="14.2 函数作为返回值"></a>14.2 函数作为返回值</h3><p>逻辑连续，当内部函数被调用时，不脱离当前的逻辑。</p>
+<h4 id="（1）闭包"><a href="#（1）闭包" class="headerlink" title="（1）闭包"></a>（1）<font color="red">闭包</font></h4><ul>
+<li><p>三要素：</p>
+<ul>
+<li>必须有一个内嵌函数。</li>
+<li>内嵌函数必须引用外部函数中变量。</li>
+<li>外部函数返回值必须是内嵌函数。</li>
+</ul>
+</li>
+<li><p>语法</p>
+</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定义：</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> 外部函数名(<span class="params">参数</span>):</span></span><br><span class="line">    外部变量</span><br><span class="line">    <span class="function"><span class="keyword">def</span> 内部函数名(<span class="params">参数</span>):</span></span><br><span class="line">        使用外部变量</span><br><span class="line">    <span class="keyword">return</span> 内部函数名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用：</span></span><br><span class="line">变量 = 外部函数名(参数)</span><br><span class="line">变量(参数)</span><br></pre></td></tr></table></figure>
 
-<p>(3) 定义：是由函数及其相关的引用环境组合而成的实体。 </p>
-<p>(4) 优点：内部函数可以使用外部变量。</p>
-<p>(5) 缺点：外部变量一直存在于内存中，不会在调用结束后释放，占用内存。</p>
-<p>(6) 作用：实现python装饰器。</p>
+<ul>
+<li><p>定义：是由函数及其相关的引用环境组合而成的实体。 </p>
+</li>
+<li><p>优点：内部函数可以使用外部变量。</p>
+</li>
+</ul>
+<ul>
+<li>缺点：外部变量一直存在于内存中，不会在调用结束后释放，占用内存。</li>
+</ul>
+<ul>
+<li><p>作用：实现python装饰器。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 装饰器</span></span><br><span class="line"><span class="comment"># 定义：</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> 函数装饰器名称(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> 内部函数名(<span class="params">*args, **kwarg</span>):</span></span><br><span class="line">        需要添加的新功能</span><br><span class="line">        <span class="keyword">return</span> func</span><br><span class="line">    <span class="keyword">return</span> 内部函数名</span><br><span class="line"></span><br><span class="line"><span class="meta">@ 函数装饰器名称</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> 被装饰函数名():</span></span><br><span class="line">	原来的功能</span><br></pre></td></tr></table></figure></li>
+</ul>
 <p>(7) 演示：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">give_gife_money</span>(<span class="params">money</span>):</span>  </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;获得&quot;</span>, money, <span class="string">&quot;元压岁钱&quot;</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">child_buy</span>(<span class="params">commodity, price</span>):</span> </span><br><span class="line">        <span class="keyword">nonlocal</span> money</span><br><span class="line">        money -= price</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;购买了&quot;</span>, commodity, <span class="string">&quot;花了&quot;</span>, price, <span class="string">&quot;元,还剩下&quot;</span>, money)</span><br><span class="line">    <span class="keyword">return</span> child_buy</span><br><span class="line"></span><br><span class="line">action = give_gife_money(<span class="number">500</span>)</span><br><span class="line">action(<span class="string">&quot;变形金刚&quot;</span>, <span class="number">200</span>)</span><br><span class="line">action(<span class="string">&quot;芭比娃娃&quot;</span>, <span class="number">300</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">give_gife_money</span>(<span class="params">money</span>):</span>  </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;获得&quot;</span>, money, <span class="string">&quot;元压岁钱&quot;</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">child_buy</span>(<span class="params">commodity, price</span>):</span> </span><br><span class="line">        <span class="keyword">nonlocal</span> money		<span class="comment"># 在内层函数修改外层嵌套函数内的变量</span></span><br><span class="line">        money -= price</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;购买了&quot;</span>, commodity, <span class="string">&quot;花了&quot;</span>, price, <span class="string">&quot;元,还剩下&quot;</span>, money)</span><br><span class="line">    <span class="keyword">return</span> child_buy</span><br><span class="line"></span><br><span class="line">action = give_gife_money(<span class="number">500</span>)	<span class="comment"># 返回值是一个函数child_buy</span></span><br><span class="line">action(<span class="string">&quot;变形金刚&quot;</span>, <span class="number">200</span>)</span><br><span class="line">action(<span class="string">&quot;芭比娃娃&quot;</span>, <span class="number">300</span>)</span><br></pre></td></tr></table></figure>
 
-<p>练习：使用闭包模拟以下情景：</p>
-<p>在银行开户存入10000</p>
-<p> 购买xx商品花了xx元</p>
-<p> 购买xx商品花了xx元</p>
-<h3 id="5-2-2-函数装饰器decorator"><a href="#5-2-2-函数装饰器decorator" class="headerlink" title="5.2.2 函数装饰器decorator"></a>5.2.2 函数装饰器decorator</h3><p>(1)  定义：在不改变原函数的调用以及内部代码情况下，为其添加新功能的函数。</p>
-<p>(2)  语法</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> 函数装饰器名称(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">        需要添加的新功能</span><br><span class="line">        <span class="keyword">return</span> func(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@ 函数装饰器名称</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> 原函数名称(<span class="params">参数</span>):</span></span><br><span class="line">    函数体</span><br><span class="line"></span><br><span class="line">原函数(参数)</span><br></pre></td></tr></table></figure>
 
-<p>(3) 本质：使用“@函数装饰器名称”修饰原函数，等同于创建与原函数名称相同的变量，关联内嵌函数；故调用原函数时执行内嵌函数。</p>
-<p>​        原函数名称 = 函数装饰器名称（原函数名称）</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func01</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;旧功能&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">new_func</span>(<span class="params">func</span>):</span> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>():</span>  </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;新功能&quot;</span>)</span><br><span class="line">        func() <span class="comment"># 执行旧功能</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新功能覆盖了旧功能</span></span><br><span class="line"><span class="comment"># func01 = new_func</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用一次外部函数(装饰器本质)</span></span><br><span class="line">func01 = new_func(func01)</span><br><span class="line"><span class="comment"># 调用多次内部函数</span></span><br><span class="line">func01()</span><br><span class="line">func01()</span><br></pre></td></tr></table></figure>
 
-<p>(3)   装饰器链：</p>
+<h4 id="（2）函数装饰器decorator"><a href="#（2）函数装饰器decorator" class="headerlink" title="（2）函数装饰器decorator"></a>（2）<font color="red">函数装饰器decorator</font></h4><ul>
+<li> 定义：在不改变原函数的调用以及内部代码情况下，为其添加新功能的函数。</li>
+</ul>
+<ul>
+<li>语法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> 函数装饰器名称(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>(<span class="params">*args, **kwargs</span>):</span>	<span class="comment">#星号元组形参，双星号字典形参</span></span><br><span class="line">        需要添加的新功能</span><br><span class="line">        <span class="keyword">return</span> func(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@ 函数装饰器名称</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> 原函数名称(<span class="params">参数</span>):</span></span><br><span class="line">    函数体</span><br><span class="line"></span><br><span class="line">原函数(参数)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>本质：使用“<font color="orange">@函数装饰器名称</font>”修饰原函数，<font color="orange">等同于创建与原函数名称相同的变量，关联内嵌函数</font>；故调用原函数时执行内嵌函数。</li>
+</ul>
+<p>​        <font color="red">原函数名称 = 函数装饰器名称（原函数名称）</font></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func01</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;旧功能&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">new_func</span>(<span class="params">func</span>):</span> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>():</span>  </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;新功能&quot;</span>)</span><br><span class="line">        func() <span class="comment"># 执行旧功能</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新功能覆盖了旧功能（没有将func01作为参数传入new_func）</span></span><br><span class="line"><span class="comment"># func01 = new_func</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用一次外部函数(装饰器本质)</span></span><br><span class="line">func01 = new_func(func01)</span><br><span class="line"><span class="comment"># 调用多次内部函数</span></span><br><span class="line">func01()</span><br><span class="line">func01()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>装饰器链：</p>
 <p>一个函数可以被多个装饰器修饰，执行顺序为从近到远。</p>
-<p>练习1：不改变插入函数与删除函数代码，为其增加验证权限的功能</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">verify_permissions</span>():</span> </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;验证权限&quot;</span>) </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert</span>():</span> </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;插入&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;删除&quot;</span>)</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">insert()</span><br><span class="line">delete()</span><br></pre></td></tr></table></figure>
-
-<p>练习2：为sum_data,增加打印函数执行时间的功能.</p>
-<p>​    函数执行时间公式： 执行后时间 - 执行前时间</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum_data</span>(<span class="params">n</span>):</span></span><br><span class="line">    sum_value = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> number <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        sum_value += number</span><br><span class="line">    <span class="keyword">return</span> sum_value </span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(sum_data(<span class="number">10</span>))</span><br><span class="line"><span class="built_in">print</span>(sum_data(<span class="number">1000000</span>))</span><br></pre></td></tr></table></figure>
-
+</li>
+</ul>
 ]]></content>
+      <categories>
+        <category>《Python》</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>面向对象</tag>
+        <tag>迭代器</tag>
+        <tag>生成器</tag>
+        <tag>装饰器</tag>
+      </tags>
   </entry>
 </search>
