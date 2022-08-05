@@ -11506,7 +11506,7 @@ print(d.popitem(last=True))
 <li> sockfd.setsockopt(level,option,value)</li>
 <li>功能：设置套接字选项</li>
 <li>参数： level  选项类别   SOL_SOCKET<pre><code>        option 具体选项内容
-        value  选项值
+          value  选项值
 </code></pre>
 </li>
 </ul>
@@ -11575,7 +11575,7 @@ print(d.popitem(last=True))
 <ul>
 <li>响应体：响应的主体内容信息</li>
 </ul>
-<h2 id="17-并发编程"><a href="#17-并发编程" class="headerlink" title="17. 并发编程"></a>17. 并发编程</h2>]]></content>
+<h2 id="17-并发编程"><a href="#17-并发编程" class="headerlink" title="17. 并发编程"></a>17. 并发编程</h2><h3 id="17-1-多任务编程"><a href="#17-1-多任务编程" class="headerlink" title="17.1 多任务编程"></a>17.1 多任务编程</h3>]]></content>
       <categories>
         <category>《Python》</category>
       </categories>
