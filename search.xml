@@ -11575,7 +11575,641 @@ print(d.popitem(last=True))
 <ul>
 <li>响应体：响应的主体内容信息</li>
 </ul>
-<h2 id="17-并发编程"><a href="#17-并发编程" class="headerlink" title="17. 并发编程"></a>17. 并发编程</h2><h3 id="17-1-多任务编程"><a href="#17-1-多任务编程" class="headerlink" title="17.1 多任务编程"></a>17.1 多任务编程</h3>]]></content>
+<h2 id="17-并发编程"><a href="#17-并发编程" class="headerlink" title="17. 并发编程"></a>17. 并发编程</h2><h3 id="17-1-多任务编程"><a href="#17-1-多任务编程" class="headerlink" title="17.1 多任务编程"></a>17.1 多任务编程</h3><ol>
+<li>意义： 充分利用计算机CPU的多核资源，同时处理多个应用程序任务，以此提高程序的运行效率。</li>
+<li>实现方案 ：多进程 ， 多线程</li>
+</ol>
+<h3 id="17-2-进程（process）"><a href="#17-2-进程（process）" class="headerlink" title="17.2 进程（process）"></a>17.2 进程（process）</h3><h4 id="（1）进程理论基础"><a href="#（1）进程理论基础" class="headerlink" title="（1）进程理论基础"></a>（1）进程理论基础</h4><ol>
+<li><h5 id="定义-：-程序在计算机中的一次运行。"><a href="#定义-：-程序在计算机中的一次运行。" class="headerlink" title="定义 ： 程序在计算机中的一次运行。"></a>定义 ： 程序在计算机中的一次运行。</h5><ul>
+<li>程序是一个可执行的文件，是静态的占有磁盘。</li>
+<li>进程是一个动态的过程描述，占有计算机运行资源，有一定的生命周期。</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><h5 id="系统中如何产生一个进程"><a href="#系统中如何产生一个进程" class="headerlink" title="系统中如何产生一个进程"></a>系统中如何产生一个进程</h5><p>【1】 用户空间通过调用程序接口或者命令发起请求<br>【2】 操作系统接收用户请求，开始创建进程<br>【3】 操作系统调配计算机资源，确定进程状态等<br>【4】 操作系统将创建的进程提供给用户使用</p>
+</li>
+</ol>
+<p><img src="/2022/06/27/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/linux.png"></p>
+<ol start="3">
+<li><h5 id="进程基本概念"><a href="#进程基本概念" class="headerlink" title="进程基本概念"></a>进程基本概念</h5></li>
+</ol>
+<ul>
+<li><p>cpu时间片：如果一个进程占有<strong>cpu内核</strong>则称这个进程在cpu时间片上。</p>
+</li>
+<li><p>PCB(进程控制块)：在内存中开辟的一块空间，用于存放<strong>进程的基本信息</strong>，也用于系统查找识别进程。</p>
+</li>
+<li><p>进程ID（PID）： 系统为每个进程分配的一个大于0的整数，作为进程ID。每个进程ID不重复。</p>
+<blockquote>
+<p>Linux查看进程ID ： ps -aux</p>
+</blockquote>
+</li>
+<li><p>父子进程 ： 系统中每一个进程(除了系统初始化进程)都有唯一的父进程，可以有0个或多个子进程。父子进程关系便于进程管理。</p>
+<blockquote>
+<p>查看进程树： pstree</p>
+</blockquote>
+</li>
+<li><p>进程状态</p>
+<ul>
+<li>三态<br>就绪态 ： 进程具备执行条件，等待分配cpu资源<br>运行态 ： 进程占有cpu时间片正在运行<br>等待态 ： 进程暂时停止运行，让出cpu</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/06/27/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/4_3%E6%80%81.png"></p>
+<ul>
+<li>五态 (在三态基础上增加新建和终止)<br>新建 ： 创建一个进程，获取资源的过程<br>终止 ： 进程结束，释放资源的过程</li>
+</ul>
+<p><img src="/2022/06/27/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/4_5%E6%80%81.png"></p>
+<ul>
+<li>状态查看命令 ： ps -aux  –&gt; STAT列</li>
+</ul>
+<blockquote>
+<pre><code>           S 等待态
+           R 执行态
+           Z 僵尸
+
+           \+ 前台进程
+           l   有多线程的
+</code></pre>
+</blockquote>
+<ul>
+<li>进程的运行特征<br>【1】 多进程可以更充分使用计算机多核资源<br>【2】 进程之间的运行互不影响，各自独立<br>【3】 每个进程拥有独立的空间，各自使用自己空间资源</li>
+</ul>
+<h3 id="17-3-基于fork的多进程编程"><a href="#17-3-基于fork的多进程编程" class="headerlink" title="17.3 基于fork的多进程编程"></a>17.3 基于fork的多进程编程</h3><h4 id="（1）fork使用"><a href="#（1）fork使用" class="headerlink" title="（1）fork使用"></a>（1）fork使用</h4><blockquote>
+<p>pid = os.fork()<br>    功能： 创建新的进程<br>    返回值：整数，如果创建进程失败返回一个负数，如果成功则在原有进程中返回新进程的PID，在新进程中返回0</p>
+</blockquote>
+<blockquote>
+<p>注意</p>
+<blockquote>
+<ul>
+<li>子进程会复制父进程全部内存空间，从fork下一句开始执行。</li>
+<li>父子进程各自独立运行，运行顺序不一定。</li>
+<li>利用父子进程fork返回值的区别，配合if结构让父子进程执行不同的内容几乎是固定搭配。</li>
+<li>父子进程有各自特有特征比如PID PCB 命令集等。</li>
+<li>父进程fork之前开辟的空间子进程同样拥有，父子进程对各自空间的操作不会相互影响。</li>
+</ul>
+</blockquote>
+</blockquote>
+<h4 id="（2）进程相关函数"><a href="#（2）进程相关函数" class="headerlink" title="（2）进程相关函数"></a>（2）进程相关函数</h4><blockquote>
+<p>os.getpid()<br>       功能： 获取一个进程的PID值<br>       返回值： 返回当前进程的PID </p>
+</blockquote>
+<blockquote>
+<p>os.getppid()<br>       功能： 获取父进程的PID号<br>       返回值： 返回父进程PID</p>
+</blockquote>
+<blockquote>
+<p>os._exit(status)<br>       功能: 结束一个进程<br>       参数：进程的终止状态</p>
+</blockquote>
+<blockquote>
+<p>sys.exit([status])<br>       功能：退出进程<br>       参数：整数 表示退出状态<br>                   字符串 表示退出时打印内容</p>
+</blockquote>
+<h4 id="（3）孤儿和僵尸"><a href="#（3）孤儿和僵尸" class="headerlink" title="（3）孤儿和僵尸"></a>（3）孤儿和僵尸</h4><ol>
+<li>孤儿进程 ： 父进程先于子进程退出，此时子进程成为孤儿进程。</li>
+</ol>
+<blockquote>
+<p>特点： 孤儿进程会被系统进程收养，此时系统进程就会成为孤儿进程新的父进程，孤儿进程退出该进程会自动处理。</p>
+</blockquote>
+<ol start="2">
+<li>僵尸进程 ： 子进程先于父进程退出，父进程又没有处理子进程的退出状态，此时子进程就会称为僵尸进程。</li>
+</ol>
+<blockquote>
+<p>特点： 僵尸进程虽然结束，但是会存留部分PCB在内存中，大量的僵尸进程会浪费系统的内存资源。</p>
+</blockquote>
+<ol start="3">
+<li>如何避免僵尸进程产生</li>
+</ol>
+<ul>
+<li>使用wait函数处理子进程退出</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pid,status = os.wait()</span><br><span class="line">功能：在父进程中阻塞等待处理子进程退出</span><br><span class="line">返回值： pid  退出的子进程的PID</span><br><span class="line">		status  子进程退出状态</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>创建二级子进程处理僵尸</p>
+<p>【1】 父进程创建子进程，等待回收子进程<br>【2】 子进程创建二级子进程然后退出<br>【3】 二级子进程称为孤儿，和原来父进程一同执行事件</p>
+</li>
+</ul>
+<ul>
+<li><p>通过信号处理子进程退出</p>
+<blockquote>
+<p>原理： 子进程退出时会发送信号给父进程，如果父进程忽略子进程信号，则系统就会自动处理子进程退出。</p>
+</blockquote>
+<blockquote>
+<p>方法： 使用signal模块在父进程创建子进程前写如下语句 ：</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> signal</span><br><span class="line">signal.signal(signal.SIGCHLD,signal.SIG_IGN)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>特点 ： 非阻塞，不会影响父进程运行。可以处理所有子进程退出</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="（4）群聊聊天室"><a href="#（4）群聊聊天室" class="headerlink" title="（4）群聊聊天室"></a>（4）群聊聊天室</h4><blockquote>
+<p>功能 ： 类似qq群功能<br>【1】 有人进入聊天室需要输入姓名，姓名不能重复<br>【2】 有人进入聊天室时，其他人会收到通知：xxx 进入了聊天室<br>【3】 一个人发消息，其他人会收到：xxx ： xxxxxxxxxxx<br>【4】 有人退出聊天室，则其他人也会收到通知:xxx退出了聊天室<br>【5】 扩展功能：服务器可以向所有用户发送公告:管理员消息： xxxxxxxxx</p>
+</blockquote>
+<h3 id="17-4-multiprocessing-模块创建进程"><a href="#17-4-multiprocessing-模块创建进程" class="headerlink" title="17.4 multiprocessing 模块创建进程"></a>17.4 multiprocessing 模块创建进程</h3><h4 id="（1）进程创建方法"><a href="#（1）进程创建方法" class="headerlink" title="（1）进程创建方法"></a>（1）进程创建方法</h4><ol>
+<li><h5 id="流程特点"><a href="#流程特点" class="headerlink" title="流程特点"></a>流程特点</h5><p> 【1】 将需要子进程执行的事件封装为函数<br> 【2】 通过模块的Process类创建进程对象，关联函数<br> 【3】 可以通过进程对象设置进程信息及属性<br> 【4】 通过进程对象调用start启动进程<br> 【5】 通过进程对象调用join回收进程</p>
+</li>
+<li><h5 id="基本接口使用"><a href="#基本接口使用" class="headerlink" title="基本接口使用"></a>基本接口使用</h5></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">Process()</span><br><span class="line">功能 ： 创建进程对象</span><br><span class="line">参数 ： target 绑定要执行的目标函数 </span><br><span class="line">	args 元组，用于给target函数位置传参</span><br><span class="line">	kwargs 字典，给target函数键值传参</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">p.start()</span><br><span class="line">功能 ： 启动进程</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意:启动进程此时target绑定函数开始执行，该函数作为子进程执行内容，此时进程真正被创建</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">p.join([timeout])</span><br><span class="line">功能：阻塞等待回收进程</span><br><span class="line">参数：超时时间</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意</p>
+<blockquote>
+<ul>
+<li>使用multiprocessing创建进程同样是子进程复制父进程空间代码段，父子进程运行互不影响。</li>
+<li>子进程只运行target绑定的函数部分，其余内容均是父进程执行内容。</li>
+<li>multiprocessing中父进程往往只用来创建子进程、回收子进程，具体事件由子进程完成。</li>
+<li>multiprocessing创建的子进程中无法使用标准输入</li>
+</ul>
+</blockquote>
+</blockquote>
+<ol start="3">
+<li><h5 id="进程对象属性"><a href="#进程对象属性" class="headerlink" title="进程对象属性"></a>进程对象属性</h5></li>
+</ol>
+<blockquote>
+<p>p.name  进程名称</p>
+</blockquote>
+<blockquote>
+<p>p.pid   对应子进程的PID号</p>
+</blockquote>
+<blockquote>
+<p>p.is_alive() 查看子进程是否在生命周期</p>
+</blockquote>
+<blockquote>
+<p>p.daemon  设置父子进程的退出关系  </p>
+<blockquote>
+<ul>
+<li>如果设置为True则子进程会随父进程的退出而结束</li>
+<li>要求必须在start()前设置</li>
+<li>如果daemon设置成True 通常就不会使用 join()</li>
+</ul>
+</blockquote>
+</blockquote>
+<h4 id="（2）自定义进程类"><a href="#（2）自定义进程类" class="headerlink" title="（2）自定义进程类"></a>（2）自定义进程类</h4><ol>
+<li><h5 id="创建步骤"><a href="#创建步骤" class="headerlink" title="创建步骤"></a>创建步骤</h5><p>【1】 继承Process类<br>【2】 重写<code>__init__</code>方法添加自己的属性，使用super()加载父类属性<br>【3】 重写run()方法</p>
+</li>
+<li><h5 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h5><p>【1】 实例化对象<br>【2】 调用start自动执行run方法<br>【3】 调用join回收进程</p>
+</li>
+</ol>
+<h4 id="（3）进程池实现"><a href="#（3）进程池实现" class="headerlink" title="（3）进程池实现"></a>（3）进程池实现</h4><ol>
+<li><h5 id="必要性"><a href="#必要性" class="headerlink" title="必要性"></a>必要性</h5><p>   【1】 进程的创建和销毁过程消耗的资源较多<br>   【2】 当任务量众多，每个任务在很短时间内完成时，需要频繁的创建和销毁进程。此时对计算机压力较大<br>   【3】 进程池技术很好的解决了以上问题。</p>
+</li>
+<li><h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5></li>
+</ol>
+<blockquote>
+<p>创建一定数量的进程来处理事件，事件处理完进程不退出而是继续处理其他事件，直到所有事件全都处理完毕统一销毁。增加进程的重复利用，降低资源消耗。</p>
+</blockquote>
+<ol start="3">
+<li><h5 id="进程池实现过程"><a href="#进程池实现过程" class="headerlink" title="进程池实现过程"></a>进程池实现过程</h5></li>
+</ol>
+<p>【1】 创建进程池对象，放入适当的进程</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"></span><br><span class="line">Pool(processes)</span><br><span class="line">功能： 创建进程池对象</span><br><span class="line">参数： 指定进程数量，默认根据系统自动判定</span><br></pre></td></tr></table></figure>
+
+<p>【2】 将事件加入进程池队列执行</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pool.apply_async(func,args,kwds)</span><br><span class="line">功能: 使用进程池执行func事件</span><br><span class="line">参数： func 事件函数</span><br><span class="line">      args 元组  给func按位置传参</span><br><span class="line">      kwds 字典  给func按照键值传参</span><br><span class="line">返回值： 返回函数事件对象</span><br></pre></td></tr></table></figure>
+
+<p>【3】 关闭进程池</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pool.close()</span><br><span class="line">功能： 关闭进程池</span><br></pre></td></tr></table></figure>
+
+<p>【4】 回收进程池中进程</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pool.join()</span><br><span class="line">功能： 回收进程池中进程</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="17-5-进程间通信（IPC）"><a href="#17-5-进程间通信（IPC）" class="headerlink" title="17.5 进程间通信（IPC）"></a>17.5 进程间通信（IPC）</h3><ol>
+<li>必要性： 进程间<strong>空间独立，资源不共享</strong>，此时在需要进程间数据传输时就需要特定的手段进行数据通信。</li>
+</ol>
+<ol start="2">
+<li>常用进程间通信方法</li>
+</ol>
+<blockquote>
+<p>管道  消息队列  共享内存  信号  信号量  套接字 </p>
+</blockquote>
+<h4 id="（1）管道通信-Pipe"><a href="#（1）管道通信-Pipe" class="headerlink" title="（1）管道通信(Pipe)"></a>（1）管道通信(Pipe)</h4><ol>
+<li><h5 id="通信原理"><a href="#通信原理" class="headerlink" title="通信原理"></a>通信原理</h5></li>
+</ol>
+<blockquote>
+<p>在内存中开辟管道空间，生成管道操作对象，多个进程使用同一个管道对象进行读写即可实现通信</p>
+</blockquote>
+<ol start="2">
+<li><h5 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h5></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span>  multiprocessing <span class="keyword">import</span> Pipe</span><br><span class="line"></span><br><span class="line">fd1,fd2 = Pipe(duplex = <span class="literal">True</span>)</span><br><span class="line">功能: 创建管道</span><br><span class="line">参数：默认表示双向管道</span><br><span class="line">如果为<span class="literal">False</span> 表示单向管道</span><br><span class="line">返回值：表示管道两端的读写对象</span><br><span class="line">	  如果是双向管道均可读写</span><br><span class="line">	  如果是单向管道fd1只读  fd2只写</span><br><span class="line"></span><br><span class="line">fd.recv()</span><br><span class="line">功能 ： 从管道获取内容</span><br><span class="line">返回值：获取到的数据</span><br><span class="line"></span><br><span class="line">fd.send(data)</span><br><span class="line">功能： 向管道写入内容</span><br><span class="line">参数： 要写入的数据</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="（2）消息队列"><a href="#（2）消息队列" class="headerlink" title="（2）消息队列"></a>（2）消息队列</h4><ol>
+<li>通信原理</li>
+</ol>
+<blockquote>
+<p>在内存中建立队列模型，进程通过队列将消息存入，或者从队列取出完成进程间通信。</p>
+</blockquote>
+<ol start="2">
+<li>实现方法</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Queue</span><br><span class="line"></span><br><span class="line">q = Queue(maxsize=<span class="number">0</span>)</span><br><span class="line">功能: 创建队列对象</span><br><span class="line">参数：最多存放消息个数</span><br><span class="line">返回值：队列对象</span><br><span class="line"></span><br><span class="line">q.put(data,[block,timeout])</span><br><span class="line">功能：向队列存入消息</span><br><span class="line">参数：data  要存入的内容</span><br><span class="line">block  设置是否阻塞 <span class="literal">False</span>为非阻塞</span><br><span class="line">timeout  超时检测</span><br><span class="line"></span><br><span class="line">q.get([block,timeout])</span><br><span class="line">功能：从队列取出消息</span><br><span class="line">参数：block  设置是否阻塞 <span class="literal">False</span>为非阻塞</span><br><span class="line">timeout  超时检测</span><br><span class="line">返回值： 返回获取到的内容</span><br><span class="line"></span><br><span class="line">q.full()   判断队列是否为满</span><br><span class="line">q.empty()  判断队列是否为空</span><br><span class="line">q.qsize()  获取队列中消息个数</span><br><span class="line">q.close()  关闭队列</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="（3）共享内存"><a href="#（3）共享内存" class="headerlink" title="（3）共享内存"></a>（3）共享内存</h4><ol>
+<li><h5 id="通信原理："><a href="#通信原理：" class="headerlink" title="通信原理："></a>通信原理：</h5><p>在内中开辟一块空间，进程可以写入内容和读取内容完成通信，但是每次写入内容会覆盖之前内容。</p>
+</li>
+<li><h5 id="实现方法-1"><a href="#实现方法-1" class="headerlink" title="实现方法"></a>实现方法</h5></li>
+</ol>
+<p><img src="/2022/06/27/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/6_ctype.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Value,Array</span><br><span class="line"></span><br><span class="line">obj = Value(ctype,data)</span><br><span class="line">功能 ： 开辟共享内存</span><br><span class="line">参数 ： ctype  表示共享内存空间类型 <span class="string">&#x27;i&#x27;</span>  <span class="string">&#x27;f&#x27;</span>  <span class="string">&#x27;c&#x27;</span></span><br><span class="line">       data   共享内存空间初始数据</span><br><span class="line">返回值：共享内存对象</span><br><span class="line"></span><br><span class="line">obj.value  对该属性的修改查看即对共享内存读写</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">obj = Array(ctype,data)</span><br><span class="line">功能： 开辟共享内存空间</span><br><span class="line">参数： ctype  表示共享内存数据类型</span><br><span class="line">      data   整数则表示开辟空间的大小，其他数据类型表示开辟空间存放的初始化数据</span><br><span class="line">返回值：共享内存对象</span><br><span class="line"></span><br><span class="line">Array共享内存读写： 通过遍历obj可以得到每个值，直接可以通过索引序号修改任意值。</span><br><span class="line"></span><br><span class="line">* 可以使用obj.value直接打印共享内存中的字节串</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="（4）信号量（信号灯集）"><a href="#（4）信号量（信号灯集）" class="headerlink" title="（4）信号量（信号灯集）"></a>（4）信号量（信号灯集）</h4><ol>
+<li>通信原理</li>
+</ol>
+<blockquote>
+<p>给定一个数量对多个进程可见。多个进程都可以操作该数量增减，并根据数量值决定自己的行为。</p>
+</blockquote>
+<ol start="2">
+<li>实现方法</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Semaphore</span><br><span class="line"></span><br><span class="line">sem = Semaphore(num)</span><br><span class="line">功能 ： 创建信号量对象</span><br><span class="line">参数 ： 信号量的初始值</span><br><span class="line">返回值 ： 信号量对象</span><br><span class="line"></span><br><span class="line">sem.acquire()  将信号量减<span class="number">1</span> 当信号量为<span class="number">0</span>时阻塞</span><br><span class="line">sem.release()  将信号量加<span class="number">1</span></span><br><span class="line">sem.get_value() 获取信号量数量</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="17-6-线程编程（Thread）"><a href="#17-6-线程编程（Thread）" class="headerlink" title="17.6 线程编程（Thread）"></a>17.6 线程编程（Thread）</h3><h4 id="（1）线程基本概念"><a href="#（1）线程基本概念" class="headerlink" title="（1）线程基本概念"></a>（1）线程基本概念</h4><ol>
+<li><p>什么是线程<br>【1】 线程被称为轻量级的进程<br>【2】 线程也可以使用计算机多核资源，是多任务编程方式<br>【3】 线程是系统分配内核的最小单元<br>【4】 线程可以理解为<strong>进程的分支任务</strong></p>
+</li>
+<li><p>线程特征<br>【1】 一个进程中可以包含多个线程<br>【2】 线程也是一个运行行为，消耗计算机资源<br>【3】 一个进程中的所有线程<strong>共享这个进程的资源</strong><br>【4】 多个线程之间的运行互不影响各自运行<br>【5】 线程的创建和销毁消耗资源远小于进程<br>【6】 各个线程也有自己的ID等特征</p>
+</li>
+</ol>
+<h4 id="（2）threading模块创建线程"><a href="#（2）threading模块创建线程" class="headerlink" title="（2）threading模块创建线程"></a>（2）threading模块创建线程</h4><p>【1】 创建线程对象</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from threading import Thread </span><br><span class="line"></span><br><span class="line">t = Thread()</span><br><span class="line">功能：创建线程对象</span><br><span class="line">参数：target 绑定线程函数</span><br><span class="line">     args   元组 给线程函数位置传参</span><br><span class="line">     kwargs 字典 给线程函数键值传参</span><br></pre></td></tr></table></figure>
+
+<p>【2】 启动线程</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">t.start()</span><br></pre></td></tr></table></figure>
+
+<p>【3】 回收线程</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">t.join([timeout])</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="（3）线程对象属性"><a href="#（3）线程对象属性" class="headerlink" title="（3）线程对象属性"></a>（3）线程对象属性</h4><blockquote>
+<p>t.name 线程名称<br>t.setName()  设置线程名称<br>t.getName()  获取线程名称</p>
+</blockquote>
+<blockquote>
+<p>t.is_alive()  查看线程是否在生命周期</p>
+</blockquote>
+<blockquote>
+<p>t.daemon  设置主线程和分支线程的退出关系<br>t.setDaemon()  设置daemon属性值<br>t.isDaemon()  查看daemon属性值</p>
+<blockquote>
+<p>daemon为True时主线程退出分支线程也退出。要在start前设置，通常不和join一起使用。</p>
+</blockquote>
+</blockquote>
+<h4 id="（4）自定义线程类"><a href="#（4）自定义线程类" class="headerlink" title="（4）自定义线程类"></a>（4）自定义线程类</h4><ol>
+<li><p>创建步骤<br>【1】 继承Thread类<br>【2】 重写<code>__init__</code>方法添加自己的属性，使用super()加载父类属性<br>【3】 重写run()方法</p>
+</li>
+<li><p>使用方法<br>【1】 实例化对象<br>【2】 调用start自动执行run方法<br>【3】 调用join回收线程</p>
+</li>
+</ol>
+<h3 id="17-7-同步互斥"><a href="#17-7-同步互斥" class="headerlink" title="17.7 同步互斥"></a>17.7 同步互斥</h3><h4 id="（1）线程间通信方法"><a href="#（1）线程间通信方法" class="headerlink" title="（1）线程间通信方法"></a>（1）线程间通信方法</h4><ol>
+<li>通信方法</li>
+</ol>
+<blockquote>
+<p>线程间使用全局变量进行通信</p>
+</blockquote>
+<ol start="2">
+<li>共享资源争夺</li>
+</ol>
+<ul>
+<li><p>共享资源：多个进程或者线程都可以操作的资源称为共享资源。对共享资源的操作代码段称为<strong>临界区</strong>。</p>
+</li>
+<li><p>影响 ： 对共享资源的无序操作可能会带来数据的混乱，或者操作错误。此时往往<strong>需要同步互斥机制协调操作顺序</strong>。</p>
+</li>
+</ul>
+<ol start="3">
+<li>同步互斥机制</li>
+</ol>
+<blockquote>
+<p>同步 ： 同步是一种协作关系，为完成操作，多进程或者线程间形成一种协调，<strong>按照必要的步骤有序执行操作</strong>。</p>
+</blockquote>
+<p><img src="/2022/06/27/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/7_%E5%90%8C%E6%AD%A5.png"></p>
+<blockquote>
+<p>互斥 ： 互斥是一种制约关系，当一个进程或者线程<strong>占有资源时会进行加锁处理</strong>，此时其他进程线程就无法操作该资源，直到解锁后才能操作。</p>
+</blockquote>
+<p><img src="/2022/06/27/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/7_%E4%BA%92%E6%96%A5.png"></p>
+<h4 id="（2）线程同步互斥方法"><a href="#（2）线程同步互斥方法" class="headerlink" title="（2）线程同步互斥方法"></a>（2）线程同步互斥方法</h4><h5 id="1-gt-线程Event"><a href="#1-gt-线程Event" class="headerlink" title="1&gt; 线程Event"></a>1&gt; 线程Event</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Event</span><br><span class="line"></span><br><span class="line">e = Event()  创建线程event对象</span><br><span class="line"></span><br><span class="line">e.wait([timeout])  阻塞等待e被<span class="built_in">set</span></span><br><span class="line"></span><br><span class="line">e.<span class="built_in">set</span>()  设置e，使wait结束阻塞</span><br><span class="line"></span><br><span class="line">e.clear() 使e回到未被设置状态</span><br><span class="line"></span><br><span class="line">e.is_set()  查看当前e是否被设置</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-gt-线程锁-Lock"><a href="#2-gt-线程锁-Lock" class="headerlink" title="2&gt; 线程锁 Lock"></a>2&gt; 线程锁 Lock</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span>  threading <span class="keyword">import</span> Lock</span><br><span class="line"></span><br><span class="line">lock = Lock()  创建锁对象</span><br><span class="line">lock.acquire() 上锁  如果lock已经上锁再调用会阻塞</span><br><span class="line">lock.release() 解锁</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span>  lock:  上锁</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">	 <span class="keyword">with</span>代码块结束自动解锁</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="（3）死锁及其处理"><a href="#（3）死锁及其处理" class="headerlink" title="（3）死锁及其处理"></a>（3）死锁及其处理</h4><ol>
+<li><h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5></li>
+</ol>
+<blockquote>
+<p>死锁是指两个或两个以上的线程在执行过程中，由于<strong>竞争资源或者由于彼此通信</strong>而造成的一种阻塞的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁。</p>
+</blockquote>
+<p><img src="/2022/06/27/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%AD%BB%E9%94%81.jpg"></p>
+<ol start="2">
+<li><h5 id="死锁产生条件"><a href="#死锁产生条件" class="headerlink" title="死锁产生条件"></a>死锁产生条件</h5></li>
+</ol>
+<blockquote>
+<p>死锁发生的必要条件</p>
+<blockquote>
+<ul>
+<li><font color="red">互斥条件</font>：指线程对所分配到的资源进行排它性使用，即在一段时间内某资源只由一个进程占用。如果此时还有其它进程请求资源，则请求者只能等待，直至占有资源的进程用毕释放。</li>
+<li><font color="red">请求和保持条件</font>：指线程已经保持至少一个资源，但又提出了新的资源<strong>请求</strong>，而该资源已被其它进程占有，此时请求线程阻塞，但又对自己已获得的其它资源<strong>保持不放</strong>。</li>
+<li><font color="red">不剥夺条件</font>：指线程已获得的资源，在未使用完之前，不能被剥夺，只能在使用完时由自己释放,通常CPU内存资源是可以被系统强行调配剥夺的。</li>
+<li><font color="red">环路等待条件</font>：指在发生死锁时，必然存在一个线程——资源的环形链，即进程集合{T0，T1，T2，···，Tn}中的T0正在等待一个T1占用的资源；T1正在等待T2占用的资源，……，Tn正在等待已被T0占用的资源。</li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>死锁的产生原因</p>
+<blockquote>
+<p>简单来说造成死锁的原因可以概括成三句话：</p>
+<ul>
+<li>当前线程拥有其他线程需要的资源</li>
+<li>当前线程等待其他线程已拥有的资源</li>
+<li>都不放弃自己拥有的资源</li>
+</ul>
+</blockquote>
+</blockquote>
+<ol start="3">
+<li><p>如何避免死锁</p>
+<p>死锁是我们非常不愿意看到的一种现象，我们要尽可能<strong>避免死锁</strong>的情况发生。通过设置某些限制条件，去破坏产生死锁的四个必要条件中的一个或者几个，来预防发生死锁。预防死锁是一种较易实现的方法。但是由于所施加的限制条件往往太严格，可能会导致系统资源利用率。</p>
+</li>
+</ol>
+<h3 id="17-8-python线程GIL"><a href="#17-8-python线程GIL" class="headerlink" title="17.8 python线程GIL"></a>17.8 python线程GIL</h3><ol>
+<li>python线程的GIL问题 （全局解释器锁）</li>
+</ol>
+<blockquote>
+<p>什么是GIL ：由于python解释器设计中加入了解释器锁，导致python解释器同一时刻只能解释执行一个线程，大大降低了线程的执行效率。</p>
+</blockquote>
+<blockquote>
+<p>导致后果： 因为遇到阻塞时线程会主动让出解释器，去解释其他线程。所以python多线程在执行<strong>多阻塞高延迟IO</strong>时可以提升程序效率，其他情况并不能对效率有所提升。</p>
+</blockquote>
+<blockquote>
+<p>GIL问题建议</p>
+<ul>
+<li>尽量使用进程完成无阻塞的并发行为</li>
+<li>不使用c作为解释器 （Java  C#）</li>
+</ul>
+</blockquote>
+<ol start="2">
+<li>结论 ： 在无阻塞状态下，多线程程序和单线程程序执行效率几乎差不多，甚至还不如单线程效率。但是多进程运行相同内容却可以有明显的效率提升。</li>
+</ol>
+<h3 id="17-9-进程线程的区别联系"><a href="#17-9-进程线程的区别联系" class="headerlink" title="17.9 进程线程的区别联系"></a>17.9 进程线程的区别联系</h3><h4 id="（1）区别联系"><a href="#（1）区别联系" class="headerlink" title="（1）区别联系"></a>（1）区别联系</h4><ol>
+<li>两者都是多任务编程方式，都能使用计算机多核资源</li>
+<li>进程的创建删除消耗的计算机资源比线程多</li>
+<li>进程空间独立，数据互不干扰，有专门通信方法；线程使用全局变量通信</li>
+<li>一个进程可以有多个分支线程，两者有包含关系</li>
+<li>多个线程共享进程资源，在共享资源操作时往往需要同步互斥处理</li>
+<li>进程线程在系统中都有自己的特有属性标志，如ID,代码段，命令集等。</li>
+</ol>
+<h4 id="（2）使用场景"><a href="#（2）使用场景" class="headerlink" title="（2）使用场景"></a>（2）使用场景</h4><ol>
+<li><p>任务场景：如果是相对独立的任务模块，可能使用多进程，如果是多个分支共同形成一个整体任务可能用多线程</p>
+</li>
+<li><p>项目结构：多种编程语言实现不同任务模块，可能是多进程，或者前后端分离应该各自为一个进程。</p>
+</li>
+<li><p>难易程度：通信难度，数据处理的复杂度来判断用进程间通信还是同步互斥方法。</p>
+</li>
+</ol>
+<h4 id="（3）要求"><a href="#（3）要求" class="headerlink" title="（3）要求"></a>（3）要求</h4><ol>
+<li>对进程线程怎么理解/说说进程线程的差异</li>
+<li>进程间通信知道哪些，有什么特点</li>
+<li>什么是同步互斥，你什么情况下使用，怎么用</li>
+<li>给一个情形，说说用进程还是线程，为什么</li>
+<li>问一些概念，僵尸进程的处理，GIL问题，进程状态</li>
+</ol>
+<h3 id="17-10-并发网络通信模型"><a href="#17-10-并发网络通信模型" class="headerlink" title="17.10 并发网络通信模型"></a>17.10 并发网络通信模型</h3><h4 id="（1）常见网络模型"><a href="#（1）常见网络模型" class="headerlink" title="（1）常见网络模型"></a>（1）常见网络模型</h4><ol>
+<li>循环服务器模型 ：循环接收客户端请求，处理请求。同一时刻只能处理一个请求，处理完毕后再处理下一个。</li>
+</ol>
+<blockquote>
+<p>优点：实现简单，占用资源少<br>缺点：无法同时处理多个客户端请求</p>
+</blockquote>
+<blockquote>
+<p>适用情况：处理的任务可以很快完成，客户端无需长期占用服务端程序。udp比tcp更适合循环。</p>
+</blockquote>
+<ol start="2">
+<li>多进程/线程网络并发模型：每当一个客户端连接服务器，就创建一个新的进程/线程为该客户端服务，客户端退出时再销毁该进程/线程。</li>
+</ol>
+<blockquote>
+<p>优点：能同时满足多个客户端长期占有服务端需求，可以处理各种请求。<br>缺点： 资源消耗较大</p>
+</blockquote>
+<blockquote>
+<p>适用情况：客户端同时连接量较少，需要处理行为较复杂情况。</p>
+</blockquote>
+<ol start="3">
+<li><p>IO并发模型：利用IO多路复用,异步IO等技术，同时处理多个客户端IO请求。</p>
+<blockquote>
+<p>优点 ： 资源消耗少，能同时高效处理多个IO行为<br>缺点 ： 只能处理并发产生的IO事件，无法处理cpu计算</p>
+</blockquote>
+<blockquote>
+<p>适用情况：HTTP请求，网络传输等都是IO行为。</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="（2）基于fork的多进程网络并发模型"><a href="#（2）基于fork的多进程网络并发模型" class="headerlink" title="（2）基于fork的多进程网络并发模型"></a>（2）基于fork的多进程网络并发模型</h4><p>​    <strong>实现步骤</strong></p>
+<ol>
+<li>创建监听套接字</li>
+<li>等待接收客户端请求</li>
+<li>客户端连接创建新的进程处理客户端请求</li>
+<li>原进程继续等待其他客户端连接</li>
+<li>如果客户端退出，则销毁对应的进程</li>
+</ol>
+<h4 id="（3）基于threading的多线程网络并发"><a href="#（3）基于threading的多线程网络并发" class="headerlink" title="（3）基于threading的多线程网络并发"></a>（3）基于threading的多线程网络并发</h4><p>​    <strong>实现步骤</strong></p>
+<ol>
+<li>创建监听套接字</li>
+<li>循环接收客户端连接请求</li>
+<li>当有新的客户端连接创建线程处理客户端请求</li>
+<li>主线程继续等待其他客户端连接</li>
+<li>当客户端退出，则对应分支线程退出</li>
+</ol>
+<h4 id="（4）ftp-文件服务器"><a href="#（4）ftp-文件服务器" class="headerlink" title="（4）ftp 文件服务器"></a>（4）ftp 文件服务器</h4><ol>
+<li>功能<br>【1】 分为服务端和客户端，要求可以有多个客户端同时操作。<br>【2】 客户端可以查看服务器文件库中有什么文件。<br>【3】 客户端可以从文件库中下载文件到本地。<br>【4】 客户端可以上传一个本地文件到文件库。<br>【5】 使用print在客户端打印命令输入提示，引导操作</li>
+</ol>
+<h3 id="17-11-IO并发"><a href="#17-11-IO并发" class="headerlink" title="17.11 IO并发"></a>17.11 IO并发</h3><h4 id="（1）IO-分类"><a href="#（1）IO-分类" class="headerlink" title="（1）IO 分类"></a>（1）IO 分类</h4><blockquote>
+<p>IO分类：阻塞IO ，非阻塞IO，IO多路复用，异步IO等</p>
+</blockquote>
+<h5 id="1-gt-阻塞IO"><a href="#1-gt-阻塞IO" class="headerlink" title="1&gt; 阻塞IO"></a>1&gt; 阻塞IO</h5><ol>
+<li><p>定义：在执行IO操作时如果执行条件不满足则阻塞。阻塞IO是IO的默认形态。</p>
+</li>
+<li><p>效率：阻塞IO是效率很低的一种IO。但是由于逻辑简单所以是默认IO行为。</p>
+</li>
+<li><p>阻塞情况：</p>
+</li>
+</ol>
+<ul>
+<li><p>因为某种执行条件没有满足造成的函数阻塞<br>e.g.  accept   input   recv</p>
+</li>
+<li><p>处理IO的时间较长产生的阻塞状态<br>e.g. 网络传输，大文件读写</p>
+</li>
+</ul>
+<h5 id="2-gt-非阻塞IO"><a href="#2-gt-非阻塞IO" class="headerlink" title="2&gt; 非阻塞IO"></a>2&gt; 非阻塞IO</h5><ol>
+<li>定义 ：通过修改IO属性行为，使原本阻塞的IO变为非阻塞的状态。</li>
+</ol>
+<ul>
+<li><p>设置套接字为非阻塞IO</p>
+<blockquote>
+<p>sockfd.setblocking(bool)<br> 功能：设置套接字为非阻塞IO<br> 参数：默认为True，表示套接字IO阻塞；设置为False则套接字IO变为非阻塞</p>
+</blockquote>
+</li>
+<li><p>超时检测 ：设置一个最长阻塞时间，超过该时间后则不再阻塞等待。</p>
+<blockquote>
+<p>sockfd.settimeout(sec)<br>功能：设置套接字的超时时间<br>参数：设置的时间</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="（2）IO多路复用"><a href="#（2）IO多路复用" class="headerlink" title="（2）IO多路复用"></a>（2）IO多路复用</h4><ol>
+<li><p>定义</p>
+<blockquote>
+<p>同时监控多个IO事件，当哪个IO事件准备就绪就执行哪个IO事件。以此形成可以同时处理多个IO的行为，避免一个IO阻塞造成其他IO均无法执行，提高了IO执行效率。</p>
+</blockquote>
+</li>
+<li><p>具体方案</p>
+<blockquote>
+<p>select方法 ： windows  linux  unix<br>poll方法： linux  unix<br>epoll方法： linux</p>
+</blockquote>
+</li>
+</ol>
+<h5 id="1-gt-select-方法"><a href="#1-gt-select-方法" class="headerlink" title="1&gt; select 方法"></a>1&gt; select 方法</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">rs, ws, xs=select(rlist, wlist, xlist[, timeout])</span><br><span class="line">功能: 监控IO事件，阻塞等待IO发生</span><br><span class="line">参数：rlist  列表  存放关注的等待发生的IO事件</span><br><span class="line">      wlist  列表  存放关注的要主动处理的IO事件</span><br><span class="line">      xlist  列表  存放关注的出现异常要处理的IO</span><br><span class="line">      timeout  超时时间</span><br><span class="line"></span><br><span class="line">返回值： rs 列表  rlist中准备就绪的IO</span><br><span class="line">        ws 列表  wlist中准备就绪的IO</span><br><span class="line">	xs 列表  xlist中准备就绪的IO</span><br></pre></td></tr></table></figure>
+
+<p>select 实现tcp服务</p>
+<pre><code>【1】 将关注的IO放入对应的监控类别列表
+【2】通过select函数进行监控
+【3】遍历select返回值列表，确定就绪IO事件
+【4】处理发生的IO事件
+</code></pre>
+<blockquote>
+<p>注意</p>
+<blockquote>
+<p>wlist中如果存在IO事件，则select立即返回给ws<br>处理IO过程中不要出现死循环占有服务端的情况<br>IO多路复用消耗资源较少，效率较高</p>
+</blockquote>
+</blockquote>
+<h5 id="2-gt-poll方法"><a href="#2-gt-poll方法" class="headerlink" title="2&gt; poll方法"></a>2&gt; poll方法</h5><p><em><strong>代码实现: day12/poll_server.py</strong></em></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">p = select.poll()</span><br><span class="line">功能 ： 创建poll对象</span><br><span class="line">返回值： poll对象</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">p.register(fd,event)   </span><br><span class="line">功能: 注册关注的IO事件</span><br><span class="line">参数：fd  要关注的IO</span><br><span class="line">      event  要关注的IO事件类型</span><br><span class="line">  	     常用类型：POLLIN  读IO事件（rlist）</span><br><span class="line">		      POLLOUT 写IO事件 (wlist)</span><br><span class="line">		      POLLERR 异常IO  （xlist）</span><br><span class="line">		      POLLHUP 断开连接 </span><br><span class="line">		  e.g. p.register(sockfd,POLLIN|POLLERR)</span><br><span class="line"></span><br><span class="line">p.unregister(fd)</span><br><span class="line">功能：取消对IO的关注</span><br><span class="line">参数：IO对象或者IO对象的fileno</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">events = p.poll()</span><br><span class="line">功能： 阻塞等待监控的IO事件发生</span><br><span class="line">返回值： 返回发生的IO</span><br><span class="line">        events格式  [(fileno,event),()....]</span><br><span class="line">        每个元组为一个就绪IO，元组第一项是该IO的fileno，第二项为该IO就绪的事件类型</span><br></pre></td></tr></table></figure>
+
+<p>poll_server 步骤</p>
+<pre><code>【1】 创建套接字
+【2】 将套接字register
+【3】 创建查找字典，并维护
+【4】 循环监控IO发生
+【5】 处理发生的IO
+</code></pre>
+<h5 id="3-gt-epoll方法"><a href="#3-gt-epoll方法" class="headerlink" title="3&gt; epoll方法"></a>3&gt; epoll方法</h5><ol>
+<li><p>使用方法 ： 基本与poll相同</p>
+<ul>
+<li>生成对象改为 epoll()</li>
+<li>将所有事件类型改为EPOLL类型</li>
+</ul>
+</li>
+<li><p>epoll特点</p>
+<ul>
+<li>epoll 效率比select poll要高</li>
+<li>epoll 监控IO数量比select要多</li>
+<li>epoll 的触发方式比poll要多 （EPOLLET边缘触发）</li>
+</ul>
+</li>
+</ol>
+<h4 id="（3）协程技术"><a href="#（3）协程技术" class="headerlink" title="（3）协程技术"></a>（3）协程技术</h4><h5 id="1-gt-基础概念"><a href="#1-gt-基础概念" class="headerlink" title="1&gt; 基础概念"></a>1&gt; 基础概念</h5><ol>
+<li><p>定义：纤程，微线程。是允许在不同入口点不同位置暂停或开始的计算机程序，简单来说，<strong>协程就是可以暂停执行的函数</strong>。</p>
+</li>
+<li><p>协程原理 ： 记录一个函数的上下文，协程调度切换时会将记录的上下文保存，在切换回来时进行调取，恢复原有的执行内容，以便从上一次执行位置继续执行。</p>
+</li>
+<li><p>协程优缺点</p>
+</li>
+</ol>
+<blockquote>
+<p>优点</p>
+<blockquote>
+<ol>
+<li>协程完成多任务占用计算资源很少</li>
+<li>由于协程的多任务切换在应用层完成，因此切换开销少</li>
+<li>协程为单线程程序，无需进行共享资源同步互斥处理</li>
+</ol>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>缺点</p>
+<blockquote>
+<p>协程的本质是一个单线程，无法利用计算机多核资源</p>
+</blockquote>
+</blockquote>
+<p>python3.5以后，使用标准库asyncio和async/await 语法来编写并发代码。asyncio库通过对异步IO行为的支持完成python的协程。虽然官方说asyncio是未来的开发方向，但是由于其生态不够丰富，大量的客户端不支持awaitable需要自己去封装，所以在使用上存在缺陷。更多时候只能使用已有的异步库（asyncio等），功能有限</p>
+<hr>
+<h5 id="2-gt-第三方协程模块"><a href="#2-gt-第三方协程模块" class="headerlink" title="2&gt; 第三方协程模块"></a>2&gt; 第三方协程模块</h5><ol>
+<li> greenlet模块</li>
+</ol>
+<ul>
+<li><p>安装 ： sudo  pip3 install greenlet</p>
+</li>
+<li><p>函数 </p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">greenlet.greenlet(func)</span><br><span class="line">功能：创建协程对象</span><br><span class="line">参数：协程函数</span><br><span class="line"></span><br><span class="line">g.switch()</span><br><span class="line">功能：选择要执行的协程函数</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>gevent模块                </li>
+</ol>
+<ul>
+<li><p>安装：sudo pip3 install gevent</p>
+</li>
+<li><p>函数</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gevent.spawn(func,argv)</span><br><span class="line">功能: 生成协程对象</span><br><span class="line">参数：func  协程函数</span><br><span class="line">     argv  给协程函数传参（不定参）</span><br><span class="line">返回值： 协程对象</span><br><span class="line"></span><br><span class="line">gevent.joinall(<span class="built_in">list</span>,[timeout])</span><br><span class="line">功能: 阻塞等待协程执行完毕</span><br><span class="line">参数：<span class="built_in">list</span>  协程对象列表</span><br><span class="line">     timeout 超时时间</span><br><span class="line"></span><br><span class="line">gevent.sleep(sec)</span><br><span class="line">功能: gevent睡眠阻塞</span><br><span class="line">参数：睡眠时间</span><br><span class="line"></span><br><span class="line">* gevent协程只有在遇到gevent指定的阻塞行为时才会自动在协程之间进行跳转</span><br><span class="line">如gevent.joinall(),gevent.sleep()带来的阻塞</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>monkey脚本</li>
+</ul>
+<blockquote>
+<p>作用：在gevent协程中，协程只有遇到gevent指定类型的阻塞才能跳转到其他协程，因此，我们希望将普通的IO阻塞行为转换为可以触发gevent协程跳转的阻塞，以提高执行效率。</p>
+</blockquote>
+<blockquote>
+<p>转换方法：gevent 提供了一个脚本程序monkey,可以修改底层解释IO阻塞的行为，将很多普通阻塞转换为gevent阻塞。</p>
+</blockquote>
+<blockquote>
+<p>使用方法</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>【1】 导入monkey</p>
+</blockquote>
+</blockquote>
+<pre><code>    from gevent  import monkey
+</code></pre>
+<blockquote>
+<blockquote>
+<p>【2】 运行相应的脚本，例如转换socket中所有阻塞</p>
+</blockquote>
+</blockquote>
+<pre><code>    monkey.patch_socket()
+</code></pre>
+<blockquote>
+<blockquote>
+<p>【3】 如果将所有可转换的IO阻塞全部转换则运行all</p>
+</blockquote>
+</blockquote>
+<pre><code>    monkey.patch_all()
+</code></pre>
+<blockquote>
+<blockquote>
+<p>【4】 注意：脚本运行函数需要在对应模块导入前执行</p>
+</blockquote>
+</blockquote>
+]]></content>
       <categories>
         <category>《Python》</category>
       </categories>
