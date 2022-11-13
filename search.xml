@@ -15110,35 +15110,35 @@ Name           Attrs
 <h2 id="序列相似性"><a href="#序列相似性" class="headerlink" title="序列相似性"></a>序列相似性</h2><h3 id="序列相似性的意义"><a href="#序列相似性的意义" class="headerlink" title="序列相似性的意义"></a>序列相似性的意义</h3><p>​    意义在于，相似的序列往往起源于一个共同的祖先。它们很可能有相似的 空间结构和生物学功能。因此，对于一个已知序列但未知结构和功能的蛋白质，如果与它序 列相似的某些蛋白质的结构和功能已知，那么就可以推测出这个未知结构和功能的蛋白质的结构和功能。简言之，相似的序列意味着相似的结构，相似的结构意味着相似的功能</p>
 <h3 id="一致度和相似度"><a href="#一致度和相似度" class="headerlink" title="一致度和相似度"></a>一致度和相似度</h3><p>​    一致度可以定义为它们对应位置上相同的残基数目占总长度的百分比。一个残基就是指一个字母（氨基酸或碱基）</p>
 <p>​    相似度可以暂时定义为他们对应位置上相似的残基 与相同的残基的数目和占总长度的百分比</p>
-<h2 id="核酸序列的替换记分矩阵"><a href="#核酸序列的替换记分矩阵" class="headerlink" title="核酸序列的替换记分矩阵"></a><strong>核酸序列的替换记分矩阵</strong></h2><h3 id="等价矩阵"><a href="#等价矩阵" class="headerlink" title="等价矩阵"></a>等价矩阵</h3><p>​    这个矩阵最简单. 其中，相同核苷酸之间的匹配得分为 1，不同核苷酸间的替换得分为 0。由于不含有碱基的 理化信息和不区别对待不同的替换，在实际的序列比较中很少使用，一般只用于理论计算。</p>
-<h3 id="转换-颠换矩阵"><a href="#转换-颠换矩阵" class="headerlink" title="转换-颠换矩阵"></a>转换-颠换矩阵</h3><p>​    我们说 核酸的碱基按照环结构特征被划分为两类，一类是嘌呤，包括腺嘌呤 A 和鸟嘌呤 G，它们都有两个环；另一类是嘧啶，包括胞嘧啶 C 和胸腺嘧啶 T，它们只有一个环。</p>
+<h2 id="替换计分矩阵"><a href="#替换计分矩阵" class="headerlink" title="替换计分矩阵"></a>替换计分矩阵</h2><h3 id="核酸序列的替换记分矩阵"><a href="#核酸序列的替换记分矩阵" class="headerlink" title="核酸序列的替换记分矩阵"></a><strong>核酸序列的替换记分矩阵</strong></h3><h4 id="等价矩阵"><a href="#等价矩阵" class="headerlink" title="等价矩阵"></a>等价矩阵</h4><p>​    这个矩阵最简单. 其中，相同核苷酸之间的匹配得分为 1，不同核苷酸间的替换得分为 0。由于不含有碱基的 理化信息和不区别对待不同的替换，在实际的序列比较中很少使用，一般只用于理论计算。</p>
+<h4 id="转换-颠换矩阵"><a href="#转换-颠换矩阵" class="headerlink" title="转换-颠换矩阵"></a>转换-颠换矩阵</h4><p>​    我们说 核酸的碱基按照环结构特征被划分为两类，一类是嘌呤，包括腺嘌呤 A 和鸟嘌呤 G，它们都有两个环；另一类是嘧啶，包括胞嘧啶 C 和胸腺嘧啶 T，它们只有一个环。</p>
 <p>​    如果 DNA 碱基的替换保持环数不变，则称为<strong>转换</strong>，比如腺嘌呤 A 替换为 鸟嘌呤 G、或者胞嘧啶 C 替换 为胸腺嘧啶 T，也就是嘌呤变嘌呤，嘧啶变嘧啶；如果环数发生变化，则称为<strong>颠换</strong>，比如腺 嘌呤 A 替换为胞嘧啶 C、或者胸腺嘧啶 T 替换为鸟嘌呤 G，也就是嘌呤变嘧啶，或者嘧啶 变嘌呤。</p>
 <p>​    在进化过程中，转换发生的频率远比颠换高。也就是说，大自然更倾向于接受嘌呤 和嘌呤之间的替换，以及嘧啶和嘧啶之间的替换，而嘌呤和嘧啶之间的替换会导致不好的事 情发生，这种替换大多在进化过程中已经被淘汰了。为了反映这一情况，转换-颠换矩阵中， 转换的得分比颠换要高为-1 分，而颠换的得分为-5 分。 </p>
-<h3 id="BLAST矩阵"><a href="#BLAST矩阵" class="headerlink" title="BLAST矩阵"></a>BLAST矩阵</h3><p>​    经过大量实际比对发现，如果令被比对的两个核苷酸相同时 得分为+5 分，不相同为-4 分，这时比对效果最好。这个矩阵广泛地被 DNA 序列比较所采 用。没有为什么，就是好，实践经验所得。因为这个矩阵最早应用于 BLAST 工具，因此得名 BLAST 矩阵</p>
+<h4 id="BLAST矩阵"><a href="#BLAST矩阵" class="headerlink" title="BLAST矩阵"></a>BLAST矩阵</h4><p>​    经过大量实际比对发现，如果令被比对的两个核苷酸相同时 得分为+5 分，不相同为-4 分，这时比对效果最好。这个矩阵广泛地被 DNA 序列比较所采 用。没有为什么，就是好，实践经验所得。因为这个矩阵最早应用于 BLAST 工具，因此得名 BLAST 矩阵</p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1667984260134.png" alt="1667984260134"></p>
-<h2 id="蛋白质序列的替换记分矩阵"><a href="#蛋白质序列的替换记分矩阵" class="headerlink" title="蛋白质序列的替换记分矩阵"></a>蛋白质序列的替换记分矩阵</h2><h3 id="等价矩阵-1"><a href="#等价矩阵-1" class="headerlink" title="等价矩阵"></a>等价矩阵</h3><h3 id="PAM-矩阵"><a href="#PAM-矩阵" class="headerlink" title="PAM 矩阵"></a>PAM 矩阵</h3><p>​    PAM 矩阵基于进化原 理。如果两种氨基酸替换频繁，说明自然界容易接受这种替换，那么这一对氨基酸替换的得 分就应该高。</p>
+<h3 id="蛋白质序列的替换记分矩阵"><a href="#蛋白质序列的替换记分矩阵" class="headerlink" title="蛋白质序列的替换记分矩阵"></a>蛋白质序列的替换记分矩阵</h3><h4 id="等价矩阵-1"><a href="#等价矩阵-1" class="headerlink" title="等价矩阵"></a>等价矩阵</h4><h4 id="PAM-矩阵"><a href="#PAM-矩阵" class="headerlink" title="PAM 矩阵"></a>PAM 矩阵</h4><p>​    PAM 矩阵基于进化原 理。如果两种氨基酸替换频繁，说明自然界容易接受这种替换，那么这一对氨基酸替换的得 分就应该高。</p>
 <p>​    PAM 矩阵是目前蛋白质序列比较中最广泛使用的记分方法之一。基础的 PAM-1 矩阵反应的是进化产生的每一百个氨基酸平均发生一个突变的量值，由统计方法得到。 PAM-1 自乘 n 次，可以得到 PAM-n ，表示发生了更多次突变。</p>
 <p>​    我们需要根据要比较的序列之间的亲缘关系远近，来选择适合的 PAM 矩阵。如果序列亲缘关系远，也就是说序列间会 有很多突变，那就选 PAM 后面跟一个大数字的矩阵。如果亲缘关系近，也就是突变比较少， 序列间大多数地方都是一样的，那就选 PAM 后面跟一个小数字的矩阵。</p>
 <p>​    如PAM250矩阵。对角线上的数值为匹配氨基酸的得分。其他位置上≥0 的得分代 表对应的一对氨基酸为相似氨基酸，&lt;0 的是不相似的氨基酸。 </p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1667984465411.png" alt="1667984465411"></p>
-<h3 id="BLOSUM-矩阵"><a href="#BLOSUM-矩阵" class="headerlink" title="BLOSUM 矩阵"></a>BLOSUM 矩阵</h3><p>​    BLOSUM 矩阵有和 PAM 矩阵相同的地方，也有不同的地方。相同的是，BLOSUM 矩阵 后面也带有一个编号，有很多种 BLOSUM 矩阵。不同的是，BLOSUM 矩阵都是通过对大量 符合特定要求的序列计算而来的。这点和 PAM 矩阵不同的。</p>
+<h4 id="BLOSUM-矩阵"><a href="#BLOSUM-矩阵" class="headerlink" title="BLOSUM 矩阵"></a>BLOSUM 矩阵</h4><p>​    BLOSUM 矩阵有和 PAM 矩阵相同的地方，也有不同的地方。相同的是，BLOSUM 矩阵 后面也带有一个编号，有很多种 BLOSUM 矩阵。不同的是，BLOSUM 矩阵都是通过对大量 符合特定要求的序列计算而来的。这点和 PAM 矩阵不同的。</p>
 <p>​    PAM-1 矩阵是基于相似度大于85%的序列计算产生的，也就是通过关系较近的序列计算出来的。那些进化距离较远的矩阵， 如 PAM-250，是通过 PAM-1 自乘得到的。也就是说，BLOSUM 矩阵的相似性是根据<strong>真实数</strong> <strong>据</strong>产生的，而 PAM 矩阵是通过矩阵自乘外推而来的。和 PAM 矩阵的另一个不同之处是 BLOSUM 矩阵的编号。这些编号，比如 BLOSUM80 中的 80，代表这个矩阵是由一致度≥80% 的序列计算而来的。同理，BLOSUM62 是指这个矩阵是由一致度≥62%的序列计算而来的。 因此，BLOSUM 后面跟一个小数字的矩阵适合用于比较相似度低的序列，也就是亲缘关系 远的序列；而 BLOSUM 后面跟一个大数字的矩阵适合比较相似度高的序列，也就是亲缘关 系近的序列。  </p>
 <p>​    BLOSUM 62 矩阵.样子和 PAM 矩阵差不多，但是里面的数值是不一样的。同样， ≥0 的得分代表对应的一对氨基酸为相似氨基酸，&lt;0 的是不相似的氨基酸。</p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1667984606849.png" alt="1667984606849"></p>
 <p>​    亲缘关系较近的序列之间的比较，用 PAM 数小的矩阵或 BLOSUM 数大的矩阵；而亲缘关系较远的序列之间的比较，用 PAM 数大的矩阵或 BLOSUM数小的矩阵。 </p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1667984664136.png" alt="1667984664136"></p>
-<h3 id="遗传密码矩阵"><a href="#遗传密码矩阵" class="headerlink" title="遗传密码矩阵"></a>遗传密码矩阵</h3><p>​    它是通过计算一个氨基酸转换成另一个氨基酸所需的密码子变化的数目而得到的。 矩阵的值对应为据此付出的代价。如果变化一个碱基就可以使一个氨基酸的密码子转换为另 一个氨基酸的密码子，则这两个氨基酸的替换代价为 1；如果需要 2 个碱基的改变，则替换 代价为 2；再比如从蛋氨酸（Met）到酪氨酸（Tyr）三个密码子都要变，则代价为 3。</p>
+<h4 id="遗传密码矩阵"><a href="#遗传密码矩阵" class="headerlink" title="遗传密码矩阵"></a>遗传密码矩阵</h4><p>​    它是通过计算一个氨基酸转换成另一个氨基酸所需的密码子变化的数目而得到的。 矩阵的值对应为据此付出的代价。如果变化一个碱基就可以使一个氨基酸的密码子转换为另 一个氨基酸的密码子，则这两个氨基酸的替换代价为 1；如果需要 2 个碱基的改变，则替换 代价为 2；再比如从蛋氨酸（Met）到酪氨酸（Tyr）三个密码子都要变，则代价为 3。</p>
 <p>​    遗传密码矩阵常用于进化距离的计算，它的优点是计算结果可以直接用于绘制进化树，但是它在 蛋白质序列比对，尤其是相似程度很低的蛋白质序列比对中，很少被使用。</p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1667984738576.png" alt="1667984738576"></p>
-<h3 id="疏水矩阵"><a href="#疏水矩阵" class="headerlink" title="疏水矩阵"></a>疏水矩阵</h3><p>​    它是根据氨基酸残基替换前后疏水性的变化而得到的矩阵。 若一次氨基酸替换导致疏水特性不发生太大的变化，则这种替换得分高，否则替换得分低。 疏水矩阵物理意义明确，有一定的<strong>理化性质</strong>依据，适用于偏重蛋白质功能方面的序列比对。 在这个矩阵里，氨基酸按照亲疏水性排列。前边是亲水的，后面是疏水的。 </p>
+<h4 id="疏水矩阵"><a href="#疏水矩阵" class="headerlink" title="疏水矩阵"></a>疏水矩阵</h4><p>​    它是根据氨基酸残基替换前后疏水性的变化而得到的矩阵。 若一次氨基酸替换导致疏水特性不发生太大的变化，则这种替换得分高，否则替换得分低。 疏水矩阵物理意义明确，有一定的<strong>理化性质</strong>依据，适用于偏重蛋白质功能方面的序列比对。 在这个矩阵里，氨基酸按照亲疏水性排列。前边是亲水的，后面是疏水的。 </p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1667984790580.png" alt="1667984790580"></p>
-<h2 id="序列比对"><a href="#序列比对" class="headerlink" title="序列比对"></a>序列比对</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>​    <strong>Sequence aligmen</strong>t:运用特定的算法找出两个或者多个序列之间产生最大相似度得分的空格插入和序列排列方案。</p>
+<h2 id="序列比对-Dotplot打点法"><a href="#序列比对-Dotplot打点法" class="headerlink" title="序列比对-Dotplot打点法"></a>序列比对-Dotplot打点法</h2><h3 id="序列比对概念"><a href="#序列比对概念" class="headerlink" title="序列比对概念"></a>序列比对概念</h3><p>​    <strong>Sequence aligmen</strong>t:运用特定的算法找出两个或者多个序列之间产生最大相似度得分的空格插入和序列排列方案。</p>
 <p>比如：</p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668043108983.png" alt="1668043108983"></p>
 <p>​    这两条序列的比对就是把 s 和 t 这两个字符串上下排列起来，在某些位置插入空格，这些空格叫空位（gap）。然后依次比较它们在每一个位置上字符的匹配情况，匹配的好，这个位置 就会得高分，匹配的不好，看看能不能左右错一错，或填上个空位，让附近的位置更好的匹 配在一起，从而使所有位置的得分之和尽可能的高。说白了，就是通过插入空位，让上下两行中尽可能多的一致的和相似的字符对在一起。这不是随便摆摆看看就能完成的，需要使用专门的序列比对算法。 </p>
 <p>​    根据比对序列的个数可以把序列比对分为<strong>双序列比对和多序列比对</strong>。顾名思义，双序列 比对就是比 2 条，而多序列比对是比 2 条以上。此外根据序列比对的算法不同，</p>
 <p>​    双序列比对 又分为<strong>全局比对和局部比对</strong>。全局比对就是全长比较，一个字符都不能落下。而局部比对是 比较对得最好的局部，对得不好的部分会被忽略不计。我们将从双序列比对的全局比对入手，看看序列比对的算法是如何插入空位，并使得插入后两条序列的得分最高的。</p>
-<h3 id="Dotplot打点法"><a href="#Dotplot打点法" class="headerlink" title="Dotplot打点法"></a>Dotplot打点法</h3><h4 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h4><p>​    打点法是最简单的比较两个序列的方法，理论上可以用纸和笔来完成。如果要比较下面这两条序列： </p>
+<h3 id="打点法概念"><a href="#打点法概念" class="headerlink" title="打点法概念"></a>打点法概念</h3><p>​    打点法是最简单的比较两个序列的方法，理论上可以用纸和笔来完成。如果要比较下面这两条序列： </p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668043715094.png" alt="1668043715094"></p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668043742557.png" alt="1668043742557"></p>
 <p>​    在打点矩阵中，<strong>连续的对角线及对角线的平行线代表两条序列中相同的区域</strong>。</p>
@@ -15150,7 +15150,7 @@ Name           Attrs
 <p>​    这样的打点矩阵必然是对称的，并且一定有一条主对角线（图 3）。此外，在横向或纵向上， 与主对角线平行的短平行线所对应的序列片段就是重复的部分。其中，红色短平行线对应的 ‘THE’在序列中重复出现了 3 次。包括主对角线在内，平行线出现的次数就是重复的次数。 </p>
 <p>​    用这种方法我们还可以快捷的发现序列中的<strong>串联重复序列以及重复的次数</strong>。我们只要数数在半个矩阵中包括主对角线在内的所有等距的平行线的个数，就可以知道重复的次数，而且最短的平行线对应的序列就是重复单元。</p>
 <p>​    短的串联重复序列具有高度多态性，也就 是说不同的个体间重复次数存在差异，而且这种差异在基因遗传过程中一般遵循孟德尔共显性遗传规律，所以快速查找某些特定的短的串联复序列的重复次数可以用于法医学的<u>个体识别或亲子鉴定</u>等领域。 </p>
-<h4 id="Dotlet-界面介绍"><a href="#Dotlet-界面介绍" class="headerlink" title="Dotlet 界面介绍"></a><strong>Dotlet 界面介绍</strong></h4><p>​    可以自动打点的软件有很多（表 1）。我们挑其中最常用的 Dotlet 软件做为演示（<strong><a href="http://myhits.isb-sib.ch/cgi-bin/dotlet">http://myhits.isb-sib.ch/cgi-bin/dotlet</a></strong>。Dotlet 基于 Java 开发，所以页面打开后会蹦出 JAVA 对话框。像对待 Jsmol 一样，接受 JAVA，信任 JAVA，运行 JAVA。当然前提是你的电脑已 经安装了 JAVA。如果还没有安装，可以到课程附件或者 JAVA 官网下载安装。别忘了安装后，重启浏览器，JAVA 才能生效。同样的，IE 如果不好使，可以尝试其他浏览器。 </p>
+<h3 id="Dotlet-界面介绍"><a href="#Dotlet-界面介绍" class="headerlink" title="Dotlet 界面介绍"></a><strong>Dotlet 界面介绍</strong></h3><p>​    可以自动打点的软件有很多（表 1）。我们挑其中最常用的 Dotlet 软件做为演示（<strong><a href="http://myhits.isb-sib.ch/cgi-bin/dotlet">http://myhits.isb-sib.ch/cgi-bin/dotlet</a></strong>。Dotlet 基于 Java 开发，所以页面打开后会蹦出 JAVA 对话框。像对待 Jsmol 一样，接受 JAVA，信任 JAVA，运行 JAVA。当然前提是你的电脑已 经安装了 JAVA。如果还没有安装，可以到课程附件或者 JAVA 官网下载安装。别忘了安装后，重启浏览器，JAVA 才能生效。同样的，IE 如果不好使，可以尝试其他浏览器。 </p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668044569496.png" alt="1668044569496"></p>
 <table>
 <thead>
@@ -15177,13 +15177,13 @@ Name           Attrs
 </tr>
 </tbody></table>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668044813102.png" alt="1668044813102"></p>
-<h4 id="Dotlet-应用实例"><a href="#Dotlet-应用实例" class="headerlink" title="Dotlet 应用实例"></a>Dotlet 应用实例</h4><p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668044956053.png" alt="1668044956053"></p>
+<h3 id="Dotlet-应用实例"><a href="#Dotlet-应用实例" class="headerlink" title="Dotlet 应用实例"></a>Dotlet 应用实例</h3><p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668044956053.png" alt="1668044956053"></p>
 <p>​    图 1 是上一节中 seq1 自己和自己打点计算出的打点图。注意默认的颜色方案是在越相 似的地方打的点的颜色越浅，越不相似的地方颜色越深。所以整体感觉像是在一张黑纸上打 白点。因为是 seq1 自己和自己打点，所以应该有一条明显的主对角线，这是所有自己和自 己打点的序列都会出现的情况。除此之外，还有一条与主对角线平行的次对角线，涉及 seq1 大约 1/2 的长度。这说明 seq1 的前半部分和后半部分非常的相似！</p>
 <p>​    我们把鼠标点在这条次对角线上的任意位置，之后就可以从下面的序列显示区域看到，这一点，对应横着这条 seq1 的位置 153 开始的这一段，同时对应竖着这条 seq1 的位置 11 开 始的这一段。为什么这一点对应的是一段呢？因为我们这里选的单元长度是 15，也就是一 次比较 15 个字母。从这里也可以看出，如果把 seq1 的前半段和后半段重合起来的话，它们是完全一样的序列。  </p>
 <p>​    图 1 右边给出了打点所用的参数设置。按照选定的替换计分矩阵和单元长度计算，比较 所能打出的最高分是 165 分，最低分是-60 分。默认的颜色方案是灰度从 0%到 100%。也就 是最高分 165 分的点具有 100%的灰度，即纯白色；最低分-60 分具有 0%的灰度，即纯黑色。参数下面的图给出了各个分值的点的个数。横坐标是分值，从-60 到 165，纵坐标是得某一分值的点的个数。我们可以看到绝大多数点的分值都是较低的，也就是绝大多数位置的比较 结果都是不相似的。只有少数对角线上的比较才是高分值的点，因为这些位置对应的是相似 的区域。这个情况反映在打点图上就是，绝大多数点都是深色的，只有少数点是浅色的，这 些浅色的点位于主对角线和两条对称的次对角线上。</p>
 <p>​    这里我们可以通过调整灰度条，来屏蔽大多数低分值的点，让他们统统变成黑色背景， 并且强化高分值的点，让他们以纯白色突出显示出来（图 2）。</p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668045793136.png" alt="1668045793136"></p>
-<h3 id="动态规划法"><a href="#动态规划法" class="headerlink" title="动态规划法"></a>动态规划法</h3><h4 id="双序列全局比对"><a href="#双序列全局比对" class="headerlink" title="双序列全局比对"></a>双序列全局比对</h4><p>​    经典的全局比对算法是 <strong>Needleman-Wunsch 算法</strong>。1970 年，Needleman 和 Wunsch 首先将<strong>动态规划</strong>法应用于两条序列的全局比对，后来这个算法就称为 Needleman-Wunsch 算法。今天，所有比对软件使用的算法都是从这个经典算法衍生出来的。  </p>
+<h2 id="序列比对-动态规划法"><a href="#序列比对-动态规划法" class="headerlink" title="序列比对-动态规划法"></a>序列比对-动态规划法</h2><h3 id="双序列全局比对"><a href="#双序列全局比对" class="headerlink" title="双序列全局比对"></a>双序列全局比对</h3><p>​    经典的全局比对算法是 <strong>Needleman-Wunsch 算法</strong>。1970 年，Needleman 和 Wunsch 首先将<strong>动态规划</strong>法应用于两条序列的全局比对，后来这个算法就称为 Needleman-Wunsch 算法。今天，所有比对软件使用的算法都是从这个经典算法衍生出来的。  </p>
 <p>​    我们用 Needleman-Wunsch 算法为序列 p 和序列 q 创建全局比对。输入值除了两条序列 之外，还要有<strong>替换计分矩阵</strong>以确定不同字母间的相似度得分，以及空位罚分（图 1）。空位 罚分就是当字母对空位的时候应该得几分。我们还是希望一致或相似的字母尽可能的对在一 起，字母对空位的情况和不相似的字母对在一起的情况一样，都不是我们希望的，还是少出 现为好，所以通常字母对空位会得到一个负分，这个负分就叫做<strong>空位罚分</strong>。这里我们让空位罚分，也就是 gap 分值为-5 分。在比对中没有空位对空位的情况。输入值就是这些。</p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668046097925.png" alt="1668046097925"></p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668046123952.png" alt="1668046123952"></p>
@@ -15193,7 +15193,7 @@ Name           Attrs
 <p>​    按照上面的公式，将整个得分矩阵填满。这时，我们再回过头来看一下第一行和第一列 （图 6）。其实，第一行的每一个值都是从左边的格加 gap 来的。所以我们给它们补上向左 的箭头。第一列的每一个值都是从上边的格加 gap 来的。所以我们给它们补上向上的箭头。 至此，所有的箭头和数值就都填好了。填满之后，<strong>右下角的分数就是整个全局比对最终的得 分</strong>。然后从这个位置开始<strong>追溯箭头一直到左上角的零</strong>，并且把这些箭头标记出来。</p>
 <p>​    图 6 中标出的红色箭头是写出全局比对的唯一依据。追溯箭头是从右下角到左上角，但是写全局比对是从左上角开始，如果是<strong>斜箭头则是字符对字符，如果是水平箭头或垂直箭头 则是字符对空位，箭头指着的序列为空位</strong>。我们看第一个是斜箭头，字母对字母，就是 A 对 A，第二个是水平箭头，字母对空位，箭头指着的序列是空位，也就是 C 对空位。然后 斜箭头 G 对 A，斜箭头 T 对 T，斜箭头 C 对 C，一直写到右下角，全局比对就出现了（图 7）。 唯一的一个空位插在序列 q 的 A 与 A 之间，这样最终的比对得分最高。不信的话可以试试， 其他任何一种插入空位的比对结果，得分都不会超过 21 分。因为我们在得分矩阵的创建过 程中，每一步都是在上一步最优的情况下得出的当前最优结果。  </p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668046572690.png" alt="1668046572690"></p>
-<h4 id="双序列局部对比"><a href="#双序列局部对比" class="headerlink" title="双序列局部对比"></a>双序列局部对比</h4><p>​    在看局部比对的算法之前，先看看序列 a 和序列 b 这两条序列，谁和序列 c 更相似一些 （图 1）。AC 做全局比对的得分是-46 分。BC 做全局比对的得分是 8 分。单从分数上看，b 跟 c 更相似，因为得分高。但是如果只看红框里这部分，a 和 c 显然比 b 和 c 对得要好。如 果只比较红框里这部分的话，a 和 c 的得分是 24 分，比 b 和 c 的得分要高。这个例子告诉我 们，对于像这样一长一短的两条序列，比较局部比比较全长更有意义。这就是为什么除了全局比对，还有局部比对。 </p>
+<h3 id="双序列局部对比"><a href="#双序列局部对比" class="headerlink" title="双序列局部对比"></a>双序列局部对比</h3><p>​    在看局部比对的算法之前，先看看序列 a 和序列 b 这两条序列，谁和序列 c 更相似一些 （图 1）。AC 做全局比对的得分是-46 分。BC 做全局比对的得分是 8 分。单从分数上看，b 跟 c 更相似，因为得分高。但是如果只看红框里这部分，a 和 c 显然比 b 和 c 对得要好。如 果只比较红框里这部分的话，a 和 c 的得分是 24 分，比 b 和 c 的得分要高。这个例子告诉我 们，对于像这样一长一短的两条序列，比较局部比比较全长更有意义。这就是为什么除了全局比对，还有局部比对。 </p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668046680161.png" alt="1668046680161"></p>
 <p>​    局部比对的算法和全局比对很相似，只是在选最大值时通过增加了第四个元素“0”，来 达到比对局部的效果。序列 p 和序列 q，一长一短，其他输入值跟全局比对的一样（图 2）。 </p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668046702735.png" alt="1668046702735"></p>
@@ -15205,19 +15205,19 @@ Name           Attrs
 <p>​    按照公式，填充满整个得分矩阵（图 6）。与全局比对不同，<strong>局部比对的得分不是在右下角，而是在整个矩阵中找最大值</strong>。这个最大值才是局部比对的最终得分，他可能出现在任何一个位置。这次箭头追溯也不是从右下角到左上角，而是从<strong>刚刚找到的最大值开始追溯到没有箭头为止</strong>。追溯箭头终止的位置也可以是得分矩阵中的任何一个位置。 </p>
 <p>​    最后根据标记好的箭头写出比对结果（图 7）。从左上到右下标记的红色箭头依次是： 斜箭头字母对字母，C 对 C；斜箭头字母对字母，G 对 G。相比这两条序列的全局比对结果， 两端的空位在局部比对中就全部被忽略掉了。  </p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668046946332.png" alt="1668046946332"></p>
-<h4 id="一致度和相似度-1"><a href="#一致度和相似度-1" class="headerlink" title="一致度和相似度"></a>一致度和相似度</h4><p>​    我们回过头来，再看看一致度和相似度的计算。之前我们卡在长度不一样的两个序列如 何计算一致度和相似度这个问题上。现在学会了序列比对，我们就可以先给这两条长度不同 的序列做全局比对，然后计算全局比对中一致字符的个数和相似字符的个数，再除以全局比对的长度，就可以得到它们的一致度和相似度了。比如下面这两条序列：  </p>
+<h2 id="一致度和相似度-1"><a href="#一致度和相似度-1" class="headerlink" title="一致度和相似度"></a>一致度和相似度</h2><p>​    我们回过头来，再看看一致度和相似度的计算。之前我们卡在长度不一样的两个序列如 何计算一致度和相似度这个问题上。现在学会了序列比对，我们就可以先给这两条长度不同 的序列做全局比对，然后计算全局比对中一致字符的个数和相似字符的个数，再除以全局比对的长度，就可以得到它们的一致度和相似度了。比如下面这两条序列：  </p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668059549705.png" alt="1668059549705"></p>
 <p>首先做出它们的全局比对，比对中一致字符的个数是 4 个，全局比对长度 6，一致度=67%。 相似字符个数 1，相似度就是(4+1)/6=83%。 </p>
 <p>​    由此，我们必须回过头来，把长度相同的两个序列计算一致度和相似度的方法重新规范 一下。尽管长度相同，但是做出的<strong>全局比对的长度并不一定等于序列的长度</strong>，比如下面这两条序列：  </p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668059716946.png" alt="1668059716946"></p>
 <p>上下各加入一个空位，全局比对的长度就不等于序列的长度了。所以不管两条序列长度是否相同，都要先对它们做全局比对。让两条序列先以最优的方式比对起来，再从全局比对中数 出一致字符和相似字符的个数，除以全局比对的长度，来得到它们的一致度和相似度。 </p>
-<h4 id="EMBL-全局双序列比对工具"><a href="#EMBL-全局双序列比对工具" class="headerlink" title="EMBL 全局双序列比对工具"></a><strong>EMBL 全局双序列比对工具</strong></h4><p>​    目前，使用率最高的是 EMBL 网 站的双序列比对工具（<a href="http://www.ebi.ac.uk/Tools/psa%EF%BC%89%E3%80%82%E6%89%93%E5%BC%80%E9%A1%B5%E9%9D%A2%EF%BC%8C%E4%B8%8A%E9%9D%A2%E6%9C%89%E5%85%A8%E5%B1%80%E6%AF%94%E5%AF%B9%E5%B7%A5%E5%85%B7%E3%80%81">http://www.ebi.ac.uk/Tools/psa）。打开页面，上面有全局比对工具、</a> 局部比对工具、还有基因组比对工具。</p>
+<h2 id="在线双序列比对工具"><a href="#在线双序列比对工具" class="headerlink" title="在线双序列比对工具"></a>在线双序列比对工具</h2><h3 id="EMBL全局双序列比对工具"><a href="#EMBL全局双序列比对工具" class="headerlink" title="EMBL全局双序列比对工具"></a>EMBL全局双序列比对工具</h3><p>​    目前，使用率最高的是 EMBL 网 站的双序列比对工具（<a href="http://www.ebi.ac.uk/Tools/psa%EF%BC%89%E3%80%82%E6%89%93%E5%BC%80%E9%A1%B5%E9%9D%A2%EF%BC%8C%E4%B8%8A%E9%9D%A2%E6%9C%89%E5%85%A8%E5%B1%80%E6%AF%94%E5%AF%B9%E5%B7%A5%E5%85%B7%E3%80%81">http://www.ebi.ac.uk/Tools/psa）。打开页面，上面有全局比对工具、</a> 局部比对工具、还有基因组比对工具。</p>
 <p>​    首先看全局比对中的蛋白质序列比对工具（图 1）。输入值非常简单，把要比较的两条 蛋白质序列贴在输入框里或者上传。可以使用示例文件 global.fasta 里面的两条序列。如果想 要进一步设置比对的参数，可以点 More options。从这里可以选择使用哪种替换记分矩阵。 按照之前讲过的原则，选择 PAM 矩阵或 BLOSUM 矩阵。如果实在不知道选哪个矩阵，就 闭着眼睛选 BLOSUME62 吧！下拉菜单里默认选的就是BLOSUM62。除了选择替换记分矩 阵，这里还可以设置空位罚分，也就是 gap 的分值。这里实际上是让你选空位对字母的情况罚几分，所以显示的是正数，但在计算的过程中还是按照负数处理。</p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668059927886.png" alt="1668059927886"></p>
 <p>​    计算机只需要用几秒钟的时间，就可以计算出结果（图 2）。在结果页面里，上部是比对使用的参数，以及得出的<strong>序列比对的长度、一致度、相似度、空位比例和比对得分</strong>。下部就是序列比对。在序列比对里，左边是两条序列的名字，因为输入的是 FASTA 格式的序列， 所以程序自动识别出了序列的名字。右边的序列比对分 3 行。上下两行是序列，里面插入了 许多的空位。中间这行标记出了哪些位置上下两个字母是完全相同的，用<strong>竖线</strong>表示。<strong>上下两个字母相似，用双点表示。上下不相似，用单点表示</strong>。字母对空位的情况，用空格表示。</p>
 <p>​    这样，我们只要数数比对结果里竖线的个数（40 个），再除以比对的长度（196 个），就可计算 出一致度。再用竖线的个数加上双点的个数（40+29=69 个），除以比对长度（196 个），就是相似度。整个比对里一共插入了 65 个空位，占整个比对长度的 33%。序列两边的数是这一行中的字母在序列中的位置数，而不是这一行的长度。比如第二行是 seq1 的第 49 个字母 到第 97 个字母，是 seq2 的第 27 个字母到第 75 个字母。 </p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668060665974.png" alt="1668060665974"></p>
-<h4 id="EMBL-局部双序列比对工具"><a href="#EMBL-局部双序列比对工具" class="headerlink" title="EMBL 局部双序列比对工具"></a><strong>EMBL 局部双序列比对工具</strong></h4><p>​    EMBL 的局部双序列比对工具可以选择经典的 Smith-Waterman 算法。仍然比对蛋白质序 列。输入的序列在示例文件 local.fasta 里面。More options 里面的参数设置和全局比对是一样 的。在这个例子里，我们保持所有参数都为默认值，点提交。  </p>
+<h3 id="EMBL-局部双序列比对工具"><a href="#EMBL-局部双序列比对工具" class="headerlink" title="EMBL 局部双序列比对工具"></a><strong>EMBL 局部双序列比对工具</strong></h3><p>​    EMBL 的局部双序列比对工具可以选择经典的 Smith-Waterman 算法。仍然比对蛋白质序 列。输入的序列在示例文件 local.fasta 里面。More options 里面的参数设置和全局比对是一样 的。在这个例子里，我们保持所有参数都为默认值，点提交。  </p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668060778365.png" alt="1668060778365"></p>
 <p>​    从比对结果可以看出（图 2），只有中间黑色的相似的部分出现在比对结果中了，两头 红色的不相似的部分被忽略掉了。也就是只返回了局部最相似，得分最高的片段的比对结果。  </p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668061385996.png" alt="1668061385996"></p>
@@ -15228,7 +15228,7 @@ Name           Attrs
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668061515140.png" alt="1668061515140"></p>
 <p>​    如果给这两条序列做全局比对的话，会发现，绝大部分位置对得都很差，只有中间这一 段对的还不错（图 6）。所以，有时候两条序列并不同源，它们只是有一个功能相似的区域，这时用局部比对我们就能很快找到这一区域在两条序列中的位置。但是如果做全局比对的话，结果就不如局部比对明显了。  </p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668061599727.png" alt="1668061599727"></p>
-<h4 id="Gap-的类型及分值设置"><a href="#Gap-的类型及分值设置" class="headerlink" title="Gap 的类型及分值设置"></a>Gap 的类型及分值设置</h4><p>​    EMBL 比对工具将 gap 分为两种，一种叫“gap 开头（GAP OPEN）”，另一种叫“gap 延长（GAP EXTEND）”（图 1）。gap 开头就是连续的一串 gap 里面打头的那一个，可以当 它是队长。gap 延长就是剩下的那些 gap，也就是队长后面跟着的小兵。这一串里，第一个 gap 是 gap 开头，后面的都是 gap 延长。单独的一个 gap 按 gap 开头算。</p>
+<h3 id="Gap-的类型及分值设置"><a href="#Gap-的类型及分值设置" class="headerlink" title="Gap 的类型及分值设置"></a>Gap 的类型及分值设置</h3><p>​    EMBL 比对工具将 gap 分为两种，一种叫“gap 开头（GAP OPEN）”，另一种叫“gap 延长（GAP EXTEND）”（图 1）。gap 开头就是连续的一串 gap 里面打头的那一个，可以当 它是队长。gap 延长就是剩下的那些 gap，也就是队长后面跟着的小兵。这一串里，第一个 gap 是 gap 开头，后面的都是 gap 延长。单独的一个 gap 按 gap 开头算。</p>
 <p>​    gap 开头和 gap 延长 可以分别定义不同的罚分。<strong>默认情况下，gap 开头罚分多，gap 延长罚分少</strong>。全局比对的例子里我们就是用这种搭配组合方案做出的比对。这次我们反过来试试，<strong>让 gap 开头罚分少， 让 gap 延长罚分多</strong>。比如 gap 开头选罚 1 分，gap 延长选罚 5 分，其他参数不变，再作一次看看结果发生了什么变化。 </p>
 <img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668061742608.png" alt="1668061742608">
 
@@ -15237,6 +15237,149 @@ Name           Attrs
 <p>​    而反过来，当 gap 开头小，gap 延长大的时候，说明在连续的字母里插入一个 gap 打开一个缺口很容易，并不需要付出太大代价，因为 gap 开头罚分小。但是想在第一个 gap 后面再接一个 gap 就难了，因为 gap 延长罚分大。所以这种情况下很难有长串的 gap 出现，gap每延长一个都要付出巨大代价。因此在第二次我们做的结果里（图 2-A）都是分散的 gap。除了开头一段因两条序列长短不同而不得已出现的长串 gap 外，没有其他的长串 gap 了。  </p>
 <p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668061932050.png" alt="1668061932050"></p>
 <p>​    这就是说，通过调整 gap 开头和 gap 延长，我们可以把序列比对做成我们期待的样子。举两个例子，看看应该怎样调整 gap 最合理。第一个例子，你知道要比对的两条序列很相似，是同源序列，所以它们的结构和功能也应该都差不多。其中一条序列的结构已知，另一条未知。你想把它们很好的比对在一起，用其中已知结构的序列做模板，来预测另一个序列的结构。这时候我们期待得到的是 gap 分散的比对结果还是 gap 集中的呢？另一例子，你知道要比对的两条序列绝大部分区域都很相似，但是其中一条序列的一个功能区在另一条序列中是缺失的。你想要通过序列比对把这个功能区找出来。这时候我们要怎么设置 gap 开头和 gap延长呢？这两个例子告诉我们，在实际应用中，需要根据不同的情况选取不同的 gap 罚分，以满足不同的生物学意义。如果你对结果没有什么预期，那就请保持默认的参数。</p>
+<h3 id="其他在线双序列比对工具"><a href="#其他在线双序列比对工具" class="headerlink" title="其他在线双序列比对工具"></a>其他在线双序列比对工具</h3><p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668236467003.png" alt="1668236467003"></p>
+<table>
+<thead>
+<tr>
+<th align="center">软件名</th>
+<th align="center">比对类型</th>
+<th align="center">网址链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">EMBL</td>
+<td align="center">Global/Local</td>
+<td align="center">http:/ / www. ebi.ac.uk/Tools/psa</td>
+</tr>
+<tr>
+<td align="center">PIR</td>
+<td align="center">Global</td>
+<td align="center"><a href="http://pir.georgetown.edu/pirwww/search/pairwise.shtml">http://pir.georgetown.edu/pirwww/search/pairwise.shtml</a></td>
+</tr>
+<tr>
+<td align="center">Lalign</td>
+<td align="center">Global/Local</td>
+<td align="center"><a href="http://www.ch.embnet.org/software/LALIGNform.html">http://www.ch.embnet.org/software/LALIGNform.html</a></td>
+</tr>
+<tr>
+<td align="center">LAGAN</td>
+<td align="center">Global</td>
+<td align="center"><a href="http://agan.stanford.edu/laganweb/index.shtml">http://agan.stanford.edu/laganweb/index.shtml</a></td>
+</tr>
+<tr>
+<td align="center">AligmMe</td>
+<td align="center">Alignment of Membrane Proteins</td>
+<td align="center"><a href="http://bioinfo.mpg.de/AlignMe/AlignMe.html">http://bioinfo.mpg.de/AlignMe/AlignMe.html</a></td>
+</tr>
+<tr>
+<td align="center">MCALIGN</td>
+<td align="center">Alignment fo non-coding DNA sequences</td>
+<td align="center"><a href="http://homepages.ed.ac.uk/eang33/mcalign/mcinstructions.html">http://homepages.ed.ac.uk/eang33/mcalign/mcinstructions.html</a></td>
+</tr>
+<tr>
+<td align="center">Biotools</td>
+<td align="center">Global/Local</td>
+<td align="center"><a href="http://1.51.215.28/~gongj/biotools">http://1.51.215.28/~gongj/biotools</a></td>
+</tr>
+</tbody></table>
+<h2 id="BLAST搜索"><a href="#BLAST搜索" class="headerlink" title="BLAST搜索"></a>BLAST搜索</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>​    我们已经学会如何做双序列比对，那可不可以拿一条序列和数据库中的每条序列逐一进行双序列比对，通过这种方法来找相似呢？这确实是一个办法。这样我们只要根据比对后得出的相似度排序，就可以找到最相似的那条序列了。但是，这种方法因计算耗时过长，只是理论上可行而已。之前我们用 EMBL 的双序列比对工具做全局比对，虽然很快就出结果了， 但至少也要经历一两秒钟的时间。而数据库中有几百万条序列，全部比对一遍，耗时太长。因此，我们需要<strong>快速的数据库相似性搜索工具</strong>。目前世界上广泛使用的就BLAST。它可以在尽可能准确的前提下，快速的从数据库中找到跟某一条序列相似的序列。 </p>
+<p>​    BLAST 是 Basic Local Alignment Search Tool 的首字母缩写，直译过来就是<strong>基本局部比对搜索工具</strong>。    </p>
+<p>​    BLAST 的<strong>基本原理</strong>很简单，要点是<strong>片段对</strong>的概念。所谓片段对是指两个给定序列中的一对子序列，它们的长度相等，且可以形成无空位的完全匹配。(图 1-A )中方框里的就是两个片段对。BLAST 从头至尾将两条序列扫描一遍并找出所有片段对，并在允许的阈值范围内对片段对进行延伸，最终找出高分值片段对（high-scoring pairs, HSPs）（图 1-B）。这样的<strong>计算复杂度是 n 的一次方</strong>（n 是序列的长度）。如果做双序列比对话需要构建一个 n 乘以 n 的表格，计算复杂度是 n 的二次方。所以找高分值片段对比做双序列比对节省了大量的时间，当然，前提是牺牲了一定的准确度。  </p>
+<p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668240861872.png" alt="1668240861872"></p>
+<h3 id="种类"><a href="#种类" class="headerlink" title="种类"></a>种类</h3><p>（按搜索内容分类）</p>
+<p>​    BLAST 实际上是综合在一起的一组工具的统称，它不仅可用于直接对蛋白质序列数据库和核酸序列数据库进行搜索，而且可以将待搜索的核酸序列翻译成蛋白质序列后再进行搜 索，或者反之，以提高搜索效率。因此 BLAST 可以分为 <strong>BLASTp，BLASTn，BLASTx，tBLASTn 和 tBLASTx</strong>。  </p>
+<ul>
+<li>BLASTp 也就是用蛋白质序列搜索蛋白质序列数据库</li>
+<li>BLASTn 是用核酸序列搜索核酸序列数据库</li>
+<li>BLASTx 是将核酸序列<strong>按 6 条链</strong>翻译成蛋白质序列后搜索蛋白质序列数据库。<ul>
+<li><strong>为什么是按 6 条链翻译？</strong>在无法得知翻译起始位点在情况下，翻译可能是从第1个碱基开始，三个三个的往后翻译，也可能是从第 2 个碱基开始，也可能从第 3 个碱基开始。另外还有可能是从 这条链的互补链上开始，这样又有3个可能的开始位置，加起来一共会产生 6 条可能被翻译出来的蛋白质序列。这 6 条中有些是真实存在的，有些是不存在，但是谁真谁假我们无从知晓，所以 6 条序列都要到数据库中去搜索一下试试。</li>
+<li>既然是核酸序列，<strong>为什么不做 BLASTn 直接到核酸数据库里去搜索</strong>，而是要到蛋白质数据库里搜索呢？我们说这样做是有意义的，比如，从核酸序列数据库里找不到跟你手里这条核酸序列相似的序列，或 找到了相似的序列但这些找到的序列无法提供有意义的注释信息。这时，就可以去蛋白质数 据库试试，看看这条核酸序列的翻译产物能不能从蛋白质数据库里找到相似的序列以及有意 义的注释信息。或者说，你不是想找跟你这条核酸序列相似的核酸序列，而是想找跟你这条 核酸序列编码蛋白质相似的蛋白质序列，这时就要做 BLASTx。 </li>
+</ul>
+</li>
+<li>tBLASTn 是用蛋白质序列 搜核酸序列数据库，核酸数据库中的核酸序列要按 6 条链翻译成蛋白质序列后再被搜索<ul>
+<li>核酸数据库里不是已经注释了某条核酸序列能够翻译成什么蛋白质序列吗？为 什么还要把这些序列可能翻译出来的 6 条蛋白质序列都翻译出来搜索呢？我们说，你看到的 是已经注释的，还有没注释的呢！就算是已经注释的，你看到的也只是已经研究出来的成果， 还有没研究出来的呢！别忘了，基因可以重叠，注释上说某段 DNA 序列可以编码某个蛋白，但是可能某个未被发现的基因也用到了这段 DNA 序列。而你要搜索的这个蛋白质序列可能 刚好就是这个未被发现的基因的翻译产物。这样就必须把核酸序列所有可能的翻译产物都翻译出来，才能搜索得到。  </li>
+</ul>
+</li>
+<li> tBLASTx 是将核酸序列按 6 条链翻译成蛋白质序列后 搜索核酸序列数据库，核酸数据库中的所有核酸序列也要按 6 条链翻译成的蛋白质序列后再 被搜索。这样用 BLASTn 搜不着的，用 tBLASTx 就能搜着了。  </li>
+</ul>
+<p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668241911377.png" alt="1668241911377"></p>
+<h3 id="BLASTp"><a href="#BLASTp" class="headerlink" title="BLASTp"></a>BLASTp</h3><p><strong><a href="http://www.ncbi.nlm.nih.gov/">http://www.ncbi.nlm.nih.gov/</a></strong></p>
+<p>1&gt; 在 BLASTp 输入界面里（图 1）：</p>
+<ul>
+<li>1）输入待搜索的蛋白质序列，这条序列可以在示例文件 blast.fasta 里面找到</li>
+<li>2）指定搜索跟输入序列哪部分相似的序列，如果空着就是全长搜索</li>
+<li>3）给搜索任务起一个名字，如果输入的是 FASTA 格式的序列，那么在输入框里面点一下，序列的名字就会被自动识别出来。</li>
+<li>4）如果在 Align two or more sequences 前面打勾的话，可以同时提交多个 BLAST 任务。 </li>
+</ul>
+<p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668242455679.png" alt="1668242455679"></p>
+<p>2&gt; 在输入界面的下部（图 2）</p>
+<ul>
+<li>1）选择被搜索的数据库</li>
+<li>2）Organism 可以把搜索范围限定在某一特定物种内， 或者排除某一物种</li>
+<li>3）在算法选择这一栏里，有之前提到的三种不同的 BLAST 算法，标准BLAST，PSI-BLAST 和 PHI-BLAST</li>
+</ul>
+<p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668242652994.png" alt="1668242652994"></p>
+<p>3&gt; 图形化搜索结果部分</p>
+<p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668242912374.png" alt="1668242912374"></p>
+<p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668242929689.png" alt="1668242929689"></p>
+<h3 id="PSI-BLAST"><a href="#PSI-BLAST" class="headerlink" title="PSI-BLAST"></a>PSI-BLAST</h3><p>​    为了提高速度，标准 BLAST 牺牲了一定的准确度，牺牲掉的准确度对高度相似的序列， 也就是亲缘关系近的序列构成不了威胁，不会把它们落掉，但是对于那些只有一点点相似， 也就是远源的序列，就有点麻烦了。它们很可能被落掉而没有被 BLAST 发现。 </p>
+<pre><code> 要解决这个问题，可以用 **PSI-BLAST**。PSI-BLAST 可以搜罗出一个庞大的蛋白质家族， 当然也包括标准 BLAST 不小心漏掉的那些远房亲戚。换言之，标准 BLAST 找到了直接认识的朋友，但朋友的朋友都丢掉了。PSI 是 **Position-Specific Iterated** 首字母缩写，中文是**位点特异性迭代**。
+</code></pre>
+<p>​    PSI-BLAST 的特色是搜完一遍再搜一遍，且从第二次搜索开始，每次搜索前都利用上一次搜索到的结果创建一个位置特异权重矩阵以扩大本次搜索的范围。如此反复直至没有新的结果产生为止。<strong>位置特异权重矩</strong>阵（Position-Specific Scoring Matrix，简称 PSSM）是 以矩阵的形式，统计一个多序列比对中，每个位置上不同残基出现的百分比。假设 A 的朋 友只有 B，B 朋友除 A 外还有 C。如果输入序列的第一个位置是 A，那么在第一轮没有 PSSM 辅助的情况下，只有第一个位置是 A 或 B 的序列被找到了。它们是图 1-A 中所示的四条序列。根据这四条序列创建的 PSSM（图 1-B）得知，第一个位置可以是 A，也可以是 B，那么在第二轮搜索中，除了 A 的朋友 B 之外，B 的朋友 C 也可以出现在第一个位置了。这样如此反复，我们就可以找到朋友的朋友了。</p>
+<p><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668243096395.png" alt="1668243096395"></p>
+<img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668243216063.png" alt="1668243216063" style="zoom: 67%;">
+
+<img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668243227679.png" alt="1668243227679" style="zoom: 67%;">
+
+<img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668243240064.png" alt="1668243240064" style="zoom:67%;">
+
+
+
+<h3 id="PHI-BLAST"><a href="#PHI-BLAST" class="headerlink" title="PHI-BLAST"></a>PHI-BLAST</h3><p>​    PHI-BLAST 和 PSI-BLAST 不同，PSI-BLAST 是撒大网搜索，而 PHI-BLAST 则是<strong>精准搜索</strong>。PHI 是 Pattern-Hit Initiated 首字母缩写，中文是<strong>模式识别</strong>。PHI-BLAST 能找到与输入序列相似的并符合某种特征模式的蛋白质序列。模式 Pattern 是对特征的描述。</p>
+<p>​    特定模式可通过正则表达式来表述。所谓正则表达式就是这句话的一个简约的规范性字 符书写法。发生 N 糖基化位点的序列符合的特定模式翻译成正则表达式为 N{P}[ST]{P}。 其中，N 是天冬酰胺，P 是脯氨酸，S 是丝氨酸，T 是苏氨酸。{}代表除大括号里的氨基酸 以外的任意氨基酸，[]代表中括号中的任意一个氨基酸。得知这些符号的含义之后，这个 正则表达式就很容易读懂了。PHI-BLAST 可以根据给入的正则表达式对搜索到的相似序列进行模式匹配，符合正则表达式的才会被作为结果输出。 </p>
+<p>​    熟悉一下正则表达式，{}代表除什么以外，[]代表其中之一，x 代表任意字 母，(3,7)代表 3 到 7 个某字符。那么正则表达式{L}GEx[GAS][LIVM]x(3,7)的意思是， 除 L 以外的任意一个字母，紧接 G，再紧接 E，再接一个任意字符，之后是 GAS 中的任意 一个，再接 LIVM 中的任意一个，最后再接 3 到 7 个任意字符。</p>
+<p>​    在 NCBI BLAST 工具的输入页面，当算法选择了 PHI-BLAST 之后，会自动出现模式输 入框（图 1）。输入正则表达式 S[IVFL]TPS(2)（含义为：一个 S 后面紧接 IVFL 中的任意 一个字母，再接 T，再接 P，再接两个 S）。这次搜索找到的相似序列中，只有符合该模式的才会被作为结果返回。 </p>
+<img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668243596930.png" alt="1668243596930" style="zoom:67%;">
+
+<img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668243608075.png" alt="1668243608075" style="zoom:67%;">
+
+
+
+<h3 id="SMART-BLAST"><a href="#SMART-BLAST" class="headerlink" title="SMART-BLAST"></a>SMART-BLAST</h3><img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668243698142.png" alt="1668243698142" style="zoom:67%;">
+
+<img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668243709460.png" alt="1668243709460" style="zoom:67%;">
+
+<img src="/2022/11/10/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E7%AC%94%E8%AE%B0/1668243748950.png" alt="1668243748950" style="zoom:67%;">
+
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>服务器</th>
+<th>网址谅解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>USA</td>
+<td>NCBI</td>
+<td><a href="http://www.ncbi.nlm.nih.gov/BLAST">http://www.ncbi.nlm.nih.gov/BLAST</a></td>
+</tr>
+<tr>
+<td>Europe</td>
+<td>ExPASys</td>
+<td><a href="http://web.expasy.org/blast">http://web.expasy.org/blast</a></td>
+</tr>
+<tr>
+<td>Europe</td>
+<td>Uniprot</td>
+<td><a href="http://www.uniprot.org/blast/">http://www.uniprot.org/blast/</a></td>
+</tr>
+<tr>
+<td>Japan</td>
+<td>DDBJ</td>
+<td><a href="http://blast.ddbj.nig.ac.jp/">http://blast.ddbj.nig.ac.jp</a></td>
+</tr>
+</tbody></table>
 ]]></content>
       <categories>
         <category>《生物信息学》</category>
@@ -15257,48 +15400,99 @@ Name           Attrs
 
 
 
-<h2 id="创建Tensor"><a href="#创建Tensor" class="headerlink" title="创建Tensor"></a>创建Tensor</h2><ul>
-<li><p>通过list创建</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 通过list创建tensor</span></span><br><span class="line">data = torch.tensor([<span class="number">2.</span>, <span class="number">3.2</span>])</span><br><span class="line">data = torch.FloatTensor([<span class="number">2.</span>, <span class="number">3.2</span>]) <span class="comment"># 尽量少用，容易混淆</span></span><br><span class="line">data = torch.tensor([[<span class="number">2.</span>, <span class="number">3.2</span>], [<span class="number">1.</span>, <span class="number">0.5</span>]])</span><br></pre></td></tr></table></figure></li>
-<li><p>通过numpy创建</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 通过numpy创建tensor</span></span><br><span class="line">a = np.array([<span class="number">2</span>, <span class="number">3.3</span>])</span><br><span class="line">data = torch.from_numpy(a)</span><br><span class="line">a = np.ones([<span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">data = torch.from_numpy(a)</span><br></pre></td></tr></table></figure></li>
-<li><p>创建未初始化的tensor</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建未初始化的tensor</span></span><br><span class="line">data = torch.empty(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(data)</span><br><span class="line"></span><br><span class="line">data = torch.FloatTensor(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(data)</span><br><span class="line"></span><br><span class="line">data = torch.IntTensor(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(data)</span><br></pre></td></tr></table></figure></li>
-<li><p>设置默认tensor类型</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 设置默认tensor类型</span></span><br><span class="line"><span class="built_in">print</span>(torch.tensor([<span class="number">1.2</span>, <span class="number">3</span>]).<span class="built_in">type</span>())    <span class="comment"># 默认是FloatTensor</span></span><br><span class="line">torch.set_default_tensor_type( torch.DoubleTensor)</span><br><span class="line"><span class="built_in">print</span>(torch.tensor([<span class="number">1.2</span>, <span class="number">3</span>]).<span class="built_in">type</span>())</span><br></pre></td></tr></table></figure></li>
-<li><p>创建随机初始化的tensor</p>
-<ul>
+<h2 id="创建Tensor"><a href="#创建Tensor" class="headerlink" title="创建Tensor"></a>创建Tensor</h2><h3 id="通过list创建"><a href="#通过list创建" class="headerlink" title="通过list创建"></a>通过list创建</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 通过list创建tensor</span></span><br><span class="line">data = torch.tensor([<span class="number">2.</span>, <span class="number">3.2</span>])</span><br><span class="line">data = torch.FloatTensor([<span class="number">2.</span>, <span class="number">3.2</span>]) <span class="comment"># 尽量少用，容易混淆</span></span><br><span class="line">data = torch.tensor([[<span class="number">2.</span>, <span class="number">3.2</span>], [<span class="number">1.</span>, <span class="number">0.5</span>]])</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="通过numpy创建"><a href="#通过numpy创建" class="headerlink" title="通过numpy创建"></a>通过numpy创建</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 通过numpy创建tensor</span></span><br><span class="line">a = np.array([<span class="number">2</span>, <span class="number">3.3</span>])</span><br><span class="line">data = torch.from_numpy(a)</span><br><span class="line">a = np.ones([<span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">data = torch.from_numpy(a)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="empty"><a href="#empty" class="headerlink" title="empty()"></a>empty()</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建未初始化的tensor</span></span><br><span class="line">data = torch.empty(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(data)</span><br><span class="line"></span><br><span class="line">data = torch.FloatTensor(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(data)</span><br><span class="line"></span><br><span class="line">data = torch.IntTensor(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(data)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="set-default-tensor-type"><a href="#set-default-tensor-type" class="headerlink" title="set_default_tensor_type()"></a>set_default_tensor_type()</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 设置默认tensor类型</span></span><br><span class="line"><span class="built_in">print</span>(torch.tensor([<span class="number">1.2</span>, <span class="number">3</span>]).<span class="built_in">type</span>())    <span class="comment"># 默认是FloatTensor</span></span><br><span class="line">torch.set_default_tensor_type( torch.DoubleTensor)</span><br><span class="line"><span class="built_in">print</span>(torch.tensor([<span class="number">1.2</span>, <span class="number">3</span>]).<span class="built_in">type</span>())</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="rand-randn"><a href="#rand-randn" class="headerlink" title="rand/randn()"></a>rand/randn()</h3><ul>
 <li><p>rand/rand_like; randint/randint_like</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># rand/rand_like; randint/randint_like</span></span><br><span class="line">a = torch.rand(<span class="number">3</span>, <span class="number">3</span>)     <span class="comment"># 在[0,1]之间均匀采样</span></span><br><span class="line">data = torch.rand_like(a)   <span class="comment"># 接受参数不在是shape而是一个tensor</span></span><br><span class="line">a = torch.randint(<span class="number">1</span>, <span class="number">10</span>, [<span class="number">3</span>, <span class="number">3</span>])    <span class="comment"># 在[1,10)之间均匀采样</span></span><br><span class="line">data = torch.randint_like(a, <span class="number">1</span>, <span class="number">10</span>)</span><br></pre></td></tr></table></figure></li>
 <li><p>randn</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># randn</span></span><br><span class="line">data = torch.randn(<span class="number">3</span>, <span class="number">3</span>)    <span class="comment"># N(0,1)标准正态分布取样</span></span><br><span class="line">data = torch.normal(mean=<span class="number">3</span>, std=<span class="number">1</span>, size=(<span class="number">3</span>, <span class="number">3</span>))     <span class="comment"># N(3,1)正态分布取样</span></span><br><span class="line"><span class="built_in">print</span>(data)</span><br><span class="line"><span class="comment"># 让每一个值服从不同的正态分布</span></span><br><span class="line">torch.normal(mean=torch.arange(<span class="number">4.</span>), std=torch.arange(<span class="number">1.</span>, <span class="number">0.6</span>, -<span class="number">0.1</span>)).reshape(<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(data)</span><br></pre></td></tr></table></figure></li>
 </ul>
-</li>
-<li><p>创建初始化为同一个值的tensor</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = torch.full([<span class="number">2</span>, <span class="number">3</span>], <span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(data)</span><br></pre></td></tr></table></figure></li>
-<li><p>创建等差数列的tensor</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = torch.arange(<span class="number">0</span>, <span class="number">10</span>, <span class="number">2</span>)   <span class="comment"># [0, 10)步幅为2</span></span><br><span class="line">data = torch.linspace(<span class="number">0</span>, <span class="number">10</span>, steps=<span class="number">11</span>) <span class="comment"># [0, 10]等分为11份</span></span><br><span class="line">data = torch.logspace(<span class="number">0</span>, -<span class="number">1</span>, steps=<span class="number">11</span>) <span class="comment"># 将[0,-1]11等分的值作为10的指数返回</span></span><br></pre></td></tr></table></figure></li>
-<li><p>创建全为1/0，对角的tensor</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成全0/1，对角的tensor</span></span><br><span class="line">data = torch.zeros(<span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line">data = torch.ones(<span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line">data = torch.eye(<span class="number">3</span>)</span><br></pre></td></tr></table></figure></li>
-<li><p>随机打算取值创建1维tensor</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 随机打散取值创建tensor</span></span><br><span class="line">data = torch.randperm(<span class="number">10</span>)   <span class="comment"># 不包含10</span></span><br><span class="line"><span class="built_in">print</span>(data)</span><br><span class="line"><span class="comment"># 协同shuffle洗牌</span></span><br><span class="line">a = torch.rand(<span class="number">4</span>, <span class="number">3</span>)</span><br><span class="line">b = torch.rand(<span class="number">4</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(a, <span class="string">&#x27;\n&#x27;</span>, b)</span><br><span class="line">idx = torch.randperm(<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(idx)</span><br><span class="line"><span class="built_in">print</span>(a[idx], <span class="string">&#x27;\n&#x27;</span>, b[idx])</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="索引与切片"><a href="#索引与切片" class="headerlink" title="索引与切片"></a>索引与切片</h2><ul>
-<li><p>四个维度 batch，channel，height，width</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = torch.rand(<span class="number">4</span>, <span class="number">3</span>, <span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>].shape)</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>, <span class="number">0</span>].shape)</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>].shape)</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>].shape)</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>])</span><br></pre></td></tr></table></figure></li>
-<li><p>基本切片</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切片 select fisrt/last N</span></span><br><span class="line"><span class="built_in">print</span>(a[:<span class="number">2</span>].shape)</span><br><span class="line"><span class="built_in">print</span>(a[:<span class="number">2</span>, :<span class="number">1</span>, :, :].shape)</span><br><span class="line"><span class="built_in">print</span>(a[:<span class="number">2</span>, -<span class="number">3</span>:, :, :].shape)</span><br><span class="line"><span class="built_in">print</span>(a[[<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>], -<span class="number">3</span>:, :, :].shape)</span><br></pre></td></tr></table></figure></li>
-<li><p>隔点采样</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 隔点采样 select by steps</span></span><br><span class="line"><span class="built_in">print</span>(a[:, :, <span class="number">0</span>:<span class="number">28</span>:<span class="number">2</span>, <span class="number">0</span>:<span class="number">28</span>:<span class="number">2</span>].shape)  <span class="comment"># 步长为2采样</span></span><br><span class="line"><span class="built_in">print</span>(a[:, :, ::<span class="number">2</span>, ::<span class="number">2</span>].shape)</span><br></pre></td></tr></table></figure></li>
-<li><p>某一维度上根据具体索引采样 index_select</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在某一维度上根据具体索引采样 index_select</span></span><br><span class="line"><span class="built_in">print</span>(a.index_select(<span class="number">0</span>, torch.tensor([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])).shape)  <span class="comment"># 在第0维度（batch）上采样[0,1,2]</span></span><br><span class="line"><span class="built_in">print</span>(a.index_select(<span class="number">1</span>, torch.tensor([<span class="number">0</span>, <span class="number">1</span>])).shape)  <span class="comment"># 在第1维度（channel）上采样[0,1]</span></span><br><span class="line"><span class="built_in">print</span>(a.index_select(<span class="number">2</span>, torch.arange(<span class="number">0</span>, <span class="number">28</span>, <span class="number">2</span>)).shape)</span><br></pre></td></tr></table></figure></li>
-<li><p>…表示任意多维度</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ...表示任意多维度</span></span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>, ...])  <span class="comment"># 等价于a[0, :, :, :]和a[0]</span></span><br><span class="line"><span class="built_in">print</span>(a[..., :<span class="number">2</span>])  <span class="comment"># 等价于a[:, :, :, :2]</span></span><br></pre></td></tr></table></figure></li>
-<li><p>根据掩码取满足条件的值 torch.masked_select</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 根据掩码取满足条件的值（会改变shape ）masked_select</span></span><br><span class="line">x = torch.randn(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">mask = x.ge(<span class="number">0.5</span>)</span><br><span class="line"><span class="built_in">print</span>(torch.masked_select(x, mask))</span><br></pre></td></tr></table></figure></li>
-<li><p>打平后根据索引采样 torch.take</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 打平后根据索引采样  take</span></span><br><span class="line">x = torch.tensor([[<span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span>], [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]])</span><br><span class="line"><span class="built_in">print</span>(torch.take(x, torch.tensor([<span class="number">0</span>, <span class="number">2</span>, <span class="number">5</span>])))</span><br></pre></td></tr></table></figure></li>
-</ul>
+<h3 id="full"><a href="#full" class="headerlink" title="full()"></a>full()</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建初始化为同一个值的tensor</span></span><br><span class="line">data = torch.full([<span class="number">2</span>, <span class="number">3</span>], <span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(data)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="arange"><a href="#arange" class="headerlink" title="arange()"></a>arange()</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建等差数列的tensor</span></span><br><span class="line">data = torch.arange(<span class="number">0</span>, <span class="number">10</span>, <span class="number">2</span>)   <span class="comment"># [0, 10)步幅为2</span></span><br><span class="line">data = torch.linspace(<span class="number">0</span>, <span class="number">10</span>, steps=<span class="number">11</span>) <span class="comment"># [0, 10]等分为11份</span></span><br><span class="line">data = torch.logspace(<span class="number">0</span>, -<span class="number">1</span>, steps=<span class="number">11</span>) <span class="comment"># 将[0,-1]11等分的值作为10的指数返回</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="zeros-ones-eye"><a href="#zeros-ones-eye" class="headerlink" title="zeros/ones/eye()"></a>zeros/ones/eye()</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成全0/1，对角的tensor</span></span><br><span class="line">data = torch.zeros(<span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line">data = torch.ones(<span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line">data = torch.eye(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="randperm"><a href="#randperm" class="headerlink" title="randperm()"></a>randperm()</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 随机打算取值创建1维tensor</span></span><br><span class="line">data = torch.randperm(<span class="number">10</span>)   <span class="comment"># 不包含10</span></span><br><span class="line"><span class="built_in">print</span>(data)</span><br><span class="line"><span class="comment"># 协同shuffle洗牌</span></span><br><span class="line">a = torch.rand(<span class="number">4</span>, <span class="number">3</span>)</span><br><span class="line">b = torch.rand(<span class="number">4</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(a, <span class="string">&#x27;\n&#x27;</span>, b)</span><br><span class="line">idx = torch.randperm(<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(idx)</span><br><span class="line"><span class="built_in">print</span>(a[idx], <span class="string">&#x27;\n&#x27;</span>, b[idx])</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="索引与切片"><a href="#索引与切片" class="headerlink" title="索引与切片"></a>索引与切片</h2><h3 id="四个维度"><a href="#四个维度" class="headerlink" title="四个维度"></a>四个维度</h3><p>batch，channel，height，width</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = torch.rand(<span class="number">4</span>, <span class="number">3</span>, <span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>].shape)</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>, <span class="number">0</span>].shape)</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>].shape)</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>].shape)</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="基本切片"><a href="#基本切片" class="headerlink" title="基本切片"></a>基本切片</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切片 select fisrt/last N</span></span><br><span class="line"><span class="built_in">print</span>(a[:<span class="number">2</span>].shape)</span><br><span class="line"><span class="built_in">print</span>(a[:<span class="number">2</span>, :<span class="number">1</span>, :, :].shape)</span><br><span class="line"><span class="built_in">print</span>(a[:<span class="number">2</span>, -<span class="number">3</span>:, :, :].shape)</span><br><span class="line"><span class="built_in">print</span>(a[[<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>], -<span class="number">3</span>:, :, :].shape)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="隔点采样"><a href="#隔点采样" class="headerlink" title="隔点采样"></a>隔点采样</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 隔点采样 select by steps</span></span><br><span class="line"><span class="built_in">print</span>(a[:, :, <span class="number">0</span>:<span class="number">28</span>:<span class="number">2</span>, <span class="number">0</span>:<span class="number">28</span>:<span class="number">2</span>].shape)  <span class="comment"># 步长为2采样</span></span><br><span class="line"><span class="built_in">print</span>(a[:, :, ::<span class="number">2</span>, ::<span class="number">2</span>].shape)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="a-index-select"><a href="#a-index-select" class="headerlink" title="a.index_select()"></a>a.index_select()</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在某一维度上根据具体索引采样 index_select</span></span><br><span class="line"><span class="built_in">print</span>(a.index_select(<span class="number">0</span>, torch.tensor([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])).shape)  <span class="comment"># 在第0维度（batch）上采样[0,1,2]</span></span><br><span class="line"><span class="built_in">print</span>(a.index_select(<span class="number">1</span>, torch.tensor([<span class="number">0</span>, <span class="number">1</span>])).shape)  <span class="comment"># 在第1维度（channel）上采样[0,1]</span></span><br><span class="line"><span class="built_in">print</span>(a.index_select(<span class="number">2</span>, torch.arange(<span class="number">0</span>, <span class="number">28</span>, <span class="number">2</span>)).shape)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="…"><a href="#…" class="headerlink" title="…"></a>…</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ...表示任意多维度</span></span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>, ...])  <span class="comment"># 等价于a[0, :, :, :]和a[0]</span></span><br><span class="line"><span class="built_in">print</span>(a[..., :<span class="number">2</span>])  <span class="comment"># 等价于a[:, :, :, :2]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="masked-select"><a href="#masked-select" class="headerlink" title="masked_select()"></a>masked_select()</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 根据掩码取满足条件的值（会改变shape ）masked_select</span></span><br><span class="line">x = torch.randn(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">mask = x.ge(<span class="number">0.5</span>)</span><br><span class="line"><span class="built_in">print</span>(torch.masked_select(x, mask))</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="take"><a href="#take" class="headerlink" title="take()"></a>take()</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 打平后根据索引采样  take</span></span><br><span class="line">x = torch.tensor([[<span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span>], [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]])</span><br><span class="line"><span class="built_in">print</span>(torch.take(x, torch.tensor([<span class="number">0</span>, <span class="number">2</span>, <span class="number">5</span>])))</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="维度变换"><a href="#维度变换" class="headerlink" title="维度变换"></a>维度变换</h2><h3 id="view-reshape"><a href="#view-reshape" class="headerlink" title="view/reshape"></a>view/reshape</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = torch.rand(<span class="number">4</span>, <span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line"><span class="built_in">print</span>(a.shape)</span><br><span class="line"></span><br><span class="line">a = a.view(<span class="number">4</span>, <span class="number">28</span> * <span class="number">28</span>)</span><br><span class="line"><span class="built_in">print</span>(a.shape)</span><br><span class="line"></span><br><span class="line">a = a.reshape(<span class="number">4</span> * <span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line"><span class="built_in">print</span>(a.shape)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="unsqueeze-squeeze-拉伸-挤压"><a href="#unsqueeze-squeeze-拉伸-挤压" class="headerlink" title="unsqueeze/squeeze 拉伸/挤压"></a>unsqueeze/squeeze 拉伸/挤压</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># unsqueeze</span></span><br><span class="line">a = torch.rand(<span class="number">4</span>, <span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line"><span class="built_in">print</span>(a.unsqueeze(<span class="number">0</span>).shape)  <span class="comment"># 在第0维度前插入维度；索引范围[-5, 4]</span></span><br><span class="line"><span class="built_in">print</span>(a.unsqueeze(-<span class="number">1</span>).shape)  <span class="comment"># 在最后一个维度后插入维度</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># squeeze</span></span><br><span class="line">b = torch.rand(<span class="number">32</span>)</span><br><span class="line">b = b.unsqueeze(<span class="number">1</span>).unsqueeze(<span class="number">2</span>).unsqueeze(<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(b.shape)</span><br><span class="line"><span class="built_in">print</span>(b.squeeze().shape)  <span class="comment"># 挤压所有size为1的维度</span></span><br><span class="line"><span class="built_in">print</span>(b.squeeze(<span class="number">0</span>).shape)</span><br><span class="line"><span class="built_in">print</span>(b.squeeze(<span class="number">1</span>).shape)  <span class="comment"># size不为1的维度不能被挤压</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="expand-repeat-扩张-重复"><a href="#expand-repeat-扩张-重复" class="headerlink" title="expand/repeat  扩张/重复"></a>expand/repeat  扩张/重复</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># expand(推荐使用)</span></span><br><span class="line">f = torch.rand(<span class="number">4</span>, <span class="number">32</span>, <span class="number">14</span>, <span class="number">14</span>)  <span class="comment"># [4, 32, 14, 14]</span></span><br><span class="line">b = torch.rand(<span class="number">32</span>)</span><br><span class="line">b = b.unsqueeze(<span class="number">1</span>).unsqueeze(<span class="number">2</span>).unsqueeze(<span class="number">0</span>)  <span class="comment"># [1, 32, 1, 1]</span></span><br><span class="line"><span class="comment"># 每个channel所有像素增加一个bias</span></span><br><span class="line">b = b.expand(<span class="number">4</span>, <span class="number">32</span>, <span class="number">14</span>, <span class="number">14</span>)  <span class="comment"># 维度一致；只有size为1的维度才能扩张成N</span></span><br><span class="line">b = b.expand(-<span class="number">1</span>, <span class="number">32</span>, -<span class="number">1</span>, -<span class="number">1</span>)  <span class="comment"># -1表示维度size不变</span></span><br><span class="line"><span class="built_in">print</span>(b.shape)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># repeat</span></span><br><span class="line">b = torch.rand(<span class="number">32</span>)</span><br><span class="line">b = b.unsqueeze(<span class="number">1</span>).unsqueeze(<span class="number">2</span>).unsqueeze(<span class="number">0</span>)  <span class="comment"># [1, 32, 1, 1]</span></span><br><span class="line">b = b.repeat(<span class="number">4</span>, <span class="number">1</span>, <span class="number">14</span>, <span class="number">14</span>)  <span class="comment"># 参数指重复次数</span></span><br><span class="line"><span class="built_in">print</span>(b.shape)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="转置-t"><a href="#转置-t" class="headerlink" title="转置 t"></a>转置 t</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 4.转置 t</span></span><br><span class="line"><span class="comment"># 只适用于矩阵，dimension为2</span></span><br><span class="line">a = torch.tensor([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]])</span><br><span class="line"><span class="built_in">print</span>(a.t())</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="transpose-维度交换"><a href="#transpose-维度交换" class="headerlink" title="transpose 维度交换"></a>transpose 维度交换</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># transpose 维度交换</span></span><br><span class="line">a = torch.rand(<span class="number">4</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">14</span>)</span><br><span class="line"><span class="comment"># [b,c,h,w] =&gt; [b,w,h,c] =&gt; [b, whc] =&gt; [b,c,w,h]  导致数据污染</span></span><br><span class="line">a1 = a.transpose(<span class="number">1</span>, <span class="number">3</span>).contiguous().view(<span class="number">4</span>, <span class="number">3</span> * <span class="number">14</span> * <span class="number">14</span>).view(<span class="number">4</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">14</span>)</span><br><span class="line"><span class="comment"># [b,c,h,w] =&gt; [b,w,h,c] =&gt; [b, whc] =&gt; [b,w,h,c]  =&gt; [b,c,w,h]</span></span><br><span class="line">a2 = a.transpose(<span class="number">1</span>, <span class="number">3</span>).contiguous().view(<span class="number">4</span>, <span class="number">3</span> * <span class="number">14</span> * <span class="number">14</span>).view(<span class="number">4</span>, <span class="number">14</span>, <span class="number">14</span>, <span class="number">3</span>).transpose(<span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(torch.<span class="built_in">all</span>(torch.eq(a, a1)))</span><br><span class="line"><span class="built_in">print</span>(torch.<span class="built_in">all</span>(torch.eq(a, a2)))</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="permute-维度排列"><a href="#permute-维度排列" class="headerlink" title="permute 维度排列"></a>permute 维度排列</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># permute 维度排列</span></span><br><span class="line">a = torch.rand(<span class="number">4</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">7</span>)</span><br><span class="line">a1 = a.permute(<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(a1.shape)</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>《Python》</category>
