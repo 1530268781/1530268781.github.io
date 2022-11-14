@@ -15493,6 +15493,33 @@ Name           Attrs
 
 <h3 id="permute-维度排列"><a href="#permute-维度排列" class="headerlink" title="permute 维度排列"></a>permute 维度排列</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># permute 维度排列</span></span><br><span class="line">a = torch.rand(<span class="number">4</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">7</span>)</span><br><span class="line">a1 = a.permute(<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(a1.shape)</span><br></pre></td></tr></table></figure>
 
+
+
+<h2 id="Broadcast机制"><a href="#Broadcast机制" class="headerlink" title="Broadcast机制"></a>Broadcast机制</h2><ul>
+<li>broadcast广播/自动扩张机制<ul>
+<li>expand</li>
+<li>不需要复制数据</li>
+</ul>
+</li>
+<li>主要思想<ul>
+<li>在前面插入维度，使维度一致</li>
+<li>扩张size为1的维度使得size一致</li>
+</ul>
+</li>
+<li>为什么需要broadcast<ul>
+<li>需求场景</li>
+<li>减少内存消耗</li>
+</ul>
+</li>
+<li>可以broadcast的情况<ul>
+<li>从最后一维往前开始匹配</li>
+<li>如果当前维度为1，扩展size到一致</li>
+<li>如果往前没有维度，则插入一个维度，并扩展size到一致</li>
+<li>其他情况都是不能broadcast的</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1668428901290.png" alt="1668428901290"></p>
 ]]></content>
       <categories>
         <category>《Python》</category>
