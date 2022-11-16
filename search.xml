@@ -11131,9 +11131,7 @@ print(d.popitem(last=True))
 <li> &lt;=    小于等于</li>
 </ul>
 <ul>
-<li><ul>
-<li> &gt;     大于</li>
-</ul>
+<li><p>&gt;     大于</p>
 </li>
 <li><p> &gt;=    大于等于</p>
 </li>
@@ -12575,7 +12573,7 @@ print(d.popitem(last=True))
 <li> sockfd.setsockopt(level,option,value)</li>
 <li>功能：设置套接字选项</li>
 <li>参数： level  选项类别   SOL_SOCKET<pre><code>        option 具体选项内容
-          value  选项值
+              value  选项值
 </code></pre>
 </li>
 </ul>
@@ -15520,7 +15518,40 @@ Name           Attrs
 </li>
 </ul>
 <p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1668428901290.png" alt="1668428901290"></p>
-]]></content>
+<h2 id="拼接与拆分"><a href="#拼接与拆分" class="headerlink" title="拼接与拆分"></a>拼接与拆分</h2><h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><p>要求除dim=d外，其他维度size一致</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a1 = torch.rand(<span class="number">4</span>, <span class="number">3</span>, <span class="number">16</span>, <span class="number">16</span>)</span><br><span class="line">a2 = torch.rand(<span class="number">5</span>, <span class="number">3</span>, <span class="number">16</span>, <span class="number">16</span>)</span><br><span class="line">b = torch.cat([a1, a2], dim=<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(b.size())</span><br><span class="line"></span><br><span class="line">a1 = torch.rand(<span class="number">4</span>, <span class="number">2</span>, <span class="number">16</span>, <span class="number">16</span>)</span><br><span class="line">a2 = torch.rand(<span class="number">4</span>, <span class="number">1</span>, <span class="number">16</span>, <span class="number">16</span>)</span><br><span class="line">b = torch.cat([a1, a2], dim=<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(b.size())</span><br><span class="line"></span><br><span class="line">a1 = torch.rand(<span class="number">4</span>, <span class="number">3</span>, <span class="number">16</span>, <span class="number">16</span>)</span><br><span class="line">a2 = torch.rand(<span class="number">4</span>, <span class="number">3</span>, <span class="number">16</span>, <span class="number">16</span>)</span><br><span class="line">b = torch.cat([a1, a2], dim=<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(b.size())</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h3><p>要求所有维度一致，会在dim=d维度前新增一个维度</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a1 = torch.rand(<span class="number">4</span>, <span class="number">3</span>, <span class="number">16</span>, <span class="number">16</span>)</span><br><span class="line">a2 = torch.rand(<span class="number">4</span>, <span class="number">3</span>, <span class="number">16</span>, <span class="number">16</span>)</span><br><span class="line">b = torch.stack([a1, a2], dim=<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(b.size())</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="split"><a href="#split" class="headerlink" title="split"></a>split</h3><p>按照长度拆分</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = torch.rand(<span class="number">3</span>, <span class="number">3</span>, <span class="number">16</span>, <span class="number">16</span>)</span><br><span class="line">aa, bb = a.split([<span class="number">2</span>, <span class="number">1</span>], dim=<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(aa.size(), bb.size())</span><br><span class="line"></span><br><span class="line">aa, bb, cc = a.split(<span class="number">1</span>, dim=<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(aa.size(), bb.size(), cc.size())</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="chunk"><a href="#chunk" class="headerlink" title="chunk"></a>chunk</h3><p>按照数量拆分</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = torch.rand(<span class="number">3</span>, <span class="number">3</span>, <span class="number">16</span>, <span class="number">16</span>)</span><br><span class="line">aa, bb = a.chunk(<span class="number">2</span>, dim=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">aa, bb, cc = a.chunk(<span class="number">3</span>, dim=<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(aa.size(), bb.size(), cc.size())</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="基本运算"><a href="#基本运算" class="headerlink" title="基本运算"></a>基本运算</h2><h3 id="加减乘除"><a href="#加减乘除" class="headerlink" title="加减乘除"></a>加减乘除</h3><p> +=*/ 或者add，sub，mul，div</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = torch.rand(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">b = torch.rand(<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据broadcast机制，b会自动扩展成[3, 4]再参与运算</span></span><br><span class="line">c1 = a + b</span><br><span class="line">c2 = a.add(b)</span><br><span class="line"><span class="built_in">print</span>(torch.<span class="built_in">all</span>(torch.eq(c1, c2)))</span><br><span class="line"></span><br><span class="line">c1 = a - b</span><br><span class="line">c2 = a.sub(b)</span><br><span class="line"><span class="built_in">print</span>(torch.<span class="built_in">all</span>(torch.eq(c1, c2)))</span><br><span class="line"></span><br><span class="line">c1 = a * b</span><br><span class="line">c2 = a.mul(b)</span><br><span class="line"><span class="built_in">print</span>(torch.<span class="built_in">all</span>(torch.eq(c1, c2)))</span><br><span class="line"></span><br><span class="line">c1 = a / b</span><br><span class="line">c2 = a.div(b)</span><br><span class="line"><span class="built_in">print</span>(torch.<span class="built_in">all</span>(torch.eq(c1, c2)))</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="matmul矩阵相乘"><a href="#matmul矩阵相乘" class="headerlink" title="matmul矩阵相乘"></a>matmul矩阵相乘</h3><ul>
+<li><p>mm 只支持二维</p>
+</li>
+<li><p>matmul</p>
+</li>
+<li><p>@</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># mm 只支持二维</span></span><br><span class="line">a = torch.tensor([[<span class="number">1.</span>, <span class="number">2.</span>], [<span class="number">3.</span>, <span class="number">4.</span>]])</span><br><span class="line">b = torch.ones(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">c = torch.mm(a, b)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"><span class="comment"># matmul</span></span><br><span class="line">c = torch.matmul(a, b)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"><span class="comment"># @</span></span><br><span class="line">c = a @ b</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一个例子</span></span><br><span class="line">x = torch.rand(<span class="number">4</span>, <span class="number">784</span>)</span><br><span class="line">w = torch.rand(<span class="number">512</span>, <span class="number">784</span>)</span><br><span class="line"><span class="built_in">print</span>((x @ w.t()).shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 大于2维张量相乘</span></span><br><span class="line">a = torch.rand(<span class="number">4</span>, <span class="number">3</span>, <span class="number">28</span>, <span class="number">64</span>)</span><br><span class="line">b = torch.rand(<span class="number">4</span>, <span class="number">3</span>, <span class="number">64</span>, <span class="number">32</span>)</span><br><span class="line">c = torch.rand(<span class="number">4</span>, <span class="number">1</span>, <span class="number">64</span>, <span class="number">32</span>)</span><br><span class="line"><span class="built_in">print</span>(torch.matmul(a, b).size())</span><br><span class="line"><span class="built_in">print</span>(torch.matmul(a, c).size())</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id><a href="#" class="headerlink" title></a></h3>]]></content>
       <categories>
         <category>《Python》</category>
       </categories>
