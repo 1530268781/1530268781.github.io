@@ -15917,6 +15917,17 @@ Name           Attrs
 
 
 <h2 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h2><h3 id="奥卡姆剃刀原则"><a href="#奥卡姆剃刀原则" class="headerlink" title="奥卡姆剃刀原则"></a>奥卡姆剃刀原则</h3><p><a href="https://baike.baidu.com/item/%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80%E5%8E%9F%E7%90%86/10900565?fr=kg_general">奥卡姆剃刀原则</a></p>
+<h3 id="减少过拟合"><a href="#减少过拟合" class="headerlink" title="减少过拟合"></a>减少过拟合</h3><ul>
+<li>More data</li>
+<li>Constraint model complexity<ul>
+<li>shallow</li>
+<li>regularization 正则化</li>
+</ul>
+</li>
+<li>Dropput</li>
+<li>Data argumentation 数据增强</li>
+<li>Early stopptin</li>
+</ul>
 <h3 id="正则化项"><a href="#正则化项" class="headerlink" title="正则化项"></a>正则化项</h3><p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1669172264288.png" alt="1669172264288"></p>
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
 <li><p>L2-regularization</p>
@@ -15926,6 +15937,26 @@ Name           Attrs
 <p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1669172468212.png" alt="1669172468212"></p>
 </li>
 </ul>
+<h2 id="动量和学习率衰减"><a href="#动量和学习率衰减" class="headerlink" title="动量和学习率衰减"></a>动量和学习率衰减</h2><h3 id="动量-momentum"><a href="#动量-momentum" class="headerlink" title="动量 momentum"></a>动量 momentum</h3><p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1669252095671.png" alt="1669252095671"></p>
+<ul>
+<li>也就是说，权值w现在不只向着 $\bigtriangledown{f}$ 的方向衰减，也向着的$z^{k}$方向进行衰减。而$z^{k}$是由$\bigtriangledown{w^{k-1}}$推出的，也就是现在w更新是当前衰减方向和之前衰减方向的惯性的结合。</li>
+</ul>
+<p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1669252733487.png" alt="1669252733487"></p>
+<p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1669252745212.png" alt="1669252745212"></p>
+<ul>
+<li><p>设置动量</p>
+<p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1669252833860.png" alt="1669252833860"></p>
+<p> 对于优化器SGD是需要进行设置的，但是对于Adam优化器不需要设置，因为它本身就有。 </p>
+</li>
+</ul>
+<h3 id="学习率衰减-learning-rate-decay"><a href="#学习率衰减-learning-rate-decay" class="headerlink" title="学习率衰减 learning rate decay"></a>学习率衰减 learning rate decay</h3><p>（1）  第一种，观测loss，如果到了一定时间，一直不变，就代表它无法找到更细分的地方，然后把learning rate减小点。 </p>
+<p> .step（loss_val）用来监测记录loss，检测周期为patience=的次数，如果没有不变的情况，则只有记录的作用，如果检测到，那么会按设定的规则进行减小learning rate。 </p>
+<p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1669253046483.png" alt="1669253046483"></p>
+<p>（2） 第二种是简单粗暴的，直接每多少次epoch减小多少 </p>
+<p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1669253122256.png" alt="1669253122256"></p>
+<h2 id="Early-stop-and-Dropout"><a href="#Early-stop-and-Dropout" class="headerlink" title="Early stop and Dropout"></a>Early stop and Dropout</h2><h3 id="Early-stop"><a href="#Early-stop" class="headerlink" title="Early stop"></a>Early stop</h3><p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1669254359267.png" alt="1669254359267"></p>
+<h3 id="Dropput"><a href="#Dropput" class="headerlink" title="Dropput"></a>Dropput</h3><p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1669254380365.png" alt="1669254380365"></p>
+<p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1669254406113.png" alt="1669254406113"></p>
 ]]></content>
       <categories>
         <category>《Python》</category>
