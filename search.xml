@@ -15850,14 +15850,9 @@ Name           Attrs
       </tags>
   </entry>
   <entry>
-    <title></title>
+    <title>Pytorch学习笔记</title>
     <url>/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>title: Pytorch学习笔记<br>date: 2022-11-12 12:01:29<br>tags:</p>
-<ul>
-<li>Pytorch</li>
-<li>Python<br>categories: 《Python》<br>cover: /img/pytorch_cover.jpg<br>top_img: /img/pytorch_topImg.jpg<br>toc_number: true</li>
-</ul>
-<h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1668234025873.png" alt="1668234025873"></p>
+    <content><![CDATA[<h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1668234025873.png" alt="1668234025873"></p>
 <h3 id="类型检验"><a href="#类型检验" class="headerlink" title="类型检验"></a>类型检验</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = torch.randn(<span class="number">2</span>, <span class="number">3</span>)   <span class="comment"># 正态分布随机初始化2*3矩阵</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(data.<span class="built_in">type</span>())</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(data))  <span class="comment"># python自带type()函数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 合法化检验</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>(data, torch.FloatTensor))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>(data, torch.cuda.FloatTensor))</span><br><span class="line">data = data.cuda()  <span class="comment"># 将数据搬运到GPU上面</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>(data, torch.cuda.FloatTensor))</span><br></pre></td></tr></table></figure>
 
 
@@ -16304,6 +16299,235 @@ Name           Attrs
 </ul>
 </li>
 </ul>
+<h2 id="nn-Module模块"><a href="#nn-Module模块" class="headerlink" title="nn.Module模块"></a>nn.Module模块</h2><p>转载自 <a href="https://zhuanlan.zhihu.com/p/557253923">pytorch nn.Module模块以及nn部分函数的介绍使用</a></p>
+<h3 id="nn-Module"><a href="#nn-Module" class="headerlink" title="nn.Module"></a>nn.Module</h3><p>​    ‎nn.Module是所有神经网络模块的基类，我们使用pytorch构建神经网络需要继承nn.Module类来实现，在<code>__init__</code>构造函数中申明各个层的定义，在<code>forward</code>中实现层之间的连接关系，实际上就是前向传播的过程。</p>
+<p>举个栗子，下面是简单构建有一个神经网络：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Model</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.conv1 = nn.Conv2d(<span class="number">1</span>, <span class="number">20</span>, <span class="number">5</span>)</span><br><span class="line">        self.conv2 = nn.Conv2d(<span class="number">20</span>, <span class="number">20</span>, <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        x = nn.ReLU(self.conv1(x))</span><br><span class="line">        x = nn.ReLU(self.conv2(x))</span><br><span class="line">        <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="nn-Conv2"><a href="#nn-Conv2" class="headerlink" title="nn.Conv2"></a>nn.Conv2</h3><p>参数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=<span class="number">1</span>, padding=<span class="number">0</span>, dilation=<span class="number">1</span>, groups=<span class="number">1</span>, bias=<span class="literal">True</span>, padding_mode=<span class="string">&#x27;zeros&#x27;</span>, device=<span class="literal">None</span>, dtype=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<p>‎对由多个输入平面组成的输入信号应用 <strong>2D 卷积</strong>。‎这个就是用在卷积神经网络中的卷积层。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>参数类型</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>in_channels</td>
+<td>int</td>
+<td>Number of channels in the input image</td>
+<td>输入图像通道数</td>
+</tr>
+<tr>
+<td>out_channels</td>
+<td>int</td>
+<td>Number of channels produced by the convolution</td>
+<td>卷积产生的通道数</td>
+</tr>
+<tr>
+<td>kernel_size</td>
+<td>(int or tuple)</td>
+<td>Size of the convolving kernel</td>
+<td>卷积核尺寸，可以设为1个int型数或者一个(int, int)型的元组。例如(2,3)是高2宽3卷积核</td>
+</tr>
+<tr>
+<td>stride</td>
+<td>(int or tuple, optional)</td>
+<td>Stride of the convolution. Default: 1</td>
+<td>卷积步长，默认为1。可以设为1个int型数或者一个(int, int)型的元组。</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>(int or tuple, optional)</td>
+<td>Zero-padding added to both sides of the input. Default: 0</td>
+<td>填充操作，控制padding_mode的数目。</td>
+</tr>
+<tr>
+<td>padding_mode</td>
+<td>(string, optional)</td>
+<td>‘zeros’, ‘reflect’, ‘replicate’ or ‘circular’. Default: ‘zeros’</td>
+<td>padding模式，默认为Zero-padding 。</td>
+</tr>
+<tr>
+<td>dilation</td>
+<td>(int or tuple, optional)</td>
+<td>Spacing between kernel elements. Default: 1</td>
+<td>扩张操作：控制kernel点（卷积核点）的间距，默认值:1。</td>
+</tr>
+<tr>
+<td>groups</td>
+<td>(int, optional)</td>
+<td>Number of blocked connections from input channels to output channels. Default: 1</td>
+<td>group参数的作用是控制分组卷积，默认不分组，为1组。</td>
+</tr>
+<tr>
+<td>bias</td>
+<td>(bool, optional)</td>
+<td>If True, adds a learnable bias to the output. Default: True</td>
+<td>为真，则在输出中添加一个可学习的偏差。默认：True。</td>
+</tr>
+</tbody></table>
+<p>举个栗子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import torch</span><br><span class="line"></span><br><span class="line">x = torch.randn(1, 3, 28, 28)</span><br><span class="line">print(x.shape)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">conv2d = torch.nn.Conv2d(in_channels=3, out_channels=12, kernel_size=3)</span><br><span class="line">res = conv2d(x)</span><br><span class="line">print(res.shape)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic1.zhimg.com/80/v2-06f173e656d0a8d77e4f41250459cf3c_720w.webp" alt="img"></p>
+<h3 id="nn-MaxPool2d-1"><a href="#nn-MaxPool2d-1" class="headerlink" title="nn.MaxPool2d"></a>nn.MaxPool2d</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.MaxPool2d(kernel_size, stride=<span class="literal">None</span>, padding=<span class="number">0</span>, dilation=<span class="number">1</span>, return_indices=<span class="literal">False</span>, ceil_mode=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<p>‎对由多个输入平面组成的输入信号应用 <strong>2D 最大池化</strong>，用在池化层。Pool层用于提取重要信息的操作，可以去掉部分相邻的信息，减少计算开销。MaxPool在提取数据时，保留相邻信息中的最大值，去掉其他值。</p>
+<p>我们先来看一下基本参数，一共六个：</p>
+<ul>
+<li><strong>kernel_size</strong> ：表示做最大池化的窗口大小，可以是单个值，也可以是tuple元组</li>
+<li><strong>stride</strong> ：步长，可以是单个值，也可以是tuple元</li>
+<li><strong>padding</strong> ：填充，可以是单个值，也可以是tuple元组</li>
+<li><strong>dilation</strong> ：控制窗口中元素步幅</li>
+<li><strong>return_indices</strong>：布尔类型，返回最大值位置索引</li>
+<li><strong>ceil_mode</strong>：布尔类型，为True，用向上取整的方法，计算输出形状；默认是向下取整。</li>
+</ul>
+<p>举个栗子：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x = torch.randn(<span class="number">1</span>, <span class="number">3</span>, <span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line"><span class="built_in">print</span>(x.shape)</span><br><span class="line">conv2d = torch.nn.Conv2d(in_channels=<span class="number">3</span>, out_channels=<span class="number">12</span>, kernel_size=<span class="number">3</span>)</span><br><span class="line">res = conv2d(x)</span><br><span class="line"><span class="built_in">print</span>(res.shape)</span><br><span class="line">pool = torch.nn.MaxPool2d(kernel_size=<span class="number">2</span>)</span><br><span class="line">res = pool(res)</span><br><span class="line"><span class="built_in">print</span>(res.shape)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic1.zhimg.com/80/v2-a16aa1273abb581c6001cbd092fffb94_720w.webp" alt="img"></p>
+<h3 id="nn-BatchNorm2d"><a href="#nn-BatchNorm2d" class="headerlink" title="nn.BatchNorm2d"></a>nn.BatchNorm2d</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.BatchNorm2d(num_features, eps=<span class="number">1e-05</span>, momentum=<span class="number">0.1</span>, affine=<span class="literal">True</span>, track_running_stats=<span class="literal">True</span>, device=<span class="literal">None</span>, dtype=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<p>功能：对输入的四维数组进行<strong>批量标准化处理</strong></p>
+<ul>
+<li><strong>num_features</strong>：输入图像的通道数量。</li>
+<li><strong>eps</strong>：稳定系数，防止分母出现0。</li>
+<li><strong>momentum</strong>： 动态均值和动态方差所使用的动量，即一个用于运行过程中均值和方差的一个估计参数，默认值为0.1。</li>
+<li><strong>affine</strong>：代表gamma，beta是否可学。如果设为True，代表两个参数是通过学习得到的；如果设为False，代表两个参数是固定值，默认情况下，gamma是1，beta是0。</li>
+<li><strong>track_running_stats</strong>：BatchNorm2d中存储的的均值和方差是否需要更新，若为True，表示需要更新；反之不需要更新。</li>
+</ul>
+<p>举个栗子：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">m = torch.nn.BatchNorm2d(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">input</span> = torch.randn(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">input</span>)</span><br><span class="line">output = m(<span class="built_in">input</span>)</span><br><span class="line"><span class="built_in">print</span>(output)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/v2-12ac857e3d114d7416c13595948b4493_720w.webp" alt="img"></p>
+<h3 id="nn-Linear"><a href="#nn-Linear" class="headerlink" title="nn.Linear"></a>nn.Linear</h3><p><em><code>nn.Linear()</code>是用于设置网络中的<strong>全连接层</strong>的</em></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.Linear(in_features, out_features, bias=<span class="literal">True</span>, device=<span class="literal">None</span>, dtype=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>in_features</strong> - 每个输入样本的大小</li>
+<li><strong>out_features</strong> - 每个输出样本的大小</li>
+<li><strong>bias</strong> - 如果设置为False，则图层不会学习附加偏差。默认值：True</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">m = nn.Linear(<span class="number">3</span>, <span class="number">12</span>)</span><br><span class="line"><span class="built_in">input</span> = torch.randn(<span class="number">128</span>, <span class="number">3</span>)</span><br><span class="line">output = m(<span class="built_in">input</span>)</span><br><span class="line"><span class="built_in">print</span>(output.shape)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic3.zhimg.com/80/v2-6ba2c166235232c49c45606bf3ebe602_720w.webp" alt="img"></p>
+<h3 id="nn-Dropout"><a href="#nn-Dropout" class="headerlink" title="nn.Dropout"></a>nn.Dropout</h3><p>‎在训练期间，使用伯努利分布中的样本，以概率p随机<strong>将输入张量的某些元素归零</strong>。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.Dropout(p=<span class="number">0.5</span>, inplace=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>nn.dropout()</code>是为了<strong>防止或减轻过拟合</strong>而使用的函数，它一般用在全连接层,<code>Dropout</code>就是在不同的训练过程中随机扔掉一部分神经元。也就是让某个神经元的激活值以一定的概率p，让其停止工作，这次训练过程中不更新权值，也不参加神经网络的计算。但是它的权重得保留下来（只是暂时不更新而已），因为下次样本输入时它可能又得工作了。</p>
+<h3 id="nn-ReLU"><a href="#nn-ReLU" class="headerlink" title="nn.ReLU"></a>nn.ReLU</h3><p>为了训练深层神经网络，需要一个激活函数神经网络，它看起来和行为都像一个线性函数，但实际上是一个非线性函数，允许学习数据中的复杂关系 。该函数还必须提供更灵敏的激活和输入，避免饱和。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.ReLU(inplace=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/v2-4a5a399e3c2067fe846906f25acc9223_720w.webp" alt="img"></p>
+<h3 id="nn-Sigmoid"><a href="#nn-Sigmoid" class="headerlink" title="nn.Sigmoid"></a>nn.Sigmoid</h3><p><strong>Sigmoid 激活函数</strong>，也被称为 Logistic函数神经网络，传统上是一个非常受欢迎的神经网络激活函数。函数的输入被转换成介于0.0和1.0之间的值。大于1.0的输入被转换为值1.0，同样，小于0.0的值被折断为0.0。所有可能的输入函数的形状都是从0到0.5到1.0的 s 形。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-f088a29d76c36b130ece733bc152ae91_720w.webp" alt="img"></p>
+<p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/v2-3f153fe52a5023c2707dc09820223e27_720w.webp" alt="img"></p>
+<h3 id="nn-Tanh"><a href="#nn-Tanh" class="headerlink" title="nn.Tanh"></a>nn.Tanh</h3><p>Tanh的诞生比Sigmoid晚一些，sigmoid函数我们提到过有一个缺点就是输出不以0为中心，使得收敛变慢的问题。而Tanh则就是解决了这个问题。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-6061833a1411df11c0cad810f2657409_720w.webp" alt="img"></p>
+<p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/v2-d25ddb0d267d329eff37e6746109aa7d_720w.webp" alt="img"></p>
+<h3 id="nn-LSTM"><a href="#nn-LSTM" class="headerlink" title="nn.LSTM"></a>nn.LSTM</h3><p>LSTM*一般指长短期记忆人工神经网络。 <strong>长短期记忆网络</strong>（<em>LSTM</em>，Long Short-Term Memory）是一种时间循环神经网络，是为了解决一般的RNN（循环神经网络）存在的长期依赖问题而专门设计出来的</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.lstm(input_size,hidden_size,num_layers,bias,batch_first,dropout,bidirectional)</span><br></pre></td></tr></table></figure>
+
+<p>详细介绍一下参数：</p>
+<ul>
+<li><strong>input_size</strong>：表示的是输入的矩阵特征数，或者说是输入的维度；</li>
+<li><strong>hidden_size</strong>：隐藏层的大小（即隐藏层节点数量），输出向量的维度等于隐藏节点数；</li>
+<li><strong>num_layer</strong>s：lstm 隐层的层数，默认为1；</li>
+<li><strong>bias</strong>：隐层状态是否带 bias，默认为 true；</li>
+<li><strong>batch_first</strong>：True 或者 False，如果是 True，则 input 为(batch, seq, input_size)，默认值为：False（seq_len, batch, input_size）</li>
+<li><strong>dropout</strong>：默认值0，除最后一层，每一层的输出都进行dropout；</li>
+<li><strong>bidirectional</strong>：如果设置为 True, 则表示双向 LSTM，默认为 False。</li>
+</ul>
+<p>nn.LSTM中输入与输出关系为output, (hn, cn) = lstm(input, (h0, c0))，输入输出格式如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">##输入数据格式：</span></span><br><span class="line"><span class="built_in">input</span>(seq_len, batch, input_size)</span><br><span class="line">h0(num_layers * num_directions, batch, hidden_size)</span><br><span class="line">c0(num_layers * num_directions, batch, hidden_size)</span><br><span class="line"> </span><br><span class="line"><span class="comment">##输出数据格式：</span></span><br><span class="line">output(seq_len, batch, hidden_size * num_directions)</span><br><span class="line">hn(num_layers * num_directions, batch, hidden_size)</span><br><span class="line">cn(num_layers * num_directions, batch, hidden_size)</span><br></pre></td></tr></table></figure>
+
+<p>​    **input (seq_len, batch, input_size)**，seq_len表示每个batch输入多少数据，batch表示把数据分成了batch批,input_size为样本输入维度。</p>
+<p>​    **output(seq_len, batch, hidden_size * num_directions)**，output是一个三维张量，第一维表示序列长度，第二维表示数据批次的多少batch，即数据分为几批送进来，第三维hidden_size隐藏层大小，双向则二倍，单向则等价于隐藏层大小。</p>
+<p>​    <strong>hn</strong>是一个三维张量，第一维是num_layers*num_directions，num_layers是我们定义的神经网络的层数，num_directions表示是否为双向LSTM；第二维表示一批的样本数量；第三维表示隐藏层的大小。</p>
+<p>​    c_n与h_n一致。</p>
+<h3 id="nn-RNN"><a href="#nn-RNN" class="headerlink" title="nn.RNN"></a>nn.RNN</h3><p><em>RNN</em>一般指循环神经网络。 循环神经网络（Recurrent Neural Network,<em>RNN</em>）是一类以序列（sequence）数据为输入，在序列的演进方向进行递归（recursion）且所有节点（循环单元）按链式连接的递归神经网络（recursive neural network）。</p>
+<p>用法同<code>nn.LSTM</code></p>
+<h3 id="nn-GRU"><a href="#nn-GRU" class="headerlink" title="nn.GRU"></a>nn.GRU</h3><p>门控循环神经网络（gated recurrent neural network）是为了更好地捕捉时序数据中间隔较大的依赖关系,门控循环单元（gated recurrent unit, GRU)是一种常用的门控循环神经网络。</p>
+<p>用法同<code>nn.LSTM</code></p>
+<h3 id="nn-Sequential"><a href="#nn-Sequential" class="headerlink" title="nn.Sequential"></a>nn.Sequential</h3><p>一个序列容器，用于搭建神经网络的模块被按照被传入构造器的顺序添加到<strong>nn.Sequential()容器</strong>中。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">model = nn.Sequential(</span><br><span class="line">    nn.Conv2d(<span class="number">1</span>, <span class="number">20</span>, <span class="number">5</span>),</span><br><span class="line">    nn.ReLU(),</span><br><span class="line">    nn.Conv2d(<span class="number">20</span>, <span class="number">64</span>, <span class="number">5</span>),</span><br><span class="line">    nn.ReLU()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">x = torch.randn(<span class="number">1</span>, <span class="number">1</span>, <span class="number">30</span>, <span class="number">30</span>)</span><br><span class="line">y = model(x)</span><br><span class="line"><span class="built_in">print</span>(y.shape)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>转载自 <a href="https://zhuanlan.zhihu.com/p/499410228">named_parameters(), named_children, named_modules()方法</a></p>
+<h3 id="named-parameters"><a href="#named-parameters" class="headerlink" title="named_parameters()"></a>named_parameters()</h3><p>可以对一个<code>nn.Module</code>中所有注册的参数进行迭代:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyLinear</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, in_features, out_features</span>):</span></span><br><span class="line">    <span class="built_in">super</span>().__init__()</span><br><span class="line">    self.weight = nn.Parameter(torch.randn(in_features, out_features))</span><br><span class="line">    self.bias = nn.Parameter(torch.randn(out_features))</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, <span class="built_in">input</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">input</span> @ self.weight) + self.bias</span><br></pre></td></tr></table></figure>
+
+
+
+<p>可以通过调用<code>named_parameters()</code>方法得到我们定义的<code>nn.Module</code>, 即<code>MyLinear</code>中所有的可学习的参数:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">my_linear = MyLinear(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"><span class="keyword">for</span> param <span class="keyword">in</span> my_linear.named_parameters():</span><br><span class="line">    <span class="built_in">print</span>(param)</span><br></pre></td></tr></table></figure>
+
+<p>可以得到以下输出:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(<span class="string">&#x27;weight&#x27;</span>, Parameter containing:</span><br><span class="line">tensor([[ <span class="number">0.9009</span>,  <span class="number">0.6984</span>,  <span class="number">3.0670</span>,  <span class="number">0.9113</span>],</span><br><span class="line">        [-<span class="number">0.2515</span>, -<span class="number">0.1617</span>,  <span class="number">0.2517</span>,  <span class="number">0.0977</span>],</span><br><span class="line">        [-<span class="number">1.0986</span>, -<span class="number">0.3517</span>, -<span class="number">0.4920</span>, -<span class="number">0.4112</span>]], requires_grad=<span class="literal">True</span>))</span><br><span class="line">(<span class="string">&#x27;bias&#x27;</span>, Parameter containing:</span><br><span class="line">tensor([-<span class="number">0.2491</span>, -<span class="number">0.1508</span>,  <span class="number">0.8393</span>, -<span class="number">1.3849</span>], requires_grad=<span class="literal">True</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>我们可以输出更多信息, 来更仔细地查看一下<code>param</code>的内容:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">my_linear = MyLinear(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"><span class="keyword">for</span> param <span class="keyword">in</span> my_linear.named_parameters():</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">len</span>(param))</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">type</span>(param[<span class="number">0</span>]), param[<span class="number">0</span>])</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">type</span>(param[<span class="number">1</span>]), param[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>得到了以下输出:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">str</span>&#x27;&gt; <span class="title">weight</span></span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> &#x27;<span class="title">torch</span>.<span class="title">nn</span>.<span class="title">parameter</span>.<span class="title">Parameter</span>&#x27;&gt; <span class="title">Parameter</span> <span class="title">containing</span>:</span></span><br><span class="line">tensor([[-<span class="number">0.3835</span>,  <span class="number">1.9484</span>,  <span class="number">0.6865</span>, -<span class="number">1.0978</span>],</span><br><span class="line">        [-<span class="number">1.7985</span>,  <span class="number">1.0263</span>, -<span class="number">0.7779</span>, -<span class="number">0.4302</span>],</span><br><span class="line">        [-<span class="number">0.2007</span>,  <span class="number">0.0540</span>,  <span class="number">0.2876</span>,  <span class="number">0.0776</span>]], requires_grad=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>可以发现<code>param</code>是由2个元素组成的<code>tuple</code>, 其中第一个元素是<code>str</code>类型的，表示参数的名字, 第二个元素是<code>torch.nn.parameter.Parameter</code>类型的，表示包含的参数信息</p>
+<h3 id="named-children"><a href="#named-children" class="headerlink" title="named_children()"></a>named_children()</h3><p>​    可以通过调用<code>nn.Module</code>的<code>named_children()</code>方法来查看这个<code>nn.Module</code>的<strong>直接子级</strong>的模块:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="built_in">super</span>().__init__()</span><br><span class="line">    self.linear_0 = MyLinear(<span class="number">4</span>, <span class="number">3</span>)</span><br><span class="line">    self.linear_1 = MyLinear(<span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">    x = self.linear_0(x)</span><br><span class="line">    x = F.relu(x)</span><br><span class="line">    x = self.linear_1(x)</span><br><span class="line">    <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
+
+<p>​    这里的<code>Net</code>是由我们定义的<code>MyLinear</code>层组成的, 其中包括了两个children，分别为<code>linear_0</code>和<code>linear_1</code>, 我们使用<code>named_children()</code>可以查看<code>Net</code>所包含的直接子级模块:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">net = Net()</span><br><span class="line"><span class="keyword">for</span> child <span class="keyword">in</span> net.named_children():</span><br><span class="line">    <span class="built_in">print</span>(child)</span><br></pre></td></tr></table></figure>
+
+<p>此时可以得到以下输出:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(<span class="string">&#x27;linear_0&#x27;</span>, MyLinear())</span><br><span class="line">(<span class="string">&#x27;linear_1&#x27;</span>, MyLinear())</span><br></pre></td></tr></table></figure>
+
+<p>如果我们调用了<code>children()</code>方法，与<code>named_children()</code>的区别就是，不会输出名称:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> child <span class="keyword">in</span> net.children():</span><br><span class="line">    <span class="built_in">print</span>(child)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>MyLinear()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>MyLinear()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="named-modules"><a href="#named-modules" class="headerlink" title="named_modules()"></a>named_modules()</h3><p>​    在上一个section中我们介绍了<code>named_children()</code>，但是这个方法只能遍历第一级的<code>nn.Module</code>，如果<code>nn.Module()</code>中的直接子级也是一个<code>nn.Module</code>，你需要连着子级一起遍历（<strong>going deeper</strong>）, 则可以调用<code>named_modules()</code>方法，这个方法会循环遍历<code>nn.Module</code>以及其<code>child nn.Modules</code> ,其实与<code>named_children()</code>的主要区别就是遍历的程度是否更deeper:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="built_in">super</span>().__init__()</span><br><span class="line">    self.linear_0 = MyLinear(<span class="number">4</span>, <span class="number">3</span>)</span><br><span class="line">    self.linear_1 = MyLinear(<span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">    x = self.linear_0(x)</span><br><span class="line">    x = F.relu(x)</span><br><span class="line">    x = self.linear_1(x)</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line">net = Net()</span><br><span class="line"><span class="keyword">for</span> child <span class="keyword">in</span> net.named_modules():</span><br><span class="line">    <span class="built_in">print</span>(child)</span><br></pre></td></tr></table></figure>
+
+<p>输出的结果如下:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(<span class="string">&#x27;&#x27;</span>, Net(</span><br><span class="line">  (linear_0): MyLinear()</span><br><span class="line">  (linear_1): MyLinear()</span><br><span class="line">))</span><br><span class="line">(<span class="string">&#x27;linear_0&#x27;</span>, MyLinear())</span><br><span class="line">(<span class="string">&#x27;linear_1&#x27;</span>, MyLinear())</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​    这里可以看到输出了一个<code>Net</code>，是因为<code>named_modules()</code>方法会迭代地找到每个<code>nn.Module</code>，包括自身，我们可以循环打印一下<code>modules()</code>方法的输出的<code>__class__</code>，<code>modules</code>方法与<code>named_modules()</code>的区别就在于是否输出名称：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">net = Net()</span><br><span class="line"><span class="keyword">for</span> child <span class="keyword">in</span> net.modules():</span><br><span class="line">    <span class="built_in">print</span>(child.__class__)</span><br></pre></td></tr></table></figure>
+
+<p>得到以下输出:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">__main__</span>.<span class="title">Net</span>&#x27;&gt;</span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> &#x27;<span class="title">__main__</span>.<span class="title">MyLinear</span>&#x27;&gt;</span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> &#x27;<span class="title">__main__</span>.<span class="title">MyLinear</span>&#x27;&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看出<code>modules()</code>方法和<code>named_modules()</code>方法会迭代自身</p>
+<h3 id="train-and-eval"><a href="#train-and-eval" class="headerlink" title="train() and eval()"></a>train() and eval()</h3><p><a href="https://blog.csdn.net/qq_46284579/article/details/120439049">Pytorch 中net.train（） 和 net.eval（）的作用和如何使用？</a></p>
+<p>​    net.train()和net.eval()到底在什么时候使用？如果一个模型有<strong>Dropout</strong>与<strong>BatchNormalization</strong>，那么它在训练时要以一定概率进行Dropout或者更新BatchNormalization参数，而在测试时不在需要Dropout或更新BatchNormalization参数。此时，要用net.train()和net.eval()进行区分。在没有涉及到BN与Dropout的模型，这两个函数没什么用。</p>
+<h3 id="save-and-load"><a href="#save-and-load" class="headerlink" title="save and load"></a>save and load</h3><p><img src="/2022/11/12/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1669431670670.png" alt="1669431670670"></p>
+<h3 id="定义自己的Module"><a href="#定义自己的Module" class="headerlink" title="定义自己的Module"></a>定义自己的Module</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> optim</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyLinear</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, inp, outp</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(MyLinear, self).__init__()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># requires_grad = True</span></span><br><span class="line">        self.w = nn.Parameter(torch.randn(outp, inp))</span><br><span class="line">        self.b = nn.Parameter(torch.randn(outp))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        x = x @ self.w.t() + self.b</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Flatten</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(Flatten, self).__init__()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, <span class="built_in">input</span></span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">input</span>.view(<span class="built_in">input</span>.size(<span class="number">0</span>), -<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestNet</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(TestNet, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.net = nn.Sequential(nn.Conv2d(<span class="number">1</span>, <span class="number">16</span>, stride=<span class="number">1</span>, padding=<span class="number">1</span>),</span><br><span class="line">                                 nn.MaxPool2d(<span class="number">2</span>, <span class="number">2</span>),</span><br><span class="line">                                 Flatten(),</span><br><span class="line">                                 nn.Linear(<span class="number">1</span> * <span class="number">14</span> * <span class="number">14</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.net(x)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BasicNet</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(BasicNet, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.net = nn.Linear(<span class="number">4</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.net(x)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(Net, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.net = nn.Sequential(BasicNet(),</span><br><span class="line">                                 nn.ReLU(),</span><br><span class="line">                                 nn.Linear(<span class="number">3</span>, <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.net(x)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    device = torch.device(<span class="string">&#x27;cuda&#x27;</span>)</span><br><span class="line">    net = Net()</span><br><span class="line">    net.to(device)</span><br><span class="line"></span><br><span class="line">    net.train()</span><br><span class="line"></span><br><span class="line">    net.<span class="built_in">eval</span>()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># net.load_state_dict(torch.load(&#x27;ckpt.mdl&#x27;))</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># torch.save(net.state_dict(), &#x27;ckpt.mdl&#x27;)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> name, t <span class="keyword">in</span> net.named_parameters():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;parameters:&#x27;</span>, name, t.shape)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> name, m <span class="keyword">in</span> net.named_children():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;children:&#x27;</span>, name, m)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> name, m <span class="keyword">in</span> net.named_modules():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;modules:&#x27;</span>, name, m)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
 ]]></content>
+      <categories>
+        <category>《Python》</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Pytorch</tag>
+      </tags>
   </entry>
 </search>
