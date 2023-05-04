@@ -10775,6 +10775,12 @@ print(d.popitem(last=True))
 <h2 id="获取前k大的索引"><a href="#获取前k大的索引" class="headerlink" title="获取前k大的索引"></a>获取前k大的索引</h2><ul>
 <li><a href="/2022/03/11/%E8%8E%B7%E5%8F%96%E5%89%8Dk%E5%A4%A7%E7%9A%84%E7%B4%A2%E5%BC%95/" title="获取前k大的索引">获取前k大的索引</a></li>
 </ul>
+<h2 id="通过累加函数构建前缀和列表"><a href="#通过累加函数构建前缀和列表" class="headerlink" title="通过累加函数构建前缀和列表"></a>通过累加函数构建前缀和列表</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">S = <span class="built_in">list</span>(accumulate(nums, initial=<span class="number">0</span>))</span><br><span class="line"><span class="comment"># S[Right] - S[Left] 表示区间[Left, Right)的元素和 </span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h1 id="二、字典"><a href="#二、字典" class="headerlink" title="二、字典"></a>二、字典</h1><h2 id="查找-1"><a href="#查找-1" class="headerlink" title="查找"></a>查找</h2><ul>
 <li><strong>get</strong>(key,  default=None)<br>返回指定键的值，如果值不在字典中返回default值</li>
 </ul>
