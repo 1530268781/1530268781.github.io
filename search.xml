@@ -10928,6 +10928,8 @@ print(d.popitem(last=True))
 <p>​    将str按指定的一些分隔符进行分割，保留分隔符</p>
 </li>
 </ul>
+<h2 id="数组转化为字符串，再还原为数组"><a href="#数组转化为字符串，再还原为数组" class="headerlink" title="数组转化为字符串，再还原为数组"></a>数组转化为字符串，再还原为数组</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 例如：[1, 12, 3, 4] =&gt; &#x27;1,12,3,4&#x27; =&gt; [1, 12, 3, 4]</span></span><br><span class="line">a = [<span class="number">1</span>, <span class="number">12</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">b = <span class="string">&#x27;,&#x27;</span>.join(<span class="built_in">map</span>(<span class="built_in">str</span>, a))</span><br><span class="line">c = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, b.split(<span class="string">&#x27;,&#x27;</span>)))</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>《Python》</category>
