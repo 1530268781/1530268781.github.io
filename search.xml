@@ -16884,11 +16884,15 @@ Name           Attrs
 <h1 id="第二章-Java概述"><a href="#第二章-Java概述" class="headerlink" title="第二章 Java概述"></a>第二章 Java概述</h1><h2 id="2-1-Java-技术体系平台"><a href="#2-1-Java-技术体系平台" class="headerlink" title="2.1 Java 技术体系平台"></a>2.1 Java 技术体系平台</h2><table>
 <thead>
 <tr>
-<th>Java SE（Standard Edition）标准版</th>
-<th>支持面向桌面级应用(如Windows下的应用程序）的Java平台，提供了完整的Java核心API，此版本以前称为J2SE</th>
+<th>版本</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
+<td>Java SE（Standard Edition）标准版</td>
+<td>支持面向桌面级应用(如Windows下的应用程序）的Java平台，提供了完整的Java核心API，此版本以前称为J2SE</td>
+</tr>
+<tr>
 <td>Java EE（Enterprise Edition）企业版</td>
 <td>是为开发企业环境下的应用程序提供的一套解决方案。该技术体系中包含的技术如:Servlet、Jsp等,主要针对于Web应用程序开发。版本以前称为J2EE</td>
 </tr>
@@ -16941,7 +16945,7 @@ Name           Attrs
 <li>使用tab操作,实现缩进,默认整体向右边移动，时候用shift+tab整体向左移4、运算符和=两边习惯性各加一个空格。比如:2 + 4 * 5 + 345  - 89</li>
 <li>源文件使用<strong>utf-8编码</strong></li>
 <li>行宽度不要超过80字符</li>
-<li>代码编写次行风格和行尾风格</li>
+<li>代码编写<strong>次行风格</strong>（推荐）和行尾风格</li>
 </ul>
 <h1 id="第三章-变量"><a href="#第三章-变量" class="headerlink" title="第三章 变量"></a>第三章 变量</h1>]]></content>
       <categories>
