@@ -16881,7 +16881,11 @@ Name           Attrs
     <title>Java学习笔记</title>
     <url>/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="第一章-内容介绍"><a href="#第一章-内容介绍" class="headerlink" title="第一章 内容介绍"></a>第一章 内容介绍</h1><p>略</p>
-<h1 id="第二章-Java概述"><a href="#第二章-Java概述" class="headerlink" title="第二章 Java概述"></a>第二章 Java概述</h1><h2 id="2-1-Java-技术体系平台"><a href="#2-1-Java-技术体系平台" class="headerlink" title="2.1 Java 技术体系平台"></a>2.1 Java 技术体系平台</h2><table>
+<h1 id="第二章-Java概述"><a href="#第二章-Java概述" class="headerlink" title="第二章 Java概述"></a>第二章 Java概述</h1><h2 id="2-1-Java历史"><a href="#2-1-Java历史" class="headerlink" title="2.1 Java历史"></a>2.1 Java历史</h2><ul>
+<li>1995年，sun公司正式发布Java第一个版本</li>
+<li>2009年，甲骨文公司收购sun</li>
+</ul>
+<h2 id="2-2-Java-技术体系平台"><a href="#2-2-Java-技术体系平台" class="headerlink" title="2.2 Java 技术体系平台"></a>2.2 Java 技术体系平台</h2><table>
 <thead>
 <tr>
 <th>版本</th>
@@ -16901,13 +16905,13 @@ Name           Attrs
 <td>支持Java程序运行在移动终端(手机、PDA)上的平台，对Java API有所精简，并加入了钛对移动终端的支持，此版本以前称为J2ME</td>
 </tr>
 </tbody></table>
-<h2 id="2-2-Java语言特点"><a href="#2-2-Java语言特点" class="headerlink" title="2.2 Java语言特点"></a>2.2 Java语言特点</h2><ul>
+<h2 id="2-3-Java语言特点"><a href="#2-3-Java语言特点" class="headerlink" title="2.3 Java语言特点"></a>2.3 Java语言特点</h2><ul>
 <li>Java 语言是面向对象的(<strong>oop</strong>)</li>
 <li> Java 语言是健壮的。Java 的强类型机制、异常处理、垃圾的自动收集等是 Java 程序健壮性的重要保</li>
 <li>Java 语言是<strong>跨平台性的</strong>。[即: 一个编译好的.class 文件可以在多个系统下运行，这种特性称为跨平台]</li>
 <li>Java 语言是解释型的</li>
 </ul>
-<h2 id="2-3-Java虚拟机及运行过程"><a href="#2-3-Java虚拟机及运行过程" class="headerlink" title="2.3 Java虚拟机及运行过程"></a>2.3 Java虚拟机及运行过程</h2><ul>
+<h2 id="2-4-Java虚拟机及运行过程"><a href="#2-4-Java虚拟机及运行过程" class="headerlink" title="2.4 Java虚拟机及运行过程"></a>2.4 Java虚拟机及运行过程</h2><ul>
 <li>JVM 是一个虚拟的计算机，具有指令集并使用不同的存储区域。负责执行指令，管理数据、内存、寄存器，包含在JDK 中. </li>
 <li>程序运行过程</li>
 </ul>
@@ -16915,7 +16919,7 @@ Name           Attrs
 
 
 
-<h2 id="2-4-JDK-JRE"><a href="#2-4-JDK-JRE" class="headerlink" title="2.4 JDK JRE"></a>2.4 JDK JRE</h2><ul>
+<h2 id="2-5-JDK-JRE"><a href="#2-5-JDK-JRE" class="headerlink" title="2.5 JDK JRE"></a>2.5 JDK JRE</h2><ul>
 <li>JDK 的全称(Java Development Kit Java 开发工具包)</li>
 </ul>
 <p>​        <strong>JDK = JRE +</strong> <strong>开发工具集</strong>（例如 Javac,java 编译工具等)</p>
@@ -16923,7 +16927,7 @@ Name           Attrs
 <li>JRE(Java Runtime Environment Java 运行环境)</li>
 </ul>
 <p>​        <strong>JRE = JVM + Java SE</strong> <strong>标准类库</strong>（java 核心类库）</p>
-<h2 id="2-5-Java注释"><a href="#2-5-Java注释" class="headerlink" title="2.5 Java注释"></a>2.5 Java注释</h2><ul>
+<h2 id="2-6-Java注释"><a href="#2-6-Java注释" class="headerlink" title="2.6 Java注释"></a>2.6 Java注释</h2><ul>
 <li><p>单行注释  //</p>
 </li>
 <li><p>多行注释 /*  */</p>
@@ -16939,7 +16943,7 @@ Name           Attrs
 </ul>
 </li>
 </ul>
-<h2 id="2-6-Java代码规范"><a href="#2-6-Java代码规范" class="headerlink" title="2.6 Java代码规范"></a>2.6 Java代码规范</h2><ul>
+<h2 id="2-7-Java代码规范"><a href="#2-7-Java代码规范" class="headerlink" title="2.7 Java代码规范"></a>2.7 Java代码规范</h2><ul>
 <li>类、方法的注释,要以javadoc的方式来写。</li>
 <li>非Java Doc的注释，往往是给代码的维护者看的，着重告述读者为什么这样写,如何修改，注意什么问题等</li>
 <li>使用tab操作,实现缩进,默认整体向右边移动，时候用shift+tab整体向左移4、运算符和=两边习惯性各加一个空格。比如:2 + 4 * 5 + 345  - 89</li>
@@ -16947,7 +16951,8 @@ Name           Attrs
 <li>行宽度不要超过80字符</li>
 <li>代码编写<strong>次行风格</strong>（推荐）和行尾风格</li>
 </ul>
-<h1 id="第三章-变量"><a href="#第三章-变量" class="headerlink" title="第三章 变量"></a>第三章 变量</h1>]]></content>
+<h1 id="第三章-变量"><a href="#第三章-变量" class="headerlink" title="第三章 变量"></a>第三章 变量</h1><h2 id="3-1-数据类型"><a href="#3-1-数据类型" class="headerlink" title="3.1 数据类型"></a>3.1 数据类型</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph LR</span><br><span class="line">	A[Java数据类型]--&gt;B[基本数据类型]</span><br><span class="line">	A--&gt;C[引用数据类型]</span><br><span class="line">        B--&gt;D[数值型]</span><br><span class="line">        	D--&gt;d1[&quot;整型: byte【1】,short【2】,int【4】,long【8】&quot;]</span><br><span class="line">        	D--&gt;d2[&quot;浮点型: float【4】,double【8】&quot;]</span><br><span class="line">        B--&gt;E[&quot;字符型: char【2】&quot;]</span><br><span class="line">        B--&gt;F[&quot;布尔型: boolean【1】&quot;]</span><br><span class="line">    C--&gt;G[类class]</span><br><span class="line">    C--&gt;H[接口interface]</span><br><span class="line">    C--&gt;I[&quot;数组[ ]&quot;]</span><br></pre></td></tr></table></figure>
+]]></content>
       <categories>
         <category>《Java》</category>
       </categories>
