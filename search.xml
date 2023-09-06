@@ -16842,4 +16842,113 @@ Name           Attrs
         <tag>TensorFlow</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Dos命令</title>
+    <url>/2023/09/06/Dos%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="DOS命令"><a href="#DOS命令" class="headerlink" title="DOS命令"></a>DOS命令</h1><p>DOS(Disk Operation System) 磁盘操作系统</p>
+<h3 id="常用DOS命令"><a href="#常用DOS命令" class="headerlink" title="常用DOS命令"></a>常用DOS命令</h3><ol>
+<li>查看当前目录是有什么内容 dir</li>
+</ol>
+<p>​        dir </p>
+<p>​        dir d:\abc2\test200</p>
+<ol start="2">
+<li>切换到其他盘下：盘符号 cd : change directory</li>
+</ol>
+<p>​        案例演示：切换到 c 盘  cd /D c:</p>
+<ol start="3">
+<li>切换到当前盘的其他目录下 (使用相对路径和绝对路径演示), ..\表示上一级目录</li>
+</ol>
+<p>​        案例演示： cd d:\abc2\test200  cd ....\abc2\test200</p>
+<ol start="4">
+<li>切换到上一级：</li>
+</ol>
+<p>​        案例演示： cd .. </p>
+<ol start="5">
+<li>切换到根目录：cd \</li>
+</ol>
+<p>​        案例演示：cd \</p>
+<ol start="6">
+<li><p>查看指定的目录下所有的子级目录 tree</p>
+</li>
+<li><p>清屏 cls </p>
+</li>
+<li><p>退出 DOS exit</p>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>Java学习笔记</title>
+    <url>/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="第一章-内容介绍"><a href="#第一章-内容介绍" class="headerlink" title="第一章 内容介绍"></a>第一章 内容介绍</h1><p>略</p>
+<h1 id="第二章-Java概述"><a href="#第二章-Java概述" class="headerlink" title="第二章 Java概述"></a>第二章 Java概述</h1><h2 id="2-1-Java-技术体系平台"><a href="#2-1-Java-技术体系平台" class="headerlink" title="2.1 Java 技术体系平台"></a>2.1 Java 技术体系平台</h2><table>
+<thead>
+<tr>
+<th>Java SE（Standard Edition）标准版</th>
+<th>支持面向桌面级应用(如Windows下的应用程序）的Java平台，提供了完整的Java核心API，此版本以前称为J2SE</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Java EE（Enterprise Edition）企业版</td>
+<td>是为开发企业环境下的应用程序提供的一套解决方案。该技术体系中包含的技术如:Servlet、Jsp等,主要针对于Web应用程序开发。版本以前称为J2EE</td>
+</tr>
+<tr>
+<td>Java ME（Micro Edition）小型版</td>
+<td>支持Java程序运行在移动终端(手机、PDA)上的平台，对Java API有所精简，并加入了钛对移动终端的支持，此版本以前称为J2ME</td>
+</tr>
+</tbody></table>
+<h2 id="2-2-Java语言特点"><a href="#2-2-Java语言特点" class="headerlink" title="2.2 Java语言特点"></a>2.2 Java语言特点</h2><ul>
+<li>Java 语言是面向对象的(<strong>oop</strong>)</li>
+<li> Java 语言是健壮的。Java 的强类型机制、异常处理、垃圾的自动收集等是 Java 程序健壮性的重要保</li>
+<li>Java 语言是<strong>跨平台性的</strong>。[即: 一个编译好的.class 文件可以在多个系统下运行，这种特性称为跨平台]</li>
+<li>Java 语言是解释型的</li>
+</ul>
+<h2 id="2-3-Java虚拟机及运行过程"><a href="#2-3-Java虚拟机及运行过程" class="headerlink" title="2.3 Java虚拟机及运行过程"></a>2.3 Java虚拟机及运行过程</h2><ul>
+<li>JVM 是一个虚拟的计算机，具有指令集并使用不同的存储区域。负责执行指令，管理数据、内存、寄存器，包含在JDK 中. </li>
+<li>程序运行过程</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph LR</span><br><span class="line">	A[Test.java]==编译javac==&gt;B[Test.class]==运行java==&gt;c&#123;JVM&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-4-JDK-JRE"><a href="#2-4-JDK-JRE" class="headerlink" title="2.4 JDK JRE"></a>2.4 JDK JRE</h2><ul>
+<li>JDK 的全称(Java Development Kit Java 开发工具包)</li>
+</ul>
+<p>​        <strong>JDK = JRE +</strong> <strong>开发工具集</strong>（例如 Javac,java 编译工具等)</p>
+<ul>
+<li>JRE(Java Runtime Environment Java 运行环境)</li>
+</ul>
+<p>​        <strong>JRE = JVM + Java SE</strong> <strong>标准类库</strong>（java 核心类库）</p>
+<h2 id="2-5-Java注释"><a href="#2-5-Java注释" class="headerlink" title="2.5 Java注释"></a>2.5 Java注释</h2><ul>
+<li><p>单行注释  //</p>
+</li>
+<li><p>多行注释 /*  */</p>
+</li>
+<li><p>文档注释  /**  */</p>
+<ul>
+<li><p>文档注释内容可以白JDK提供的工具javadoc所解析，生成一套以网页文件形式体现的该程序的说明文档。一般写在类和方法前。</p>
+</li>
+<li><p>javadoc -d d:\temp -author -version Test.java</p>
+</li>
+<li><p>javadoc标签</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	* <span class="doctag">@author</span> Durango</span></span><br><span class="line"><span class="comment">	* <span class="doctag">@version</span> 1.0</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="2-6-Java代码规范"><a href="#2-6-Java代码规范" class="headerlink" title="2.6 Java代码规范"></a>2.6 Java代码规范</h2><ul>
+<li>类、方法的注释,要以javadoc的方式来写。</li>
+<li>非Java Doc的注释，往往是给代码的维护者看的，着重告述读者为什么这样写,如何修改，注意什么问题等</li>
+<li>使用tab操作,实现缩进,默认整体向右边移动，时候用shift+tab整体向左移4、运算符和=两边习惯性各加一个空格。比如:2 + 4 * 5 + 345  - 89</li>
+<li>源文件使用<strong>utf-8编码</strong></li>
+<li>行宽度不要超过80字符</li>
+<li>代码编写次行风格和行尾风格</li>
+</ul>
+<h1 id="第三章-变量"><a href="#第三章-变量" class="headerlink" title="第三章 变量"></a>第三章 变量</h1>]]></content>
+      <categories>
+        <category>《Java》</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
 </search>
