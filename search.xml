@@ -16884,6 +16884,10 @@ Name           Attrs
 
 
 
+<img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20230907181847180.png" alt="image-20230907181847180" style="zoom:80%;">
+
+
+
 <h2 id="2-5-JDK-JRE"><a href="#2-5-JDK-JRE" class="headerlink" title="2.5 JDK JRE"></a>2.5 JDK JRE</h2><ul>
 <li>JDK 的全称(Java Development Kit Java 开发工具包)</li>
 </ul>
@@ -16917,6 +16921,8 @@ Name           Attrs
 <li>代码编写<strong>次行风格</strong>（推荐）和行尾风格</li>
 </ul>
 <h1 id="第三章-基本数据类型"><a href="#第三章-基本数据类型" class="headerlink" title="第三章 基本数据类型"></a>第三章 基本数据类型</h1><h2 id="3-1-数据类型"><a href="#3-1-数据类型" class="headerlink" title="3.1 数据类型"></a>3.1 数据类型</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph LR</span><br><span class="line">	A[Java数据类型]--&gt;B[基本数据类型]</span><br><span class="line">	A--&gt;C[引用数据类型]</span><br><span class="line">        B--&gt;D[数值型]</span><br><span class="line">        	D--&gt;d1[&quot;整型: byte【1】,short【2】,int【4】,long【8】&quot;]</span><br><span class="line">        	D--&gt;d2[&quot;浮点型: float【4】,double【8】&quot;]</span><br><span class="line">        B--&gt;E[&quot;字符型: char【2】&quot;]</span><br><span class="line">        B--&gt;F[&quot;布尔型: boolean【1】&quot;]</span><br><span class="line">    C--&gt;G[类class]</span><br><span class="line">    C--&gt;H[接口interface]</span><br><span class="line">    C--&gt;I[&quot;数组[ ]&quot;]</span><br></pre></td></tr></table></figure>
+
+<img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20230907181904276.png" alt="image-20230907181904276" style="zoom: 80%;">
 
 
 
