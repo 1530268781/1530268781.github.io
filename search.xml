@@ -16882,20 +16882,26 @@ Name           Attrs
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph LR</span><br><span class="line">	A[Test.java]==编译javac==&gt;B[Test.class]==运行java==&gt;c&#123;JVM&#125;</span><br></pre></td></tr></table></figure>
 
+<div class="mermaid"> 
+
+graph LR
+		A[Test.java]&#x3D;&#x3D;编译javac&#x3D;&#x3D;&gt;B[Test.class]&#x3D;&#x3D;运行java&#x3D;&#x3D;&gt;c{JVM}
+</div>
 
 
-<img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20230907181847180.png" alt="image-20230907181847180" style="zoom:80%;">
 
-
-
-<h2 id="2-5-JDK-JRE"><a href="#2-5-JDK-JRE" class="headerlink" title="2.5 JDK JRE"></a>2.5 JDK JRE</h2><ul>
+<h2 id="2-5-JDK-JRE"><a href="#2-5-JDK-JRE" class="headerlink" title="2.5 JDK JRE"></a>2.5 JDK JRE</h2><div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><ul>
 <li>JDK 的全称(Java Development Kit Java 开发工具包)</li>
 </ul>
-<p>​        <strong>JDK = JRE +</strong> <strong>开发工具集</strong>（例如 Javac,java 编译工具等)</p>
+<p>​            <strong>JDK = JRE +</strong> <strong>开发工具集</strong>（例如 Javac,java 编译工具等)</p>
 <ul>
 <li>JRE(Java Runtime Environment Java 运行环境)</li>
 </ul>
-<p>​        <strong>JRE = JVM + Java SE</strong> <strong>标准类库</strong>（java 核心类库）</p>
+<p>​            <strong>JRE = JVM + Java SE</strong> <strong>标准类库</strong>（java 核心类库）</p>
+</div>
+
+
+
 <h2 id="2-6-Java注释"><a href="#2-6-Java注释" class="headerlink" title="2.6 Java注释"></a>2.6 Java注释</h2><ul>
 <li><p>单行注释  //</p>
 </li>
@@ -16920,9 +16926,21 @@ Name           Attrs
 <li>行宽度不要超过80字符</li>
 <li>代码编写<strong>次行风格</strong>（推荐）和行尾风格</li>
 </ul>
-<h1 id="第三章-基本数据类型"><a href="#第三章-基本数据类型" class="headerlink" title="第三章 基本数据类型"></a>第三章 基本数据类型</h1><h2 id="3-1-数据类型"><a href="#3-1-数据类型" class="headerlink" title="3.1 数据类型"></a>3.1 数据类型</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph LR</span><br><span class="line">	A[Java数据类型]--&gt;B[基本数据类型]</span><br><span class="line">	A--&gt;C[引用数据类型]</span><br><span class="line">        B--&gt;D[数值型]</span><br><span class="line">        	D--&gt;d1[&quot;整型: byte【1】,short【2】,int【4】,long【8】&quot;]</span><br><span class="line">        	D--&gt;d2[&quot;浮点型: float【4】,double【8】&quot;]</span><br><span class="line">        B--&gt;E[&quot;字符型: char【2】&quot;]</span><br><span class="line">        B--&gt;F[&quot;布尔型: boolean【1】&quot;]</span><br><span class="line">    C--&gt;G[类class]</span><br><span class="line">    C--&gt;H[接口interface]</span><br><span class="line">    C--&gt;I[&quot;数组[ ]&quot;]</span><br></pre></td></tr></table></figure>
+<h1 id="第三章-基本数据类型"><a href="#第三章-基本数据类型" class="headerlink" title="第三章 基本数据类型"></a>第三章 基本数据类型</h1><h2 id="3-1-数据类型"><a href="#3-1-数据类型" class="headerlink" title="3.1 数据类型"></a>3.1 <font color="red">数据类型</font></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph LR</span><br><span class="line">	A[Java数据类型]--&gt;B[基本数据类型]</span><br><span class="line">	A--&gt;C[引用数据类型]</span><br><span class="line">        B--&gt;D[数值型]</span><br><span class="line">        	D--&gt;d1[&quot;整型: byte【1】,short【2】,int【4】,long【8】&quot;]</span><br><span class="line">        	D--&gt;d2[&quot;浮点型: float【4】,double【8】&quot;]</span><br><span class="line">        B--&gt;E[&quot;字符型: char【2】&quot;]</span><br><span class="line">        B--&gt;F[&quot;布尔型: boolean【1】&quot;]</span><br><span class="line">    C--&gt;G[类class]</span><br><span class="line">    C--&gt;H[接口interface]</span><br><span class="line">    C--&gt;I[&quot;数组[ ]&quot;]</span><br></pre></td></tr></table></figure>
 
-<img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20230907181904276.png" alt="image-20230907181904276" style="zoom: 80%;">
+<div class="mermaid">
+graph LR
+	A[Java数据类型]--&gt;B[基本数据类型]
+	A--&gt;C[引用数据类型]
+        B--&gt;D[数值型]
+        	D--&gt;d1[&quot;整型: byte【1】,short【2】,int【4】,long【8】&quot;]
+        	D--&gt;d2[&quot;浮点型: float【4】,double【8】&quot;]
+        B--&gt;E[&quot;字符型: char【2】&quot;]
+        B--&gt;F[&quot;布尔型: boolean【1】&quot;]
+    C--&gt;G[类class]
+    C--&gt;H[接口interface]
+    C--&gt;I[&quot;数组[ ]&quot;]
+</div>
 
 
 
@@ -17043,6 +17061,122 @@ Name           Attrs
 <li>true  or false</li>
 <li>java中不可以用0或非0的整数替代false或true。（C语言中可以）</li>
 </ul>
+<h2 id="3-6-数据类型转换"><a href="#3-6-数据类型转换" class="headerlink" title="3.6 数据类型转换"></a>3.6 数据类型转换</h2><h3 id="3-6-1-自动类型转换"><a href="#3-6-1-自动类型转换" class="headerlink" title="3.6.1. 自动类型转换"></a>3.6.1. <font color="red">自动类型转换</font></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph LR</span><br><span class="line">	char--&gt;int--&gt;long--&gt;float--&gt;double</span><br><span class="line">	byte--&gt;short--&gt;int</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注意和细节</li>
+</ul>
+<p>​    <div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><p>​    （1）有多种类型的数据混合运算时，系统首先自动将所有数据<font color="red">转换成容量最大</font>的那种数据类型，然后再进行计算。</p>
+<p>​    （2）当我们把精度(容量)大的数据类型赋值给精度(容量)小的数据类型时，就会报错，反之就会进行自动类型转换。</p>
+<p>​    （3）(byte,short)和char之间不会相互自动转换。</p>
+<p>​    （4）byte, short,char 他们三者可以参与计算，在<font color="red">计算时首先转换为int类型</font>。</p>
+<p>​    （5）boolean不参与转换</p>
+<p>​    （6）自动提升原则：表达式结果的类型自动提升为操作数中最大的类型</p>
+<p>​    </p>
+</div></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//自动类型转换细节</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AutoConvertDetail</span> </span>&#123;</span><br><span class="line"><span class="comment">//编写一个 main 方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//细节 1： 有多种类型的数据混合运算时，</span></span><br><span class="line">        <span class="comment">//系统首先自动将所有数据转换成容量最大的那种数据类型，然后再进行计算</span></span><br><span class="line">        <span class="keyword">int</span> n1 = <span class="number">10</span>; <span class="comment">//ok</span></span><br><span class="line">        <span class="keyword">float</span> d1 = n1 + <span class="number">1.1</span>;<span class="comment">//错误 n1 + 1.1 =&gt; 结果类型是 double</span></span><br><span class="line">        <span class="keyword">double</span> d1 = n1 + <span class="number">1.1</span>;<span class="comment">//对 n1 + 1.1 =&gt; 结果类型是 double</span></span><br><span class="line">        <span class="keyword">float</span> d1 = n1 + <span class="number">1.1F</span>;<span class="comment">//对 n1 + 1.1 =&gt; 结果类型是 float</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//细节 2: 当我们把精度(容量)大 的数据类型赋值给精度(容量)小 的数据类型时，</span></span><br><span class="line">        <span class="comment">//就会报错，反之就会进行自动类型转换。</span></span><br><span class="line">        <span class="keyword">int</span> n2 = <span class="number">1.1</span>;<span class="comment">//错误 double -&gt; int</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//细节 3: (byte, short) 和 char 之间不会相互自动转换</span></span><br><span class="line">        <span class="comment">//当把具体数赋给 byte 时，(1)先判断该数是否在 byte 范围内，如果是就可以</span></span><br><span class="line">        <span class="keyword">byte</span> b1 = <span class="number">10</span>; <span class="comment">//对 , -128-127</span></span><br><span class="line">        <span class="keyword">int</span> n2 = <span class="number">1</span>; <span class="comment">//n2 是 int</span></span><br><span class="line">        <span class="keyword">byte</span> b2 = n2; <span class="comment">//错误，原因： 如果是变量赋值，判断类型</span></span><br><span class="line">        <span class="keyword">char</span> c1 = b1; <span class="comment">//错误， 原因 byte 不能自动转成 char</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//细节 4: byte，short，char 他们三者可以计算，在计算时首先转换为 int 类型</span></span><br><span class="line">        <span class="keyword">byte</span> b2 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">byte</span> b3 = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">short</span> s1 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">short</span> s2 = b2 + s1;<span class="comment">//错, b2 + s1 =&gt; int</span></span><br><span class="line">        <span class="keyword">int</span> s2 = b2 + s1;<span class="comment">//对, b2 + s1 =&gt; int</span></span><br><span class="line">        <span class="keyword">byte</span> b4 = b2 + b3; <span class="comment">//错误: b2 + b3 =&gt; int</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//细节5boolean 不参与转换</span></span><br><span class="line">        <span class="keyword">boolean</span> pass = <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">//int num100 = pass;// 错误，boolean 不参与类型的自动转换</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//自动提升原则： 表达式结果的类型自动提升为 操作数中最大的类型</span></span><br><span class="line">        <span class="comment">//看一道题</span></span><br><span class="line">        <span class="keyword">byte</span> b4 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">short</span> s3 = <span class="number">100</span>;</span><br><span class="line">        <span class="keyword">int</span> num200 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">float</span> num300 = <span class="number">1.1F</span>;</span><br><span class="line">        <span class="keyword">double</span> num500 = b4 + s3 + num200 + num300; <span class="comment">//float -&gt; double</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-6-2-强制类型转换"><a href="#3-6-2-强制类型转换" class="headerlink" title="3.6.2 强制类型转换"></a>3.6.2 强制类型转换</h3><ul>
+<li>当进行数据从高精度到低精度转换时，需要使用强制转换</li>
+<li>强制转换符 如(int)  (byte)等</li>
+<li>char类型可以用int常量值赋值，但是不能用int变量值赋值</li>
+<li>byte, short, char类型在参与运算时，当做int类型处理</li>
+</ul>
+<h3 id="3-6-3-与字符串转换"><a href="#3-6-3-与字符串转换" class="headerlink" title="3.6.3 与字符串转换"></a>3.6.3 与字符串转换</h3><ul>
+<li><p>基本数据类型 -&gt; 字符串</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> n1 = <span class="number">100</span>;</span><br><span class="line">String s1 = n1 + <span class="string">&quot;&quot;</span>;</span><br></pre></td></tr></table></figure></li>
+<li><p>字符串 -&gt; 基本数据类型</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String s5 = <span class="string">&quot;123&quot;</span>;</span><br><span class="line"><span class="keyword">int</span> num1 = Integer.parseInt(s5);</span><br><span class="line"><span class="keyword">double</span> num2 = Double.parseDouble(s5);</span><br><span class="line"><span class="keyword">float</span> num3 = Float.parseFloat(s5);</span><br><span class="line"><span class="keyword">long</span> num4 = Long.parseLong(s5);</span><br><span class="line"><span class="keyword">byte</span> num5 = Byte.parseByte(s5);</span><br><span class="line"><span class="keyword">boolean</span> b = Boolean.parseBoolean(<span class="string">&quot;true&quot;</span>);</span><br><span class="line"><span class="keyword">short</span> num6 = Short.parseShort(s5)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="第四章-运算符"><a href="#第四章-运算符" class="headerlink" title="第四章 运算符"></a>第四章 运算符</h1><h2 id="4-1-算数运算符"><a href="#4-1-算数运算符" class="headerlink" title="4.1 算数运算符"></a>4.1 算数运算符</h2><p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20230909141542866.png" alt="image-20230909141542866"></p>
+<ul>
+<li>注意事项</li>
+</ul>
+<p>​    <div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><ol>
+<li>对于除号”/“，它的整数除和小数除是有区别的: 整数之间做除法时，只保留整数部分而舍弃小数部分。例如: int x= 10/3,结果是3</li>
+<li>当对一个数取模时，可以等价<font color="red">a%b = a-a/b*b</font>，这样我们可以看到取模的一个本质运算。</li>
+<li>当自增当做一个独立语言使用时，不管是 ++i 还是 i++ 都是一样的</li>
+<li>当自增当做一个表达式使用时 j=++i 等价于 i=i+1; j=i<br>当自增当做一个表达式使用时 j=i++ 等价 j=i; i=i+1</li>
+</ol>
+<p>​    </p>
+</div></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// % 取模 ,取余</span></span><br><span class="line"><span class="comment">// 在 % 的本质 看一个公式!!!! a % b = a - a / b * b</span></span><br><span class="line"><span class="comment">// -10 % 3 =&gt; -10 - (-10) / 3 * 3 = -10 + 9 = -1</span></span><br><span class="line"><span class="comment">// 10 % -3 = 10 - 10 / (-3) * (-3) = 10 - 9 = 1</span></span><br><span class="line"><span class="comment">// -10 % -3 = (-10) - (-10) / (-3) * (-3) = -10 + 9 = -1</span></span><br><span class="line"></span><br><span class="line">System.out.println(<span class="number">10</span> % <span class="number">3</span>); <span class="comment">//1</span></span><br><span class="line">System.out.println(-<span class="number">10</span> % <span class="number">3</span>); <span class="comment">// -1</span></span><br><span class="line">System.out.println(<span class="number">10</span> % -<span class="number">3</span>); <span class="comment">//1</span></span><br><span class="line">System.out.println(-<span class="number">10</span> % -<span class="number">3</span>);<span class="comment">//-1</span></span><br><span class="line"></span><br><span class="line">System.out.println(<span class="number">10</span> / <span class="number">3</span>); <span class="comment">//3</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-2-关系运算符"><a href="#4-2-关系运算符" class="headerlink" title="4.2 关系运算符"></a>4.2 关系运算符</h2><p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20230909142820955.png" alt="image-20230909142820955"></p>
+<h2 id="4-3-逻辑运算符"><a href="#4-3-逻辑运算符" class="headerlink" title="4.3 逻辑运算符"></a>4.3 逻辑运算符</h2><p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20230909143251548.png" alt="image-20230909143251548"></p>
+<ul>
+<li><p>&amp;&amp; 和 &amp; 的区别</p>
+<ul>
+<li><p>&amp;&amp;短路与：如果第**<font color="red">一个条件为 false，则第二个条件不会判断</font>**，最终结果为 false，效率高</p>
+</li>
+<li><p>&amp; 逻辑与：不管第一个条件是否为 false，第二个条件都要判断，效率低</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//对于&amp;&amp;短路与而言，如果第一个条件为 false ,后面的条件不再判断</span></span><br><span class="line"><span class="comment">//对于&amp;逻辑与而言，如果第一个条件为 false ,后面的条件仍然会判断</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">9</span>;</span><br><span class="line"><span class="keyword">if</span>(a &lt; <span class="number">1</span> &amp;&amp; ++b &lt; <span class="number">50</span>) &#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;ok300&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="string">&quot;a=&quot;</span> + a + <span class="string">&quot; b=&quot;</span> + b);<span class="comment">// 4 9</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(a &lt; <span class="number">1</span> &amp; ++b &lt; <span class="number">50</span>) &#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;ok300&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="string">&quot;a=&quot;</span> + a + <span class="string">&quot; b=&quot;</span> + b);<span class="comment">// 4 10</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>|| 和 | 的区别</p>
+<ul>
+<li>||短路或：如果**<font color="red">第一个条件为 true，则第二个条件不会判断</font>**，最终结果为 true，效率高</li>
+<li>| 逻辑或：不管第一个条件是否为 true，第二个条件都要判断，效率低</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//(1)||短路或：如果第一个条件为 true，</span></span><br><span class="line"><span class="comment">//则第二个条件不会判断，最终结果为 true，效率高</span></span><br><span class="line"><span class="comment">//(2)| 逻辑或：不管第一个条件是否为 true，第二个条件都要判断，效率低</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">9</span>;</span><br><span class="line"><span class="keyword">if</span>( a &gt; <span class="number">1</span> || ++b &gt; <span class="number">4</span>) &#123; <span class="comment">// 可以换成 | 测试</span></span><br><span class="line">	System.out.println(<span class="string">&quot;ok300&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="string">&quot;a=&quot;</span> + a + <span class="string">&quot; b=&quot;</span> + b); <span class="comment">//4 9</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>( a &gt; <span class="number">1</span> | ++b &gt; <span class="number">4</span>) &#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;ok300&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="string">&quot;a=&quot;</span> + a + <span class="string">&quot; b=&quot;</span> + b); <span class="comment">//4 10</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="4-4-赋值运算符"><a href="#4-4-赋值运算符" class="headerlink" title="4.4 赋值运算符"></a>4.4 赋值运算符</h2><ul>
+<li>复合赋值运算符会进行类型转换</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">byte</span> b = <span class="number">3</span>;</span><br><span class="line">b += <span class="number">2</span>;	<span class="comment">//等价于 b = (byte)(b + 2)</span></span><br><span class="line">b ++;	<span class="comment">//等价于 b = (byte)(b + 1)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-5-三元运算符"><a href="#4-5-三元运算符" class="headerlink" title="4.5 三元运算符"></a>4.5 三元运算符</h2><p>条件表达式 ? 表达式 1: 表达式 2;</p>
+<p>运算规则：</p>
+<ol>
+<li><p>如果条件表达式为 true，运算后的结果是表达式 1；</p>
+</li>
+<li><p>如果条件表达式为 false，运算后的结果是表达式 2；</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">99</span>;</span><br><span class="line"><span class="comment">// 解读</span></span><br><span class="line"><span class="comment">// 1. a &gt; b 为 false</span></span><br><span class="line"><span class="comment">// 2. 返回 b--, 先返回 b 的值,然后在 b-1</span></span><br><span class="line"><span class="comment">// 3. 返回的结果是 99</span></span><br><span class="line"><span class="keyword">int</span> result = a &gt; b ? a++ : b--;</span><br><span class="line">System.out.println(<span class="string">&quot;result=&quot;</span> + result);	<span class="comment">// 99</span></span><br><span class="line">System.out.println(<span class="string">&quot;a=&quot;</span> + a);	<span class="comment">// 10</span></span><br><span class="line">System.out.println(<span class="string">&quot;b=&quot;</span> + b);	<span class="comment">// 98</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//案例：实现三个数的最大值</span></span><br><span class="line"><span class="keyword">int</span> n1 = <span class="number">553</span>;</span><br><span class="line"><span class="keyword">int</span> n2 = <span class="number">33</span>;</span><br><span class="line"><span class="keyword">int</span> n3 = <span class="number">123</span>;</span><br><span class="line"><span class="comment">//思路</span></span><br><span class="line"><span class="comment">//1. 先得到 n1 和 n2 中最大数 , 保存到 max1</span></span><br><span class="line"><span class="comment">//2. 然后再 求出 max1 和 n3 中的最大数，保存到 max2</span></span><br><span class="line"><span class="keyword">int</span> max1 = n1 &gt; n2 ? n1 : n2;</span><br><span class="line"><span class="keyword">int</span> max2 = max1 &gt; n3 ? max1 : n3;</span><br><span class="line">System.out.println(<span class="string">&quot;最大数=&quot;</span> + max2);</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用一条语句实现, 推荐使用上面方法</span></span><br><span class="line"><span class="comment">//老师提示: 后面我们可以使用更好方法,比如排序</span></span><br><span class="line"><span class="comment">// int max = (n1 &gt; n2 ? n1 : n2) &gt; n3 ?</span></span><br><span class="line"><span class="comment">// (n1 &gt; n2 ? n1 : n2) : n3;</span></span><br><span class="line"><span class="comment">// System.out.println(&quot;最大数=&quot; + max);</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-6-标识符"><a href="#4-6-标识符" class="headerlink" title="4.6 标识符"></a>4.6 标识符</h2><ul>
+<li>标识符命名规则</li>
+</ul>
+<p>​    <div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><ol>
+<li><p>由26个英文字母大小写, 0-9，或 $ 组成</p>
+</li>
+<li><p>数字不可以开头。int 3ab = 1;//错误</p>
+</li>
+<li><p>不可以使用关键字和保留字，但能包含关键字和保留字。</p>
+</li>
+<li><p>Java中严格区分大小写，长度无限制。int totalNum = 10; int n = 90;</p>
+</li>
+<li><p>标识符不能包含空格。int a b = 90;</p>
+</li>
+</ol>
+<p>​    </p>
+</div></p>
+<ul>
+<li>标识符命名规范</li>
+</ul>
+<p>​    <div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><ol>
+<li><p> ：多单词组成时所有字母都小写：aaa.bbb.ccc //比如 com.hsp.crm</p>
+</li>
+<li><p>类名、接口名：多单词组成时，所有单词的首字母大写：XxxYyyZzz [大驼峰]</p>
+</li>
+<li><p>变量名、方法名：多单词组成时，第一个单词首字母小写，第二个单词开始每个单词首字母大写：xxxYyyZz[小驼峰， 简称 驼峰法]</p>
+</li>
+<li><p>常量名：所有字母都大写。多单词时每个单词用下划线连接：XXX_YYY_ZZZ</p>
+</li>
+</ol>
+<p>​    </p>
+</div></p>
 ]]></content>
       <categories>
         <category>《Java》</category>
