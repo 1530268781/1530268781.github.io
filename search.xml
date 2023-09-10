@@ -17166,7 +17166,7 @@ graph LR
 <li>标识符命名规范</li>
 </ul>
 <p>​    <div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><ol>
-<li><p> ：多单词组成时所有字母都小写：aaa.bbb.ccc //比如 com.hsp.crm</p>
+<li><p> 多单词组成时所有字母都小写：aaa.bbb.ccc //比如 com.hsp.crm</p>
 </li>
 <li><p>类名、接口名：多单词组成时，所有单词的首字母大写：XxxYyyZzz [大驼峰]</p>
 </li>
@@ -17177,6 +17177,35 @@ graph LR
 </ol>
 <p>​    </p>
 </div></p>
+<h2 id="4-7-键盘输入"><a href="#4-7-键盘输入" class="headerlink" title="4.7 键盘输入"></a>4.7 键盘输入</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;<span class="comment">//表示把 java.util 下的 Scanner 类导入</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Input</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//步骤</span></span><br><span class="line">        <span class="comment">//Scanner 类 表示 简单文本扫描器，在 java.util 包</span></span><br><span class="line">        <span class="comment">//1. 引入/导入 Scanner 类所在的包</span></span><br><span class="line">        <span class="comment">//2. 创建 Scanner 对象 , new 创建一个对象</span></span><br><span class="line">        Scanner myScanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="comment">//3. 接收用户输入了，使用相关的方法</span></span><br><span class="line">        System.out.println(<span class="string">&quot;请输入名字&quot;</span>);</span><br><span class="line">        <span class="comment">//当程序执行到 next 方法时，会等待用户输入~~~ </span></span><br><span class="line">        String name = myScanner.next(); <span class="comment">//接收用户输入字符串</span></span><br><span class="line">        System.out.println(<span class="string">&quot;请输入年龄&quot;</span>);</span><br><span class="line">        <span class="keyword">int</span> age = myScanner.nextInt(); <span class="comment">//接收用户输入 int</span></span><br><span class="line">        System.out.println(<span class="string">&quot;请输入薪水&quot;</span>);</span><br><span class="line">        <span class="keyword">double</span> sal = myScanner.nextDouble(); <span class="comment">//接收用户输入 double</span></span><br><span class="line">        System.out.println(<span class="string">&quot;人的信息如下:&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;名字=&quot;</span> + name</span><br><span class="line">        + <span class="string">&quot; 年龄=&quot;</span> + age + <span class="string">&quot; 薪水=&quot;</span> + sal);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-8-进制（基本功）"><a href="#4-8-进制（基本功）" class="headerlink" title="4.8 进制（基本功）"></a>4.8 进制（基本功）</h2><h3 id="4-8-1-进制介绍"><a href="#4-8-1-进制介绍" class="headerlink" title="4.8.1 进制介绍"></a>4.8.1 进制介绍</h3><ul>
+<li>对于整数，有四种表示方式：<ul>
+<li>二进制：0,1 ，满 2 进 1. <font color="red">以 <strong>0b</strong> 或 <strong>0B</strong> 开头</font>。</li>
+<li>十进制：0-9 ，满 10 进 1。</li>
+<li>八进制：0-7 ，满 8 进 1. <font color="red">以数字 以数字 <strong>0</strong> 开头表示 开头表示</font>。</li>
+<li>十六进制：0-9 及 A(10)-F(15)，满 16 进 1. <font color="red">以 <strong>0x 或 0X</strong> 开头表示</font>。此处的 A-F 不区分大小写。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-8-2-进制转化"><a href="#4-8-2-进制转化" class="headerlink" title="4.8.2 进制转化"></a>4.8.2 进制转化</h3><ul>
+<li>k进制转十进制</li>
+</ul>
+<p>​        从最低位（右边）开始，将每个位上的数提取出来，乘以 k的(位数-1)次方 后再求和</p>
+<ul>
+<li><p>十进制转k进制</p>
+<p>除k取余法</p>
+</li>
+<li><p>二进制转八进制（十六进制）</p>
+</li>
+</ul>
+<p>​         从低位开始, 将二进制数（十六进制数）<strong>每三位（四位）</strong>一组，转成对应的八进制数（十六进制数）即可。</p>
+<ul>
+<li>八进制（十六进制）转二进制</li>
+</ul>
+<p>​        将八进制数（十六进制）每 1 位，转成对应的一个 3 位（4位）的二进制数即可。</p>
 ]]></content>
       <categories>
         <category>《Java》</category>
