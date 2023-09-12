@@ -17028,7 +17028,7 @@ graph LR
 <h2 id="3-4-字符类型"><a href="#3-4-字符类型" class="headerlink" title="3.4 字符类型"></a>3.4 字符类型</h2><ul>
 <li><p>使用细节</p>
 <ul>
-<li>java中，char的本质是一个整数，在输出时，是Unicode码对应的字符</li>
+<li>java中，char的本质是一个整数，在<strong>输出时，是Unicode码对应的字符</strong></li>
 <li>char类型时可以进行运算法</li>
 </ul>
 </li>
@@ -17095,7 +17095,7 @@ graph LR
 <li>注意事项</li>
 </ul>
 <p>​    <div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><ol>
-<li>对于除号”/“，它的整数除和小数除是有区别的: 整数之间做除法时，只保留整数部分而舍弃小数部分。例如: int x= 10/3,结果是3</li>
+<li>对于除号”/“，它的整数除和小数除是有区别的: <strong>整数之间做除法时，只保留整数部分而舍弃小数部分</strong>。例如: int x= 10/3,结果是3</li>
 <li>当对一个数取模时，可以等价<font color="red">a%b = a-a/b*b</font>，这样我们可以看到取模的一个本质运算。</li>
 <li>当自增当做一个独立语言使用时，不管是 ++i 还是 i++ 都是一样的</li>
 <li>当自增当做一个表达式使用时 j=++i 等价于 i=i+1; j=i<br>当自增当做一个表达式使用时 j=i++ 等价 j=i; i=i+1</li>
@@ -17259,7 +17259,7 @@ graph LR
 </ul>
 <p>​    <div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><pre><code> 1. 表达式数据类型，应和case后的常量**类型一致**，或者是可以**自动转换**成可以相互比较的类型，比如输入的是字符，而常量是int
  2. switch(表达式)中表达式的返回值必须是: &lt;font color=&#39;red&#39;&gt;byte, short, int, char, enum[枚举], String&lt;/font&gt;
- double c = 1.1; switch(c)//错误
+  double c = 1.1; switch(c)//错误
  3. case子句中的值必须是**常量**,而不能是变量
  4. default子句是可选的，当没有匹配的case时，执行default
  5. break语句用来在执行完一个case分支后使程序跳出switch语句块; 如果没有写break，程序会顺序执行到switch结尾，除非遇到break; （穿透现象）
@@ -17275,7 +17275,69 @@ graph LR
 </ul>
 </li>
 </ul>
-<h2 id="5-3-循环控制"><a href="#5-3-循环控制" class="headerlink" title="5.3 循环控制"></a>5.3 循环控制</h2>]]></content>
+<h2 id="5-3-循环控制"><a href="#5-3-循环控制" class="headerlink" title="5.3 循环控制"></a>5.3 循环控制</h2><h3 id="5-3-1-for循环"><a href="#5-3-1-for循环" class="headerlink" title="5.3.1 for循环"></a>5.3.1 for循环</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (循环变量初始化; 循环条件; 循环变量迭代) &#123;</span><br><span class="line">	循环操作;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20230911162316011.png" alt="image-20230911162316011"></p>
+<ul>
+<li><p>for 有四要素: (1)循环变量初始化 (2)循环条件 (3)循环操作 (4)循环变量迭代</p>
+</li>
+<li><p>for(; ;)表示无限循环</p>
+</li>
+<li><p>for(; 循环判断条件; ) 中的初始化和变量迭代可以写到其它地方，但是两边的分号不能省略。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>( ; i &lt;= <span class="number">10</span>; ) &#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">    i++</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure></li>
+<li><p>循环初始值<strong>可以有多条初始化语句，但要求类型一样，并且中间用逗号隔开</strong>，循环变量迭代也可以有多条变量迭代语句，中间用逗号隔开.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++, j += <span class="number">2</span>) &#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;i=&quot;</span> + i + <span class="string">&quot;j=&quot;</span> + j)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="5-3-2-while循环"><a href="#5-3-2-while循环" class="headerlink" title="5.3.2 while循环"></a>5.3.2 while循环</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">循环变量初始化；</span><br><span class="line"><span class="keyword">while</span>(循环条件) &#123;</span><br><span class="line">	循环体;</span><br><span class="line">	循环变量迭代;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20230911163633782.png" alt="image-20230911163633782"></p>
+<h3 id="5-3-3-do-while循环"><a href="#5-3-3-do-while循环" class="headerlink" title="5.3.3 do while循环"></a>5.3.3 do while循环</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">循环变量初始化;</span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">    循环体(语句);</span><br><span class="line">    循环变量迭代;</span><br><span class="line">&#125;<span class="keyword">while</span>(循环条件);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20230911163844949.png" alt="image-20230911163844949"></p>
+<h3 id="5-3-4-嵌套循环"><a href="#5-3-4-嵌套循环" class="headerlink" title="5.3.4 嵌套循环"></a>5.3.4 嵌套循环</h3><p><font color="red">编程思想：化繁为简，先死后活</font></p>
+<p>化繁为简：将复杂的程序简化为多个简单的步骤</p>
+<p>先死后活：先考虑常量的情况，再考虑变量的情况</p>
+<ul>
+<li><p>打印九九乘法表</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">9</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; j++) &#123;</span><br><span class="line">        System.out.print(j + <span class="string">&quot;*&quot;</span> + i +<span class="string">&quot;=&quot;</span> + j * i);</span><br><span class="line">        System.out.print(<span class="string">&quot;\t&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20230911165707995.png" alt="image-20230911165707995"></p>
+</li>
+</ul>
+<ul>
+<li><p>打印空心金字塔</p>
+<ul>
+<li>化繁为简</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 第一版</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= <span class="number">2</span> * i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二版</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="comment">// 空格数 = 层数 - 当前层数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= <span class="number">5</span> - i; k++) &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot; &quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= <span class="number">2</span> * i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第三版</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= <span class="number">5</span> - i; k++) &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot; &quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= <span class="number">2</span> * i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">        <span class="comment">// 每行只有第一个位置和最后一个位置打印*</span></span><br><span class="line">        <span class="comment">// 最后一行全部输出</span></span><br><span class="line">        <span class="keyword">if</span>(j == <span class="number">1</span> || j == <span class="number">2</span> * i - <span class="number">1</span> || i == <span class="number">5</span>) &#123;</span><br><span class="line">            System.out.print(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;	<span class="comment">//其他位置打印空格</span></span><br><span class="line">            System.out.print(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>先死后活</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 终版</span></span><br><span class="line">Scanner myScanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">System.out.println(<span class="string">&quot;请输入金字塔层数：&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> level = myScanner.nextInt();</span><br><span class="line"><span class="comment">// 第三版</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= level; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= level - i; k++) &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot; &quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= <span class="number">2</span> * i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">        <span class="comment">// 每行只有第一个位置和最后一个位置打印*</span></span><br><span class="line">        <span class="comment">// 最后一行全部输出</span></span><br><span class="line">        <span class="keyword">if</span>(j == <span class="number">1</span> || j == <span class="number">2</span> * i - <span class="number">1</span> || i == level) &#123;</span><br><span class="line">            System.out.print(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;	<span class="comment">//其他位置打印空格</span></span><br><span class="line">            System.out.print(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20230912104055452.png" alt="image-20230912104055452"></p>
+</li>
+</ul>
+<h3 id="5-3-5-break跳转"><a href="#5-3-5-break跳转" class="headerlink" title="5.3.5 break跳转"></a>5.3.5 break跳转</h3><ul>
+<li><p>跳出最近的循环体</p>
+</li>
+<li><p>break语句出现在多层嵌套的语句块中时，可以通过**<font color="red">标签</font>**指明要终止的是哪一层语句块。</p>
+</li>
+<li><p>label1: { …{break label1}… }</p>
+</li>
+<li><p>label1是标签，名字由程序员指定，可以是任意如abc1，ABC2</p>
+</li>
+<li><p>在实际开发中尽量不要使用标签</p>
+</li>
+<li><p>如果break没有指定标签，默认退出最近的循环体</p>
+</li>
+</ul>
+<h3 id="5-3-6-continue跳转"><a href="#5-3-6-continue跳转" class="headerlink" title="5.3.6 continue跳转"></a>5.3.6 continue跳转</h3><ul>
+<li>结束本次循环，继续执行下一次循环</li>
+<li>continue 语句出现在多层嵌套的循环语句体中时，可以通过**<font color="red">标签</font>**指明要跳过的是哪一层循环 , 这个和前面的标签的使用的规则一样.</li>
+</ul>
+]]></content>
       <categories>
         <category>《Java》</category>
       </categories>
