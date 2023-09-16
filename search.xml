@@ -17371,7 +17371,7 @@ graph LR
 <h2 id="6-3-数组赋值机制"><a href="#6-3-数组赋值机制" class="headerlink" title="6.3 数组赋值机制"></a>6.3 数组赋值机制</h2><ul>
 <li><p>基本数据类型是<font color="red">值传递</font>，赋值类型是<font color="red">值拷贝</font></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// b的变化不会影响到a</span></span><br><span class="line"><span class="keyword">int</span> n1 = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> n2 = a;</span><br><span class="line">n2 = <span class="number">80</span>;</span><br><span class="line">System.out.println(n1);	<span class="comment">// 10</span></span><br><span class="line">System.out.println(n2);	<span class="comment">// 80</span></span><br></pre></td></tr></table></figure></li>
-<li><p>数组在默认情况下是**<font color="red">引用传递，赋的值是地址</font>**，赋值方式为<font color="red">地址拷贝</font>。</p>
+<li><p>数组在默认情况下是**<font color="red">引用传递，赋的值是地址</font>**，赋值方式为<font color="red"><strong>地址拷贝</strong></font>。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// b的变化会影响到a</span></span><br><span class="line"><span class="keyword">int</span>[] arr1 = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>[] arr2 = arr1;	<span class="comment">//把数组a赋值给b，赋的是地址</span></span><br><span class="line">arr2[<span class="number">0</span>] = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr1.length; i++) &#123;</span><br><span class="line">	System.out.println(arr1[i]);</span><br><span class="line">&#125;	<span class="comment">// 10, 2, 3</span></span><br></pre></td></tr></table></figure></li>
 <li><p>值传递和引用传递区别</p>
 <p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20230913101848477.png" alt="image-20230913101848477"></p>
@@ -17400,9 +17400,9 @@ graph LR
 <h3 id="6-8-1-初始化"><a href="#6-8-1-初始化" class="headerlink" title="6.8.1 初始化"></a>6.8.1 初始化</h3><ul>
 <li><p>静态初始化：</p>
 <ul>
-<li>数据类型[][] 数组名 = &lt;!–swig￼42–&gt;</li>
-<li>数据类型 数组名[][] = &lt;!–swig￼43–&gt;</li>
-<li><font color="red">数据类型[] 数组名[] = &lt;!–swig￼44–&gt;</font></li>
+<li><font color="red">数据类型[][] 数组名 = &lt;!–swig￼45–&gt;</font></li>
+<li><font color="red">数据类型 数组名[][] = &lt;!–swig￼46–&gt;</font></li>
+<li><font color="red">数据类型[] 数组名[] = &lt;!–swig￼47–&gt;</font></li>
 </ul>
 </li>
 <li><p>动态初始化1：</p>
@@ -17439,16 +17439,53 @@ graph LR
 <li> 类是对象的模板，对象是类的一个个体，对应一个实例</li>
 </ul>
 <p>​        </p>
-<h3 id="7-1-2-对象在内存中存在形式（-重要-！）"><a href="#7-1-2-对象在内存中存在形式（-重要-！）" class="headerlink" title="7.1.2 对象在内存中存在形式（**重要**！）"></a>7.1.2 对象在内存中存在形式（**<font color="red">重要</font>**！）</h3><p>​        <strong>栈</strong>中存放的是对象的<strong>引用</strong>（对象名），真正的对象在<strong>堆</strong>中。</p>
+<h3 id="7-1-2-对象在内存中存在形式（重要！）"><a href="#7-1-2-对象在内存中存在形式（重要！）" class="headerlink" title="7.1.2 对象在内存中存在形式（重要！）"></a>7.1.2 对象在内存中存在形式（<font color="red">重要</font>！）</h3><p>​        <strong>栈</strong>中存放的是对象的<strong>引用</strong>（对象名），真正的对象在<strong>堆</strong>中。</p>
 <p>​        年龄12是一个基本数据类型（整型），直接存放在堆中；名字和颜色是一个引用类型（字符串），在堆中存放的是地址，真正的数据存放在方法区的常量池中。</p>
 <p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20230915192816359.png" alt="image-20230915192816359"></p>
 <h3 id="7-1-3-成员变量-属性-字段"><a href="#7-1-3-成员变量-属性-字段" class="headerlink" title="7.1.3 成员变量|属性|字段"></a>7.1.3 成员变量|属性|字段</h3><ul>
 <li><p>定义：<strong>访问修饰符 属性类型 属性名</strong></p>
 </li>
-<li><p>赋值：属性如果不赋值，有<a href="#myid">默认值</a>**，规则和数组一致。具体说: int 0，short 0, byte 0, long 0, float 0.0,double 0.0，</p>
+<li><p>赋值：属性如果不赋值，有<a href="#myid">默认值</a>，规则和数组一致。具体说: int 0，short 0, byte 0, long 0, float 0.0,double 0.0，</p>
 <p>char \u0000，boolean false，String null</p>
 </li>
+<li><p>访问属性：对象名.属性名</p>
+</li>
 </ul>
+<h3 id="7-1-4-创建对象"><a href="#7-1-4-创建对象" class="headerlink" title="7.1.4 创建对象"></a>7.1.4 创建对象</h3><ul>
+<li><p>先声明在创建</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 声明时会在栈中创建一个值为空的变量,创建时会在堆中创建一个对象并把它的地址赋给这个变量</span></span><br><span class="line">Cat cat;</span><br><span class="line">cat = <span class="keyword">new</span> Cat();</span><br></pre></td></tr></table></figure></li>
+<li><p>直接创建</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Cat cat = <span class="keyword">new</span> Cat();</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="7-1-5-类和对象的内存分配机制（重要！）"><a href="#7-1-5-类和对象的内存分配机制（重要！）" class="headerlink" title="7.1.5 类和对象的内存分配机制（重要！）"></a>7.1.5 类和对象的内存分配机制（重要！）</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Person p1 = <span class="keyword">new</span> Person();</span><br><span class="line">p1.name = <span class="string">&quot;小明&quot;</span>;</span><br><span class="line">p1.age = <span class="number">18</span>;</span><br><span class="line"></span><br><span class="line">Person p2 = p1;</span><br><span class="line">p2.age = <span class="number">80</span>;</span><br><span class="line">System.out.print(p1.age);<span class="comment">//80</span></span><br><span class="line">System.out.print(p2.name);<span class="comment">//小明</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20230916184807203.png" alt="image-20230916184807203"></p>
+<ul>
+<li>java的内存结构</li>
+</ul>
+<div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><ol>
+<li>栈： 一般存放基本数据类型(局部变量)</li>
+<li>堆： 存放对象(Cat cat , 数组等)</li>
+<li>方法区：常量池(常量，比如字符串)， 类加载信息</li>
+</ol>
+</div>
+
+
+
+<ul>
+<li>java创建对象的流程</li>
+</ul>
+<div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><ol>
+<li>先加载 Person 类信息到<strong>方法区</strong>中(属性和方法信息, 只会加载一次)</li>
+<li>在<strong>堆</strong>中分配空间, 进行默认初始化(看规则)</li>
+<li>把地址赋给<strong>栈</strong>中的变量p , p 就指向对象</li>
+<li>进行指定初始化， 比如 p.name =”jack” p.age = 10</li>
+</ol>
+</div>
+
+
+
+<h2 id="7-2-成员方法"><a href="#7-2-成员方法" class="headerlink" title="7.2 成员方法"></a>7.2 成员方法</h2><h3 id="7-2-1-方法的调用机制（重要！）"><a href="#7-2-1-方法的调用机制（重要！）" class="headerlink" title="7.2.1 方法的调用机制（重要！）"></a>7.2.1 方法的调用机制（重要！）</h3><p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20230916191418109.png" alt="image-20230916191418109"></p>
 ]]></content>
       <categories>
         <category>《Java》</category>
