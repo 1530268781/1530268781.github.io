@@ -19,36 +19,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>网络实验四-DHCP动态分配IP</title>
-    <url>/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-DHCP%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8DIP/</url>
-    <content><![CDATA[<h1 id="实验四-DHCP动态分配IP"><a href="#实验四-DHCP动态分配IP" class="headerlink" title="实验四 DHCP动态分配IP"></a>实验四 DHCP动态分配IP</h1><h2 id="一、实验目的"><a href="#一、实验目的" class="headerlink" title="一、实验目的"></a>一、实验目的</h2><p>掌握DHCP（动态主机配置协议）工作原理<br>启动路由器的DHCP服务为局域网中的机器分配IP地址<br>启动服务器的DHCP服务为局域网中的机器分配IP地址</p>
-<h2 id="二、实验环境"><a href="#二、实验环境" class="headerlink" title="二、实验环境"></a>二、实验环境</h2><p>Cisco Packet Tracer</p>
-<h2 id="三、实验内容"><a href="#三、实验内容" class="headerlink" title="三、实验内容"></a>三、实验内容</h2><p>（1）新建Packet Tracer拓扑图（如图）；<br>（2）静态配置路由器的IP地址；<br>（3）左侧网络通过路由器DHCP动态分配各主机包括服务器的IP地址；<br>（4）右侧网络通过服务器DHCP动态分配各主机的IP地址。</p>
-<h2 id="四、方案设计"><a href="#四、方案设计" class="headerlink" title="四、方案设计"></a>四、方案设计</h2><h3 id="1-新建packet-tracer网络拓扑图"><a href="#1-新建packet-tracer网络拓扑图" class="headerlink" title="1.新建packet tracer网络拓扑图"></a>1.新建packet tracer网络拓扑图</h3><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-DHCP%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8DIP/wps7.jpg" alt="img" style="zoom: 80%;">
-
-
-
-<h3 id="2-启动路由器DHCP服务"><a href="#2-启动路由器DHCP服务" class="headerlink" title="2.启动路由器DHCP服务"></a>2.启动路由器DHCP服务</h3><p>(config)#ip dhcp pool test1<br>(dhcp-config)#network 192.168.1.0 255.255.255.0<br>(dhcp-config)#dns-server 192.168.1.1    //设置默认DNS服务器<br>(dhcp-config)#exit</p>
-<p>(config)#in f0/0<br>(config)#ip address 192.168.1.254 255.255.255.0<br>(config)#no shut</p>
-<h3 id="3-启动服务器DHCP服务"><a href="#3-启动服务器DHCP服务" class="headerlink" title="3.启动服务器DHCP服务"></a>3.启动服务器DHCP服务</h3><ul>
-<li>（1）先静态配置服务器的IP地址、子网掩码、默认网关和默认DNS服务器</li>
-</ul>
-<p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-DHCP%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8DIP/wps8.jpg" alt="img"></p>
-<ul>
-<li>（2）再开启服务器DHCP服务</li>
-</ul>
-<p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-DHCP%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8DIP/wps9.jpg" alt="img"></p>
-<h2 id="五、运行结果"><a href="#五、运行结果" class="headerlink" title="五、运行结果"></a>五、运行结果</h2><p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-DHCP%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8DIP/wps10.jpg" alt="img"></p>
-<p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-DHCP%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8DIP/wps11.jpg" alt="img"></p>
-<p><img src="/2021/05/23/%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C-DHCP%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8DIP/wps59-1621920521237.jpg" alt="img"></p>
-<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><p>DHCP是动态主机分配协议，是一个局域网的网络协议，使用UDP协议工作。</p>
-<div class="note success modern"><p>主要有两个用途：<br>（1）用于内部网或网络服务供应商ISP自动分配IP地址；<br>（2）给用户用于内部网管理员作为对所有计算机作中央管理的手段。</p>
-</div>
-
-<div class="note success modern"><p>DHCP具有以下功能：<br>1、保证任何IP地址在同一时刻只能由一台DHCP客户机所使用。<br>2、DHCP应当可以给用户分配永久固定的IP地址。<br>3、DHCP应当可以同用其他方法获得IP地址的主机共存（如手工配置IP地址的主机）。<br>4、DHCP服务器应当向现有的BOOTP客户端提供服务。</p>
-</div>]]></content>
-  </entry>
-  <entry>
     <title>pictures</title>
     <url>/2021/05/22/pictures/</url>
     <content><![CDATA[<p><img src="/2021/05/22/pictures/2.png" alt="2"></p>
