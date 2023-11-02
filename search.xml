@@ -16849,7 +16849,7 @@ table[i] = (char)(&#39;a&#39; + i);
 <pre><code>System.out.print(table[i] + &quot; &quot;);
 </code></pre>
 <p>}</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">## 6.2 使用细节</span><br><span class="line"></span><br><span class="line">- 数组是多个**相同类型数据**的组合，实现对这些数据的统一管理</span><br><span class="line">-  数组中的**元素可以是任何数据类型**，包括基本类型和引用类型，但是不能混用。</span><br><span class="line">- 数组创建后，如果没有赋值，有&lt;a id=&quot;myid&quot;&gt; **默认值** &lt;/a&gt;int 0，short 0, byte 0, long 0, float 0.0,double 0.0，char \u0000，boolean false，String null</span><br><span class="line">- 数组的**下标是从** **0** **开始的**。</span><br><span class="line">- 获取数组长度：&lt;font color=&#x27;red&#x27;&gt;数组名.length&lt;/font&gt;</span><br><span class="line">- 数组下标必须在指定范围内使用，否则报：下标越界异常</span><br><span class="line">- 数组属**引用类型**，数组型数据是对象(object)代码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 6.3 数组赋值机制</span><br><span class="line"></span><br><span class="line">- 基本数据类型是&lt;font color=&#x27;red&#x27;&gt;值传递&lt;/font&gt;，赋值类型是&lt;font color=&#x27;red&#x27;&gt;值拷贝&lt;/font&gt;</span><br><span class="line"></span><br><span class="line">  ```java</span><br><span class="line">  // b的变化不会影响到a</span><br><span class="line">  int n1 = 10;</span><br><span class="line">  int n2 = a;</span><br><span class="line">  n2 = 80;</span><br><span class="line">  System.out.println(n1);	// 10</span><br><span class="line">  System.out.println(n2);	// 80</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">## 6.2 使用细节</span><br><span class="line"></span><br><span class="line">- 数组是多个**相同类型数据**的组合，实现对这些数据的统一管理</span><br><span class="line">-  数组中的**元素可以是任何数据类型**，包括基本类型和引用类型，但是不能混用。</span><br><span class="line">- 数组创建后，如果没有赋值，有&lt;a id=&quot;myid&quot;&gt; **默认值** &lt;/a&gt;**int 0，short 0, byte 0, long 0, float 0.0,double 0.0，char \u0000，boolean false，String null**</span><br><span class="line">- 数组的**下标是从** **0** **开始的**。</span><br><span class="line">- 获取数组长度：&lt;font color=&#x27;red&#x27;&gt;数组名.length&lt;/font&gt;</span><br><span class="line">- 数组下标必须在指定范围内使用，否则报：下标越界异常</span><br><span class="line">- 数组属**引用类型**，数组型数据是对象(object)代码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 6.3 数组赋值机制</span><br><span class="line"></span><br><span class="line">- 基本数据类型是&lt;font color=&#x27;red&#x27;&gt;值传递&lt;/font&gt;，赋值类型是&lt;font color=&#x27;red&#x27;&gt;值拷贝&lt;/font&gt;</span><br><span class="line"></span><br><span class="line">  ```java</span><br><span class="line">  // b的变化不会影响到a</span><br><span class="line">  int n1 = 10;</span><br><span class="line">  int n2 = a;</span><br><span class="line">  n2 = 80;</span><br><span class="line">  System.out.println(n1);	// 10</span><br><span class="line">  System.out.println(n2);	// 80</span><br></pre></td></tr></table></figure></li>
 <li><p>数组在默认情况下是**<font color="red">引用传递，赋的值是地址</font>**，赋值方式为<font color="red"><strong>地址拷贝</strong></font>。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// b的变化会影响到a</span></span><br><span class="line"><span class="keyword">int</span>[] arr1 = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>[] arr2 = arr1;	<span class="comment">//把数组a赋值给b，赋的是地址</span></span><br><span class="line">arr2[<span class="number">0</span>] = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr1.length; i++) &#123;</span><br><span class="line">	System.out.println(arr1[i]);</span><br><span class="line">&#125;	<span class="comment">// 10, 2, 3</span></span><br></pre></td></tr></table></figure></li>
 <li><p>值传递和引用传递区别</p>
@@ -16879,9 +16879,9 @@ table[i] = (char)(&#39;a&#39; + i);
 <h3 id="6-8-1-初始化"><a href="#6-8-1-初始化" class="headerlink" title="6.8.1 初始化"></a>6.8.1 初始化</h3><ul>
 <li><p>静态初始化：</p>
 <ul>
-<li><font color="red">数据类型[][] 数组名 = &lt;!–swig￼161–&gt;</font></li>
-<li><font color="red">数据类型 数组名[][] = &lt;!–swig￼162–&gt;</font></li>
-<li><font color="red">数据类型[] 数组名[] = &lt;!–swig￼163–&gt;</font></li>
+<li><font color="red">数据类型[][] 数组名 = &lt;!–swig￼181–&gt;</font></li>
+<li><font color="red">数据类型 数组名[][] = &lt;!–swig￼182–&gt;</font></li>
+<li><font color="red">数据类型[] 数组名[] = &lt;!–swig￼183–&gt;</font></li>
 </ul>
 </li>
 <li><p>动态初始化1：</p>
@@ -17403,11 +17403,11 @@ table[i] = (char)(&#39;a&#39; + i);
 <td align="center">对父类对象的引用</td>
 </tr>
 </tbody></table>
-<h2 id="8-9-方法重写-覆盖-Override"><a href="#8-9-方法重写-覆盖-Override" class="headerlink" title="8.9 方法重写/覆盖 Override"></a>8.9 方法重写/覆盖 Override</h2><h3 id="8-9-1-基本介绍"><a href="#8-9-1-基本介绍" class="headerlink" title="8.9.1 基本介绍"></a>8.9.1 基本介绍</h3><p>​    方法覆盖(重写)就是<strong>子类有一个方法和父类的某个方法的名称、返回类型、参数一样</strong>，那么我们就说子类的这个方法覆盖了父类的方法</p>
+<h2 id="8-9-方法重写-重构-覆盖-Override"><a href="#8-9-方法重写-重构-覆盖-Override" class="headerlink" title="8.9 方法重写/重构/覆盖 Override"></a>8.9 方法重写/重构/覆盖 Override</h2><h3 id="8-9-1-基本介绍"><a href="#8-9-1-基本介绍" class="headerlink" title="8.9.1 基本介绍"></a>8.9.1 基本介绍</h3><p>​    方法覆盖(重写)就是<strong>子类有一个方法和父类的某个方法的名称、返回类型、参数一样</strong>，那么我们就说子类的这个方法覆盖了父类的方法</p>
 <h3 id="8-9-2-注意事项"><a href="#8-9-2-注意事项" class="headerlink" title="8.9.2 注意事项"></a>8.9.2 注意事项</h3><ul>
-<li>子类的方法的<font color="red">方法名称，形参列表</font>要和父类方法的形参列表，方法名称完全一样。</li>
+<li>子类的方法的<font color="red">方法名称，形参列表</font>要和父类方法的<strong>形参列表，方法名称</strong>完全一样。</li>
 <li>子类方法的返回类型和父类方法<strong>返回类型一样</strong>，<font color="red">或者是父类返回类型的子类</font>。比如父类返回类型是Object,子类方法返回类型是String</li>
-<li><font color="red">子类方法不能缩小父类方法的访问权限</font>。public &gt; protected &gt; 默认 &gt; private</li>
+<li><font color="red">子类方法不能缩小父类方法的访问权限</font>。public &gt; protected &gt; 默认 &gt; privat</li>
 </ul>
 <h3 id="8-9-3-重写与重载的比较"><a href="#8-9-3-重写与重载的比较" class="headerlink" title="8.9.3 重写与重载的比较"></a>8.9.3 重写与重载的比较</h3><table>
 <thead>
@@ -18562,7 +18562,7 @@ table[i] = (char)(&#39;a&#39; + i);
 </ul>
 <ul>
 <li><p><strong>copyOf</strong>：数组拷贝</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// copyOf 数组拷贝</span></span><br><span class="line"><span class="comment">//1. 从 arr 数组中，拷贝 arr.length 个元素到 newArr 数组中</span></span><br><span class="line"><span class="comment">//2. 如果拷贝的长度 &gt; arr.length 就在新数组的后面 增加 null</span></span><br><span class="line"><span class="comment">//3. 如果拷贝长度 &lt; 0 就抛出异常 NegativeArraySizeException</span></span><br><span class="line"><span class="comment">//4. 该方法的底层使用的是 System.arraycopy()</span></span><br><span class="line">Integer[] newArr = Arrays.copyOf(arr, arr.length);</span><br><span class="line">System.out.println(<span class="string">&quot;==拷贝执行完毕后==&quot;</span>);</span><br><span class="line">System.out.println(Arrays.toString(newArr));</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// copyOf 数组拷贝</span></span><br><span class="line"><span class="comment">//1. 从 arr 数组中，拷贝 length 个元素到 newArr 数组中</span></span><br><span class="line"><span class="comment">//2. 如果拷贝的长度length &gt; oldArr.length 就在新数组的后面 增加 null</span></span><br><span class="line"><span class="comment">//3. 如果拷贝长度length &lt; 0 就抛出异常 NegativeArraySizeException</span></span><br><span class="line"><span class="comment">//4. 该方法的底层使用的是 System.arraycopy()</span></span><br><span class="line">Integer[] newArr = Arrays.copyOf(oldArr, length);</span><br><span class="line">System.out.println(<span class="string">&quot;==拷贝执行完毕后==&quot;</span>);</span><br><span class="line">System.out.println(Arrays.toString(newArr));</span><br></pre></td></tr></table></figure></li>
 <li><p><strong>fill</strong>：数组填充</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//fill 数组元素的填充</span></span><br><span class="line">Integer[] num = <span class="keyword">new</span> Integer[]&#123;<span class="number">9</span>,<span class="number">3</span>,<span class="number">2</span>&#125;;</span><br><span class="line"><span class="comment">//1. 使用 99 去填充 num 数组，可以理解成是替换原理的元素</span></span><br><span class="line">Arrays.fill(num, <span class="number">99</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;==num 数组填充后==&quot;</span>);</span><br><span class="line">System.out.println(Arrays.toString(num));</span><br></pre></td></tr></table></figure></li>
 </ul>
@@ -18583,6 +18583,184 @@ table[i] = (char)(&#39;a&#39; + i);
 <h2 id="13-9-System类"><a href="#13-9-System类" class="headerlink" title="13.9 System类"></a>13.9 System类</h2><p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231030182047674.png" alt="image-20231030182047674"></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//exit 退出当前程序</span></span><br><span class="line">System.out.println(<span class="string">&quot;ok1&quot;</span>);</span><br><span class="line"><span class="comment">//1. exit(0) 表示程序退出</span></span><br><span class="line"><span class="comment">//2. 0 表示一个状态 , 正常的状态</span></span><br><span class="line">System.exit(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//arraycopy ：复制数组元素，比较适合底层调用，</span></span><br><span class="line"><span class="comment">// 一般使用 Arrays.copyOf 完成复制数组</span></span><br><span class="line"><span class="keyword">int</span>[] src=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>[] dest = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];<span class="comment">// dest 当前是 &#123;0,0,0&#125;</span></span><br><span class="line"><span class="comment">//1. 主要是搞清楚这五个参数的含义</span></span><br><span class="line"><span class="comment">// * @param     src         源数组</span></span><br><span class="line"><span class="comment">// * @param     srcPos      从源数组的哪个索引位置开始拷贝</span></span><br><span class="line"><span class="comment">// * @param     dest        目标数组，即把源数组的数据拷贝到哪个数组</span></span><br><span class="line"><span class="comment">// * @param     destPos     把源数组的数据拷贝到 目标数组的哪个索引</span></span><br><span class="line"><span class="comment">// * @param     length      从源数组拷贝多少个数据到目标数组</span></span><br><span class="line">System.arraycopy(src, <span class="number">0</span>, dest, <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"><span class="comment">// int[] src=&#123;1,2,3&#125;;</span></span><br><span class="line">System.out.println(<span class="string">&quot;dest=&quot;</span> + Arrays.toString(dest));<span class="comment">//[0, 1, 2]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//currentTimeMillens:返回当前时间距离 1970-1-1 的毫秒数</span></span><br><span class="line">System.out.println(System.currentTimeMillis());</span><br></pre></td></tr></table></figure>
 
+
+
+<h2 id="13-10-BigInteger-和-BigDecimal-类"><a href="#13-10-BigInteger-和-BigDecimal-类" class="headerlink" title="13.10 BigInteger 和 BigDecimal 类"></a>13.10 BigInteger 和 BigDecimal 类</h2><ul>
+<li><p>应用场景：</p>
+<ul>
+<li>Biglnteger适合保存比较大的整型</li>
+<li>BigDecimal适合保存精度更高的浮点型(小数)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 当我们编程中，需要处理很大的整数，long 不够用</span></span><br><span class="line"><span class="comment">// 可以使用 BigInteger 的类来搞定</span></span><br><span class="line"><span class="comment">//long l = 23788888899999999999999999999l;</span></span><br><span class="line"><span class="comment">//System.out.println(&quot;l=&quot; + l);</span></span><br><span class="line"></span><br><span class="line">BigInteger bigInteger = <span class="keyword">new</span> BigInteger(<span class="string">&quot;23788888899999999999999999999&quot;</span>);</span><br><span class="line">System.out.println(bigInteger);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 当我们需要保存一个精度很高的数时，double 不够用</span></span><br><span class="line"><span class="comment">// 可以用 BigDecimal</span></span><br><span class="line"><span class="comment">//double d = 1999.11111111111999999999999977788d;</span></span><br><span class="line"><span class="comment">//System.out.println(d); //会缩减精度</span></span><br><span class="line">BigDecimal bigDecimal = <span class="keyword">new</span> BigDecimal(<span class="string">&quot;1999.11&quot;</span>);</span><br><span class="line">BigDecimal bigDecimal2 = <span class="keyword">new</span> BigDecimal(<span class="string">&quot;3&quot;</span>);</span><br><span class="line">System.out.println(bigDecimal);</span><br></pre></td></tr></table></figure></li>
+<li><p>加、减、乘、除操作</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1. 在对 BigInteger 进行加减乘除的时候，需要使用对应的方法，不能直接进行 + - * /</span></span><br><span class="line"><span class="comment">//2. 可以创建一个 要操作的 BigInteger 然后进行相应操作</span></span><br><span class="line">BigInteger add = bigInteger.add(bigInteger2);</span><br><span class="line">System.out.println(add);<span class="comment">//加</span></span><br><span class="line">BigInteger subtract = bigInteger.subtract(bigInteger2);</span><br><span class="line">System.out.println(subtract);<span class="comment">//减</span></span><br><span class="line">BigInteger multiply = bigInteger.multiply(bigInteger2);</span><br><span class="line">System.out.println(multiply);<span class="comment">//乘</span></span><br><span class="line">BigInteger divide = bigInteger.divide(bigInteger2);</span><br><span class="line">System.out.println(divide);<span class="comment">//除</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1. 如果对 BigDecimal 进行运算，比如加减乘除，需要使用对应的方法</span></span><br><span class="line"><span class="comment">//2. 创建一个需要操作的 BigDecimal 然后调用相应的方法即可</span></span><br><span class="line">System.out.println(bigDecimal.add(bigDecimal2));</span><br><span class="line">System.out.println(bigDecimal.subtract(bigDecimal2));</span><br><span class="line">System.out.println(bigDecimal.multiply(bigDecimal2));</span><br><span class="line"><span class="comment">//System.out.println(bigDecimal.divide(bigDecimal2));//可能抛出异常ArithmeticException，无限循环小数</span></span><br><span class="line"><span class="comment">//在调用 divide 方法时，指定精度即可. BigDecimal.ROUND_CEILING</span></span><br><span class="line"><span class="comment">//如果有无限循环小数，就会保留 和“被除数”一致的 精度</span></span><br><span class="line">System.out.println(bigDecimal.divide(bigDecimal2, BigDecimal.ROUND_CEILING));</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="13-11-日期类"><a href="#13-11-日期类" class="headerlink" title="13.11 日期类"></a>13.11 日期类</h2><h3 id="13-11-1-第一代日期类-Date"><a href="#13-11-1-第一代日期类-Date" class="headerlink" title="13.11.1 第一代日期类 Date"></a>13.11.1 第一代日期类 Date</h3><p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231031093802564.png" alt="image-20231031093802564"></p>
+<ul>
+<li><p>获取日期</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1. 获取当前系统时间</span></span><br><span class="line"><span class="comment">//2. 这里的 Date 类是在 java.util 包的</span></span><br><span class="line"><span class="comment">//3. 默认输出的日期格式是国外的方式, 因此通常需要对格式进行转换</span></span><br><span class="line">Date d1 = <span class="keyword">new</span> Date(); <span class="comment">//获取当前系统时间</span></span><br><span class="line">System.out.println(<span class="string">&quot;当前日期=&quot;</span> + d1);</span><br><span class="line"></span><br><span class="line">Date d2 = <span class="keyword">new</span> Date(<span class="number">9234567</span>); <span class="comment">//通过指定毫秒数得到时间</span></span><br><span class="line">System.out.println(<span class="string">&quot;d2=&quot;</span> + d2);</span><br><span class="line"></span><br><span class="line">System.out.println(d1.getTime());   <span class="comment">//获取某个时间对应的毫秒数</span></span><br></pre></td></tr></table></figure></li>
+<li><p>Date转格式化String</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1. 创建 SimpleDateFormat 对象，将Date转换成格式化字符串</span></span><br><span class="line"><span class="comment">//2. 这里的格式使用的字母是规定好，不能乱写</span></span><br><span class="line">SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy年MM月dd日 hh:mm:ss E&quot;</span>);</span><br><span class="line">String format = sdf.format(d1); <span class="comment">// format:将日期转换成指定格式的字符串</span></span><br><span class="line">System.out.println(<span class="string">&quot;当前日期=&quot;</span> + format);</span><br></pre></td></tr></table></figure></li>
+<li><p>格式化String转Date</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1. 可以把一个格式化的 String 转成对应的 Date</span></span><br><span class="line"><span class="comment">//2. 得到 Date 在输出时，仍然还是按照国外的形式，如果希望指定格式输出，还是需要转换</span></span><br><span class="line"><span class="comment">//3. 在把 String -&gt; Date ， String 的格式 需要和 定义的sdf格式 一致，否则会抛出转换异常</span></span><br><span class="line">String s = <span class="string">&quot;1996 年 01 月 01 日 10:20:30 星期一&quot;</span>;</span><br><span class="line">Date parse = sdf.parse(s); <span class="comment">//可能会报异常ParseException</span></span><br><span class="line">System.out.println(<span class="string">&quot;parse=&quot;</span> + sdf.format(parse));</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="13-11-2-第二代日期类-Calendar"><a href="#13-11-2-第二代日期类-Calendar" class="headerlink" title="13.11.2 第二代日期类 Calendar"></a>13.11.2 第二代日期类 Calendar</h3><p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231031095901376.png" alt="image-20231031095901376"></p>
+<ul>
+<li><p>获取Calendar对象</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1. Calendar 是一个抽象类， 并且构造器是 private</span></span><br><span class="line"><span class="comment">//2. 可以通过 getInstance() 来获取实例</span></span><br><span class="line"><span class="comment">//3. 提供大量的方法和字段提供给程序员</span></span><br><span class="line"><span class="comment">//4. Calendar 没有提供对应的格式化的类，因此需要程序员自己组合来输出(灵活)</span></span><br><span class="line"><span class="comment">//5. 如果我们需要按照 24 小时进制来获取时间， Calendar.HOUR ==改成=&gt; Calendar.HOUR_OF_DAY</span></span><br><span class="line">Calendar c = Calendar.getInstance(); <span class="comment">//创建日历类对象，比较简单，自由</span></span><br><span class="line">System.out.println(<span class="string">&quot;c=&quot;</span> + c); <span class="comment">//会输出很多字段信息</span></span><br></pre></td></tr></table></figure></li>
+<li><p>获取日历字段</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取日历对象的某个日历字段</span></span><br><span class="line">System.out.println(<span class="string">&quot;年：&quot;</span> + c.get(Calendar.YEAR));</span><br><span class="line"><span class="comment">// 这里为什么要 + 1, 因为 Calendar 返回月时候，是按照 0 开始编号</span></span><br><span class="line">System.out.println(<span class="string">&quot;月：&quot;</span> + (c.get(Calendar.MONTH) + <span class="number">1</span>));</span><br><span class="line">System.out.println(<span class="string">&quot;日：&quot;</span> + c.get(Calendar.DAY_OF_MONTH));</span><br><span class="line">System.out.println(<span class="string">&quot;小时：&quot;</span> + c.get(Calendar.HOUR));</span><br><span class="line">System.out.println(<span class="string">&quot;分钟：&quot;</span> + c.get(Calendar.MINUTE));</span><br><span class="line">System.out.println(<span class="string">&quot;秒：&quot;</span> + c.get(Calendar.SECOND));</span><br></pre></td></tr></table></figure></li>
+<li><p>格式化输出</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Calender 没有专门的格式化方法，所以需要程序员自己来组合显示</span></span><br><span class="line">System.out.println(c.get(Calendar.YEAR) + <span class="string">&quot;-&quot;</span> + (c.get(Calendar.MONTH) + <span class="number">1</span>) + <span class="string">&quot;-&quot;</span> +</span><br><span class="line">c.get(Calendar.DAY_OF_MONTH) +</span><br><span class="line"><span class="string">&quot; &quot;</span> + c.get(Calendar.HOUR_OF_DAY) + <span class="string">&quot;:&quot;</span> + c.get(Calendar.MINUTE) + <span class="string">&quot;:&quot;</span> + c.get(Calendar.SECOND) );</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="13-11-3-第三代日期类-LocalDateTime"><a href="#13-11-3-第三代日期类-LocalDateTime" class="headerlink" title="13.11.3 第三代日期类 LocalDateTime"></a>13.11.3 第三代日期类 LocalDateTime</h3><p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231031100935458.png" alt="image-20231031100935458"></p>
+<p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231031101058708.png" alt="image-20231031101058708"></p>
+<ul>
+<li><p>获取日期时间</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1. 使用 now() 返回表示当前日期时间的 对象</span></span><br><span class="line">LocalDateTime ldt = LocalDateTime.now();</span><br><span class="line">System.out.println(ldt);</span><br><span class="line">LocalDate now = LocalDate.now(); <span class="comment">//可以获取年月日</span></span><br><span class="line">LocalTime now2 = LocalTime.now();<span class="comment">//获取到时分秒</span></span><br></pre></td></tr></table></figure></li>
+<li><p>格式化输出</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//2. 使用 DateTimeFormatter 对象来进行格式化</span></span><br><span class="line"><span class="comment">// 创建 DateTimeFormatter 对象</span></span><br><span class="line">DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br><span class="line">String format = dateTimeFormatter.format(ldt);</span><br><span class="line">System.out.println(<span class="string">&quot;格式化的日期=&quot;</span> + format);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以向Calendar一样输出各个字段，组合显示</span></span><br><span class="line">System.out.println(<span class="string">&quot;年=&quot;</span> + ldt.getYear());</span><br><span class="line">System.out.println(<span class="string">&quot;月=&quot;</span> + ldt.getMonth());</span><br><span class="line">System.out.println(<span class="string">&quot;月=&quot;</span> + ldt.getMonthValue());</span><br><span class="line">System.out.println(<span class="string">&quot;日=&quot;</span> + ldt.getDayOfMonth());</span><br><span class="line">System.out.println(<span class="string">&quot;时=&quot;</span> + ldt.getHour());</span><br><span class="line">System.out.println(<span class="string">&quot;分=&quot;</span> + ldt.getMinute());</span><br><span class="line">System.out.println(<span class="string">&quot;秒=&quot;</span> + ldt.getSecond());</span><br></pre></td></tr></table></figure></li>
+<li><p>对当前时间进行加减</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//提供 plus 和 minus 方法可以对当前时间进行加或者减</span></span><br><span class="line"><span class="comment">//看看 890 天后，是什么时候 把 年月日-时分秒</span></span><br><span class="line">LocalDateTime ldt2 = ldt.plusDays(<span class="number">890</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;890 天后=&quot;</span> + dateTimeFormatter.format(ldt2));</span><br><span class="line"><span class="comment">//看看在 3456 分钟前是什么时候，把 年月日-时分秒输出</span></span><br><span class="line">LocalDateTime ldt3 = ldt.minusMinutes(<span class="number">3456</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;3456 分钟前 日期=&quot;</span> + dateTimeFormatter.format(ldt3));</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="第十四章-集合"><a href="#第十四章-集合" class="headerlink" title="第十四章 集合"></a>第十四章 集合</h1><h2 id="14-1-集合介绍"><a href="#14-1-集合介绍" class="headerlink" title="14.1 集合介绍"></a>14.1 集合介绍</h2><ul>
+<li>数组的不足<ul>
+<li>长度开始时必须指定，而且一旦指定，不能更改</li>
+<li>保存的必须为同一类型的元素</li>
+<li>使用数组进行增加/删除元素比较麻烦（需要创建一个新数组）</li>
+</ul>
+</li>
+<li>集合的好处<ul>
+<li>可以<strong>动态保存</strong>任意多个对象，使用比较方便!</li>
+<li>提供了一系列方便的操作对象的方法:add、remove、set、get等</li>
+<li>使用集合添加，删除新元素的代码-<strong>简洁</strong>明了</li>
+</ul>
+</li>
+</ul>
+<h2 id="14-2-框架体系图（必背）"><a href="#14-2-框架体系图（必背）" class="headerlink" title="14.2 框架体系图（必背）"></a>14.2 框架体系图（必背）</h2><ol>
+<li><p>集合主要是两组(单列集合 , 双列集合)</p>
+</li>
+<li><p>Collection 接口有两个重要的子接口 List和Set , 他们的实现子类都是单列集合</p>
+</li>
+<li><p>Map 接口的实现子类 是双列集合，存放的是 K-V</p>
+</li>
+</ol>
+<div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><ul>
+<li>Collection<ul>
+<li><strong>List</strong><ul>
+<li>Vector</li>
+<li>ArrayList</li>
+<li>LinkedList</li>
+</ul>
+</li>
+<li><strong>Set</strong><ul>
+<li>TreeSet</li>
+<li>HashSet</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Map</strong><ul>
+<li>TreeMap</li>
+<li>HashMap<ul>
+<li>LinkedHashMap</li>
+</ul>
+</li>
+<li>Hashtable<ul>
+<li>Properties</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>​    </p>
+</div>
+
+<p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231101093437236.png" alt="image-20231101093437236"></p>
+<p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231101093444815.png" alt="image-20231101093444815"></p>
+<h2 id="14-3-Collection接口"><a href="#14-3-Collection接口" class="headerlink" title="14.3 Collection接口"></a>14.3 Collection接口</h2><h3 id="14-3-1-实现类的特点和常用方法"><a href="#14-3-1-实现类的特点和常用方法" class="headerlink" title="14.3.1 实现类的特点和常用方法"></a>14.3.1 实现类的特点和常用方法</h3><ol>
+<li><p>收集实现子类可以存放多个元素，每个元素可以是Object</p>
+</li>
+<li><p>有些Collection的实现类，可以存放重复的元素，有些不可以</p>
+</li>
+<li><p>有些的实现类，有些是<strong>有序的(List)<strong>，有些是</strong>无序的(Set)</strong></p>
+</li>
+<li><p>集合接口没有直接的实现子类，是通过它的子接口<strong>Set</strong>和<strong>List</strong>来实现的</p>
+</li>
+</ol>
+<ul>
+<li><p>常用方法：以ArrayList为例</p>
+<p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231101095156361.png" alt="image-20231101095156361"></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List list = <span class="keyword">new</span> ArrayList();</span><br><span class="line"><span class="comment">// 1.add：添加单个元素</span></span><br><span class="line">list.add(<span class="string">&quot;jack&quot;</span>);</span><br><span class="line">list.add(<span class="number">10</span>); <span class="comment">//会自动装箱list.add(Integer.valueOf(10))</span></span><br><span class="line">list.add(<span class="keyword">true</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;list=&quot;</span> + list);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.contains：查找元素是否存在</span></span><br><span class="line">System.out.println(list.contains(<span class="string">&quot;jack&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.remove：删除指定元素</span></span><br><span class="line">list.remove(<span class="number">0</span>); <span class="comment">//按索引删除</span></span><br><span class="line">list.remove(Integer.valueOf(<span class="number">10</span>)); <span class="comment">//按元素删除</span></span><br><span class="line">System.out.println(<span class="string">&quot;list=&quot;</span> + list);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4.size：获取元素个数</span></span><br><span class="line">System.out.println(list.size());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 5.isEmpty：判断集合是否为空</span></span><br><span class="line">System.out.println(list.isEmpty());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 6.clear：清空集合 (list.removeAll(list)与之等价)</span></span><br><span class="line">list.clear();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 7.addAll：添加多个元素</span></span><br><span class="line">List list2 = <span class="keyword">new</span> ArrayList();</span><br><span class="line">list2.add(<span class="string">&quot;红楼梦&quot;</span>);</span><br><span class="line">list2.add(<span class="string">&quot;三国演义&quot;</span>);</span><br><span class="line">list.addAll(list2);</span><br><span class="line">System.out.println(list);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 8.containAll：判断多个元素是否同时存在</span></span><br><span class="line">System.out.println(list.containsAll(list2));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 9.removeAll：删除多个元素</span></span><br><span class="line">list.add(<span class="string">&quot;西游记&quot;</span>);</span><br><span class="line">list.removeAll(list2);</span><br><span class="line">System.out.println(<span class="string">&quot;list=&quot;</span> + list);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="14-3-2-遍历1-Iterator迭代器"><a href="#14-3-2-遍历1-Iterator迭代器" class="headerlink" title="14.3.2 遍历1 - Iterator迭代器"></a>14.3.2 遍历1 - Iterator迭代器</h3><p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231101101622869.png" alt="image-20231101101622869"></p>
+<p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231101101905703.png" alt="image-20231101101905703"></p>
+<p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231101102225179.png" alt="image-20231101102225179"></p>
+<ul>
+<li>快捷键 <font color="red">itit</font></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Collection col = <span class="keyword">new</span> ArrayList();</span><br><span class="line">col.add(<span class="keyword">new</span> Book(<span class="string">&quot;三国演义&quot;</span>, <span class="string">&quot;罗贯中&quot;</span>, <span class="number">10.1</span>));</span><br><span class="line">col.add(<span class="keyword">new</span> Book(<span class="string">&quot;小李飞刀&quot;</span>, <span class="string">&quot;古龙&quot;</span>, <span class="number">5.1</span>));</span><br><span class="line">col.add(<span class="keyword">new</span> Book(<span class="string">&quot;红楼梦&quot;</span>, <span class="string">&quot;曹雪芹&quot;</span>, <span class="number">34.6</span>));</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">&quot;col=&quot;</span> + col);</span><br><span class="line"><span class="comment">// 1.先得到col的Iterator对象</span></span><br><span class="line">Iterator iterator = col.iterator();</span><br><span class="line"><span class="comment">// 2. 使用while循环遍历  快捷键 itit (ctrl+j可以查看所有快捷键)</span></span><br><span class="line"><span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">Object obj = iterator.next();</span><br><span class="line">System.out.println(<span class="string">&quot;obj=&quot;</span> + obj);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//3. 当退出 while 循环后 , 这时 iterator 迭代器，指向最后的元素</span></span><br><span class="line"><span class="comment">// iterator.next();//NoSuchElementException</span></span><br><span class="line"><span class="comment">//4. 如果希望再次遍历，需要重置我们的迭代器</span></span><br><span class="line">iterator = col.iterator();</span><br><span class="line">System.out.println(<span class="string">&quot;===第二次遍历===&quot;</span>);</span><br><span class="line"><span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">Object obj = iterator.next();</span><br><span class="line">System.out.println(<span class="string">&quot;obj=&quot;</span> + obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="14-3-2-遍历2-for循环"><a href="#14-3-2-遍历2-for循环" class="headerlink" title="14.3.2 遍历2 - for循环"></a>14.3.2 遍历2 - for循环</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Collection col = <span class="keyword">new</span> ArrayList();</span><br><span class="line">col.add(<span class="keyword">new</span> Book(<span class="string">&quot;三国演义&quot;</span>, <span class="string">&quot;罗贯中&quot;</span>, <span class="number">10.1</span>));</span><br><span class="line">col.add(<span class="keyword">new</span> Book(<span class="string">&quot;小李飞刀&quot;</span>, <span class="string">&quot;古龙&quot;</span>, <span class="number">5.1</span>));</span><br><span class="line">col.add(<span class="keyword">new</span> Book(<span class="string">&quot;红楼梦&quot;</span>, <span class="string">&quot;曹雪芹&quot;</span>, <span class="number">34.6</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; col.size(); i++) &#123;</span><br><span class="line">System.out.println(((ArrayList)col).get(i));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="14-3-3-遍历3-for循环增强"><a href="#14-3-3-遍历3-for循环增强" class="headerlink" title="14.3.3 遍历3 - for循环增强"></a>14.3.3 遍历3 - for循环增强</h3><p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231101103127471.png" alt="image-20231101103127471"></p>
+<ul>
+<li>快捷键：<font color="red">I</font></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Collection col = <span class="keyword">new</span> ArrayList();</span><br><span class="line">col.add(<span class="keyword">new</span> Book(<span class="string">&quot;三国演义&quot;</span>, <span class="string">&quot;罗贯中&quot;</span>, <span class="number">10.1</span>));</span><br><span class="line">col.add(<span class="keyword">new</span> Book(<span class="string">&quot;小李飞刀&quot;</span>, <span class="string">&quot;古龙&quot;</span>, <span class="number">5.1</span>));</span><br><span class="line">col.add(<span class="keyword">new</span> Book(<span class="string">&quot;红楼梦&quot;</span>, <span class="string">&quot;曹雪芹&quot;</span>, <span class="number">34.6</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用增强for循环遍历集合</span></span><br><span class="line"><span class="comment">// 底层仍然使用的是Iterator，debug看源码</span></span><br><span class="line"><span class="comment">// 快捷键 I</span></span><br><span class="line"><span class="keyword">for</span>(Object obj : col) &#123;</span><br><span class="line">System.out.println(<span class="string">&quot;obj=&quot;</span> + obj);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 增强for循环也可以遍历数组</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="14-4-List接口"><a href="#14-4-List接口" class="headerlink" title="14.4 List接口"></a>14.4 List接口</h2><h3 id="14-4-1-基本介绍"><a href="#14-4-1-基本介绍" class="headerlink" title="14.4.1 基本介绍"></a>14.4.1 基本介绍</h3><p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231101104403257.png" alt="image-20231101104403257"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1. List 集合类中元素有序(即添加顺序和取出顺序一致)、且可重复</span></span><br><span class="line">List list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">list.add(<span class="string">&quot;jack&quot;</span>);</span><br><span class="line">list.add(<span class="string">&quot;tom&quot;</span>);</span><br><span class="line">list.add(<span class="string">&quot;mary&quot;</span>);</span><br><span class="line">list.add(<span class="string">&quot;hsp&quot;</span>);</span><br><span class="line">list.add(<span class="string">&quot;tom&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;list=&quot;</span> + list);</span><br><span class="line"><span class="comment">//2. List 集合中的每个元素都有其对应的顺序索引，即支持索引</span></span><br><span class="line"><span class="comment">// 使用get()方法获取元素，索引是从 0 开始的</span></span><br><span class="line">System.out.println(list.get(<span class="number">3</span>));<span class="comment">//hsp</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="14-4-2-常用方法"><a href="#14-4-2-常用方法" class="headerlink" title="14.4.2 常用方法"></a>14.4.2 常用方法</h3><ol>
+<li>add</li>
+<li>addAll</li>
+<li>get</li>
+<li>indexOf</li>
+<li>lastIndexOf</li>
+<li>remove</li>
+<li>set：替换或设置</li>
+<li>subList：子集合或切片</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">list.add(<span class="string">&quot;张三丰&quot;</span>);</span><br><span class="line">list.add(<span class="string">&quot;贾宝玉&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1.void add(int index, Object ele):在 index 位置插入 ele 元素</span></span><br><span class="line"><span class="comment">//在 index = 1 的位置插入一个对象</span></span><br><span class="line">list.add(<span class="number">1</span>, <span class="string">&quot;韩顺平&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;list=&quot;</span> + list);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.boolean addAll(int index, Collection eles):从 index 位置开始将 eles 中的所有元素添加进来</span></span><br><span class="line">List list2 = <span class="keyword">new</span> ArrayList();</span><br><span class="line">list2.add(<span class="string">&quot;jack&quot;</span>);</span><br><span class="line">list2.add(<span class="string">&quot;tom&quot;</span>);</span><br><span class="line">list.addAll(<span class="number">1</span>, list2);</span><br><span class="line">System.out.println(<span class="string">&quot;list=&quot;</span> + list);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.Object get(int index):获取指定 index 位置的元素</span></span><br><span class="line">System.out.println(list.get(<span class="number">0</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4.int indexOf(Object obj):返回 obj 在集合中首次出现的位置</span></span><br><span class="line">System.out.println(list.indexOf(<span class="string">&quot;tom&quot;</span>));<span class="comment">//2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 5.int lastIndexOf(Object obj):返回 obj 在当前集合中末次出现的位置</span></span><br><span class="line">list.add(<span class="string">&quot;韩顺平&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;list=&quot;</span> + list);</span><br><span class="line">System.out.println(list.lastIndexOf(<span class="string">&quot;韩顺平&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 6.Object remove(int index):移除指定 index 位置的元素，并返回此元素</span></span><br><span class="line">list.remove(<span class="number">0</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;list=&quot;</span> + list);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 7.Object set(int index, Object ele):设置指定 index 位置的元素为 ele , 相当于是替换. list.set(1, &quot;玛丽&quot;);</span></span><br><span class="line">System.out.println(<span class="string">&quot;list=&quot;</span> + list);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 8.List subList(int fromIndex, int toIndex):返回从 fromIndex 到 toIndex 位置的子集合. </span></span><br><span class="line"><span class="comment">// 注意返回的子集合 fromIndex &lt;= subList &lt; toIndex</span></span><br><span class="line">List returnlist = list.subList(<span class="number">0</span>, <span class="number">2</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;returnlist=&quot;</span> + returnlist);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="14-5-ArrayList源码分析"><a href="#14-5-ArrayList源码分析" class="headerlink" title="14.5 ArrayList源码分析"></a>14.5 ArrayList源码分析</h2><h3 id="14-5-1-注意事项"><a href="#14-5-1-注意事项" class="headerlink" title="14.5.1 注意事项"></a>14.5.1 注意事项</h3><ul>
+<li>ArrayList允许所有元素，包括null；ArrayList<strong>可以加入null</strong>、并且多个</li>
+<li>ArrayList是由<strong>数组来实现</strong>数据存储的</li>
+<li>ArrayList基本等同于Vector，除了<strong>ArrayList是线程不安全</strong>(执行效率高)看源码。在多线程情况下，不建议使用数组列表</li>
+</ul>
+<h3 id="14-5-2-底层操作机制（重要！）"><a href="#14-5-2-底层操作机制（重要！）" class="headerlink" title="14.5.2 底层操作机制（重要！）"></a>14.5.2 底层操作机制（重要！）</h3><div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><ol>
+<li>ArrayList中维护了一个**<font color="red">Object类型的数组elementData</font><strong>. [debug 看源码]<strong>。transient Object[] elementData</strong>; //<strong>transient</strong>表示瞬间,短暂的,表示该属性</strong>不会被序列号**</li>
+<li>当创建ArrayList对象时，如果使用的是<strong>无参构造器</strong>，则初始elementData容量为**<font color="red">0</font><strong>，第1次添加，则扩容elementData为<font color="red"><strong>10</strong></font>，如需要再次扩容，则扩容elementData为</strong><font color="red">1.5</font>**倍（即第一次扩容为15，第二次22……）。</li>
+<li>如果使用的是<strong>指定大小的构造器</strong>，则初始elementData容量为**<font color="red">指定大小</font><strong>，如果需要扩容,则直接扩容elementData为</strong><font color="red">1.5</font>**倍。</li>
+</ol>
+</div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 使用无参构造器创建 ArrayList 对象</span></span><br><span class="line"><span class="comment">//ArrayList list = new ArrayList();</span></span><br><span class="line"><span class="comment">// 使用有参构造器创建 ArrayList 对象</span></span><br><span class="line">ArrayList list = <span class="keyword">new</span> ArrayList(<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 for 给 list 集合添加 1-10个 数据</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">list.add(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 使用 for 给 list 集合添加 11-15 数据</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">11</span>; i &lt;= <span class="number">15</span>; i++) &#123;</span><br><span class="line">list.add(i);</span><br><span class="line">&#125;</span><br><span class="line">list.add(<span class="number">100</span>);</span><br><span class="line">list.add(<span class="number">200</span>);</span><br><span class="line">list.add(<span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231102155326382.png" alt="image-20231102155326382"></p>
+<p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231102155512644.png" alt="image-20231102155512644"></p>
+<p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231102155550922.png" alt="image-20231102155550922"></p>
 ]]></content>
       <categories>
         <category>《Java》</category>
