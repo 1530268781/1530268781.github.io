@@ -16357,7 +16357,7 @@ Name           Attrs
 </tbody></table>
 <h2 id="2-3-Java语言特点"><a href="#2-3-Java语言特点" class="headerlink" title="2.3 Java语言特点"></a>2.3 Java语言特点</h2><ul>
 <li>Java 语言是面向对象的(<strong>oop</strong>)</li>
-<li> Java 语言是健壮的。Java 的强类型机制、异常处理、垃圾的自动收集等是 Java 程序健壮性的重要保</li>
+<li> Java 语言是健壮的。Java 的强类型机制、异常处理、垃圾的自动收集等是 Java 程序健壮性的重要保障</li>
 <li>Java 语言是<strong>跨平台性的</strong>。[即: 一个编译好的.class 文件可以在多个系统下运行，这种特性称为跨平台]</li>
 <li>Java 语言是解释型的</li>
 </ul>
@@ -16564,7 +16564,7 @@ graph LR
 
 
 <h3 id="3-6-2-强制类型转换"><a href="#3-6-2-强制类型转换" class="headerlink" title="3.6.2 强制类型转换"></a>3.6.2 强制类型转换</h3><ul>
-<li>当进行数据从高精度到低精度转换时，需要使用强制转换</li>
+<li>当进行数据<strong>从高精度到低精度转换时，需要使用强制转换</strong></li>
 <li>强制转换符 如(int)  (byte)等</li>
 <li>char类型可以用int常量值赋值，但是不能用int变量值赋值</li>
 <li>byte, short, char类型在参与运算时，当做int类型处理</li>
@@ -17273,6 +17273,35 @@ table[i] = (char)(&#39;a&#39; + i);
 <td align="center">×</td>
 </tr>
 </tbody></table>
+<table>
+<thead>
+<tr>
+<th>访问权限</th>
+<th>可见性</th>
+<th>访问性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public</td>
+<td>所有类、接口、方法、变量都可见</td>
+<td>所有类、接口、方法、变量都可访问</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>当前包中的所有类、接口、方法、变量都可见，其他包中的子类也可见</td>
+<td><strong>当前包</strong>中的所有类、接口、方法、变量都可访问，<strong>其他包中的子类</strong>也可访问</td>
+</tr>
+<tr>
+<td>default</td>
+<td>当前包中的所有类、接口、方法、变量都可见</td>
+<td><strong>当前包</strong>中的所有类、接口、方法、变量都可访问</td>
+</tr>
+<tr>
+<td>private</td>
+<td>当前类中的所有方法和变量都可见</td>
+<td><strong>当前类</strong>中的所有方法和变量都可访问</td>
+</tr>
+</tbody></table>
 <h3 id="8-5-2-注意事项"><a href="#8-5-2-注意事项" class="headerlink" title="8.5.2 注意事项"></a>8.5.2 注意事项</h3><ul>
 <li>修饰符可以用来修饰类中的<strong>属性、成员方法以及类</strong></li>
 <li><strong><font color="red">只有默认的和public才能修饰类</font></strong>!,并且遵循上述访问权限的特点。</li>
@@ -17324,7 +17353,7 @@ table[i] = (char)(&#39;a&#39; + i);
 </li>
 <li><p>super 在使用时，<strong>必须放在构造器<font color="red">第一行</font></strong>(super 只能在构造器中使用)</p>
 </li>
-<li><p><strong>super() 和 this()</strong> 都只能放在构造器<strong>第一行</strong>，因此这两个方法不能共存在一个构造器。<strong>如果写了this()，隐式的super()将不会被调用</strong></p>
+<li><p><strong>super() 和 this()</strong> 都只能放在构造器<strong>第一行</strong>，因此这两个方法不能共存在一个构造器。<strong>如果写了this()，隐式的super()将不会被该构造器调用</strong>，<strong>而是会在this()中调用super()</strong></p>
 </li>
 <li><p>java 所有类都是 <strong>Object 类</strong>的子类, Object 是所有类的基类. <strong>ctrl + H</strong>可以看到类的继承关系</p>
 </li>
@@ -17868,7 +17897,7 @@ table[i] = (char)(&#39;a&#39; + i);
 
 
 <ul>
-<li><p>存在继承关系时，静态代码块，静态属性初始化，普通代码块，普通属性初始化，构造方法调用顺序</p>
+<li><p><font color="red"><strong>存在继承关系时，静态代码块，静态属性初始化，普通代码块，普通属性初始化，构造方法调用顺序</strong>&lt;/font</font></p>
 <p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20231012163641321.png" alt="image-20231012163641321"></p>
 </li>
 </ul>
@@ -17903,7 +17932,7 @@ table[i] = (char)(&#39;a&#39; + i);
 <li>属性是引用数据类型，值是地址，不能被修改</li>
 </ul>
 </li>
-<li>修饰方法时，方法不能被重写/覆盖</li>
+<li>修饰方法时，方法<strong>不能被重写/覆盖</strong></li>
 <li>修饰局部变量时，变量的值<strong>不能被修改</strong></li>
 </ul>
 </li>
@@ -17951,7 +17980,7 @@ table[i] = (char)(&#39;a&#39; + i);
 <li><p>接口就是给出一些没有实现的方法,封装到一起,到某个类要使用的时候,在根据具体情况把这些方法写出来</p>
 </li>
 <li><p>语法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> 接口名 </span>&#123;</span><br><span class="line">	属性；</span><br><span class="line">	方法；（<span class="number">1.</span> 抽象方法【<span class="keyword">abstract</span>可以省略】； <span class="number">2.</span>默认实现方法【<span class="keyword">default</span>】；<span class="number">3.</span>静态方法【<span class="keyword">static</span>】）</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> 类名 <span class="keyword">implements</span> 接口名 </span>&#123;</span><br><span class="line">	自己的属性；</span><br><span class="line">	自己的方法；</span><br><span class="line">	必须实现的接口的抽象方法；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> 接口名 </span>&#123;</span><br><span class="line">	属性；（默认是<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span>修饰的，需要赋初值）</span><br><span class="line">	方法；（<span class="number">1.</span> 抽象方法【<span class="keyword">abstract</span>可以省略】； <span class="number">2.</span>默认实现方法【<span class="keyword">default</span>】；<span class="number">3.</span>静态方法【<span class="keyword">static</span>】）</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> 类名 <span class="keyword">implements</span> 接口名 </span>&#123;</span><br><span class="line">	自己的属性；</span><br><span class="line">	自己的方法；</span><br><span class="line">	必须实现的接口的抽象方法；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>小结</p>
 <ul>
 <li><p>在JDK7以前，接口里的方法都是抽象方法，没有方法体</p>
@@ -17969,11 +17998,11 @@ table[i] = (char)(&#39;a&#39; + i);
 </ul>
 <h3 id="10-8-3-注意事项"><a href="#10-8-3-注意事项" class="headerlink" title="10.8.3 注意事项"></a>10.8.3 注意事项</h3><div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><ol>
 <li>接口<strong>不能被实例化</strong></li>
-<li>接口中所有**<font color="red">方法都是public的</font>**（可以省略public），接口中的抽象方法可以不用abstract修饰</li>
+<li>接口中所有**<font color="red">方法都是public的</font><strong>（可以省略public），接口中的抽象方法</strong>可以不用abstract修饰**</li>
 <li>普通类实现接口，就必须实现接口中的所有抽象方法。快捷键 alt+enter</li>
 <li>抽象类实现接口，可以不用实现接口中的抽象方法</li>
 <li>一个类可以<strong>实现多个接口</strong>。</li>
-<li>接口中的**<font color="red">属性是public static final的</font>**，比如 int n1 = 100 实际上是 public static final int n1 = 100;（必须初始化）。实现了接口的类也可以调用接口中的属性，但是不能修改。</li>
+<li>接口中的**<font color="red">属性是public static final的</font><strong>，比如 int n1 = 100 实际上是 public static final int n1 = 100;（必须初始化）。实现了接口的类也</strong>可以调用接口中的属性，但是不能修改**（接口中的变量默认是public static final修饰的，需要赋初值）。</li>
 <li>接口不能继承其他的类，但是可以<strong>继承多个别的接口</strong></li>
 <li>接口的修饰符只能是public和默认，这点和类的修饰符是一样的</li>
 </ol>
@@ -18273,7 +18302,7 @@ table[i] = (char)(&#39;a&#39; + i);
 </li>
 <li><p>如果希望不管是否发生异常，都执行某段代码(比如关闭连接，释放资源等)则使用如下代码- finally</p>
 </li>
-<li><p><strong>可以有多个catch语句，捕获不同的异常</strong>(进行不同的业务处理)，<strong>要求父类异常在后，子类异常在前</strong>，比如(Exception在后，NullPointerException在前)，如果发生异常，只会匹配一个catch</p>
+<li><p><strong>可以有多个catch语句，捕获不同的异常</strong>(进行不同的业务处理)，**要求<font color="red">父类异常在后，子类异常在前</font>**，比如(Exception在后，NullPointerException在前)，如果发生异常，只会匹配一个catch</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TryCatchDetail02</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1.如果 try 代码块有可能有多个异常</span></span><br><span class="line">        <span class="comment">//2.可以使用多个 catch 分别捕获不同的异常，相应处理</span></span><br><span class="line">        <span class="comment">//3.要求子类异常写在前面，父类异常写在后面</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Person person = <span class="keyword">new</span> Person();</span><br><span class="line">            <span class="comment">// person = null;</span></span><br><span class="line">            System.out.println(person.getName());<span class="comment">//NullPointerException</span></span><br><span class="line">            <span class="keyword">int</span> n1 = <span class="number">10</span>;</span><br><span class="line">            <span class="keyword">int</span> n2 = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> res = n1 / n2;<span class="comment">//ArithmeticException</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (NullPointerException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;空指针异常=&quot;</span> + e.getMessage());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ArithmeticException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;算术异常=&quot;</span> + e.getMessage());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(e.getMessage());</span><br><span class="line">         &#125; <span class="keyword">finally</span> &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>可以进行<strong>try-finally</strong> 配合使用，这种用法<strong>相当于没有捕获异常</strong>，因此程序会直接崩掉/退出。应用场景，就是<strong>执行一段代码，不管是否发生异常，都必须执行某个业务逻辑</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TryCatchDetail02</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> n1 = <span class="number">100</span>;</span><br><span class="line">            <span class="keyword">int</span> n2 = <span class="number">0</span>;</span><br><span class="line">            System.out.println(n1 / n2);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;执行了finally...&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;程序继续执行...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出：</span><br><span class="line">执行了<span class="keyword">finally</span>...    </span><br></pre></td></tr></table></figure></li>
@@ -18423,7 +18452,7 @@ table[i] = (char)(&#39;a&#39; + i);
 
 
 
-<h2 id="13-5-Stringuffer类"><a href="#13-5-Stringuffer类" class="headerlink" title="13.5 Stringuffer类"></a>13.5 Stringuffer类</h2><h3 id="13-5-1-基本介绍"><a href="#13-5-1-基本介绍" class="headerlink" title="13.5.1 基本介绍"></a>13.5.1 基本介绍</h3><ul>
+<h2 id="13-5-StringBuffer类"><a href="#13-5-StringBuffer类" class="headerlink" title="13.5 StringBuffer类"></a>13.5 StringBuffer类</h2><h3 id="13-5-1-基本介绍"><a href="#13-5-1-基本介绍" class="headerlink" title="13.5.1 基本介绍"></a>13.5.1 基本介绍</h3><ul>
 <li>String类是保存字符串常量的<strong>。每次更新都需要重新开辟空间(new 对象)，效率较低</strong>, 因此java设计者还提供了String Builder 和 StringBuffer 来增强String的功能并提高效率。</li>
 <li>java.lang.StringBuffer代表<strong>可变的字符序列</strong>，可以对字符串内容进行增删</li>
 <li>很多方法与String相同，但StringBuffer是<strong>可变长度的</strong>。</li>
@@ -19686,7 +19715,7 @@ table[i] = (char)(&#39;a&#39; + i);
 
 <h2 id="23-2-反射机制"><a href="#23-2-反射机制" class="headerlink" title="23.2 反射机制"></a>23.2 反射机制</h2><h3 id="23-2-1-Java-Reflection"><a href="#23-2-1-Java-Reflection" class="headerlink" title="23.2.1 Java Reflection"></a>23.2.1 Java Reflection</h3><ul>
 <li>反射机制允许程序在执行期借助于Reflection API<strong>取得任何类的内部信息</strong>(比如成员变量，构造器，成员方法等等)，并能操作对象的属性及方法。反射<strong>在设计模式和框架底层都会用到</strong>。</li>
-<li>加载完类之后，在堆中就产生了一个<strong>Class类型的对象</strong> (一个类只对应一个Class对象) ，<strong>这个对象包含了类的完整结构信息</strong>。通过这个对象得到类的结构。这个Class对象就像一面镜子，透过这个镜子看到类的结构，以，形象的称之为: 反射</li>
+<li>加载完类之后，在<strong>堆中</strong>就产生了一个<strong>Class类型的对象</strong> (一个类只对应一个Class对象) ，<strong>这个对象包含了类的完整结构信息</strong>。通过这个对象得到类的结构。这个Class对象就像一面镜子，透过这个镜子看到类的结构，以，形象的称之为: 反射</li>
 </ul>
 <h3 id="23-2-2-原理示意图"><a href="#23-2-2-原理示意图" class="headerlink" title="23.2.2 原理示意图"></a>23.2.2 原理示意图</h3><p><img src="/2023/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20240119103941797.png" alt="image-20240119103941797"></p>
 <h3 id="23-2-3-反射的作用"><a href="#23-2-3-反射的作用" class="headerlink" title="23.2.3 反射的作用"></a>23.2.3 反射的作用</h3><ol>
@@ -20218,5 +20247,285 @@ table[i] = (char)(&#39;a&#39; + i);
         <tag>Java</tag>
         <tag>正则表达式</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>十大排序算法</title>
+    <url>/2024/03/23/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p><img src="/2024/03/23/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/1059417-20200329211447529-1820545437.png" alt="img"></p>
+<table>
+<thead>
+<tr>
+<th align="center">排序算法</th>
+<th align="center">时间复杂度（平均）</th>
+<th align="center">时间复杂度（最坏）</th>
+<th align="center">时间复杂度（最好）</th>
+<th align="center">空间复杂度</th>
+<th align="center">稳定性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">冒泡排序</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">$O(n)$</td>
+<td align="center">$O(1)$</td>
+<td align="center">稳定</td>
+</tr>
+<tr>
+<td align="center">选择排序</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">$O(1)$</td>
+<td align="center">不稳定</td>
+</tr>
+<tr>
+<td align="center">插入排序</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">$O(n)$</td>
+<td align="center">$O(1)$</td>
+<td align="center">稳定</td>
+</tr>
+<tr>
+<td align="center">希尔排序</td>
+<td align="center">$O(n^{1.3})$</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">$O(n)$</td>
+<td align="center">$O(1)$</td>
+<td align="center">不稳定</td>
+</tr>
+<tr>
+<td align="center">归并排序</td>
+<td align="center">$O(nlog^n)$</td>
+<td align="center">$O(nlog^n)$</td>
+<td align="center">$O(nlog^n)$</td>
+<td align="center">$O(n)$</td>
+<td align="center">稳定</td>
+</tr>
+<tr>
+<td align="center">快速排序</td>
+<td align="center">$O(nlog^n)$</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">$O(nlog^n)$</td>
+<td align="center">$O(nlog^n)$</td>
+<td align="center">不稳定</td>
+</tr>
+<tr>
+<td align="center">堆排序</td>
+<td align="center">$O(nlog^n)$</td>
+<td align="center">$O(nlog^n)$</td>
+<td align="center">$O(nlog^n)$</td>
+<td align="center">$O(1)$</td>
+<td align="center">不稳定</td>
+</tr>
+<tr>
+<td align="center">计数排序</td>
+<td align="center">$O(n+k)$</td>
+<td align="center">$O(n+k)$</td>
+<td align="center">$O(n+k)$</td>
+<td align="center">$O(n+k)$</td>
+<td align="center">稳定</td>
+</tr>
+<tr>
+<td align="center">桶排序</td>
+<td align="center">$O(n+k)$</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">$O(n)$</td>
+<td align="center">$O(n+k)$</td>
+<td align="center">稳定</td>
+</tr>
+<tr>
+<td align="center">基数排序</td>
+<td align="center">$O(n*k)$</td>
+<td align="center">$O(n*k)$</td>
+<td align="center">$O(n*k)$</td>
+<td align="center">$O(n+k)$</td>
+<td align="center">稳定</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>比较类排序</strong>：通过比较来决定元素间的相对次序，由于其时间复杂度不能突破$O(nlog^n)$，因此也称为非线性时间比较类排序。</li>
+<li><strong>非比较类排序</strong>：不通过比较来决定元素间的相对次序，它可以突破基于比较排序的时间下界，以线性时间运行，因此也称为线性时间非比较类排序。</li>
+<li><strong>稳定</strong>：如果A原本在B前面，而A=B，排序之后A仍然在B的前面；</li>
+<li><strong>不稳定</strong>：如果A原本在B的前面，而A=B，排序之后A可能会出现在B的后面；</li>
+</ul>
+<h2 id="一、冒泡排序"><a href="#一、冒泡排序" class="headerlink" title="一、冒泡排序"></a>一、冒泡排序</h2><h3 id="1-图解"><a href="#1-图解" class="headerlink" title="1. 图解"></a>1. 图解</h3><p>​        冒泡排序（Bubble Sort），他重复地走访要排序的数列，一次比较两个元素，如果顺序错误，就将它们交换位置。无论是最坏时间复杂度还是平均时间复杂度都为$O(n^2)$，但算法稳定。</p>
+<p><img src="/2024/03/23/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/1059417-20200329215227392-1409855225.gif" alt="冒泡排序"></p>
+<h3 id="2-算法步骤"><a href="#2-算法步骤" class="headerlink" title="2. 算法步骤"></a>2. 算法步骤</h3><ol>
+<li>比较相邻的两个元素，如果第一个比第二个大，就交换</li>
+<li>对每一对相邻元素做同样的工作，从开始到结束，这一趟结束之后，最后那个元素就是最大的数</li>
+<li>对所有的元素重复以上步骤，除了最后一个元素</li>
+<li>持续每次对越来越少的元素重复上面的操作，直到没有任何一个数字需要比较。</li>
+</ol>
+<h3 id="3-程序"><a href="#3-程序" class="headerlink" title="3. 程序"></a>3. 程序</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n - i; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">                temp = arr[j];</span><br><span class="line">                arr[j] = arr[j + <span class="number">1</span>];</span><br><span class="line">                arr[j + <span class="number">1</span>] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="二、选择排序"><a href="#二、选择排序" class="headerlink" title="二、选择排序"></a>二、选择排序</h2><h3 id="1-图解-1"><a href="#1-图解-1" class="headerlink" title="1. 图解"></a>1. 图解</h3><p>​        选择排序（Selection Sort）是一种简单直观的排序算法，无论什么数据进去都是 O(n²) 的时间复杂度。所以用到它的时候，数据规模越小越好。唯一的好处可能就是不占用额外的内存空间了吧。</p>
+<p><img src="/2024/03/23/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/ab69a1575f6a449b8b3241a2a187b795.gif" alt="选择排序"></p>
+<h3 id="2-步骤"><a href="#2-步骤" class="headerlink" title="2. 步骤"></a>2. 步骤</h3><ol>
+<li>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置；</li>
+<li>再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾；</li>
+<li>重复第2步，直到所有元素均排序完毕。</li>
+</ol>
+<h3 id="3-算法"><a href="#3-算法" class="headerlink" title="3. 算法"></a>3. 算法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">selectionSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> minIndex = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &lt; arr[minIndex]) &#123;</span><br><span class="line">                j = minIndex;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (minIndex != i) &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = arr[i];</span><br><span class="line">            arr[i] = arr[minIndex];</span><br><span class="line">            arr[minIndex] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="三、插入排序"><a href="#三、插入排序" class="headerlink" title="三、插入排序"></a>三、插入排序</h2><h3 id="1-图解-2"><a href="#1-图解-2" class="headerlink" title="1. 图解"></a>1. 图解</h3><p>​        插入排序（Insertion Sort）的代码实现虽然没有冒泡排序和选择排序那么简单粗暴，但它的原理应该是最容易理解的了，因为只要打过扑克牌的人都应该能够秒懂。插入排序是一种最简单直观的排序算法，它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。</p>
+<p><img src="/2024/03/23/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/f8951b09b88c4c4a9551835a3c97e77f.gif" alt="插入排序"></p>
+<h3 id="2-步骤-1"><a href="#2-步骤-1" class="headerlink" title="2. 步骤"></a>2. 步骤</h3><ol>
+<li>首先从第一个元素开始，该元素被认为是有序的；</li>
+<li>取出下一个元素，在已经排序的元素序列中从后往前进行扫描；</li>
+<li>如果该已排好序的元素大于新元素，则将该元素移到下一位置；</li>
+<li>重复步骤3一直往前进行扫描比较，直到找到已排序的元素小于或者等于新元素的位置；</li>
+<li>将新元素插入到该位置后；</li>
+<li>重复步骤2~5。</li>
+</ol>
+<h3 id="3-算法-1"><a href="#3-算法-1" class="headerlink" title="3. 算法"></a>3. 算法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertionSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> val = arr[i];</span><br><span class="line">        <span class="keyword">int</span> j = i - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(j &gt;= <span class="number">0</span> &amp;&amp; val &lt; arr[j]) &#123; <span class="comment">//找到第一个比val小的元素</span></span><br><span class="line">            arr[j + <span class="number">1</span>] = arr[j];</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">        arr[j + <span class="number">1</span>] = val; <span class="comment">//插入到该元素之后</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="四、希尔排序"><a href="#四、希尔排序" class="headerlink" title="四、希尔排序"></a>四、希尔排序</h2><h3 id="1-图解-3"><a href="#1-图解-3" class="headerlink" title="1. 图解"></a>1. 图解</h3><ul>
+<li><p>希尔排序（Shell Sort），也称<strong>递减增量排序算法</strong>，是插入排序的一种更高效的改进版本。但希尔排序是非稳定排序算法。</p>
+</li>
+<li><p>希尔排序是基于插入排序的以下两点性质而提出改进方法的：</p>
+<ul>
+<li><p>插入排序在<strong>对几乎已经排好序的数据操作时，效率高</strong>，即可以达到线性排序的效率；</p>
+</li>
+<li><p>但插入排序一般来说是低效的，因为<strong>插入排序每次只能将数据移动一位</strong>；</p>
+</li>
+</ul>
+</li>
+<li><p>希尔排序的基本思想是：先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，待整个序列中的记录“基本有序”时，再对全体记录进行依次直接插入排序。</p>
+</li>
+</ul>
+<p><img src="/2024/03/23/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/674c37f45a9e4f349b11c5e0734e934b.png" alt="希尔排序"></p>
+<h3 id="2-步骤-2"><a href="#2-步骤-2" class="headerlink" title="2. 步骤"></a>2. 步骤</h3><ol>
+<li>选择一个增量序列 {t1, t2, …, tk} ；</li>
+<li>按增量序列个数k，对序列进行k趟排序；</li>
+<li>每趟排序，根据对应的增量t，将待排序列分割成若干长度为m的子序列，分别对各子表进行直接插入排序。仅增量因子为1时，整个序列作为一个表来处理，表长度即为整个序列的长度。（增量为1时，就是直接插入排序）</li>
+<li>其中，增量gap=length/2，缩小增量继续以gap = gap/2的方式，这种增量选择我们可以用一个序列来表示，**{n/2,  (n/2)/2,  …,  1}**，称为增量序列。一般的增量序列都选择以上说明的这个，但不一定是最优的。</li>
+</ol>
+<h3 id="3-算法-2"><a href="#3-算法-2" class="headerlink" title="3. 算法"></a>3. 算法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">shellSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    <span class="keyword">int</span> gap = n / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span> (gap &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 每一组子序列进行插入排序</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = gap; i &lt; n; i++) &#123; <span class="comment">//子序列中找到第一个比val小的元素</span></span><br><span class="line">            <span class="keyword">int</span> val = arr[i];</span><br><span class="line">            <span class="keyword">int</span> j = i - gap;</span><br><span class="line">            <span class="keyword">while</span>(j &gt;= <span class="number">0</span> &amp;&amp; val &lt; arr[j]) &#123;</span><br><span class="line">                arr[j + gap] = arr[j];</span><br><span class="line">                j -= gap;</span><br><span class="line">            &#125;</span><br><span class="line">            arr[j + gap] = val;</span><br><span class="line">        &#125;</span><br><span class="line">        gap /= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="五、归并排序"><a href="#五、归并排序" class="headerlink" title="五、归并排序"></a>五、归并排序</h2><h3 id="1-图解-4"><a href="#1-图解-4" class="headerlink" title="1. 图解"></a>1. 图解</h3><ul>
+<li>归并排序（Merge sort）是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。</li>
+<li>和选择排序一样，归并排序的性能不受输入数据的影响，但表现比选择排序好的多，因为始终都是 $O(nlog^n)$ 的时间复杂度。代价是需要额外的内存空间。</li>
+</ul>
+<p><img src="/2024/03/23/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/6a2626d8bdc24992aa750a54dbcbfc09.gif" alt="归并排序"></p>
+<h3 id="2-步骤-3"><a href="#2-步骤-3" class="headerlink" title="2. 步骤"></a>2. 步骤</h3><ol>
+<li>将长度为n的子序列递归进行分割，分割长度为n/2的两个子序列，如果子序列中只有1个元素，则认为是有序的，直接返回该子序列</li>
+<li>对于递归返回的每个子序列被认为是有序的，然后将递归返回子序列进行两两合并；</li>
+<li>合并过程中完成排序操作，具体操作为设定两个指针，分别指向两个已经排序子序列的起始位置；</li>
+<li>比较两个指针所指向的元素，选择相对小的元素放入到合并数组，并移动指针到下一位置；</li>
+<li>重复步骤3~4直到某一指针达到序列尾；</li>
+<li>将另一序列剩下的所有元素直接复制到合并序列尾部，最终得到的新序列就是有序序列。</li>
+</ol>
+<h3 id="3-算法-3"><a href="#3-算法-3" class="headerlink" title="3. 算法"></a>3. 算法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span>[] temp)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">        mergeSort(arr, left, mid, temp);</span><br><span class="line">        mergeSort(arr, mid + <span class="number">1</span>, right, temp);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> mid, <span class="keyword">int</span>[] temp)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = left, j = mid + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= mid &amp;&amp; j &lt;= right) &#123; <span class="comment">//双指针</span></span><br><span class="line">        <span class="keyword">if</span> (arr[i] &lt; arr[j]) &#123;</span><br><span class="line">            temp[k++] = arr[i++];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            temp[k++] = arr[j++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将序列剩下的元素直接复制到合并序列尾部</span></span><br><span class="line">    <span class="keyword">while</span> (i &lt;= mid) &#123;</span><br><span class="line">        temp[k++] = arr[i++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (j &lt;= right)&#123;</span><br><span class="line">        temp[k++] = arr[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; k; l++) &#123;</span><br><span class="line">        arr[left + l] = temp[l];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="六、快速排序"><a href="#六、快速排序" class="headerlink" title="六、快速排序"></a>六、快速排序</h2><h3 id="1-图解-5"><a href="#1-图解-5" class="headerlink" title="1. 图解"></a>1. 图解</h3><ul>
+<li>快速排序采用<strong>分治法策略</strong>，把一个串行（list）分成两个子串行（sub-list）。最坏的情况下，时间复杂度为$O(n^2)$，但平均时间复杂度为$O(nlogn)$，不稳定。</li>
+<li>归并排序是局部有序到整体有序的过程；快速排序是整体有序到局部有序的过程。</li>
+</ul>
+<p><img src="/2024/03/23/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/1059417-20200329213216556-1137844184.gif" alt="快速排序"></p>
+<h3 id="2-算法步骤-1"><a href="#2-算法步骤-1" class="headerlink" title="2. 算法步骤"></a>2. 算法步骤</h3><ol>
+<li>从数列中挑出一个元素，称为基准（pivot），一般选取第一个元素作为基准</li>
+<li>重新排列数列，将所有小于基准的元素放在基准的左边，大于基准的元素放在基准的右边，相同的元素可以放在任意一边，直到low不小于high。在这个分区结束后，该基准就处于数列的中间，这个称为分区（partition）操作。</li>
+<li>递归把小于基准值元素的子数列和大于基准值元素的子数列排序。</li>
+</ol>
+<h3 id="3-程序-1"><a href="#3-程序-1" class="headerlink" title="3. 程序"></a>3. 程序</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (start &lt; end) &#123;</span><br><span class="line">        <span class="keyword">int</span> pivot = partition(arr, start, end);</span><br><span class="line">        quickSort(arr, start, pivot - <span class="number">1</span>);</span><br><span class="line">        quickSort(arr, pivot + <span class="number">1</span>, end);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pivot  = arr[start];</span><br><span class="line">    <span class="keyword">while</span> (start &lt; end) &#123;</span><br><span class="line">        <span class="keyword">while</span> (start &lt; end &amp;&amp; arr[end] &gt; pivot) &#123; <span class="comment">//右指针，找到小于基准的那个数</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (start &lt; end &amp;&amp; arr[start] &lt;= pivot) &#123; <span class="comment">//左指针，找到大于基准的那个数</span></span><br><span class="line">            start++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> temp = arr[start];</span><br><span class="line">        arr[start] = arr[end];</span><br><span class="line">        arr[end] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="七、堆排序"><a href="#七、堆排序" class="headerlink" title="七、堆排序"></a>七、堆排序</h2><h3 id="1-图解-6"><a href="#1-图解-6" class="headerlink" title="1. 图解"></a>1. 图解</h3><ul>
+<li>堆排序（Heap Sort）是指利用堆这种数据结构所设计的一种排序算法。堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。堆排序可以说是一种利用堆的概念来排序的选择排序。分为两种方法：<ul>
+<li>大顶堆：每个节点的值都大于或等于其子节点的值，在堆排序算法中用于升序排列；</li>
+<li>小顶堆：每个节点的值都小于或等于其子节点的值，在堆排序算法中用于降序排列；</li>
+<li><a href="https://blog.csdn.net/SHYLOGO/article/details/109473011">堆排序（超详细图解 Java版）</a></li>
+</ul>
+</li>
+</ul>
+<p><img src="/2024/03/23/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/640.gif" alt="堆排序"></p>
+<h3 id="2-步骤-4"><a href="#2-步骤-4" class="headerlink" title="2. 步骤"></a>2. 步骤</h3><ol>
+<li>将待排序列(R0, R1, ……, Rn)构建成最大堆（最小堆）；</li>
+<li>将堆顶元素R[0]与最后一个元素R[n]进行交换，此时得到新的无序区(R0, R1, ……, Rn-1)和新的有序区(Rn)，且满足R[0, 1, ……, n-1]&lt;=R[n]（或&gt;=R[n]）</li>
+<li>由于调整后的新堆可能违反堆的性质，因此需要对当前无序区(R0, R1, ……, Rn-1)进行调整；</li>
+<li>重复步骤2~3直到有序区的元素个数为n。</li>
+</ol>
+<h3 id="3-算法-4"><a href="#3-算法-4" class="headerlink" title="3. 算法"></a>3. 算法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heapSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1.构建初始堆，arr[0]堆顶为最大元素</span></span><br><span class="line">    buildMaxHeap(arr);</span><br><span class="line">    <span class="comment">//2.交换堆顶和最后一个元素，从上至下继续调整堆、</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = arr.length - <span class="number">1</span>; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">        swap(arr,<span class="number">0</span>, i);</span><br><span class="line">        adjustHeap(arr,<span class="number">0</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构建最大堆，arr[0]为最大值</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">buildMaxHeap</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n / <span class="number">2</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="comment">//从第一个非叶子结点从下至上，从右至左调整结构</span></span><br><span class="line">        adjustHeap(arr, i, n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 调整堆</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> i      父节点编号</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> length 对应节点i的调整，可能会影响到已经调整好的子堆,</span></span><br><span class="line"><span class="comment">     *               需要调整的范围是（i, length）</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">adjustHeap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">2</span> * i + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> right = <span class="number">2</span> * i + <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> largest = i;</span><br><span class="line">    <span class="comment">// 让largest指向【根节点，左节点，右节点】中最大的那一个节点</span></span><br><span class="line">    <span class="keyword">if</span> (left &lt; length &amp;&amp; arr[left] &gt; arr[i]) &#123;</span><br><span class="line">        largest = left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (right &lt; length &amp;&amp; arr[right] &gt; arr[largest]) &#123;</span><br><span class="line">        largest = right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (largest != i) &#123; <span class="comment">//根节点不是最大的，需要交换</span></span><br><span class="line">        swap(arr, i, largest);</span><br><span class="line">        <span class="comment">// 调整之后，被调整的子堆需要重新调整（直到子堆内部无交换）</span></span><br><span class="line">        adjustHeap(arr, largest, length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp = arr[i];</span><br><span class="line">    arr[i] = arr[j];</span><br><span class="line">    arr[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="八、计数排序"><a href="#八、计数排序" class="headerlink" title="八、计数排序"></a>八、计数排序</h2><h3 id="1-图解-7"><a href="#1-图解-7" class="headerlink" title="1. 图解"></a>1. 图解</h3><p>​        计数排序的核心在于将输入的数据值转化为键存储在额外开辟的数组空间中。作为一种线性时间复杂度的排序，计数排序要求输入的数据必须是有确定范围的整数。</p>
+<p><img src="/2024/03/23/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/387cf2b5729344cb9e19b32ee91c7c22.gif" alt="计数排序"></p>
+<h3 id="2-步骤-5"><a href="#2-步骤-5" class="headerlink" title="2. 步骤"></a>2. 步骤</h3><ol>
+<li>找出数组中的最大值maxVal和最小值minVal；</li>
+<li>创建一个计数数组countArr，其长度是<strong>maxVal-minVal+1</strong>，元素默认值都为0；</li>
+<li>遍历原数组arr中的元素arr[i]，<strong>以arr[i]-minVal作为countArr数组的索引，以arr[i]的值在arr中元素出现次数作为countArr[a[i]-min]的值</strong>；</li>
+<li>遍历countArr数组，只要该数组的某一下标的值不为0，则循环将下标值+minVal输出返回到原数组即可。</li>
+</ol>
+<h3 id="3-算法-5"><a href="#3-算法-5" class="headerlink" title="3. 算法"></a>3. 算法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">countingSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    <span class="keyword">int</span> max = arr[<span class="number">0</span>], min = arr[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        max = max &gt; arr[i] ? max : arr[i];</span><br><span class="line">        min = min &lt; arr[i] ? min : arr[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>[] count = <span class="keyword">new</span> <span class="keyword">int</span>[max - min + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        count[arr[i] - min]++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count.length; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span>(count[i] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            arr[index++] = i + min;</span><br><span class="line">            count[i]--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="九、桶排序"><a href="#九、桶排序" class="headerlink" title="九、桶排序"></a>九、桶排序</h2><h3 id="1-图解-8"><a href="#1-图解-8" class="headerlink" title="1. 图解"></a>1. 图解</h3><ul>
+<li><p>桶排序是计数排序的升级版。它利用了函数的映射关系，高效与否的关键就在于这个映射函数的确定。为了使桶排序更加高效，我们需要做到这两点：</p>
+<ol>
+<li><p>在额外空间充足的情况下，尽量增大桶的数量</p>
+</li>
+<li><p>使用的映射函数能够将输入的 N 个数据<strong>均匀的</strong>分配到 K 个桶中。</p>
+</li>
+</ol>
+</li>
+<li><p>同时，对于桶中元素的排序，选择何种比较排序算法对于性能的影响至关重要。</p>
+</li>
+</ul>
+<p><img src="/2024/03/23/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/dd3f5f2859c145e5a0810c6dbc08eb05.png" alt="桶排序"></p>
+<h3 id="2-步骤-6"><a href="#2-步骤-6" class="headerlink" title="2. 步骤"></a>2. 步骤</h3><ol>
+<li>设置一个bucketSize（该数值的选择对性能至关重要，性能最好时每个桶都<strong>均匀</strong>放置所有数值，反之最差），表示每个桶最多能放置多少个数值；</li>
+<li>遍历输入数据，并且把数据依次放到到对应的桶里去；</li>
+<li>对每个非空的桶进行排序，可以使用其它排序方法；</li>
+<li>从非空桶里把排好序的数据拼接起来即可。</li>
+</ol>
+<h3 id="3-算法-6"><a href="#3-算法-6" class="headerlink" title="3. 算法"></a>3. 算法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bucketSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    <span class="keyword">int</span> max = arr[<span class="number">0</span>], min = arr[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        max = max &gt; arr[i] ? max : arr[i];</span><br><span class="line">        min = min &lt; arr[i] ? min : arr[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> bucketSize = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> bucketCount = (max - min) / bucketSize + <span class="number">1</span>;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; buckets = <span class="keyword">new</span> ArrayList&lt;&gt;(bucketCount); <span class="comment">//桶集合</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bucketCount; i++) &#123;</span><br><span class="line">        buckets.add(<span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> bucketIndex = (arr[i] - min) / bucketSize;</span><br><span class="line">        buckets.get(bucketIndex).add(arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bucketCount; i++) &#123;</span><br><span class="line">        List&lt;Integer&gt; bucket = buckets.get(i);</span><br><span class="line">        Collections.sort(bucket); <span class="comment">//桶内部排序</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; bucket.size(); j++) &#123;</span><br><span class="line">            arr[index++] = bucket.get(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="十、基数排序"><a href="#十、基数排序" class="headerlink" title="十、基数排序"></a>十、基数排序</h2><h3 id="1-图解-9"><a href="#1-图解-9" class="headerlink" title="1. 图解"></a>1. 图解</h3><p>​        基数排序是一种非比较型整数排序算法，其原理是将整数按位数切割成不同的数字，然后按每个位数分别比较。由于整数也可以表达字符串（比如名字或日期）和特定格式的浮点数，所以基数排序也不是只能使用于整数。</p>
+<p><img src="/2024/03/23/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/a2c2c69d444b45a2b27d0d239a25c185.png" alt="基数排序"></p>
+<h3 id="2-步骤-7"><a href="#2-步骤-7" class="headerlink" title="2. 步骤"></a>2. 步骤</h3><ol>
+<li>取得数组中的最大数，并取得位数，即为迭代次数n（例如：数组中最大数为123，则 n=3）；</li>
+<li>arr为原始数组，从最低位（或最高位）开始根据每位的数字组成radix数组（radix数组是个二维数组，其中一维长度为10），例如123在第一轮时存放在下标为3的radix数组中；</li>
+<li>将radix数组中的数据从0下标开始依次赋值给原数组；</li>
+<li>重复2~3步骤n次即可。</li>
+</ol>
+<h3 id="3-算法-7"><a href="#3-算法-7" class="headerlink" title="3. 算法"></a>3. 算法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">radixSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = arr.length;</span><br><span class="line">    <span class="keyword">int</span> max = arr[<span class="number">0</span>]; <span class="comment">//最大值</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        max = max &gt; arr[i] ? max : arr[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">1</span>; <span class="comment">//最大值位数</span></span><br><span class="line">    <span class="keyword">while</span> (max / <span class="number">10</span> != <span class="number">0</span>) &#123;</span><br><span class="line">        max /= <span class="number">10</span>;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++) &#123;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; radix = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) &#123;</span><br><span class="line">            radix.add(<span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> index;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            index = (arr[j] / (<span class="keyword">int</span>) Math.pow(<span class="number">10</span>, i)) % <span class="number">10</span>; <span class="comment">//取第i位</span></span><br><span class="line">            radix.get(index).add(arr[j]);</span><br><span class="line">        &#125;</span><br><span class="line">        index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (List&lt;Integer&gt; list : radix) &#123; <span class="comment">//赋值给原数组</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> a : list) &#123;</span><br><span class="line">                arr[index++] = a;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-基数排序-vs-计数排序-vs-桶排序"><a href="#4-基数排序-vs-计数排序-vs-桶排序" class="headerlink" title="4. 基数排序 vs 计数排序 vs 桶排序"></a>4. 基数排序 vs 计数排序 vs 桶排序</h3><p>基数排序有两种方法：</p>
+<p>这三种排序算法都利用了桶的概念，但对桶的使用方法上有明显差异：</p>
+<ul>
+<li>基数排序：根据键值的每位数字来分配桶；</li>
+<li>计数排序：每个桶只存储单一键值；</li>
+<li>桶排序：每个桶存储一定范围的数值；</li>
+</ul>
+<h2 id="十一、总结"><a href="#十一、总结" class="headerlink" title="十一、总结"></a>十一、总结</h2><ul>
+<li><p>数据量规模较小，考虑<strong>插入或选择</strong>。当元素分布有序时插入将大大减少比较和移动记录的次数，如果不要求稳定性，可以使用选择，效率略高于插入；$O(n^2)$</p>
+</li>
+<li><p>数据量规模中等，使用<strong>希尔排序</strong>；$O(n^{1.3})$</p>
+</li>
+<li><p>数据量规模较大，考虑<strong>堆排序</strong>（元素分布接近正序或逆序）、快速排序（元素分布随机）和<strong>归并排序</strong>（稳定性）；</p>
+</li>
+<li><p>一般来说不使用冒泡。$O(nlog^n)$</p>
+</li>
+</ul>
+]]></content>
   </entry>
 </search>
